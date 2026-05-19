@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(curl -s --max-filesize 5000000 -H \"Accept: text/html\" \"https://api.anthropic.com/v1/design/h/m05kg_Qn7csKga1-6NKRIA?open_file=README.md\")",
+      "Bash(curl -s --compressed \"https://api.anthropic.com/v1/design/h/m05kg_Qn7csKga1-6NKRIA?open_file=README.md\")",
+      "Bash(curl -s --compressed \"https://api.anthropic.com/v1/design/h/m05kg_Qn7csKga1-6NKRIA?open_file=README.md\" -o /tmp/design_readme.html)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(dir \"D:\\\\Buisness CHRIS\\\\WEBSITE 3.0\" /s /b)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\Buisness CHRIS\\\\WEBSITE 3.0\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName, Length, LastWriteTime)",
+      "Bash(ffmpeg -version)"
+    ]
+  }
+}

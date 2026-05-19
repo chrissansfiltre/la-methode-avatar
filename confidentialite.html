@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NT29CX1YG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2NT29CX1YG');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Méthode AVATAR — @chris.sans.filtre</title>
+  <link rel="icon" type="image/png" href="MON_LOGO.png">
+  <link rel="apple-touch-icon" href="MON_LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    @font-face {
+      font-family: 'ITCGaramond';
+      src: url('ITC Garamond.otf') format('opentype');
+      font-weight: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --bg-2:      #111111;
+      --orange:    #FF6B00;
+      --white:     #F5F5F5;
+      --grey:      #888888;
+      --grey-light:#aaaaaa;
+      --border:    rgba(255,255,255,0.07);
+      --font-title:'ITCGaramond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    .topbar-logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-style: italic;
+      color: var(--white);
+    }
+    .topbar-back {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--white); text-decoration: none; }
+
+    /* CONTENT */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    .page-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .page-updated {
+      font-size: 0.82rem;
+      color: var(--grey);
+      margin-bottom: 56px;
+    }
+
+    /* ANCRES NAV */
+    .anchor-nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .anchor-nav a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--grey-light);
+      transition: color 0.2s;
+    }
+    .anchor-nav a:hover { color: var(--orange); text-decoration: none; }
+
+    /* SECTIONS */
+    .legal-section {
+      margin-bottom: 60px;
+      scroll-margin-top: 80px;
+    }
+
+    .legal-section h2 {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 28px 0 10px;
+    }
+
+    .legal-section p {
+      color: var(--grey-light);
+      margin-bottom: 14px;
+    }
+
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 14px;
+    }
+    .legal-section ul li {
+      color: var(--grey-light);
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+    }
+
+    .legal-highlight {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      color: var(--grey-light);
+    }
+    .legal-highlight strong { color: var(--white); }
+
+    /* FOOTER */
+    .page-footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: #444;
+    }
+    .page-footer a { color: var(--grey); }
+  </style>
+</head>
+
+<body>
+
+<nav class="topbar">
+  <span class="topbar-logo">csf</span>
+  <a href="index.html" class="topbar-back">← Retour à la page principale</a>
+</nav>
+
+<div class="page-wrap">
+
+  <h1 class="page-title">Politique de confidentialité</h1>
+  <p class="page-updated">Dernière mise à jour : 27 avril 2026</p>
+
+  <nav class="anchor-nav">
+    <a href="#responsable">Responsable</a>
+    <a href="#donnees">Données collectées</a>
+    <a href="#finalites">Finalités</a>
+    <a href="#conservation">Conservation</a>
+    <a href="#destinataires">Destinataires</a>
+    <a href="#droits">Vos droits</a>
+    <a href="#securite">Sécurité</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+
+  <!-- INTRO -->
+  <section class="legal-section">
+    <p>
+      Chris (ci-après « moi ») attache une importance particulière à la protection de vos données personnelles.
+      La présente politique explique quelles données sont collectées, dans quel but, et vos droits, conformément
+      au Règlement (UE) 2016/679 (RGPD) et à la loi française Informatique et Libertés.
+    </p>
+  </section>
+
+
+  <!-- 1. RESPONSABLE -->
+  <section class="legal-section" id="responsable">
+    <h2>1. Responsable du traitement</h2>
+    <div class="legal-highlight">
+      <strong>Chris</strong> — @chris.sans.filtre<br/>
+      Contact : <a href="mailto:christophervaslopes@gmail.com">christophervaslopes@gmail.com</a>
+    </div>
+  </section>
+
+
+  <!-- 2. DONNÉES COLLECTÉES -->
+  <section class="legal-section" id="donnees">
+    <h2>2. Données collectées</h2>
+
+    <h3>Lors de l'achat</h3>
+    <ul>
+      <li>Nom, prénom</li>
+      <li>Adresse email</li>
+      <li>Pays de résidence</li>
+      <li>Données de paiement (gérées par Stan Store — je n'y ai pas accès)</li>
+    </ul>
+
+    <h3>Lors de la navigation</h3>
+    <ul>
+      <li>Adresse IP, type de navigateur, pages visitées, durée de visite</li>
+      <li>Identifiants de cookies analytiques (Google Analytics)</li>
+    </ul>
+  </section>
+
+
+  <!-- 3. FINALITÉS -->
+  <section class="legal-section" id="finalites">
+    <h2>3. Finalités et bases légales</h2>
+    <ul>
+      <li><strong style="color:var(--white);">Exécution du contrat</strong> — traiter la commande, donner accès au guide, assurer le support (art. 6.1.b RGPD)</li>
+      <li><strong style="color:var(--white);">Obligations légales</strong> — facturation, comptabilité, fiscalité (art. 6.1.c RGPD)</li>
+      <li><strong style="color:var(--white);">Intérêt légitime</strong> — sécurité du site, prévention de la fraude, statistiques (art. 6.1.f RGPD)</li>
+      <li><strong style="color:var(--white);">Consentement</strong> — cookies analytiques (art. 6.1.a RGPD)</li>
+    </ul>
+  </section>
+
+
+  <!-- 4. CONSERVATION -->
+  <section class="legal-section" id="conservation">
+    <h2>4. Durée de conservation</h2>
+    <ul>
+      <li>Données d'achat : 10 ans (obligation comptable)</li>
+      <li>Données de navigation / analytics : 13 mois maximum</li>
+      <li>Emails : jusqu'au retrait du consentement</li>
+    </ul>
+  </section>
+
+
+  <!-- 5. DESTINATAIRES -->
+  <section class="legal-section" id="destinataires">
+    <h2>5. Destinataires</h2>
+    <p>Vos données sont partagées uniquement avec :</p>
+    <ul>
+      <li><strong style="color:var(--white);">Stan Store Inc.</strong> — paiement et livraison du produit</li>
+      <li><strong style="color:var(--white);">Cloudflare Inc.</strong> — hébergement du site</li>
+      <li><strong style="color:var(--white);">Google LLC</strong> — analytics via Google Analytics</li>
+    </ul>
+    <div class="legal-highlight">
+      Aucune donnée n'est vendue. Les transferts hors UE sont encadrés par les clauses contractuelles types
+      de la Commission européenne.
+    </div>
+  </section>
+
+
+  <!-- 6. DROITS -->
+  <section class="legal-section" id="droits">
+    <h2>6. Vos droits</h2>
+    <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+    <ul>
+      <li>Droit d'accès, de rectification, d'effacement</li>
+      <li>Droit à la limitation et à la portabilité</li>
+      <li>Droit d'opposition</li>
+      <li>Droit de retirer votre consentement à tout moment</li>
+    </ul>
+    <p>
+      Pour exercer vos droits : <a href="mailto:christophervaslopes@gmail.com">christophervaslopes@gmail.com</a><br/>
+      Je réponds sous 30 jours maximum.
+    </p>
+    <p>
+      Vous pouvez également introduire une réclamation auprès de la
+      <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL (www.cnil.fr)</a>.
+    </p>
+  </section>
+
+
+  <!-- 7. SÉCURITÉ -->
+  <section class="legal-section" id="securite">
+    <h2>7. Sécurité</h2>
+    <p>
+      Je mets en œuvre des mesures techniques appropriées (chiffrement HTTPS, hébergeurs certifiés)
+      pour protéger vos données contre tout accès ou destruction non autorisés.
+    </p>
+  </section>
+
+
+  <!-- 8. MODIFICATIONS -->
+  <section class="legal-section">
+    <h2>8. Modifications</h2>
+    <p>
+      La présente politique peut être modifiée. Toute modification substantielle sera notifiée
+      par email ou via le site.
+    </p>
+  </section>
+
+
+  <!-- 9. CONTACT -->
+  <section class="legal-section" id="contact">
+    <h2>9. Contact</h2>
+    <div class="legal-highlight">
+      <strong>Email :</strong> <a href="mailto:christophervaslopes@gmail.com">christophervaslopes@gmail.com</a><br/>
+      <strong>DM TikTok :</strong> <a href="https://www.tiktok.com/@chris.sans.filtre" target="_blank" rel="noopener">@chris.sans.filtre</a><br/>
+      <strong>DM Instagram :</strong> <a href="https://www.instagram.com/chris.sans.filtre" target="_blank" rel="noopener">@chris.sans.filtre</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  © 2026 Chris — La Méthode AVATAR ·
+  <a href="index.html">Retour au site</a> ·
+  <a href="mentions-legales.html">Mentions légales</a>
+</footer>
+
+</body>
+</html>
