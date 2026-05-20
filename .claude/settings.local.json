@@ -10,7 +10,13 @@
       "Bash(python3 -c ' *)",
       "Bash(dir \"D:\\\\Buisness CHRIS\\\\WEBSITE 3.0\" /s /b)",
       "PowerShell(Get-ChildItem -Path \"D:\\\\Buisness CHRIS\\\\WEBSITE 3.0\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName, Length, LastWriteTime)",
-      "Bash(ffmpeg -version)"
+      "Bash(ffmpeg -version)",
+      "WebFetch(domain:webkit.org)",
+      "WebFetch(domain:rotato.app)",
+      "Bash(ffprobe -v quiet -show_streams -select_streams v \"D:/Buisness CHRIS/WEBSITE 3.0/anim pixel 400x400.mov\")",
+      "Bash(ls \"D:\\\\Buisness CHRIS\\\\WEBSITE 3.0\\\\\" | grep -i \"anim\\\\|pixel\\\\|mov\\\\|webm\\\\|apng\")",
+      "Bash(ffprobe -i \"D:/Buisness CHRIS/WEBSITE 3.0/anim pixel 400x400.mov\")",
+      "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -vf \"fps=12,scale=90:90:flags=neighbor\" -f apng -plays 0 \"anim pixel.apng\" -y)"
     ]
   }
 }
