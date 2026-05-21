@@ -863,11 +863,10 @@
     .doc {
       padding: 16px 0;
       gap: 16px;
-      align-items: flex-start;
+      align-items: center;
     }
     .page {
-      transform-origin: top left;
-      /* La valeur de scale est injectée par le JS ci-dessous */
+      transform-origin: top center;
     }
   }
 </style>
@@ -1320,7 +1319,7 @@
       pages.forEach(function(p) { p.style.transform = ''; p.style.marginBottom = ''; });
       return;
     }
-    var scale = window.innerWidth / 1080;
+    var scale = (window.innerWidth - 32) / 1080;
     pages.forEach(function(p) {
       p.style.transform = 'scale(' + scale + ')';
       var diff = p.offsetHeight * (1 - scale);
