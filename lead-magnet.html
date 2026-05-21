@@ -855,128 +855,20 @@
   }
 
   /* ============================================================
-     MOBILE — responsive (max 879px)
+     MOBILE — scale proportionnel (max 879px)
+     Les pages gardent leur mise en page exacte, elles sont
+     juste rétrécies pour tenir dans la largeur de l'écran.
      ============================================================ */
   @media (max-width: 879px) {
-    :root {
-      --pad-x: 20px;
-      --pad-y: 28px;
-    }
-
     .doc {
-      padding: 0;
-      gap: 8px;
-      align-items: stretch;
+      padding: 16px 0;
+      gap: 16px;
+      align-items: flex-start;
     }
-
     .page {
-      width: 100vw;
-      height: auto;
-      min-height: 100vh;
+      transform-origin: top left;
+      /* La valeur de scale est injectée par le JS ci-dessous */
     }
-
-    .page-content {
-      height: auto;
-    }
-
-    /* ---- Typographie ---- */
-    .cover-title          { font-size: clamp(44px, 12vw, 80px); }
-    .cover-sub            { font-size: clamp(15px, 4vw, 26px); max-width: 100%; }
-    .h-display            { font-size: clamp(32px, 9.5vw, 64px); }
-    .h-title              { font-size: clamp(24px, 7.5vw, 48px); }
-    .h-sub                { font-size: clamp(20px, 5.5vw, 36px); }
-    .body-lg              { font-size: 14px; }
-    .body                 { font-size: 13px; }
-    .conclusion           { font-size: 16px; padding: 16px 18px; }
-    .eyebrow              { font-size: 9px; }
-    .crt-deco             { font-size: 16px; }
-
-    /* ---- Cover ---- */
-    .cover .page-content  { padding: 28px 20px 24px; }
-    .cover-head           { gap: 10px; align-items: flex-start; }
-    .cover-title-block    { gap: 18px; }
-
-    /* ---- Stats ---- */
-    .stats .stat          { padding: 14px 8px; }
-    .stats .stat .num     { font-size: 28px; }
-    .stats .stat .num small { font-size: 15px; }
-    .stats .stat .lbl     { font-size: 8px; margin-top: 6px; }
-
-    /* ---- Method cards ---- */
-    .method               { gap: 10px; }
-    .method .row          { grid-template-columns: 52px 1fr; gap: 10px; padding: 12px 14px; }
-    .method .row .num     { font-size: 40px; }
-    .method .row .head    { font-size: 14px; }
-    .method .row .desc    { font-size: 12px; }
-
-    /* ---- Grilles 2 colonnes → colonne ---- */
-    .page-content [style*="grid-template-columns:1fr 1fr"],
-    .page-content [style*="grid-template-columns: 1fr 1fr"],
-    .page-content [style*="grid-template-columns:1fr 420px"],
-    .page-content [style*="grid-template-columns: 1fr 420px"] {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 16px !important;
-    }
-
-    /* ---- Frames images ---- */
-    .result-frame         { width: 100% !important; }
-    .mockup-block         { width: 100% !important; }
-    .mockup-block .img-wrap img { height: 220px !important; }
-
-    /* ---- Proof strip ---- */
-    .proof-strip          { flex-wrap: wrap; padding: 12px 14px; gap: 8px; }
-    .proof-strip .item    { font-size: 10px; flex: 1 1 42%; min-width: 70px; }
-    .proof-strip .item + .item { border-left: none; padding-left: 0; }
-
-    /* ---- Prompt ---- */
-    .prompt-body          { font-size: 9px; line-height: 1.4; padding: 10px 12px; }
-    .prompt-head .step    { font-size: 12px; }
-    .prompt-head .tool    { font-size: 9px; }
-
-    /* ---- Offer list ---- */
-    .offer                { padding: 16px 18px; }
-    .offer li             { font-size: 12px; }
-    .offer li .sub        { font-size: 11px; }
-
-    /* ---- Price anchor ---- */
-    .price-anchor         { grid-template-columns: 1fr; gap: 14px; }
-    .price-anchor .now    { font-size: 64px; }
-    .price-anchor .old    { font-size: 22px; }
-
-    /* ---- Guarantee / seal ---- */
-    .guarantee            { grid-template-columns: 70px 1fr; gap: 14px; padding: 14px; }
-    .seal                 { width: 70px; height: 70px; font-size: 8px; }
-    .seal::before         { inset: 4px; }
-
-    /* ---- CTA ---- */
-    .cta-btn              { padding: 16px 18px; }
-    .cta-btn .label       { font-size: 18px !important; }
-    .cta-btn .arrow       { font-size: 22px; }
-
-    /* ---- H-sub inline overrides ---- */
-    .h-sub[style*="font-size:80px"] { font-size: clamp(32px, 9vw, 52px) !important; }
-    .page-content p[style*="font-size:22px"] { font-size: 14px !important; }
-
-    /* ---- Specs ---- */
-    .specs                { grid-template-columns: 1fr; }
-    .specs .spec          { font-size: 11px; }
-
-    /* ---- Author badge ---- */
-    .author               { padding: 6px 10px 6px 6px; gap: 8px; }
-    .author img           { width: 36px; height: 36px; }
-    .author .name         { font-size: 13px; }
-    .author .h            { font-size: 8px; }
-
-    /* ---- Section head ---- */
-    .section-head         { gap: 12px; }
-
-    /* ---- Footer ---- */
-    .footer               { padding-top: 10px; font-size: 9px; }
-
-    /* ---- Page head ---- */
-    .page-head            { margin-bottom: 8px; }
-    .pagenum              { font-size: 9px; }
   }
 </style>
 </head>
@@ -1420,6 +1312,24 @@
   </section>
 
 </div>
+
+<script>
+  function scalePages() {
+    var pages = document.querySelectorAll('.page');
+    if (window.innerWidth >= 880) {
+      pages.forEach(function(p) { p.style.transform = ''; p.style.marginBottom = ''; });
+      return;
+    }
+    var scale = window.innerWidth / 1080;
+    pages.forEach(function(p) {
+      p.style.transform = 'scale(' + scale + ')';
+      var diff = p.offsetHeight * (1 - scale);
+      p.style.marginBottom = '-' + diff + 'px';
+    });
+  }
+  scalePages();
+  window.addEventListener('resize', scalePages);
+</script>
 
 </body>
 </html>
