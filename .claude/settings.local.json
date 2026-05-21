@@ -18,7 +18,10 @@
       "Bash(ffprobe -i \"D:/Buisness CHRIS/WEBSITE 3.0/anim pixel 400x400.mov\")",
       "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -vf \"fps=12,scale=90:90:flags=neighbor\" -f apng -plays 0 \"anim pixel.apng\" -y)",
       "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -f apng -plays 0 \"anim pixel.apng\" -y)",
-      "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -vf \"scale=200:200:flags=neighbor\" -compression_level 9 -f apng -plays 0 \"anim pixel.apng\" -y)"
+      "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -vf \"scale=200:200:flags=neighbor\" -compression_level 9 -f apng -plays 0 \"anim pixel.apng\" -y)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
