@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=1080" />
 <title>La Méthode AVATAR — Lead Magnet</title>
 <link rel="stylesheet" href="colors_and_type.css" />
 <style>
@@ -854,21 +855,6 @@
     text-shadow: 0 0 10px rgba(200,255,61,.5);
   }
 
-  /* ============================================================
-     MOBILE — scale proportionnel (max 879px)
-     Les pages gardent leur mise en page exacte, elles sont
-     juste rétrécies pour tenir dans la largeur de l'écran.
-     ============================================================ */
-  @media (max-width: 879px) {
-    .doc {
-      padding: 16px 0;
-      gap: 16px;
-      align-items: center;
-    }
-    .page {
-      transform-origin: top center;
-    }
-  }
 </style>
 </head>
 <body>
@@ -1312,23 +1298,6 @@
 
 </div>
 
-<script>
-  function scalePages() {
-    var pages = document.querySelectorAll('.page');
-    if (window.innerWidth >= 880) {
-      pages.forEach(function(p) { p.style.transform = ''; p.style.marginBottom = ''; });
-      return;
-    }
-    var scale = (window.innerWidth - 32) / 1080;
-    pages.forEach(function(p) {
-      p.style.transform = 'scale(' + scale + ')';
-      var diff = p.offsetHeight * (1 - scale);
-      p.style.marginBottom = '-' + diff + 'px';
-    });
-  }
-  scalePages();
-  window.addEventListener('resize', scalePages);
-</script>
 
 </body>
 </html>
