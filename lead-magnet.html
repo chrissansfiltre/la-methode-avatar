@@ -436,6 +436,12 @@
     font-size: 14px;
     letter-spacing: .12em;
   }
+  .prompt-body.nano-banana::before {
+    content: "▌ À COLLER DANS NANO BANANA";
+  }
+  .prompt-body.kling::before {
+    content: "▌ À COLLER DANS KLING 3.0";
+  }
 
   .prompt-intro {
     font-family: var(--font-body);
@@ -881,7 +887,7 @@
       <!-- Header lockup -->
       <header class="cover-head">
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <span class="crt-deco" style="font-size:32px;">▌ 01 / 06</span>
+          <span class="crt-deco" style="font-size:32px;">▌ 01 / 07</span>
         </div>
         <div class="author" style="padding:12px 20px 12px 12px;gap:16px;">
           <img src="assets/logo-patch.png" alt="csf" style="width:64px;height:64px;" />
@@ -899,7 +905,7 @@
           qui arrêtent<br/>
           le <span class="hl">scroll</span>.
         </h1>
-        <p class="cover-sub">
+        <p class="cover-sub" style="font-size:54px;">
           La méthode exacte<br/>
           pour créer un hook<br/>
           à plusieurs <span class="hl">milliers</span> de vues.
@@ -924,7 +930,7 @@
 
     <div class="page-content">
       <header class="page-head">
-        <span class="crt-deco" style="font-size:32px;">▌ 02 / 06</span>
+        <span class="crt-deco" style="font-size:32px;">▌ 02 / 07</span>
       </header>
 
       <div style="display:flex;flex-direction:column;gap:36px;margin-top:auto;margin-bottom:auto;">
@@ -984,15 +990,252 @@
   </section>
 
   <!-- ====================================================== -->
-  <!-- PAGE 3 — PREUVE SOCIALE + LA MÉTHODE -->
+  <!-- PAGE 3 — LES 2 PROMPTS EN OR -->
   <!-- ====================================================== -->
-  <section class="page" data-screen-label="03 Preuve + Méthode">
+  <section class="page" data-screen-label="03 Prompts">
+    <div class="page-bg"><img src="assets/bg-4.png" alt="" /></div>
+    <div class="page-scrim"></div>
+
+    <div class="page-content">
+      <header class="page-head">
+        <span class="crt-deco" style="font-size:32px;">▌ 03 / 07</span>
+      </header>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;margin-bottom:auto;">
+
+        <div class="section-head">
+          <span class="vhs orange" style="font-size:33px;padding:14px 24px;">★ EXEMPLE 1</span>
+          <h2 class="h-title italic">
+            Les prompts <em>exacts</em><br/>
+            que j'utilise.
+          </h2>
+        </div>
+
+        <p class="body" style="font-size:29px;">
+          Copie. Colle. Génère. <strong>T'as ton hook ce soir.</strong>
+        </p>
+
+        <!-- Image + Prompt 1 côte à côte -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;">
+
+          <!-- Image résultat — génération Nano Banana -->
+          <figure class="result-frame" style="width:100%;margin:0;">
+            <div class="img-wrap" style="transform:rotate(-1deg);position:relative;">
+              <img src="assets/result-p4.png" alt="Résultat fan-footage généré par Nano Banana" />
+              <div style="position:absolute;bottom:18px;left:16px;display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,0.58);backdrop-filter:blur(4px);padding:8px 16px;border-radius:6px;">
+                <span style="font-size:23px;line-height:1;">👁</span>
+                <span style="font-family:var(--font-body);font-weight:700;font-size:23px;color:#fff;letter-spacing:.02em;line-height:1;">215 k</span>
+              </div>
+            </div>
+            <figcaption class="meta">
+              <span class="vhs orange" style="font-size:22px;padding:10px 18px;">★ Image · Nano Banana</span>
+            </figcaption>
+          </figure>
+
+          <!-- Colonne droite : Prompt 1 + Prompt 2 + Specs -->
+          <div style="display:flex;flex-direction:column;gap:14px;">
+
+            <!-- PROMPT 1 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 01 — Image fan footage</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body nano-banana" style="font-size:15px;">A candid photo taken from inside a Peugeot 106, on the driver's side. In the foreground, you can see the dashboard, steering wheel, and window frame. The driver's hand, through the open window, gestures for someone to come over. A large white van is parked across the road directly in front, blocking the narrow Parisian street. The van's door window is open; a 50-year-old man in a gray t-shirt, his head half-sticking out of the window, looks particularly annoyed and is staring at the car taking the picture. Old Haussmannian buildings on either side, traffic light in the background. The photo was taken with a smartphone through a slightly dirty windshield. Handheld, a little shaky, informally framed. Captured spontaneously, in the moment. Natural imperfections: slight motion blur at the edges, minor chromatic aberration, grain from sensor compression, diffused light. Colors are soft and slightly desaturated, like a genuine candid shot, unretouched. Gray sky. Hyperrealistic, spontaneous, almost amateur documentary impression. No filter. No text. No watermark.</div>
+            </div>
+
+            <!-- PROMPT 2 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 02 — Animation vidéo</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body kling" style="padding-top:14px;font-size:15px;">Starting image @img1. Handheld shot from inside the car, natural camera shake, amateur aesthetic. The driver's hand gestures to the van driver to approach. The man, looking through his open window, sees the gesture, gets out, slams the door, and quickly heads toward the car filming, visibly furious. He raises his fist and slams it violently against the windshield. The windshield cracks instantly, a clean spiderweb-like fissure spreading. The camera shakes slightly from the impact. Cloudy Paris daylight, Haussmannian buildings, a traffic light. Raw iPhone footage, no filters.</div>
+            </div>
+
+            <p class="prompt-intro" style="margin: -4px 0;font-size:22px;">› Tu uploads l'image générée + ce prompt ci-dessus.</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <span>@chris.sans.filtre</span>
+        <span>La Méthode AVATAR · 03</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== -->
+  <!-- PAGE 4 — EXEMPLE 2 -->
+  <!-- ====================================================== -->
+  <section class="page" data-screen-label="04 Prompts 2">
+    <div class="page-bg"><img src="assets/bg-4.png" alt="" /></div>
+    <div class="page-scrim"></div>
+
+    <div class="page-content">
+      <header class="page-head">
+        <span class="crt-deco" style="font-size:32px;">▌ 04 / 07</span>
+      </header>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;margin-bottom:auto;">
+
+        <div class="section-head">
+          <span class="vhs orange" style="font-size:33px;padding:14px 24px;">★ EXEMPLE 2</span>
+          <h2 class="h-title italic">
+            Les prompts <em>exacts</em><br/>
+            que j'utilise.
+          </h2>
+        </div>
+
+        <p class="body" style="font-size:29px;">
+          Copie. Colle. Génère. <strong>T'as ton hook ce soir.</strong>
+        </p>
+
+        <!-- Image + Prompt 1 côte à côte -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;">
+
+          <!-- Image résultat -->
+          <figure class="result-frame" style="width:100%;margin:0;">
+            <div class="img-wrap" style="transform:rotate(-1deg);position:relative;">
+              <img src="assets/result-p5.png" alt="Résultat fan-footage généré par Nano Banana" />
+              <div style="position:absolute;bottom:18px;left:16px;display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,0.58);backdrop-filter:blur(4px);padding:8px 16px;border-radius:6px;">
+                <span style="font-size:23px;line-height:1;">👁</span>
+                <span style="font-family:var(--font-body);font-weight:700;font-size:23px;color:#fff;letter-spacing:.02em;line-height:1;">94 k</span>
+              </div>
+            </div>
+            <figcaption class="meta">
+              <span class="vhs orange" style="font-size:22px;padding:10px 18px;">★ Image · Nano Banana</span>
+            </figcaption>
+          </figure>
+
+          <!-- Colonne droite : Prompt 1 + Prompt 2 -->
+          <div style="display:flex;flex-direction:column;gap:14px;">
+
+            <!-- PROMPT 1 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 01 — Image fan footage</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body nano-banana" style="font-size:15px;">A candid photo taken from inside a Lamborghini Urus, on the driver's side. In the foreground, the dashboard, steering wheel, and window frame are visible. The driver's hand, through the open window, gestures for someone to approach. A yellow French postal van Laposte @img1 is parked across the street directly in front, blocking the narrow Parisian street. The door window is open; a woman in her fifties, wearing a Laposte work uniform, her head half-peeping out, seems particularly annoyed and is staring at the car taking the picture. On either side stand old Haussmannian buildings; a traffic light is visible in the background; a narrow urban street. The photo was taken with a smartphone through a slightly dirty windshield. Handheld, a little shaky, and informally framed, it doesn't quite do the subject justice. Captured spontaneously, in the moment. The image reveals the natural imperfections of a hastily taken photo with a mobile phone: slight motion blur at the edges, minor chromatic aberration, grain from sensor compression, diffuse light, and no particular lighting. The colors are soft and slightly desaturated, like an authentic snapshot taken on the fly, without retouching. Under a gray sky. A hyperrealistic, spontaneous, almost amateur documentary impression. No filter. No text. No watermark. No one.</div>
+            </div>
+
+            <!-- PROMPT 2 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 02 — Animation vidéo</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body kling" style="padding-top:14px;font-size:15px;">@Start image. Handheld from inside the car, natural motion blur, amateur aesthetic. The driver's hand, visible on the left, signals to the van driver to approach. The woman, looking out her open window, sees the gesture, gets out, slams the door, and quickly heads towards the car filming, visibly furious: tense body language, fast and aggressive gait. Reaching the passenger window, she raises her hand towards the camera, grabs it, and throws it to the ground. Intense parallax effect due to the jolt. Cloudy daylight in Paris, Haussmannian buildings in the background, a traffic light visible. Raw footage filmed with an iPhone, without filters or color grading.</div>
+            </div>
+
+            <p class="prompt-intro" style="margin: -4px 0;font-size:22px;">› Tu uploads l'image générée + ce prompt ci-dessus.</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <span>@chris.sans.filtre</span>
+        <span>La Méthode AVATAR · 04</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== -->
+  <!-- PAGE 5 — EXEMPLE 3 -->
+  <!-- ====================================================== -->
+  <section class="page" data-screen-label="05 Prompts 3">
+    <div class="page-bg"><img src="assets/bg-4.png" alt="" /></div>
+    <div class="page-scrim"></div>
+
+    <div class="page-content">
+      <header class="page-head">
+        <span class="crt-deco" style="font-size:32px;">▌ 05 / 07</span>
+      </header>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;margin-bottom:auto;">
+
+        <div class="section-head">
+          <span class="vhs orange" style="font-size:33px;padding:14px 24px;">★ EXEMPLE 3</span>
+          <h2 class="h-title italic">
+            Les prompts <em>exacts</em><br/>
+            que j'utilise.
+          </h2>
+        </div>
+
+        <p class="body" style="font-size:29px;">
+          Copie. Colle. Génère. <strong>T'as ton hook ce soir.</strong>
+        </p>
+
+        <!-- Image + Prompts côte à côte -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;">
+
+          <!-- Image résultat -->
+          <figure class="result-frame" style="width:100%;margin:0;">
+            <div class="img-wrap" style="transform:rotate(-1deg);position:relative;">
+              <img src="assets/result-p6.png" alt="Résultat fan-footage" />
+              <div style="position:absolute;bottom:18px;left:16px;display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,0.58);backdrop-filter:blur(4px);padding:8px 16px;border-radius:6px;">
+                <span style="font-size:23px;line-height:1;">👁</span>
+                <span style="font-family:var(--font-body);font-weight:700;font-size:23px;color:#fff;letter-spacing:.02em;line-height:1;">231 k</span>
+              </div>
+            </div>
+            <figcaption class="meta">
+              <span class="vhs orange" style="font-size:22px;padding:10px 18px;">★ Image · Nano Banana</span>
+            </figcaption>
+          </figure>
+
+          <!-- Colonne droite : Prompt 1 + Prompt 2 — Exemple 3 -->
+          <div style="display:flex;flex-direction:column;gap:14px;">
+
+            <!-- PROMPT 1 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 01 — Image fan footage</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body nano-banana" style="font-size:15px;">Candid handheld street photo, fan footage aesthetic, Taken discreetly with a smartphone. the photo testifies to the photographer's desire to remain unnoticed. A young Japanese woman is standing behind a small art stand in a Parisian outdoor market, narrow cobblestone alley, old stone walls. Her main painting from @img1 is prominently displayed at the front of her stand, clearly visible. Busy market atmosphere around her, people walking past, other vendors in the background, warm ambient daylight filtering through the alley. She looks engaged and natural, not posed. Raw iPhone snapshot, no filter, no color grade, shot on the spot.</div>
+            </div>
+
+            <!-- PROMPT 2 -->
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="step">Étape 02 — Animation vidéo</span>
+                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
+              </div>
+              <div class="prompt-body kling" style="padding-top:14px;font-size:15px;">Start frame @img1. Handheld shot, natural camera shake, fan footage aesthetic, no stabilization. The person filming walks slowly forward through the busy market alley toward the art stand. People around move naturally, passing by, browsing. The camera performs a slow natural smartphone zoom in on the large black and yellow painting displayed on the easel — gradual, organic zoom, not a smooth cinematic push, like someone pinching to zoom on an iPhone while filming. The young woman behind the stand is naturally present in the background, slightly out of focus as the zoom tightens on the painting. Warm golden hour ambient light from the string lights above, cobblestone alley, stone walls. Raw iPhone footage, no filter, no color grade.</div>
+            </div>
+
+            <p class="prompt-intro" style="margin: -4px 0;font-size:22px;">› Tu uploads l'image générée + ce prompt ci-dessus.</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <span>@chris.sans.filtre</span>
+        <span>La Méthode AVATAR · 05</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== -->
+  <!-- PAGE 6 — PREUVE SOCIALE + LA MÉTHODE -->
+  <!-- ====================================================== -->
+  <section class="page" data-screen-label="04 Preuve + Méthode">
     <div class="page-bg"><img src="assets/bg-3.png" alt="" /></div>
     <div class="page-scrim"></div>
 
     <div class="page-content">
       <header class="page-head">
-        <span class="crt-deco" style="font-size:32px;">▌ 03 / 06</span>
+        <span class="crt-deco" style="font-size:32px;">▌ 06 / 07</span>
       </header>
 
       <div style="display:flex;flex-direction:column;gap:28px;margin-top:auto;margin-bottom:auto;">
@@ -1081,80 +1324,7 @@
 
       <div class="footer">
         <span>@chris.sans.filtre</span>
-        <span>La Méthode AVATAR · 03</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================== -->
-  <!-- PAGE 4 — LES 2 PROMPTS EN OR -->
-  <!-- ====================================================== -->
-  <section class="page" data-screen-label="04 Prompts">
-    <div class="page-bg"><img src="assets/bg-4.png" alt="" /></div>
-    <div class="page-scrim"></div>
-
-    <div class="page-content">
-      <header class="page-head">
-        <span class="crt-deco" style="font-size:32px;">▌ 04 / 06</span>
-      </header>
-
-      <div style="display:flex;flex-direction:column;gap:14px;margin-top:auto;margin-bottom:auto;">
-
-        <div class="section-head">
-          <span class="vhs orange" style="font-size:33px;padding:14px 24px;">★ COPY · COLLE · GÉNÈRE</span>
-          <h2 class="h-title italic">
-            Les prompts <em>exacts</em><br/>
-            que j'utilise.
-          </h2>
-        </div>
-
-        <p class="body" style="font-size:29px;">
-          Copie. Colle. Génère. <strong>T'as ton hook ce soir.</strong>
-        </p>
-
-        <!-- Image + Prompt 1 côte à côte -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;">
-
-          <!-- Image résultat — génération Nano Banana -->
-          <figure class="result-frame" style="width:100%;margin:0;">
-            <div class="img-wrap" style="transform:rotate(-1deg);"><img src="assets/result-p4.png" alt="Résultat fan-footage généré par Nano Banana" /></div>
-            <figcaption class="meta">
-              <span class="vhs orange" style="font-size:22px;padding:10px 18px;">★ Sortie · Nano Banana</span>
-            </figcaption>
-          </figure>
-
-          <!-- Colonne droite : Prompt 1 + Prompt 2 + Specs -->
-          <div style="display:flex;flex-direction:column;gap:14px;">
-
-            <!-- PROMPT 1 -->
-            <div class="prompt">
-              <div class="prompt-head">
-                <span class="step">Étape 01 — Image fan footage</span>
-                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
-              </div>
-              <div class="prompt-body" style="font-size:15px;">A candid photo taken from inside a Peugeot 106, on the driver's side. In the foreground, you can see the dashboard, steering wheel, and window frame. The driver's hand, through the open window, gestures for someone to come over. A large white van is parked across the road directly in front, blocking the narrow Parisian street. The van's door window is open; a 50-year-old man in a gray t-shirt, his head half-sticking out of the window, looks particularly annoyed and is staring at the car taking the picture. Old Haussmannian buildings on either side, traffic light in the background. The photo was taken with a smartphone through a slightly dirty windshield. Handheld, a little shaky, informally framed. Captured spontaneously, in the moment. Natural imperfections: slight motion blur at the edges, minor chromatic aberration, grain from sensor compression, diffused light. Colors are soft and slightly desaturated, like a genuine candid shot, unretouched. Gray sky. Hyperrealistic, spontaneous, almost amateur documentary impression. No filter. No text. No watermark.</div>
-            </div>
-
-            <!-- PROMPT 2 -->
-            <div class="prompt">
-              <div class="prompt-head">
-                <span class="step">Étape 02 — Animation vidéo</span>
-                <button onclick="copyPrompt(this)" style="margin-left:auto;background:var(--ink-050);color:var(--acid-500);border:1.5px solid var(--acid-500);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;cursor:pointer;flex-shrink:0;">▌ COPIER</button>
-              </div>
-              <div class="prompt-body" style="padding-top:14px;font-size:15px;">Starting image @img1. Handheld shot from inside the car, natural camera shake, amateur aesthetic. The driver's hand gestures to the van driver to approach. The man, looking through his open window, sees the gesture, gets out, slams the door, and quickly heads toward the car filming, visibly furious. He raises his fist and slams it violently against the windshield. The windshield cracks instantly, a clean spiderweb-like fissure spreading. The camera shakes slightly from the impact. Cloudy Paris daylight, Haussmannian buildings, a traffic light. Raw iPhone footage, no filters.</div>
-            </div>
-
-            <p class="prompt-intro" style="margin: -4px 0;font-size:22px;">› Tu uploads l'image générée + ce prompt ci-dessus.</p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="footer">
-        <span>@chris.sans.filtre</span>
-        <span>La Méthode AVATAR · 04</span>
+        <span>La Méthode AVATAR · 06</span>
       </div>
     </div>
   </section>
@@ -1169,7 +1339,7 @@
 
     <div class="page-content">
       <header class="page-head">
-        <span class="crt-deco" style="font-size:32px;">▌ 05 / 06</span>
+        <span class="crt-deco" style="font-size:32px;">▌ 07 / 07</span>
       </header>
 
       <div style="display:flex;flex-direction:column;gap:24px;margin-top:auto;margin-bottom:auto;">
@@ -1186,7 +1356,7 @@
         <p class="body" style="font-size:29px;">
           Des vues, c'est cool. Mais sans système derrière, <strong>ça rapporte 0€</strong>.
           Moi, en 19 jours, j'ai généré <strong>2 340€</strong> avec exactement la même
-          méthode que je suis sur le point de te donner.
+          méthode que je suis sur le point de te montrer.
         </p>
 
         <div style="display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:center;">
@@ -1210,41 +1380,6 @@
           </figure>
         </div>
 
-
-
-      </div>
-
-      <div class="footer">
-        <span>@chris.sans.filtre</span>
-        <span>La Méthode AVATAR · 05</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================== -->
-  <!-- PAGE 6 — CTA FINAL + GARANTIE -->
-  <!-- ====================================================== -->
-  <section class="page" data-screen-label="06 CTA Final">
-    <div class="page-bg"><img src="assets/bg-6.png" alt="" /></div>
-    <div class="page-scrim"></div>
-
-    <div class="page-content">
-      <header class="page-head">
-        <span class="crt-deco" style="font-size:32px;">▌ 06 / 06</span>
-      </header>
-
-      <div style="display:flex;flex-direction:column;gap:28px;margin-top:auto;margin-bottom:auto;">
-
-        <div class="section-head">
-          <span class="vhs orange" style="font-size:18px;padding:10px 16px;">★ DERNIÈRE PAGE · LECTURE OBLIGATOIRE</span>
-          <h2 class="h-display italic" style="font-size:84px;">
-            Le seul truc<br/>
-            qui peut te faire rater,<br/>
-            c'est de pas commencer<br/>
-            <em>maintenant</em>.
-          </h2>
-        </div>
-
         <p class="body-lg" style="font-size:33px;">
           T'as les prompts. T'as vu les résultats. T'as la méthode.
         </p>
@@ -1253,13 +1388,10 @@
           Et c'est exactement ce qu'il y a dans <strong>La Méthode AVATAR</strong>.
         </p>
 
-
-
         <!-- CTA -->
         <div class="cta-block">
-          <a class="cta-btn" href="https://chrissansfiltre.com/">
-            <span class="label" style="font-size:42px;">› Je crée mon AVATAR</span>
-            <span class="arrow">→</span>
+          <a class="cta-btn" href="https://chrissansfiltre.com/" style="justify-content:center;">
+            <span class="label" style="font-size:42px;">› Je découvre la méthode</span>
           </a>
           <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:14px;">
             <span style="font-family:var(--font-mono);font-size:140px;color:var(--flash-500);line-height:.9;">↑</span>
@@ -1270,11 +1402,12 @@
       </div>
 
       <div class="footer">
-        <span>© @chris.sans.filtre</span>
-        <span>chrissansfiltre.com</span>
+        <span>@chris.sans.filtre</span>
+        <span>La Méthode AVATAR · 07</span>
       </div>
     </div>
   </section>
+
 
 </div>
 
