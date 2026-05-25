@@ -1632,6 +1632,64 @@
     .receive .terminal { max-width: 100%; overflow: hidden; }
     .receive .terminal-body { overflow-x: auto; }
     .receive .terminal pre { font-size: 9px !important; white-space: pre; }
+
+    /* --- Hero CTA: stack button + pixel art vertically sur mobile --- */
+    .hero-cta-block > div:first-child {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 16px;
+    }
+    .hero-cta-block > div:first-child > a.btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* --- Hero video: ne dépasse jamais la largeur dispo --- */
+    .hero-video { max-width: min(380px, calc(100vw - 48px)); }
+
+    /* --- Pricing/countdown: réduire les gros chiffres --- */
+    .countdown .num { font-size: 44px; }
+    .value-table .you .now { font-size: 46px; }
+  }
+
+  /* ============================================================
+     EXTRA SMALL — Galaxy S8+, petits Android (≤ 390px)
+     ============================================================ */
+  @media (max-width: 390px) {
+    .hero h1 { font-size: clamp(32px, 8.8vw, 38px); }
+    .hero-lede { font-size: 14px; }
+    .countdown .num { font-size: 38px; }
+    .value-table .you .now { font-size: 40px; }
+    .chris-stats { grid-template-columns: 1fr 1fr; }
+    .chris-stats .stat { padding: 14px; }
+    .chris-stats .stat .v { font-size: 28px; }
+    .lesson .meta h4 { font-size: 18px; }
+    .section-counter { font-size: 7px; letter-spacing: 0.03em; gap: 6px; }
+  }
+
+  /* ============================================================
+     ULTRA SMALL — ≤ 360px
+     ============================================================ */
+  @media (max-width: 360px) {
+    .wrap, .wrap-tight { padding: 0 14px; }
+    .hero h1 { font-size: 30px; }
+    .hero-lede { font-size: 13px; }
+    .hero-cta-block .btn-lg { font-size: 13px; padding: 14px 16px; }
+    .countdown .num { font-size: 32px; }
+    .countdown .lbl { font-size: 9px; letter-spacing: 0.08em; }
+    .value-table .you .now { font-size: 36px; }
+    .value-table .you { padding: 18px 16px; }
+    .chris-stats { grid-template-columns: 1fr; }
+    .chris-stats .stat { border-right: 0; border-bottom: 1px solid var(--border); padding: 14px 16px; }
+    .chris-stats .stat:last-child { border-bottom: 0; }
+    .chris-stats .stat .v { font-size: 30px; }
+    .faq-q { grid-template-columns: 32px 1fr auto; gap: 8px; padding: 20px 0; }
+    .faq-a { padding-left: 40px; font-size: 14px; }
+    .offer-bar { padding: 12px 14px; gap: 8px; }
+    .offer-bar .btn { padding: 10px 12px; font-size: 11px; }
+    .site-header .brand-name { font-size: 13px; }
+    .section { padding: 56px 0; }
   }
 </style>
 
