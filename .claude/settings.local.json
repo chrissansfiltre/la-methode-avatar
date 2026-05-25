@@ -21,7 +21,8 @@
       "Bash(ffmpeg -i \"anim pixel 400x400.mov\" -vf \"scale=200:200:flags=neighbor\" -compression_level 9 -f apng -plays 0 \"anim pixel.apng\" -y)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "WebFetch(domain:stan.store)"
     ]
   }
 }
