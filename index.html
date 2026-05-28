@@ -693,6 +693,19 @@
     }
     .sticky-cta:hover { background:var(--orlo); }
 
+    /* ── STICKY BAR SMALL PHONES ────────────────── */
+    @media(max-width:400px) {
+      #sticky-bar { padding:10px 12px; gap:8px; }
+      .sticky-info .lbl { font-size:8px; }
+      .sticky-info .title { font-size:.88rem; }
+      .sticky-cta { font-size:.82rem; padding:12px 16px; gap:6px; }
+    }
+    @media(max-width:360px) {
+      #sticky-bar { padding:8px 10px; gap:6px; }
+      .sticky-info .title { font-size:.8rem; }
+      .sticky-cta { font-size:.78rem; padding:11px 13px; }
+    }
+
     /* ── MOBILE GUARANTEES FIX ──────────────────── */
     @media(max-width:859px) {
       .guarantees { flex-wrap:nowrap; gap:4px 14px; justify-content:center; }
