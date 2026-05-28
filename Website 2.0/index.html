@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NT29CX1YG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2NT29CX1YG');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Méthode AVATAR — @chris.sans.filtre</title>
+  <link rel="icon" type="image/png" href="MON_LOGO.png">
+  <link rel="apple-touch-icon" href="MON_LOGO.png">
+  <meta name="description" content="Crée un influenceur IA cohérent et vends un produit digital — sans jamais te montrer à la caméra. Guide complet : Nano Banana, Kling 3.0, Stan Store. Résultats en 48h." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0a;
+      --bg2:     #111111;
+      --bg3:     #181818;
+      --orange:  #FF6B00;
+      --orlo:    #cc5500;
+      --oglow:   rgba(255,107,0,.25);
+      --cardgrad: linear-gradient(145deg,#1e0e00 0%,#2d1400 55%,#1a0800 100%);
+      --white:   #F5F5F5;
+      --grey:    #888;
+      --greyli:  #aaa;
+      --border:  rgba(255,255,255,.08);
+      --radius:  22px;
+      --fhead:   'Barlow Condensed', 'Impact', sans-serif;
+      --fbody:   'Barlow', 'Inter', sans-serif;
+      --fsmall:  'Inter', system-ui, sans-serif;
+    }
+
+    html { font-size:16px; overflow-x:hidden; scroll-behavior:smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--fbody);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    ::selection { background:rgba(255,107,0,.35); }
+
+    /* ── PLACEHOLDER ─────────────────────────────── */
+    .ph {
+      background: repeating-linear-gradient(
+        135deg, rgba(255,255,255,.025) 0 10px, rgba(255,255,255,.055) 10px 20px
+      ), #141414;
+      border: 1.5px dashed rgba(255,107,0,.3);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--fsmall); font-size:11px; letter-spacing:.15em;
+      text-transform:uppercase; color:#555; text-align:center; padding:16px;
+      border-radius:14px;
+    }
+
+    /* ── LAYOUT ──────────────────────────────────── */
+    .wrap { max-width:480px; margin:0 auto; padding:0 18px; }
+    @media(min-width:860px){ .wrap { max-width:900px; } }
+
+    /* ── REVEAL ──────────────────────────────────── */
+    .rv { opacity:0; transform:translateY(28px);
+      transition:opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); }
+    .rv.in { opacity:1; transform:none; }
+    .rv.d1{ transition-delay:.08s } .rv.d2{ transition-delay:.16s }
+    .rv.d3{ transition-delay:.24s } .rv.d4{ transition-delay:.32s }
+    .rv.d5{ transition-delay:.40s } .rv.d6{ transition-delay:.48s }
+
+    /* ── NAVBAR ──────────────────────────────────── */
+    #nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      transition: background .3s, border-color .3s;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.sc {
+      background:rgba(10,10,10,.88);
+      backdrop-filter:blur(18px) saturate(140%);
+      border-bottom-color:var(--border);
+    }
+    .nav-inner {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 18px; max-width:900px; margin:0 auto;
+    }
+    .nav-logo {
+      display:flex; align-items:center; gap:10px;
+      font-family:var(--fhead); font-size:1.4rem; font-weight:900; letter-spacing:.04em;
+    }
+    .nav-logo img { height:36px; width:auto; display:block; }
+    .nav-logo .logo-text { display:flex; align-items:center; gap:0; }
+    .nav-logo .logo-text .lo { color:var(--white); }
+    .nav-logo .logo-text .hi { color:var(--orange); }
+
+    .hamburger {
+      width:46px; height:46px; background:var(--bg3); border:1px solid var(--border);
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:5px; cursor:pointer;
+    }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--white); border-radius:2px; }
+
+    /* Mobile menu */
+    .nav-mobile {
+      display:none; flex-direction:column;
+      background:rgba(10,10,10,.97); backdrop-filter:blur(20px);
+      border-top:1px solid var(--border);
+    }
+    .nav-mobile.open { display:flex; }
+    .nav-mobile a {
+      padding:18px; font-size:1rem; color:var(--greyli);
+      border-bottom:1px solid var(--border); font-family:var(--fbody); font-weight:600;
+    }
+    .nav-mobile a:last-child {
+      margin:16px; border:none; background:var(--orange); color:#fff;
+      text-align:center; border-radius:100px; padding:16px;
+      font-family:var(--fhead); font-size:1.1rem; font-weight:900; letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    /* ── SECTION HEADER ──────────────────────────── */
+    .sec-head {
+      display:flex; align-items:center; gap:12px;
+      font-family:var(--fsmall); font-size:11px; letter-spacing:.22em;
+      color:var(--grey); text-transform:uppercase; margin-bottom:12px;
+    }
+    .sec-head .slash { color:var(--orange); font-weight:700; }
+    .sec-head .line { flex:1; height:1px; background:rgba(255,255,255,.1); }
+
+    /* ── BTN CTA ─────────────────────────────────── */
+    .btn-cta {
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      width:100%; padding:20px 28px; background:var(--orange);
+      color:#fff; font-family:var(--fhead); font-weight:900; font-size:1.15rem;
+      letter-spacing:.12em; text-transform:uppercase; border-radius:100px;
+      border:none; cursor:pointer;
+      transition:background .2s, transform .2s, box-shadow .3s;
+      box-shadow: 0 8px 40px -8px rgba(255,107,0,.55);
+      text-decoration:none;
+    }
+    .btn-cta:hover { background:var(--orlo); transform:translateY(-2px); box-shadow:0 12px 50px -8px rgba(255,107,0,.7); }
+    .btn-cta.sm { font-size:.95rem; padding:16px 24px; }
+
+    /* ── GUARANTEES ──────────────────────────────── */
+    .guarantees {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:8px 20px;
+      margin-top:22px;
+    }
+    .guarantee {
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--grey); text-align:center;
+      min-width:80px;
+    }
+    .guarantee .ico { font-size:1.3rem; color:var(--orange); }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero { padding-top:74px; }
+    .hero-img-card {
+      width:100%; aspect-ratio:16/9; border-radius:var(--radius);
+      overflow:hidden; margin-bottom:28px;
+    }
+    .hero-img-card img, .hero-img-card .ph {
+      width:100%; height:100%; object-fit:cover; border-radius:var(--radius);
+    }
+    .img-desktop { display:none; }
+    .img-mobile  { display:block; }
+    .hero-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2.6rem,10vw,4.2rem); line-height:1.0;
+      letter-spacing:-.01em; margin-bottom:16px;
+    }
+    .hero-title .accent { color:var(--orange); }
+    .hero-sub {
+      font-family:var(--fbody); font-size:1rem; color:var(--greyli);
+      line-height:1.6; margin-bottom:28px; max-width:44ch;
+    }
+    .hero-sub strong { color:var(--orange); font-weight:700; }
+
+    /* ── MÉTHODE SECTION ─────────────────────────── */
+    #etapes { padding:60px 0 0; }
+    .etapes-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,3rem); letter-spacing:-.01em; margin-bottom:6px;
+    }
+    .etapes-title .accent { color:var(--orange); }
+    .etapes-tagline {
+      font-family:var(--fsmall); font-size:11px; letter-spacing:.24em;
+      text-transform:uppercase; color:var(--grey); margin-bottom:36px;
+      display:block; text-align:center;
+    }
+
+    /* Step block */
+    .step-block { margin-bottom:12px; }
+
+    .step-card {
+      background: var(--cardgrad);
+      border-radius:var(--radius); padding:24px 22px 28px;
+      position:relative; overflow:hidden;
+      border:1px solid rgba(255,107,0,.12);
+      box-shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    }
+    .step-card::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 60% at 80% 0%, rgba(255,107,0,.07), transparent 60%);
+      pointer-events:none;
+    }
+    .step-num-title {
+      display:flex; align-items:flex-end; gap:10px; margin-bottom:14px;
+    }
+    .step-big-num {
+      font-family:var(--fhead); font-size:clamp(3.5rem,14vw,5.5rem);
+      font-weight:900; color:var(--orange); line-height:1; letter-spacing:-.02em;
+    }
+    .step-big-title {
+      font-family:var(--fhead); font-size:clamp(1.5rem,6vw,2.3rem);
+      font-weight:800; color:var(--white); line-height:1.05; letter-spacing:-.01em;
+      padding-bottom:8px;
+    }
+    .step-subtitle {
+      font-family:var(--fbody); font-weight:800; font-size:1.05rem;
+      color:var(--white); margin-bottom:6px;
+    }
+    .step-desc {
+      font-family:var(--fbody); font-size:.9rem; color:rgba(245,245,245,.65);
+      line-height:1.55; margin-bottom:22px;
+    }
+    .step-desc u { color:var(--orange); text-decoration:underline; }
+
+    /* Floating images inside card */
+    .step-images {
+      position:relative; height:240px; margin:0 -4px;
+    }
+    .step-img-main {
+      position:absolute; left:50%; top:0; transform:translateX(-50%);
+      width:55%; height:100%; border-radius:14px; overflow:hidden;
+      border:2px solid rgba(255,107,0,.4); z-index:2;
+    }
+    .step-img-tl {
+      position:absolute; left:0; top:10px;
+      width:38%; height:55%; border-radius:12px; overflow:hidden;
+      border:2px solid rgba(255,107,0,.35); z-index:3; transform:rotate(-3deg);
+    }
+    .step-img-tr {
+      position:absolute; right:0; top:22px;
+      width:36%; height:50%; border-radius:12px; overflow:hidden;
+      border:2px solid rgba(255,107,0,.35); z-index:3; transform:rotate(2.5deg);
+    }
+    .step-img-bl {
+      position:absolute; left:0; bottom:0;
+      width:42%; height:38%; border-radius:10px; overflow:hidden;
+      border:2px solid rgba(255,107,0,.3); z-index:4; transform:rotate(1deg);
+    }
+    .step-img-main img, .step-img-tl img, .step-img-tr img, .step-img-bl img,
+    .step-img-main .ph, .step-img-tl .ph, .step-img-tr .ph, .step-img-bl .ph {
+      width:100%; height:100%; object-fit:cover; border-radius:0;
+    }
+
+    /* Grid of images for step 2 */
+    .step-grid-imgs {
+      display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:16px;
+    }
+    .step-grid-imgs .gi {
+      aspect-ratio:3/4; border-radius:12px; overflow:hidden;
+      border:2px solid rgba(255,107,0,.3);
+    }
+    .step-grid-imgs .gi.wide {
+      aspect-ratio:4/3;
+    }
+    .step-grid-imgs .gi img, .step-grid-imgs .gi .ph {
+      width:100%; height:100%; object-fit:cover; border-radius:0;
+    }
+
+    /* Step meta below card */
+    .step-meta {
+      padding:24px 0 20px;
+      border-bottom:1px solid var(--border);
+    }
+    .step-meta .num {
+      font-family:var(--fhead); font-size:2rem; font-weight:900;
+      color:var(--orange); line-height:1;
+    }
+    .step-meta .line-h {
+      display:inline-block; width:40px; height:2px;
+      background:var(--orange); margin-left:6px; vertical-align:middle;
+    }
+    .step-meta h3 {
+      font-family:var(--fhead); font-size:1.5rem; font-weight:900;
+      letter-spacing:-.01em; margin:6px 0 6px;
+    }
+    .step-meta p {
+      font-family:var(--fbody); font-size:.92rem; color:var(--greyli);
+      line-height:1.55;
+    }
+    .step-arrow {
+      display:flex; justify-content:center; margin:20px 0;
+    }
+    .step-arrow a {
+      width:46px; height:46px; border-radius:50%;
+      background:transparent; border:2px solid var(--orange);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--orange); font-size:1.2rem;
+      transition:background .2s;
+    }
+    .step-arrow a:hover { background:var(--orange); color:#fff; }
+
+    /* ── CE QUE TU APPRENDS ──────────────────────── */
+    #apprendre { padding:32px 0; }
+    .apprendre-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:28px; line-height:1.05;
+    }
+    .apprendre-title .accent { color:var(--orange); }
+    .learn-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    }
+    .learn-cell {
+      border-radius:16px; overflow:hidden;
+      background:var(--bg3);
+      border:1.5px solid rgba(255,107,0,.7);
+      display:flex; flex-direction:column;
+    }
+    .learn-media {
+      position:relative; aspect-ratio:9/13; overflow:hidden; flex-shrink:0;
+    }
+    .learn-cell .ph { border-radius:0; height:100%; border:none; }
+    .learn-cell .badge {
+      position:absolute; top:12px; left:12px; z-index:2;
+      background:var(--bg); border:1px solid var(--orange);
+      color:var(--orange); font-family:var(--fsmall); font-size:9px;
+      font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+      padding:5px 10px; border-radius:4px;
+    }
+    .learn-cell .caption {
+      padding:12px 14px 14px;
+      background:#333333;
+    }
+    .learn-cell .cap-title {
+      font-family:var(--fhead); font-size:1.05rem; font-weight:800;
+      color:var(--white); line-height:1.2;
+    }
+    .learn-cell .cap-sub {
+      font-family:var(--fbody); font-size:.78rem; color:rgba(245,245,245,.6);
+      margin-top:3px; line-height:1.4;
+    }
+
+    /* ── CE QUE TU REÇOIS ────────────────────────── */
+    #recois { padding:32px 0; }
+    #recois .sec-head { margin-bottom:28px; }
+
+    /* Bonus card */
+    .bonus-card {
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px; margin-bottom:16px;
+      position:relative;
+    }
+    .bonus-tag {
+      position:absolute; top:-14px; right:18px;
+      background:var(--orange); color:#fff;
+      font-family:var(--fhead); font-size:.95rem; font-weight:900;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:6px 16px; border-radius:8px;
+      box-shadow:0 6px 20px rgba(255,107,0,.5);
+    }
+    .bonus-label {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(255,107,0,.12); border:1px solid rgba(255,107,0,.3);
+      border-radius:6px; padding:5px 12px;
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.18em;
+      color:var(--orange); text-transform:uppercase; font-weight:700;
+      margin-bottom:14px;
+    }
+    .bonus-title {
+      font-family:var(--fhead); font-size:1.8rem; font-weight:900;
+      letter-spacing:.02em; line-height:1.05; margin-bottom:6px;
+    }
+    .bonus-title .accent { color:var(--orange); }
+    .bonus-sub {
+      font-family:var(--fbody); font-size:.9rem; color:var(--greyli);
+      line-height:1.55; margin-bottom:20px;
+    }
+    .bonus-sub strong { color:var(--white); }
+
+    /* Comparison sans/avec */
+    .comparison { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:0; }
+    .comp-col {
+      border-radius:14px; padding:16px 14px; border:1px solid transparent;
+    }
+    .comp-col.sans { background:rgba(255,60,60,.1); border-color:rgba(255,60,60,.2); }
+    .comp-col.avec { background:rgba(255,107,0,.1); border-color:rgba(255,107,0,.3); }
+    .comp-label {
+      font-family:var(--fsmall); font-size:10px; font-weight:700;
+      letter-spacing:.18em; text-transform:uppercase; margin-bottom:4px;
+    }
+    .comp-col.sans .comp-label { color:rgba(255,80,80,.8); }
+    .comp-col.avec .comp-label { color:var(--orange); }
+    .comp-sub {
+      font-family:var(--fsmall); font-size:9px; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--grey); margin-bottom:14px;
+    }
+    .comp-item {
+      display:flex; align-items:flex-start; gap:8px;
+      font-family:var(--fbody); font-size:.82rem; color:rgba(245,245,245,.75);
+      line-height:1.4; margin-bottom:8px;
+    }
+    .comp-item .ico { flex-shrink:0; margin-top:1px; }
+
+    /* Checklist */
+    .checklist { margin-top:0; display:flex; flex-direction:column; }
+    .check-item {
+      display:flex; align-items:flex-start; gap:14px;
+      padding:14px 0; border-bottom:1px solid var(--border);
+      font-family:var(--fbody); font-size:.95rem; color:var(--white);
+      line-height:1.45;
+    }
+    .check-item:last-child { border-bottom:none; }
+    .check-item .ck { color:var(--orange); flex-shrink:0; margin-top:3px; font-size:1rem; }
+    .check-item .gift-badge {
+      display:block; font-family:var(--fsmall); font-size:10px;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--orange);
+      font-weight:700; margin-bottom:2px;
+    }
+    .check-item strong { color:var(--white); font-weight:700; }
+    .check-item .sub { display:block; color:var(--greyli); font-size:.85rem; margin-top:2px; }
+
+    /* ── VALEUR ──────────────────────────────────── */
+    #valeur { padding:32px 0; }
+    .valeur-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(1.8rem,7vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:28px; line-height:1.05;
+    }
+    .valeur-title .accent { color:var(--orange); }
+    .v-table { display:flex; flex-direction:column; }
+    .v-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 0; border-bottom:1px solid var(--border);
+      gap:12px;
+    }
+    .v-row .vn { font-family:var(--fbody); font-size:.95rem; color:var(--greyli); }
+    .v-row .vp { font-family:var(--fsmall); font-size:.9rem; color:var(--grey); text-decoration:line-through; white-space:nowrap; }
+    .v-row.total { padding-top:20px; }
+    .v-row.total .vn {
+      font-family:var(--fhead); font-size:1.1rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:.08em; color:var(--greyli);
+    }
+    .v-row.total .vp { font-size:1rem; }
+    .v-row.highlight {
+      border-bottom:none; padding-top:18px; align-items:baseline;
+    }
+    .v-row.highlight .vn {
+      font-family:var(--fhead); font-size:1.3rem; font-weight:900;
+      text-transform:uppercase; letter-spacing:.1em; color:var(--orange);
+    }
+    .v-row.highlight .vp {
+      font-family:var(--fhead); font-size:2.8rem; font-weight:900;
+      color:var(--orange); text-decoration:none; letter-spacing:-.01em;
+    }
+    .v-note {
+      text-align:center; font-family:var(--fsmall); font-size:10px;
+      letter-spacing:.16em; text-transform:uppercase; color:var(--grey);
+      margin-top:16px;
+    }
+
+    /* ── COUNTDOWN + CTA FINAL ───────────────────── */
+    #cta-final { padding:60px 0; border-top:1px solid var(--border); }
+    .countdown-label {
+      text-align:center; font-family:var(--fsmall); font-size:10px;
+      letter-spacing:.28em; text-transform:uppercase; color:var(--orange);
+      margin-bottom:12px;
+    }
+    .countdown {
+      display:flex; justify-content:center; gap:12px; margin-bottom:40px;
+    }
+    .cd-item {
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+    }
+    .cd-num {
+      font-family:var(--fhead); font-size:2.6rem; font-weight:900;
+      color:var(--white); line-height:1; min-width:50px; text-align:center;
+    }
+    .cd-label {
+      font-family:var(--fsmall); font-size:9px; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--grey);
+    }
+    .cd-sep {
+      font-family:var(--fhead); font-size:2rem; font-weight:900;
+      color:var(--orange); padding-top:4px; line-height:1;
+    }
+    .cta-sub-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,3rem); letter-spacing:-.01em;
+      text-align:center; margin-bottom:6px; line-height:1.05;
+    }
+    .cta-sub-title .accent { color:var(--orange); }
+    .cta-price-box {
+      text-align:center; background:var(--bg3);
+      border:1px solid var(--border); border-radius:var(--radius);
+      padding:28px 24px; margin:24px 0;
+    }
+    .cta-offer-label {
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.22em;
+      text-transform:uppercase; color:var(--orange); margin-bottom:10px;
+    }
+    .cta-price-main {
+      font-family:var(--fhead); font-size:4.5rem; font-weight:900;
+      color:var(--white); line-height:1; letter-spacing:-.02em;
+    }
+    .cta-price-old {
+      font-family:var(--fbody); font-size:1rem; color:var(--grey);
+      text-decoration:line-through; margin-top:4px;
+    }
+    .cta-access {
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.16em;
+      text-transform:uppercase; color:var(--grey); margin-top:8px;
+    }
+    .cta-guarantees {
+      display:flex; justify-content:center; gap:6px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .cta-g-item {
+      display:flex; align-items:center; gap:6px;
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--grey);
+    }
+    .cta-g-item .ico { color:var(--orange); font-size:.9rem; }
+    .cta-g-sep { color:#333; }
+
+    /* ── CHRIS ───────────────────────────────────── */
+    #chris { padding:60px 0; border-top:1px solid var(--border); }
+    .chris-photo-wrap {
+      width:100%; aspect-ratio:3/4; border-radius:var(--radius);
+      overflow:hidden; margin-bottom:28px;
+    }
+    .chris-photo-wrap img, .chris-photo-wrap .ph {
+      width:100%; height:100%; object-fit:cover; border-radius:var(--radius);
+    }
+    .chris-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,3rem); letter-spacing:-.01em;
+      margin-bottom:20px; line-height:1.05;
+    }
+    .chris-title .accent { color:var(--orange); }
+    .chris-text {
+      font-family:var(--fbody); font-size:.97rem; color:var(--greyli);
+      line-height:1.7;
+    }
+    .chris-text p + p { margin-top:12px; }
+    .chris-badge {
+      display:inline-flex; align-items:center; gap:12px;
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:100px; padding:12px 20px; margin-top:24px;
+    }
+    .chris-badge .handle { font-weight:700; font-size:.9rem; }
+    .chris-badge .sep { color:#333; }
+    .chris-badge .followers {
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--grey);
+    }
+
+    /* ── FAQ ─────────────────────────────────────── */
+    #faq { padding:32px 0; border-top:1px solid var(--border); }
+    .faq-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:32px; line-height:1.05;
+    }
+    .faq-title .accent { color:var(--orange); }
+    .faq-list { display:flex; flex-direction:column; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-q {
+      width:100%; background:none; border:none; text-align:left;
+      padding:20px 0; display:flex; justify-content:space-between;
+      align-items:center; gap:16px; cursor:pointer;
+      color:var(--white); font-family:var(--fbody); font-size:1.05rem;
+      font-weight:700; line-height:1.35;
+    }
+    .faq-q:hover { color:var(--orange); }
+    .faq-chevron {
+      flex-shrink:0; width:28px; height:28px;
+      border:1.5px solid var(--border); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:transform .35s, background .2s, border-color .2s;
+    }
+    .faq-chevron svg { width:12px; height:12px; stroke:var(--white); }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); background:var(--orange); border-color:var(--orange); }
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.22,1,.36,1); }
+    .faq-answer-inner {
+      padding:0 0 20px; font-family:var(--fbody); font-size:.95rem;
+      color:var(--greyli); line-height:1.65;
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      padding:60px 0 120px; border-top:1px solid var(--border);
+    }
+    .footer-inner { display:flex; flex-direction:column; gap:32px; }
+    .footer-logo {
+      font-family:var(--fhead); font-size:1.5rem; font-weight:900;
+      letter-spacing:.04em; margin-bottom:12px;
+    }
+    .footer-logo img { height:32px; margin-bottom:8px; }
+    .footer-logo .hi { color:var(--orange); }
+    .footer-desc {
+      font-family:var(--fbody); font-size:.9rem; color:var(--grey);
+      line-height:1.6; margin-bottom:8px; max-width:42ch;
+    }
+    .footer-email {
+      font-family:var(--fsmall); font-size:11px; letter-spacing:.14em;
+      color:var(--grey); text-transform:uppercase;
+    }
+    .footer-email a {
+      color:var(--grey); text-decoration:none; transition:color .2s;
+    }
+    .footer-email a:hover { color:var(--orange); }
+    .footer-col-label {
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.22em;
+      text-transform:uppercase; color:var(--grey); margin-bottom:16px;
+    }
+    .footer-col-label .sl { color:var(--orange); }
+    .footer-links { display:flex; flex-direction:column; gap:0; }
+    .footer-links a {
+      font-family:var(--fbody); font-size:1rem; font-weight:400;
+      color:var(--greyli); padding:8px 0;
+      transition:color .2s;
+    }
+    .footer-links a:hover { color:var(--orange); }
+    .footer-copy {
+      font-family:var(--fsmall); font-size:10px; letter-spacing:.16em;
+      text-transform:uppercase; color:#444; margin-top:32px; padding-top:20px;
+      border-top:1px solid var(--border);
+    }
+
+    /* ── BANDEAU COOKIES ────────────────────────── */
+    #cookie-banner {
+      position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+      z-index:400; width:calc(100% - 36px); max-width:640px;
+      background:#141414; border:1px solid rgba(255,255,255,.1);
+      border-radius:16px; padding:18px 20px;
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+      box-shadow:0 8px 40px rgba(0,0,0,.6);
+    }
+    #cookie-banner p {
+      font-family:var(--fsmall); font-size:13px; color:var(--greyli);
+      line-height:1.5; flex:1; min-width:200px;
+    }
+    #cookie-banner p a { color:var(--orange); text-decoration:underline; }
+    #cookie-accept {
+      flex-shrink:0; background:var(--orange); color:#fff;
+      font-family:var(--fhead); font-size:.9rem; font-weight:900;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:12px 24px; border-radius:100px; border:none; cursor:pointer;
+      transition:background .2s;
+    }
+    #cookie-accept:hover { background:var(--orlo); }
+
+    /* ── STICKY BOTTOM BAR ───────────────────────── */
+    #sticky-bar {
+      position:fixed; bottom:0; left:0; right:0; z-index:300;
+      background:var(--bg); border-top:1px solid var(--border);
+      padding:12px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      box-shadow:0 -8px 30px rgba(0,0,0,.5);
+    }
+    .sticky-info { display:flex; flex-direction:column; gap:2px; }
+    .sticky-info .lbl {
+      font-family:var(--fsmall); font-size:9px; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--orange);
+    }
+    .sticky-info .title {
+      font-family:var(--fhead); font-size:1rem; font-weight:900;
+      letter-spacing:.04em; white-space:nowrap;
+    }
+    .sticky-info .title .old { color:var(--grey); font-size:.85rem; text-decoration:line-through; margin-left:4px; }
+    .sticky-cta {
+      flex-shrink:0; display:flex; align-items:center; gap:8px;
+      background:var(--orange); color:#fff;
+      font-family:var(--fhead); font-size:.95rem; font-weight:900;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:14px 22px; border-radius:100px;
+      box-shadow:0 4px 20px rgba(255,107,0,.5);
+      transition:background .2s;
+    }
+    .sticky-cta:hover { background:var(--orlo); }
+
+    /* ── MOBILE GUARANTEES FIX ──────────────────── */
+    @media(max-width:859px) {
+      .guarantees { flex-wrap:nowrap; gap:4px 14px; justify-content:center; }
+      .guarantee { min-width:0; font-size:7.5px; letter-spacing:.05em; gap:4px; }
+      .guarantee .ico { font-size:1rem; }
+    }
+
+    /* ── DESKTOP LAYOUT ──────────────────────────── */
+    @media(min-width:860px) {
+      .wrap { padding:0 32px; }
+      #hero .hero-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+      .hero-img-card { margin-bottom:0; aspect-ratio:3/4; }
+      .img-desktop { display:block; }
+      .img-mobile  { display:none; }
+      .hero-title { font-size:2.6rem; }
+      .guarantees { display:flex; flex-wrap:nowrap; justify-content:start; gap:8px 28px; }
+
+      #etapes .etapes-header { display:flex; align-items:baseline; gap:24px; }
+      .etapes-tagline { margin-bottom:0; }
+
+      .steps-wrapper { display:grid; grid-template-columns:1fr 1fr 1fr; column-gap:24px; }
+      .step-block { display:contents; margin-bottom:0; }
+      .step-card { grid-row:1; }
+      .step-meta-wrap { grid-row:2; padding-top:24px; border-top:1px solid var(--border); }
+      .step-meta { border-bottom:none; padding-top:0; }
+      .step-arrow { display:none; }
+
+      #apprendre .apprendre-inner { display:flex; flex-direction:column; gap:36px; }
+      .apprendre-title { margin-bottom:0; }
+      .learn-grid { grid-template-columns:1fr 1fr 1fr 1fr; }
+      .learn-cell .caption { display:none; }
+      .learn-media { aspect-ratio:9/16; }
+
+      #recois .sec-head { margin-bottom:36px; }
+      #recois .recois-inner { display:flex; flex-direction:column; gap:40px; }
+      #recois .bonus-card { margin-bottom:0; }
+      #recois .comparison { gap:16px; }
+      #recois .comp-col { padding:20px 18px; }
+      #recois .comp-item { font-size:.95rem; margin-bottom:10px; }
+
+      #cta-final .cta-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+      .cta-left { text-align:center; }
+      .countdown { justify-content:center; }
+
+      #chris .chris-inner { display:grid; grid-template-columns:1fr 1.4fr; gap:60px; align-items:center; }
+      .chris-photo-wrap { margin-bottom:0; aspect-ratio:3/4; max-width:100%; }
+      .footer-inner { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:60px; align-items:start; }
+      .footer-links a { font-size:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<header id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="MON_LOGO.png" alt="cf.st"
+           onerror="this.outerHTML='<span class=&quot;logo-text&quot;><span class=&quot;lo&quot;>CF.</span><span class=&quot;hi&quot;>ST</span></span>';" />
+    </div>
+    <div class="hamburger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile">
+    <a href="#etapes" class="nm-link">La méthode</a>
+    <a href="#apprendre" class="nm-link">Ce que tu apprends</a>
+    <a href="#recois" class="nm-link">Ce que tu reçois</a>
+    <a href="#faq" class="nm-link">FAQ</a>
+    <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank">JE CRÉE MON AVATAR →</a>
+  </nav>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" style="padding-top:74px;">
+  <div class="wrap">
+    <div class="hero-inner">
+
+      <div class="hero-img-card rv">
+        <img class="img-mobile"  src="IMAGE_HERO.png"         alt="Avatar IA Hero"         style="width:100%;height:100%;object-fit:contain;background:#0a0a0a;" />
+        <img class="img-desktop" src="IMAGE_HERO_DESKTOP.png" alt="Avatar IA Hero Desktop" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+
+      <div class="rv d1">
+        <h1 class="hero-title">
+          Lance ton<br/>
+          <span class="accent">influenceur IA</span><br/>
+          en <span class="accent">48h</span> sans te montrer
+        </h1>
+        <p class="hero-sub">
+          Le seul guide qui t'apprend à créer un avatar IA cohérent, le mettre en scène et l'animer avec Kling 3.0, <strong style="color:var(--orange);">sans jamais apparaître à la caméra.</strong>
+        </p>
+        <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta">
+          JE CRÉE MON AVATAR →
+        </a>
+        <p style="text-align:center;font-family:var(--fsmall);font-size:11px;letter-spacing:.1em;color:var(--grey);margin-top:10px;">💳 Paiement sécurisé via Stan Store</p>
+        <div class="guarantees">
+          <div class="guarantee">
+            <span class="ico">⚡</span>
+            <span>ACCÈS IMMÉDIAT</span>
+          </div>
+          <div class="guarantee">
+            <span class="ico">∞</span>
+            <span>MISES À JOUR INCLUSES</span>
+          </div>
+          <div class="guarantee">
+            <span class="ico">📩</span>
+            <span>SUPPORT DM DIRECT</span>
+          </div>
+          <div class="guarantee">
+            <span class="ico">🛡️</span>
+            <span>GARANTI 7 JOURS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     MÉTHODE EN 3 ÉTAPES
+═══════════════════════════════════════════════ -->
+<section id="etapes" style="padding:60px 0 0;">
+  <div class="wrap">
+
+    <div class="etapes-header rv" style="margin-bottom:32px;">
+      <h2 class="etapes-title">La méthode en <span class="accent">3 étapes.</span></h2>
+      <div class="etapes-tagline">CRÉER · ANIMER · VENDRE</div>
+    </div>
+
+    <div class="steps-wrapper">
+
+    <!-- STEP 1 -->
+    <div class="step-block rv d1">
+      <div class="step-card">
+        <div class="step-num-title">
+          <span class="step-big-num">1</span>
+          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px;">— Créer ton <span style="color:var(--orange);">avatar IA.</span></span>
+        </div>
+        <div class="step-subtitle">Le Process complet.</div>
+        <div class="step-desc">Construit l'identité de ton Avatar et <strong style="color:var(--orange);">Verrouille</strong> la dans toutes tes scènes. Avec Nano Banana, les bons prompts et ton workflow step by step.</div>
+        <div class="step-images">
+          <div class="step-img-main">
+            <img src="ETAPE_1_VISUEL.png?v=2" alt="Étape 1" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          </div>
+          <div class="step-img-tl">
+            <img src="AVATAR_A.png" alt="Avatar A" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="step-img-tr">
+            <img src="AVATAR_B.png" alt="Avatar B" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="step-img-bl">
+            <img src="PROMPTS.png" alt="Mon Avatar IA" style="width:100%;height:100%;object-fit:cover;object-position:left center;" />
+          </div>
+        </div>
+      </div>
+      <div class="step-meta-wrap">
+        <div class="step-meta">
+          <div><span class="num">01</span><span class="line-h"></span></div>
+          <h3>Créer ton influenceur IA</h3>
+          <p>Un personnage cohérent, crédible, mémorable — sans te montrer à la caméra. Identité, photos, animation.</p>
+        </div>
+        <div class="step-arrow"><a href="#etapes-2">↓</a></div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-block rv d2" id="etapes-2">
+      <div class="step-card">
+        <div class="step-num-title">
+          <span class="step-big-num">2</span>
+          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px">— L'animer en <span style="color:var(--orange);">vidéo.</span></span>
+        </div>
+        <div class="step-subtitle">Maîtrise la méthode complète</div>
+        <div class="step-desc">que <strong style="color:var(--orange);">90%</strong> des créateurs ignorent. Transforme tes images IA en vidéos prêtes à poster avec Kling 3.0. Pas besoin de te filmer.</div>
+        <div class="step-grid-imgs">
+          <div class="gi">
+            <img src="KLING%203.0.gif" alt="Kling 3.0" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="gi">
+            <img src="VIDEO%2002.gif" alt="Vidéo 02" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="gi">
+            <img src="VIDEO%2003.gif" alt="Vidéo 03" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="gi">
+            <img src="VIDEO%2004.gif" alt="Vidéo 04" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+      <div class="step-meta-wrap">
+        <div class="step-meta">
+          <div><span class="num">02</span><span class="line-h"></span></div>
+          <h3>L'animer en vidéo</h3>
+          <p>Reels, stories, ads. Ton avatar poste sans toi — script, voix, montage. Zéro compétence technique.</p>
+        </div>
+        <div class="step-arrow"><a href="#etapes-3">↓</a></div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-block rv d3" id="etapes-3">
+      <div class="step-card">
+        <div class="step-num-title">
+          <span class="step-big-num">3</span>
+          <span class="step-big-title" style="padding: 0px 0px 21.3335px; color: rgb(243, 242, 241)">— &nbsp;Le <span style="color:var(--orange);">vendre.</span><span style="color:var(--orange);"></span></span>
+        </div>
+        <div class="step-subtitle">Ton avatar devient un <span style="color:var(--orange);">business.</span></div>
+        <div class="step-desc">Comment transformer une audience en sources de revenus. Crée un produit digital et mets-le en vente sur Stan Store. La machine tourne pendant que tu dors.</div>
+        <div class="step-images">
+          <div class="step-img-main">
+            <img src="ETAPE_3_VISUEL.png" alt="Étape 3"
+                 onerror="this.outerHTML='<div class=&quot;ph&quot; style=&quot;height:100%;&quot;>STAN STORE</div>';" />
+          </div>
+          <div class="step-img-tl">
+            <img src="PAIEMENT.png" alt="Paiement" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="step-img-tr">
+            <img src="VENTES.png" alt="Ventes" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="step-img-bl">
+            <img src="LIVRAISON%20AUTO.png" alt="Livraison auto" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+      <div class="step-meta-wrap">
+        <div class="step-meta">
+          <div><span class="num">03</span><span class="line-h"></span></div>
+          <h3>Monétise ton influenceur IA</h3>
+          <p>Produits digitaux, affiliation, clients. Lien en bio → paiement → livraison automatique.</p>
+        </div>
+        <div class="step-arrow"><a href="#apprendre">↓</a></div>
+      </div>
+    </div>
+
+    </div><!-- end steps-wrapper -->
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CE QUE TU VAS APPRENDRE
+═══════════════════════════════════════════════ -->
+<section id="apprendre">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 002</span>
+      <span class="line"></span>
+      <span>CE QUE TU APPRENDS</span>
+    </div>
+
+    <div class="apprendre-inner">
+      <div class="rv d1">
+        <h2 class="apprendre-title">Ce que tu vas <span class="accent">apprendre à faire.</span></h2>
+      </div>
+
+      <div class="learn-grid rv d2">
+        <div class="learn-cell">
+          <div class="learn-media">
+            <video src="NANO%20BANANA.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            <div class="badge">NANO BANANA</div>
+          </div>
+          <div class="caption">
+            <div class="cap-title">Maîtriser Nano Banana.</div>
+            <div class="cap-sub">Prompts exacts + lock visuel.</div>
+          </div>
+        </div>
+        <div class="learn-cell">
+          <div class="learn-media">
+            <video src="KLING%203.0.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            <div class="badge">KLING 3.0</div>
+          </div>
+          <div class="caption">
+            <div class="cap-title">Animer avec Kling 3.0.</div>
+            <div class="cap-sub">Claude + prompts optimisés.</div>
+          </div>
+        </div>
+        <div class="learn-cell">
+          <div class="learn-media">
+            <video src="STAN%20STORE.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            <div class="badge">STAN STORE</div>
+          </div>
+          <div class="caption">
+            <div class="cap-title">Vendre sur Stan Store.</div>
+            <div class="cap-sub">Setup en 4 étapes. Auto.</div>
+          </div>
+        </div>
+        <div class="learn-cell">
+          <div class="learn-media">
+            <video src="CONCEPT.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            <div class="badge">CAPCUT</div>
+          </div>
+          <div class="caption">
+            <div class="cap-title">Formation vidéos Capcut.</div>
+            <div class="cap-sub">Technique de montage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CE QUE TU REÇOIS
+═══════════════════════════════════════════════ -->
+<section id="recois">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 003</span>
+      <span class="line"></span>
+      <span>CE QUE TU REÇOIS</span>
+    </div>
+
+    <div class="recois-inner">
+
+      <div class="rv d1">
+        <!-- Bonus card -->
+        <div class="bonus-card" style="margin-bottom:28px;">
+          <div class="bonus-tag">OFFERT</div>
+          <div class="bonus-label">📚 SKILL CLAUDE</div>
+          <h3 class="bonus-title">LE SKILL PROMPT <span class="accent">CHRIS</span></h3>
+          <p class="bonus-sub">Le skill parfait qui te permet d'avoir des prompts calibré pour tous les générateur d'images et vidéos, celui que j'utilise tout les jours.</p>
+          <!-- Comparison -->
+          <div class="comparison">
+            <div class="comp-col sans">
+              <div class="comp-label">SANS LE SKILL</div>
+              <div class="comp-sub">TA RÉALITÉ ACTUELLE</div>
+              <div class="comp-item"><span class="ico">❌</span> Tu galères avec tes prompts</div>
+              <div class="comp-item"><span class="ico">❌</span> Résultat médiocre</div>
+              <div class="comp-item"><span class="ico">❌</span> x5 crédits cramés</div>
+            </div>
+            <div class="comp-col avec">
+              <div class="comp-label">AVEC MON SKILL</div>
+              <div class="comp-sub">DÈS LE PREMIER SOIR</div>
+              <div class="comp-item"><span class="ico">✅</span> Des prompts parfaitement calibrés</div>
+              <div class="comp-item"><span class="ico">✅</span> Résultat parfait</div>
+              <div class="comp-item"><span class="ico">✅</span> Crédit économisé</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv d2">
+        <!-- Full checklist -->
+        <p style="font-family:var(--fsmall);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-bottom:4px;">1 GUIDE PRINCIPAL · 2 BONUS OFFERTS</p>
+        <ul class="checklist">
+          <li class="check-item"><span class="ck">✅</span><span>Le guide PDF complet — <strong>4 modules ~ 40 min de vidéo</strong></span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Tous les <strong>prompts Nano Banana</strong> prêts à l'emploi</span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Le <strong>workflow Kling 3.0</strong> avec exemples concrets</span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Les <strong>prompts Claude</strong> pour animer sans se prendre la tête</span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Le <strong>setup Stan Store</strong> en 4 étapes chrono</span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Les prompts Claude pour <strong>créer ton produit digital</strong></span></li>
+          <li class="check-item">
+            <span class="ck">🎁</span>
+            <span>
+              <span class="gift-badge">BONUS OFFERT</span>
+              <strong>La Méthode CLONE (15 pages)</strong>
+              <span class="sub">Comment cloner ta personnalité dans Claude</span>
+            </span>
+          </li>
+          <li class="check-item">
+            <span class="ck">🎁</span>
+            <span>
+              <span class="gift-badge">BONUS OFFERT</span>
+              <strong>La Méthode EMPILAGE (15 pages)</strong>
+              <span class="sub">Comment créer des images IA sublimes</span>
+            </span>
+          </li>
+          <li class="check-item"><span class="ck">✅</span><span><strong>Accès DM direct</strong> — je réponds à toutes tes questions</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     VALEUR RÉELLE
+═══════════════════════════════════════════════ -->
+<section id="valeur">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 004</span>
+      <span class="line"></span>
+      <span>LA VALEUR</span>
+    </div>
+
+    <h2 class="valeur-title rv d1">Le vrai prix de ce que tu <span class="accent">reçois.</span></h2>
+
+    <div class="v-table rv d2">
+      <div class="v-row"><span class="vn">Guide PDF · 4 modules · ~40 min de vidéo</span><span class="vp">97€</span></div>
+      <div class="v-row"><span class="vn">3 bonus (SKILL CHRIS, La méthode CLONE &amp; EMPILAGE)</span><span class="vp">55€</span></div>
+      <div class="v-row"><span class="vn">Prompts &amp; templates + mises à jour à vie</span><span class="vp">97€</span></div>
+      <div class="v-row total"><span class="vn">VALEUR TOTALE</span><span class="vp" style="font-size:1.4rem;font-weight:900;color:var(--greyli);">249€</span></div>
+      <div class="v-row highlight"><span class="vn">TON PRIX</span><span class="vp">37€</span></div>
+    </div>
+    <div class="v-note rv d3">PAIEMENT UNIQUE · ACCÈS IMMÉDIAT · PRIX DE LANCEMENT</div>
+
+    <div style="margin-top:28px;" class="rv d4">
+      <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta">
+        JE CRÉE MON AVATAR →
+      </a>
+      <p style="text-align:center;font-family:var(--fsmall);font-size:11px;letter-spacing:.1em;color:var(--grey);margin-top:10px;">💳 Paiement sécurisé via Stan Store</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CTA FINAL + COUNTDOWN
+═══════════════════════════════════════════════ -->
+<section id="cta-final">
+  <div class="wrap">
+    <div class="cta-inner">
+
+      <div class="cta-left">
+        <div class="countdown-label rv">FIN DE L'OFFRE DANS</div>
+        <div class="countdown rv d1">
+          <div class="cd-item"><div class="cd-num" id="cd-d">00</div><div class="cd-label">JOURS</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-item"><div class="cd-num" id="cd-h">00</div><div class="cd-label">HRS</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-item"><div class="cd-num" id="cd-m">00</div><div class="cd-label">MIN</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-item"><div class="cd-num" id="cd-s">00</div><div class="cd-label">SEC</div></div>
+        </div>
+
+        <h2 class="cta-sub-title rv d2">
+          T'as tout ce<br/><span class="accent">qu'il faut.</span>
+        </h2>
+        <p style="font-family:var(--fbody);font-size:1rem;color:var(--greyli);line-height:1.6;margin-top:12px;max-width:44ch;" class="rv d2">
+          Le seul truc qui peut te faire rater après avoir lu ce guide, c'est l'inaction. Lance-toi.
+        </p>
+      </div>
+
+      <div class="rv d3">
+        <div class="cta-price-box">
+          <div class="cta-offer-label">OFFRE DE LANCEMENT · PRIX LIMITÉ</div>
+          <div class="cta-price-main">37€</div>
+          <div class="cta-price-old">249€</div>
+          <div class="cta-access">PAIEMENT UNIQUE · ACCÈS À VIE</div>
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.25);border-radius:10px;font-family:var(--fsmall);font-size:10px;letter-spacing:.12em;color:var(--orange);text-transform:uppercase;">🛡️ SATISFAIT OU REMBOURSÉ — 7 JOURS</div>
+        </div>
+        <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta" style="margin-top:16px;">
+          JE CRÉE MON AVATAR →
+        </a>
+        <p style="text-align:center;font-family:var(--fsmall);font-size:11px;letter-spacing:.1em;color:var(--grey);margin-top:10px;">💳 Paiement sécurisé via Stan Store</p>
+        <div class="cta-guarantees">
+          <div class="cta-g-item"><span class="ico">🛡️</span> GARANTI 7 JOURS</div>
+          <span class="cta-g-sep">·</span>
+          <div class="cta-g-item"><span class="ico">🔒</span> PAIEMENT SÉCURISÉ</div>
+          <span class="cta-g-sep">·</span>
+          <div class="cta-g-item"><span class="ico">⚡</span> ACCÈS IMMÉDIAT</div>
+          <span class="cta-g-sep">·</span>
+          <div class="cta-g-item"><span class="ico">∞</span> MISES À JOUR</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     QUI EST CHRIS
+═══════════════════════════════════════════════ -->
+<section id="chris">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 005</span>
+      <span class="line"></span>
+      <span>LE CRÉATEUR</span>
+    </div>
+
+    <div class="chris-inner">
+
+      <div class="chris-photo-wrap rv">
+        <img src="PHOTO_CHRIS.png" alt="Chris"
+             onerror="this.outerHTML='<div class=&quot;ph&quot; style=&quot;height:100%;&quot;>PHOTO_CHRIS.png</div>';" />
+      </div>
+
+      <div class="rv d1">
+        <h2 class="chris-title">Yo, c'est <span class="accent">Chris.</span></h2>
+        <div class="chris-text">
+          <p>32 ans. J'ai grandi en famille d'accueil, enchaîné les CDI et les périodes de chômage, bossé de nuit en station-service.</p>
+          <p>Un soir entre deux clients, j'ai découvert l'IA sur mon téléphone. J'ai commencé à tester, à bidouiller, à créer du contenu avec. Pas dans un cours, pas dans une formation à 2000€ — sur mon tel, dans une station-service à 3h du mat.</p>
+          <p>Aujourd'hui j'ai +167k abonnés sur TikTok et je crée du contenu tous les jours grâce à l'IA.</p>
+          <p>Ce guide, c'est tout ce que j'aurais voulu avoir quand j'ai commencé.</p>
+        </div>
+        <div class="chris-badge">
+          <span class="handle">@chris.sans.filtre</span>
+          <span class="sep">·</span>
+          <span class="followers">+167K · TIKTOK</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 006</span>
+      <span class="line"></span>
+      <span>FAQ</span>
+    </div>
+
+    <h2 class="faq-title rv d1">Questions <span class="accent">fréquentes.</span></h2>
+
+    <div class="faq-list rv d2">
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Je peux créer un influenceur IA avec zéro compétence ?
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Oui. Le guide est fait pour des débutants complets. T'as juste besoin d'une connexion internet et de suivre les étapes dans l'ordre. Tout est expliqué step by step.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Est-ce qu'il y a des frais en dehors du guide ?
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Les outils utilisés (Nano Banana, Kling 3.0) sont accessibles via des abonnements peu chers ou gratuitement. Je t'explique comment y accéder au moins cher dans le guide.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Est-ce que ça marche si je suis pas créatif ?
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Oui. Les prompts sont fournis, les workflows sont step by step. T'as pas à inventer quoi que ce soit — tu suis, tu adaptes, tu publies.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Je reçois le guide quand ?
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Immédiatement après le paiement. Stan Store t'envoie automatiquement le lien de téléchargement sur ton email. Pas d'attente, accès instantané.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Est-ce qu'il y a une garantie ?
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Oui. Si dans les 7 jours tu estimes que le guide ne t'a pas apporté de valeur, envoie-moi un DM et je te rembourse sans question. Pas de formulaire, pas de condition. Ma réputation vaut plus que 37€.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          J'ai une question avant d'acheter.
+          <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Envoie-moi un DM directement sur TikTok ou Instagram @chris.sans.filtre. Je réponds à tout le monde, sans exception. Pas un bot. Moi.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+
+    <div class="footer-inner">
+
+      <!-- Colonne brand -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="MON_LOGO.png" alt="cf.st" style="height:32px;"
+               onerror="this.outerHTML='<div><span class=&quot;lo&quot;>CF.</span><span class=&quot;hi&quot;>ST</span></div>';" />
+        </div>
+        <div class="footer-desc">
+          Le guide complet pour créer et monétiser ton influenceur IA. Par @chris.sans.filtre — +167k sur TikTok.
+        </div>
+        <div class="footer-email">
+          <a href="https://www.tiktok.com/@chris.sans.filtre" target="_blank">TIKTOK</a> &amp;
+          <a href="https://www.instagram.com/chris.sans.filtre/" target="_blank">INSTAGRAM</a>
+        </div>
+      </div>
+
+      <!-- Colonne navigation -->
+      <div class="footer-col">
+        <div class="footer-col-label"><span class="sl">// </span>NAVIGATION</div>
+        <nav class="footer-links">
+          <a href="#etapes">La méthode</a>
+          <a href="#apprendre">Ce que tu apprends</a>
+          <a href="#recois">Ce que tu reçois</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+
+      <!-- Colonne légal -->
+      <div class="footer-col">
+        <div class="footer-col-label"><span class="sl">// </span>LÉGAL</div>
+        <nav class="footer-links">
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="mentions-legales.html#cgv">CGV</a>
+          <a href="confidentialite.html">Confidentialité</a>
+          <a href="cookies.html">Cookies</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="footer-copy">© 2026 LA MÉTHODE AVATAR · TOUS DROITS RÉSERVÉS</div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     BANDEAU COOKIES
+═══════════════════════════════════════════════ -->
+<div id="cookie-banner">
+  <p>Ce site utilise des cookies pour mesurer l'audience et améliorer votre expérience. En continuant, vous acceptez notre <a href="cookies.html">politique cookies</a>.</p>
+  <button id="cookie-accept">J'accepte</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     STICKY BOTTOM BAR
+═══════════════════════════════════════════════ -->
+<div id="sticky-bar">
+  <div class="sticky-info">
+    <span class="lbl">OFFRE DE LANCEMENT</span>
+    <span class="title">LA MÉTHODE AVATAR — 37€ <span class="old">47€</span></span>
+  </div>
+  <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="sticky-cta">
+    JE REJOINS →
+  </a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     JS
+═══════════════════════════════════════════════ -->
+<script>
+  /* Navbar scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 20), { passive:true });
+
+  /* Burger */
+  const burger = document.getElementById('burger');
+  const navMobile = document.getElementById('nav-mobile');
+  burger.addEventListener('click', () => navMobile.classList.toggle('open'));
+  document.querySelectorAll('.nm-link').forEach(l => l.addEventListener('click', () => navMobile.classList.remove('open')));
+
+  /* Scroll reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.1, rootMargin:'0px 0px -50px 0px' });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const ans = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if(!isOpen){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+    });
+  });
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e){
+      const t = document.querySelector(this.getAttribute('href'));
+      if(t){ e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth' }); }
+    });
+  });
+
+  /* Bandeau cookies */
+  (function(){
+    const KEY = 'cookie_consent';
+    const banner = document.getElementById('cookie-banner');
+    const stored = localStorage.getItem(KEY);
+    if(stored && Date.now() < parseInt(stored)){
+      banner.style.display = 'none';
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function(){
+      const expiry = Date.now() + 13 * 30 * 24 * 3600 * 1000; // 13 mois
+      localStorage.setItem(KEY, expiry);
+      banner.style.display = 'none';
+    });
+  })();
+
+  /* Countdown — 3 days from now, persisted */
+  (function(){
+    const KEY = 'avatar_cd_v2';
+    let end = localStorage.getItem(KEY);
+    if(!end){ end = Date.now() + 7 * 24 * 3600 * 1000; localStorage.setItem(KEY, end); }
+    end = parseInt(end);
+    function tick(){
+      const diff = Math.max(0, end - Date.now());
+      const d = Math.floor(diff/86400000);
+      const h = Math.floor((diff%86400000)/3600000);
+      const m = Math.floor((diff%3600000)/60000);
+      const s = Math.floor((diff%60000)/1000);
+      const pad = n => String(n).padStart(2,'0');
+      document.getElementById('cd-d').textContent = pad(d);
+      document.getElementById('cd-h').textContent = pad(h);
+      document.getElementById('cd-m').textContent = pad(m);
+      document.getElementById('cd-s').textContent = pad(s);
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+</script>
+
+</body>
+</html>
