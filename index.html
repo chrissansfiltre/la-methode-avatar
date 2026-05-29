@@ -356,6 +356,33 @@
     /* ── CE QUE TU REÇOIS ────────────────────────── */
     #recois { padding:32px 0; }
     #recois .sec-head { margin-bottom:28px; }
+    .recois-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:32px; line-height:1.05;
+    }
+    .recois-title .accent { color:var(--orange); }
+    .screens-row {
+      display:flex; flex-direction:column; gap:16px;
+      width:100%;
+    }
+    .screen-col {
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .screen-label {
+      font-family:var(--fsmall); font-size:10px;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--grey);
+    }
+    .screen-img {
+      width:100%; border-radius:14px;
+      border:1px solid var(--orange);
+      display:block;
+    }
+    @media(min-width:860px) {
+      .screens-row { flex-direction:row; gap:16px; }
+      .screen-col { flex:1; }
+    }
 
     /* Bonus card */
     .bonus-card {
@@ -1039,6 +1066,8 @@
       <span>CE QUE TU REÇOIS</span>
     </div>
 
+    <h2 class="recois-title rv d1">Ce que tu vas <span class="accent">recevoir.</span></h2>
+
     <div class="recois-inner">
 
       <div class="rv d1">
@@ -1107,6 +1136,23 @@
       </div>
 
     </div>
+
+    <!-- Screen modules row -->
+    <div class="screens-row rv">
+      <div class="screen-col">
+        <p class="screen-label">Aperçu module 1</p>
+        <img src="SCREEN MODULE 1.png" alt="Module 1" class="screen-img" />
+      </div>
+      <div class="screen-col">
+        <p class="screen-label">Aperçu module 2</p>
+        <img src="SCREEN MODULE 2.png" alt="Module 2" class="screen-img" />
+      </div>
+      <div class="screen-col">
+        <p class="screen-label">Aperçu module 3</p>
+        <img src="SCREEN MODULE 3.png" alt="Module 3" class="screen-img" />
+      </div>
+    </div>
+
   </div>
 </section>
 
