@@ -517,7 +517,9 @@
     }
 
     /* ── COUNTDOWN + CTA FINAL ───────────────────── */
-    #cta-final { padding:60px 0; border-top:1px solid var(--border); }
+    #cta-final { padding:0 0 60px 0; border-top:1px solid var(--border); }
+    .cta-left { display:none; }
+    .cta-inner { display:flex; flex-direction:column; align-items:center; }
     .countdown-label {
       text-align:center; font-family:var(--fsmall); font-size:10px;
       letter-spacing:.28em; text-transform:uppercase; color:var(--orange);
@@ -556,9 +558,22 @@
       font-family:var(--fsmall); font-size:10px; letter-spacing:.22em;
       text-transform:uppercase; color:var(--orange); margin-bottom:10px;
     }
+    .mini-timer {
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+      margin-bottom:10px;
+    }
+    .mini-timer-label {
+      font-family:var(--fsmall); font-size:9px; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--grey);
+    }
+    .mini-timer-count {
+      font-family:var(--fhead); font-size:1rem; font-weight:900;
+      color:var(--white); letter-spacing:.05em;
+    }
+    .mt-sep { color:var(--grey); margin:0 2px; }
     .cta-price-main {
       font-family:var(--fhead); font-size:4.5rem; font-weight:900;
-      color:var(--white); line-height:1; letter-spacing:-.02em;
+      color:var(--orange); line-height:1; letter-spacing:-.02em;
     }
     .cta-price-old {
       font-family:var(--fbody); font-size:1rem; color:var(--grey);
@@ -851,8 +866,13 @@
       #recois .comp-col { padding:20px 18px; }
       #recois .comp-item { font-size:.95rem; margin-bottom:10px; }
 
-      #cta-final .cta-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-      .cta-left { text-align:center; }
+      #cta-final .cta-inner { display:flex; flex-direction:column; align-items:center; }
+      .cta-left { display:none; }
+      #cta-box { max-width:660px; }
+      #cta-box .cta-price-main { font-size:6rem; }
+      #cta-box .mini-timer-count { font-size:1.3rem; }
+      #cta-box .mini-timer-label { font-size:11px; }
+      #cta-box .btn-cta { font-size:1.2rem; padding:20px 40px; }
       .countdown { justify-content:center; }
 
       #chris .chris-inner { display:grid; grid-template-columns:1fr 1.4fr; gap:60px; align-items:center; }
@@ -911,7 +931,7 @@
         <h1 class="hero-title">
           Lance ton<br/>
           <span class="accent">influenceur IA</span><br/>
-          en <span class="accent">48h</span> sans te montrer
+          en <span class="accent">24h</span> sans te montrer
         </h1>
         <p class="hero-sub">
           Le seul système qui crée ton avatar IA, écrit tes prompts et anime tes vidéos automatiquement — <strong style="color:var(--orange);">sans jamais apparaître à la caméra.</strong>
@@ -952,7 +972,7 @@
   <div class="wrap">
 
     <div class="etapes-header rv" style="margin-bottom:32px;">
-      <h2 class="etapes-title">La méthode en <span class="accent">3 étapes.</span></h2>
+      <h2 class="etapes-title">Ce que tu vas <span class="accent">apprendre.</span></h2>
       <div class="etapes-tagline">CRÉER · ANIMER · VENDRE</div>
     </div>
 
@@ -986,14 +1006,6 @@
           </div>
         </div>
       </div>
-      <div class="step-meta-wrap">
-        <div class="step-meta">
-          <div><span class="num">01</span><span class="line-h"></span></div>
-          <h3>Créer ton avatar IA</h3>
-          <p>Un personnage cohérent, crédible, mémorable — même tête, même style dans chaque scène. Zéro incohérence.</p>
-        </div>
-        <div class="step-arrow"><a href="#etapes-2">↓</a></div>
-      </div>
     </div>
 
     <!-- STEP 2 -->
@@ -1023,14 +1035,6 @@
             <img src="v2/VIDEO%2004.gif" alt="Vidéo 04" style="width:100%;height:100%;object-fit:cover;" />
           </div>
         </div>
-      </div>
-      <div class="step-meta-wrap">
-        <div class="step-meta">
-          <div><span class="num">02</span><span class="line-h"></span></div>
-          <h3>Créer des vidéos virales</h3>
-          <p>Tu déposes une vidéo virale, le système sort tous les prompts pour la recréer avec ton avatar.</p>
-        </div>
-        <div class="step-arrow"><a href="#etapes-3">↓</a></div>
       </div>
     </div>
 
@@ -1062,14 +1066,6 @@
           </div>
         </div>
       </div>
-      <div class="step-meta-wrap">
-        <div class="step-meta">
-          <div><span class="num">03</span><span class="line-h"></span></div>
-          <h3>Vend cette viralité</h3>
-          <p>Produit digital + méthode + prompts. Lien en bio → paiement → livraison automatique.</p>
-        </div>
-        <div class="step-arrow"><a href="#apprendre">↓</a></div>
-      </div>
     </div>
 
     </div><!-- end steps-wrapper -->
@@ -1080,100 +1076,8 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     AI AVATAR SYSTEM
-═══════════════════════════════════════════════ -->
-<section id="ai-system" style="padding:60px 0;">
-  <div class="wrap">
-
-    <div class="sec-head rv">
-      <span class="slash">// NEW</span>
-      <span class="line"></span>
-      <span>AI AVATAR SYSTEM</span>
-    </div>
-
-    <h2 class="ai-system-title rv d1">🆕 Le Système AI AVATAR —<br/><span class="accent">ton arme secrète.</span></h2>
-
-    <div class="ai-system-inner rv d2">
-      <p class="ai-system-lead">Pendant que les autres galèrent à écrire leurs prompts à la main, toi t'as un système qui le fait pour toi. Tu installes <strong style="color:var(--white);">4 outils dans Claude Code</strong>, et à partir de là :</p>
-      <ul class="ai-system-list">
-        <li><span class="ai-ico">⚡</span><span>Ton avatar est <strong>créé et verrouillé automatiquement</strong></span></li>
-        <li><span class="ai-ico">⚡</span><span>Tes <strong>prompts image et vidéo sont générés</strong> pour toi</span></li>
-        <li><span class="ai-ico">⚡</span><span>Tu déposes une vidéo virale → il te sort le <strong>script complet + tous les prompts</strong> pour la recréer avec ton avatar</span></li>
-      </ul>
-      <div class="ai-system-badge rv d3">
-        <span class="badge-ico">🔒</span>
-        <p>Personne d'autre ne vend ça. C'est ce qui te fait <strong>gagner des heures à chaque vidéo.</strong></p>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 
-<!-- ═══════════════════════════════════════════════
-     CE QUE TU VAS APPRENDRE
-═══════════════════════════════════════════════ -->
-<section id="apprendre">
-  <div class="wrap">
-
-    <div class="sec-head rv">
-      <span class="slash">// 002</span>
-      <span class="line"></span>
-      <span>CE QUE TU APPRENDS</span>
-    </div>
-
-    <div class="apprendre-inner">
-      <div class="rv d1">
-        <h2 class="apprendre-title">Ce que tu vas <span class="accent">apprendre à faire.</span></h2>
-      </div>
-
-      <div class="learn-grid rv d2">
-        <div class="learn-cell">
-          <div class="learn-media">
-            <video src="v2/NANO%20BANANA.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
-            <div class="badge">NANO BANANA</div>
-          </div>
-          <div class="caption">
-            <div class="cap-title">Maîtriser Nano Banana.</div>
-            <div class="cap-sub">Prompts exacts + lock visuel.</div>
-          </div>
-        </div>
-        <div class="learn-cell">
-          <div class="learn-media">
-            <video src="v2/KLING%203.0.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
-            <div class="badge">KLING 3.0</div>
-          </div>
-          <div class="caption">
-            <div class="cap-title">Animer avec Kling 3.0.</div>
-            <div class="cap-sub">Claude + prompts optimisés.</div>
-          </div>
-        </div>
-        <div class="learn-cell">
-          <div class="learn-media">
-            <video src="v2/STAN%20STORE.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
-            <div class="badge">STAN STORE</div>
-          </div>
-          <div class="caption">
-            <div class="cap-title">Vendre sur Stan Store.</div>
-            <div class="cap-sub">Setup en 4 étapes. Auto.</div>
-          </div>
-        </div>
-        <div class="learn-cell">
-          <div class="learn-media">
-            <video src="v2/CONCEPT.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
-            <div class="badge">CAPCUT</div>
-          </div>
-          <div class="caption">
-            <div class="cap-title">Formation vidéos Capcut.</div>
-            <div class="cap-sub">Technique de montage</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ═══════════════════════════════════════════════
@@ -1183,7 +1087,7 @@
   <div class="wrap">
 
     <div class="sec-head rv">
-      <span class="slash">// 003</span>
+      <span class="slash">// 002</span>
       <span class="line"></span>
       <span>CE QUE TU REÇOIS</span>
     </div>
@@ -1193,28 +1097,20 @@
     <div class="recois-inner">
 
       <div class="rv d1">
-        <!-- Bonus card -->
+        <!-- AI AVATAR System card -->
         <div class="bonus-card" style="margin-bottom:28px;">
-          <div class="bonus-tag">OFFERT</div>
-          <div class="bonus-label">📚 SKILL CLAUDE</div>
-          <h3 class="bonus-title">LE SKILL PROMPT <span class="accent">CHRIS</span></h3>
-          <p class="bonus-sub">Le skill parfait qui te permet d'avoir des prompts calibré pour tous les générateur d'images et vidéos, celui que j'utilise tout les jours.</p>
-          <!-- Comparison -->
-          <div class="comparison">
-            <div class="comp-col sans">
-              <div class="comp-label">SANS LE SKILL</div>
-              <div class="comp-sub">TA RÉALITÉ ACTUELLE</div>
-              <div class="comp-item"><span class="ico">❌</span> Tu galères avec tes prompts</div>
-              <div class="comp-item"><span class="ico">❌</span> Résultat médiocre</div>
-              <div class="comp-item"><span class="ico">❌</span> x5 crédits cramés</div>
-            </div>
-            <div class="comp-col avec">
-              <div class="comp-label">AVEC MON SKILL</div>
-              <div class="comp-sub">DÈS LE PREMIER SOIR</div>
-              <div class="comp-item"><span class="ico">✅</span> Des prompts parfaitement calibrés</div>
-              <div class="comp-item"><span class="ico">✅</span> Résultat parfait</div>
-              <div class="comp-item"><span class="ico">✅</span> Crédit économisé</div>
-            </div>
+          <div class="bonus-tag">🆕 INCLUS</div>
+          <div class="bonus-label">🤖 AI AVATAR SYSTEM</div>
+          <h3 class="bonus-title">LE SYSTÈME QUI <span class="accent">AUTOMATISE TOUT.</span></h3>
+          <p class="bonus-sub">Pendant que les autres galèrent à écrire leurs prompts à la main, toi t'as un système qui le fait pour toi. Tu installes 4 outils dans Claude Code, et à partir de là :</p>
+          <ul class="ai-system-list" style="margin-top:14px;">
+            <li><span class="ai-ico">⚡</span><span>Ton avatar est <strong>créé et verrouillé automatiquement</strong></span></li>
+            <li><span class="ai-ico">⚡</span><span>Tes <strong>prompts image et vidéo sont générés</strong> pour toi</span></li>
+            <li><span class="ai-ico">⚡</span><span>Tu déposes une vidéo virale → le système sort le <strong>script complet + tous les prompts</strong></span></li>
+          </ul>
+          <div class="ai-system-badge" style="margin-top:16px;">
+            <span class="badge-ico">🔒</span>
+            <p>Personne d'autre ne vend ça. C'est ce qui te fait <strong>gagner des heures à chaque vidéo.</strong></p>
           </div>
         </div>
       </div>
@@ -1227,10 +1123,9 @@
             <span class="ck">🆕</span>
             <span><strong style="color:var(--orange);">Le Système AI AVATAR</strong> — 4 outils IA qui automatisent toute ta création</span>
           </li>
-          <li class="check-item"><span class="ck">✅</span><span>Le guide PDF complet — <strong>5 modules ~ 1h05 de vidéo</strong></span></li>
-          <li class="check-item"><span class="ck">✅</span><span>Tous les <strong>prompts Nano Banana</strong> prêts à l'emploi</span></li>
-          <li class="check-item"><span class="ck">✅</span><span>Le <strong>workflow Kling 3.0</strong> avec exemples concrets</span></li>
-          <li class="check-item"><span class="ck">✅</span><span>Les <strong>prompts Claude</strong> pour animer sans se prendre la tête</span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Formation vidéo complète — <strong>5 modules ~ 1h05 de vidéo</strong></span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Accès à vie + <strong>mises à jour incluses</strong></span></li>
+          <li class="check-item"><span class="ck">✅</span><span>Mon <strong>workflow complet</strong> avec exemples concrets</span></li>
           <li class="check-item"><span class="ck">✅</span><span>Le <strong>setup Stan Store</strong> en 4 étapes chrono</span></li>
           <li class="check-item"><span class="ck">✅</span><span>Les prompts Claude pour <strong>créer ton produit digital</strong></span></li>
           <li class="check-item">
@@ -1263,21 +1158,6 @@
 
     </div>
 
-    <!-- Screen modules row -->
-    <div class="screens-row rv">
-      <div class="screen-col">
-        <p class="screen-label">Aperçu module 1</p>
-        <img src="SCREEN MODULE 1.png" alt="Module 1" class="screen-img" />
-      </div>
-      <div class="screen-col">
-        <p class="screen-label">Aperçu module 2</p>
-        <img src="SCREEN MODULE 2.png" alt="Module 2" class="screen-img" />
-      </div>
-      <div class="screen-col">
-        <p class="screen-label">Aperçu module 3</p>
-        <img src="SCREEN MODULE 3.png" alt="Module 3" class="screen-img" />
-      </div>
-    </div>
 
   </div>
 </section>
@@ -1290,7 +1170,7 @@
   <div class="wrap">
 
     <div class="sec-head rv">
-      <span class="slash">// 004</span>
+      <span class="slash">// 003</span>
       <span class="line"></span>
       <span>LA VALEUR</span>
     </div>
@@ -1298,19 +1178,10 @@
     <h2 class="valeur-title rv d1">Le vrai prix de ce que tu <span class="accent">reçois.</span></h2>
 
     <div class="v-table rv d2">
-      <div class="v-row"><span class="vn">Guide PDF · 5 modules · ~1h05 de vidéo</span><span class="vp">97€</span></div>
+      <div class="v-row"><span class="vn">Formation vidéo · 5 modules · ~1h05 de vidéo</span><span class="vp">97€</span></div>
       <div class="v-row"><span class="vn">3 bonus (SKILL CHRIS, La méthode CLONE &amp; EMPILAGE)</span><span class="vp">55€</span></div>
-      <div class="v-row"><span class="vn">AI AVATAR System + mises à jour à vie</span><span class="vp">97€</span></div>
+      <div class="v-row"><span class="vn"><span style="color:var(--orange);font-weight:700;">AI AVATAR System</span> + mises à jour à vie</span><span class="vp">97€</span></div>
       <div class="v-row total"><span class="vn">VALEUR TOTALE</span><span class="vp" style="font-size:1.4rem;font-weight:900;color:var(--greyli);">249€</span></div>
-      <div class="v-row highlight"><span class="vn">TON PRIX</span><span class="vp">27€</span></div>
-    </div>
-    <div class="v-note rv d3">PAIEMENT UNIQUE · ACCÈS IMMÉDIAT · PRIX DE LANCEMENT</div>
-
-    <div style="margin-top:28px;" class="rv d4">
-      <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta">
-        JE CRÉE MON AVATAR →
-      </a>
-      <p style="text-align:center;font-family:var(--fsmall);font-size:11px;letter-spacing:.1em;color:var(--grey);margin-top:10px;">💳 Paiement sécurisé via Stan Store</p>
     </div>
 
   </div>
@@ -1324,7 +1195,7 @@
   <div class="wrap">
     <div class="cta-inner">
 
-      <div class="cta-left">
+      <div class="cta-left" style="display:none!important;margin:0;padding:0;height:0;overflow:hidden;">
         <div class="countdown-label rv">FIN DE L'OFFRE DANS</div>
         <div class="countdown rv d1">
           <div class="cd-item"><div class="cd-num" id="cd-d">00</div><div class="cd-label">JOURS</div></div>
@@ -1335,22 +1206,32 @@
           <div class="cd-sep">:</div>
           <div class="cd-item"><div class="cd-num" id="cd-s">00</div><div class="cd-label">SEC</div></div>
         </div>
-
-        <h2 class="cta-sub-title rv d2">
-          T'as tout ce<br/><span class="accent">qu'il faut.</span>
-        </h2>
-        <p style="font-family:var(--fbody);font-size:1rem;color:var(--greyli);line-height:1.6;margin-top:12px;max-width:44ch;" class="rv d2">
-          Le seul truc qui peut te faire rater après avoir lu ce guide, c'est l'inaction. Lance-toi.
-        </p>
       </div>
 
-      <div class="rv d3">
+      <div class="rv d3" style="width:100%;max-width:420px;" id="cta-box">
         <div class="cta-price-box">
-          <div class="cta-offer-label">OFFRE DE LANCEMENT · PRIX LIMITÉ</div>
+          <div class="mini-timer">
+            <span class="mini-timer-label">⏳ FIN DE L'OFFRE DANS</span>
+            <span class="mini-timer-count">
+              <span id="mt-d">00</span>j
+              <span class="mt-sep">:</span>
+              <span id="mt-h">00</span>h
+              <span class="mt-sep">:</span>
+              <span id="mt-m">00</span>m
+              <span class="mt-sep">:</span>
+              <span id="mt-s">00</span>s
+            </span>
+          </div>
           <div class="cta-price-main">27€</div>
           <div class="cta-price-old">47€</div>
           <div class="cta-access">PAIEMENT UNIQUE · ACCÈS À VIE</div>
-          <div style="margin-top:14px;padding:10px 14px;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.25);border-radius:10px;font-family:var(--fsmall);font-size:10px;letter-spacing:.12em;color:var(--orange);text-transform:uppercase;">🛡️ SATISFAIT OU REMBOURSÉ — 7 JOURS</div>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <span style="font-size:1.2rem;letter-spacing:2px;line-height:1;">
+              <span style="color:var(--orange);">★★★★</span><span style="position:relative;display:inline-block;"><span style="color:#444;">★</span><span style="position:absolute;top:0;left:0;width:50%;overflow:hidden;color:var(--orange);">★</span></span>
+            </span>
+            <span style="font-family:var(--fhead);font-size:1rem;font-weight:900;color:var(--white);">4,7</span>
+            <span style="font-family:var(--fsmall);font-size:10px;letter-spacing:.1em;color:var(--grey);text-transform:uppercase;">(+46 membres)</span>
+          </div>
         </div>
         <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta" style="margin-top:16px;">
           JE CRÉE MON AVATAR →
@@ -1372,53 +1253,16 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     QUI EST CHRIS
-═══════════════════════════════════════════════ -->
-<section id="chris">
-  <div class="wrap">
-
-    <div class="sec-head rv">
-      <span class="slash">// 005</span>
-      <span class="line"></span>
-      <span>LE CRÉATEUR</span>
-    </div>
-
-    <div class="chris-inner">
-
-      <div class="chris-photo-wrap rv">
-        <img src="v2/PHOTO_CHRIS.png" alt="Chris"
-             onerror="this.outerHTML='<div class=&quot;ph&quot; style=&quot;height:100%;&quot;>PHOTO_CHRIS.png</div>';" />
-      </div>
-
-      <div class="rv d1">
-        <h2 class="chris-title">Yo, c'est <span class="accent">Chris.</span></h2>
-        <div class="chris-text">
-          <p>32 ans. J'ai grandi en famille d'accueil, enchaîné les CDI et les périodes de chômage, bossé de nuit en station-service.</p>
-          <p>Un soir entre deux clients, j'ai découvert l'IA sur mon téléphone. J'ai commencé à tester, à bidouiller, à créer du contenu avec. Pas dans un cours, pas dans une formation à 2000€ — sur mon tel, dans une station-service à 3h du mat.</p>
-          <p>Aujourd'hui j'ai +167k abonnés sur TikTok et je crée du contenu tous les jours grâce à l'IA.</p>
-          <p>Ce guide, c'est tout ce que j'aurais voulu avoir quand j'ai commencé.</p>
-        </div>
-        <div class="chris-badge">
-          <span class="handle">@chris.sans.filtre</span>
-          <span class="sep">·</span>
-          <span class="followers">+167K · TIKTOK</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 
 <!-- ═══════════════════════════════════════════════
      TÉMOIGNAGES
 ═══════════════════════════════════════════════ -->
-<section id="temoignages" style="padding:60px 0;">
+<section id="temoignages" style="padding:0 0 60px 0;">
   <div class="wrap">
 
     <div class="sec-head rv">
-      <span class="slash">// 006</span>
+      <span class="slash">// 004</span>
       <span class="line"></span>
       <span>ILS L'ONT TESTÉ</span>
     </div>
@@ -1476,7 +1320,7 @@
   <div class="wrap">
 
     <div class="sec-head rv">
-      <span class="slash">// 007</span>
+      <span class="slash">// 005</span>
       <span class="line"></span>
       <span>FAQ</span>
     </div>
@@ -1614,15 +1458,6 @@
 <!-- ═══════════════════════════════════════════════
      STICKY BOTTOM BAR
 ═══════════════════════════════════════════════ -->
-<div id="sticky-bar">
-  <div class="sticky-info">
-    <span class="lbl">OFFRE DE LANCEMENT</span>
-    <span class="title">LA MÉTHODE AVATAR — 27€ <span class="old">47€</span></span>
-  </div>
-  <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="sticky-cta">
-    JE REJOINS →
-  </a>
-</div>
 
 
 <!-- ═══════════════════════════════════════════════
@@ -1699,6 +1534,10 @@
       document.getElementById('cd-h').textContent = pad(h);
       document.getElementById('cd-m').textContent = pad(m);
       document.getElementById('cd-s').textContent = pad(s);
+      document.getElementById('mt-d').textContent = pad(d);
+      document.getElementById('mt-h').textContent = pad(h);
+      document.getElementById('mt-m').textContent = pad(m);
+      document.getElementById('mt-s').textContent = pad(s);
     }
     tick(); setInterval(tick, 1000);
   })();
