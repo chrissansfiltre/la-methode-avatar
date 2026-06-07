@@ -198,6 +198,23 @@
       display:block; text-align:center;
     }
 
+    /* Badge Automatisé */
+    .step-auto-badge {
+      display:inline-flex; align-items:center; gap:4px;
+      background:rgba(255,107,0,.12); border:1px solid rgba(255,107,0,.35);
+      color:var(--orange); font-family:var(--fsmall); font-size:10px;
+      letter-spacing:.16em; text-transform:uppercase;
+      padding:4px 10px; border-radius:100px;
+      margin-bottom:10px;
+    }
+    /* Accroche sous les cartes */
+    .etapes-accroche {
+      text-align:center; margin-top:36px;
+      font-family:var(--fbody); font-size:1rem; letter-spacing:.02em;
+      color:var(--greyli); line-height:1.6;
+    }
+    .etapes-accroche strong { color:var(--white); }
+
     /* Step block */
     .step-block { margin-bottom:12px; }
 
@@ -214,11 +231,12 @@
       pointer-events:none;
     }
     .step-num-title {
-      display:flex; align-items:flex-end; gap:10px; margin-bottom:14px;
+      display:flex; align-items:flex-start; gap:10px; margin-bottom:14px;
     }
     .step-big-num {
       font-family:var(--fhead); font-size:clamp(3.5rem,14vw,5.5rem);
-      font-weight:900; color:var(--orange); line-height:1; letter-spacing:-.02em;
+      font-weight:900; color:var(--orange); line-height:0.8; letter-spacing:-.02em;
+      margin-top:-0.05em;
     }
     .step-big-title {
       font-family:var(--fhead); font-size:clamp(1.5rem,6vw,2.3rem);
@@ -602,6 +620,66 @@
       margin-bottom:32px; line-height:1.05;
     }
     .faq-title .accent { color:var(--orange); }
+
+    /* ── AI AVATAR SYSTEM ────────────────────────── */
+    .ai-system-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:28px; line-height:1.05;
+    }
+    .ai-system-title .accent { color:var(--orange); }
+    .ai-system-inner {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:16px; padding:28px 24px;
+    }
+    .ai-system-lead {
+      font-size:1.05rem; color:var(--greyli);
+      margin-bottom:20px; line-height:1.6;
+    }
+    .ai-system-list {
+      list-style:none; display:flex; flex-direction:column; gap:14px;
+      margin-bottom:24px;
+    }
+    .ai-system-list li {
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:1rem; color:var(--greyli); line-height:1.5;
+    }
+    .ai-ico {
+      font-size:1.1rem; flex-shrink:0; margin-top:1px;
+    }
+    .ai-system-badge {
+      display:flex; align-items:flex-start; gap:12px;
+      background:rgba(255,107,0,.08); border:1px solid rgba(255,107,0,.3);
+      border-radius:10px; padding:14px 16px;
+    }
+    .badge-ico { font-size:1.3rem; flex-shrink:0; }
+    .ai-system-badge p {
+      font-size:.95rem; color:var(--greyli); line-height:1.5;
+    }
+
+    /* ── TÉMOIGNAGES ─────────────────────────────── */
+    .temoignages-title {
+      font-family:var(--fhead); font-weight:900;
+      font-size:clamp(2rem,8vw,2.8rem); letter-spacing:-.01em;
+      margin-bottom:32px; line-height:1.05;
+    }
+    .temoignages-title .accent { color:var(--orange); }
+    .temoignages-grid {
+      display:grid; grid-template-columns:1fr; gap:16px;
+    }
+    .temoignage-card {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:12px; overflow:hidden; padding:16px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .temoignage-card img { width:100%; border-radius:8px; }
+    .temo-name { font-family:var(--fsmall); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--grey); }
+    .temo-result { font-family:var(--fhead); font-size:1.1rem; font-weight:900; color:var(--orange); }
+    .temo-stars { color:var(--orange); font-size:1.1rem; letter-spacing:2px; margin-bottom:10px; }
+    .temo-quote { font-size:.95rem; color:var(--greyli); line-height:1.65; margin-bottom:14px; font-style:italic; }
+    @media(min-width:860px) {
+      .temoignages-grid { grid-template-columns:repeat(3,1fr); }
+    }
     .faq-list { display:flex; flex-direction:column; }
     .faq-item { border-bottom:1px solid var(--border); }
     .faq-q {
@@ -836,7 +914,7 @@
           en <span class="accent">48h</span> sans te montrer
         </h1>
         <p class="hero-sub">
-          Le seul guide qui t'apprend à créer un avatar IA cohérent, le mettre en scène et l'animer avec Kling 3.0, <strong style="color:var(--orange);">sans jamais apparaître à la caméra.</strong>
+          Le seul système qui crée ton avatar IA, écrit tes prompts et anime tes vidéos automatiquement — <strong style="color:var(--orange);">sans jamais apparaître à la caméra.</strong>
         </p>
         <a href="https://stan.store/chrissansfiltre/p/la-mthode-avatar" target="_blank" rel="noopener" class="btn-cta">
           JE CRÉE MON AVATAR →
@@ -885,10 +963,14 @@
       <div class="step-card">
         <div class="step-num-title">
           <span class="step-big-num">1</span>
-          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px;">— Créer ton <span style="color:var(--orange);">avatar IA.</span></span>
+          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px; font-size:1.7rem;">
+            <span style="display:block;">— Créer ton</span>
+            <span style="display:block; color:var(--orange);">avatar IA.</span>
+          </span>
         </div>
-        <div class="step-subtitle">Le Process complet.</div>
-        <div class="step-desc">Construit l'identité de ton Avatar et <strong style="color:var(--orange);">Verrouille</strong> la dans toutes tes scènes. Avec Nano Banana, les bons prompts et ton workflow step by step.</div>
+        <span class="step-auto-badge">⚡ Automatisé</span>
+        <div class="step-subtitle">Le système verrouille l'identité automatiquement.</div>
+        <div class="step-desc">Le système verrouille l'identité de ton avatar automatiquement : <strong style="color:var(--orange);">même tête, même style</strong>, dans chaque scène. Zéro incohérence.</div>
         <div class="step-images">
           <div class="step-img-main">
             <img src="v2/ETAPE_1_VISUEL.png?v=2" alt="Étape 1" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
@@ -907,8 +989,8 @@
       <div class="step-meta-wrap">
         <div class="step-meta">
           <div><span class="num">01</span><span class="line-h"></span></div>
-          <h3>Créer ton influenceur IA</h3>
-          <p>Un personnage cohérent, crédible, mémorable — sans te montrer à la caméra. Identité, photos, animation.</p>
+          <h3>Créer ton avatar IA</h3>
+          <p>Un personnage cohérent, crédible, mémorable — même tête, même style dans chaque scène. Zéro incohérence.</p>
         </div>
         <div class="step-arrow"><a href="#etapes-2">↓</a></div>
       </div>
@@ -919,10 +1001,14 @@
       <div class="step-card">
         <div class="step-num-title">
           <span class="step-big-num">2</span>
-          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px">— L'animer en <span style="color:var(--orange);">vidéo.</span></span>
+          <span class="step-big-title" style="margin: -4px -1.3335px -10.6667px 0.666748px; padding: 0px 0px 28.6667px; font-size:1.7rem;">
+            <span style="display:block;">— Créer des</span>
+            <span style="display:block; color:var(--orange);">vidéos virales.</span>
+          </span>
         </div>
-        <div class="step-subtitle">Maîtrise la méthode complète</div>
-        <div class="step-desc">que <strong style="color:var(--orange);">90%</strong> des créateurs ignorent. Transforme tes images IA en vidéos prêtes à poster avec Kling 3.0. Pas besoin de te filmer.</div>
+        <span class="step-auto-badge">⚡ Automatisé</span>
+        <div class="step-subtitle">Tu copies ce qui marche déjà.</div>
+        <div class="step-desc">Tu déposes une vidéo virale, le système la décortique et la recrée à l'identique avec <strong style="color:var(--orange);">TON avatar IA</strong> — mêmes plans, mêmes mouvements, même énergie.</div>
         <div class="step-grid-imgs">
           <div class="gi">
             <img src="v2/KLING%203.0.gif" alt="Kling 3.0" style="width:100%;height:100%;object-fit:cover;" />
@@ -941,8 +1027,8 @@
       <div class="step-meta-wrap">
         <div class="step-meta">
           <div><span class="num">02</span><span class="line-h"></span></div>
-          <h3>L'animer en vidéo</h3>
-          <p>Reels, stories, ads. Ton avatar poste sans toi — script, voix, montage. Zéro compétence technique.</p>
+          <h3>Créer des vidéos virales</h3>
+          <p>Tu déposes une vidéo virale, le système sort tous les prompts pour la recréer avec ton avatar.</p>
         </div>
         <div class="step-arrow"><a href="#etapes-3">↓</a></div>
       </div>
@@ -953,10 +1039,13 @@
       <div class="step-card">
         <div class="step-num-title">
           <span class="step-big-num">3</span>
-          <span class="step-big-title" style="padding: 0px 0px 21.3335px; color: rgb(243, 242, 241)">— &nbsp;Le <span style="color:var(--orange);">vendre.</span><span style="color:var(--orange);"></span></span>
+          <span class="step-big-title" style="padding: 0px 0px 21.3335px; font-size:1.7rem;">
+            <span style="display:block;">— Vend cette</span>
+            <span style="display:block; color:var(--orange);">viralité.</span>
+          </span>
         </div>
         <div class="step-subtitle">Ton avatar devient un <span style="color:var(--orange);">business.</span></div>
-        <div class="step-desc">Comment transformer une audience en sources de revenus. Crée un produit digital et mets-le en vente sur Stan Store. La machine tourne pendant que tu dors.</div>
+        <div class="step-desc">Transforme ton audience en revenus avec un produit digital — je te file la méthode <strong style="color:var(--orange);">ET les prompts</strong> pour le créer.</div>
         <div class="step-images">
           <div class="step-img-main">
             <img src="v2/ETAPE_3_VISUEL.png" alt="Étape 3"
@@ -976,14 +1065,47 @@
       <div class="step-meta-wrap">
         <div class="step-meta">
           <div><span class="num">03</span><span class="line-h"></span></div>
-          <h3>Monétise ton influenceur IA</h3>
-          <p>Produits digitaux, affiliation, clients. Lien en bio → paiement → livraison automatique.</p>
+          <h3>Vend cette viralité</h3>
+          <p>Produit digital + méthode + prompts. Lien en bio → paiement → livraison automatique.</p>
         </div>
         <div class="step-arrow"><a href="#apprendre">↓</a></div>
       </div>
     </div>
 
     </div><!-- end steps-wrapper -->
+
+    <p class="etapes-accroche rv">🤖 Les 3 étapes, propulsées par le <strong>AI AVATAR System</strong> — le seul système qui écrit tes prompts à ta place.</p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     AI AVATAR SYSTEM
+═══════════════════════════════════════════════ -->
+<section id="ai-system" style="padding:60px 0;">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// NEW</span>
+      <span class="line"></span>
+      <span>AI AVATAR SYSTEM</span>
+    </div>
+
+    <h2 class="ai-system-title rv d1">🆕 Le Système AI AVATAR —<br/><span class="accent">ton arme secrète.</span></h2>
+
+    <div class="ai-system-inner rv d2">
+      <p class="ai-system-lead">Pendant que les autres galèrent à écrire leurs prompts à la main, toi t'as un système qui le fait pour toi. Tu installes <strong style="color:var(--white);">4 outils dans Claude Code</strong>, et à partir de là :</p>
+      <ul class="ai-system-list">
+        <li><span class="ai-ico">⚡</span><span>Ton avatar est <strong>créé et verrouillé automatiquement</strong></span></li>
+        <li><span class="ai-ico">⚡</span><span>Tes <strong>prompts image et vidéo sont générés</strong> pour toi</span></li>
+        <li><span class="ai-ico">⚡</span><span>Tu déposes une vidéo virale → il te sort le <strong>script complet + tous les prompts</strong> pour la recréer avec ton avatar</span></li>
+      </ul>
+      <div class="ai-system-badge rv d3">
+        <span class="badge-ico">🔒</span>
+        <p>Personne d'autre ne vend ça. C'est ce qui te fait <strong>gagner des heures à chaque vidéo.</strong></p>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -1101,7 +1223,11 @@
         <!-- Full checklist -->
         <p style="font-family:var(--fsmall);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-bottom:4px;">1 GUIDE PRINCIPAL · 3 BONUS OFFERTS</p>
         <ul class="checklist">
-          <li class="check-item"><span class="ck">✅</span><span>Le guide PDF complet — <strong>4 modules ~ 40 min de vidéo</strong></span></li>
+          <li class="check-item" style="background:rgba(255,107,0,.07);border:1px solid rgba(255,107,0,.25);border-radius:8px;padding:10px 12px;margin-bottom:6px;">
+            <span class="ck">🆕</span>
+            <span><strong style="color:var(--orange);">Le Système AI AVATAR</strong> — 4 outils IA qui automatisent toute ta création</span>
+          </li>
+          <li class="check-item"><span class="ck">✅</span><span>Le guide PDF complet — <strong>5 modules ~ 1h05 de vidéo</strong></span></li>
           <li class="check-item"><span class="ck">✅</span><span>Tous les <strong>prompts Nano Banana</strong> prêts à l'emploi</span></li>
           <li class="check-item"><span class="ck">✅</span><span>Le <strong>workflow Kling 3.0</strong> avec exemples concrets</span></li>
           <li class="check-item"><span class="ck">✅</span><span>Les <strong>prompts Claude</strong> pour animer sans se prendre la tête</span></li>
@@ -1172,9 +1298,9 @@
     <h2 class="valeur-title rv d1">Le vrai prix de ce que tu <span class="accent">reçois.</span></h2>
 
     <div class="v-table rv d2">
-      <div class="v-row"><span class="vn">Guide PDF · 4 modules · ~40 min de vidéo</span><span class="vp">97€</span></div>
+      <div class="v-row"><span class="vn">Guide PDF · 5 modules · ~1h05 de vidéo</span><span class="vp">97€</span></div>
       <div class="v-row"><span class="vn">3 bonus (SKILL CHRIS, La méthode CLONE &amp; EMPILAGE)</span><span class="vp">55€</span></div>
-      <div class="v-row"><span class="vn">Prompts &amp; templates + mises à jour à vie</span><span class="vp">97€</span></div>
+      <div class="v-row"><span class="vn">AI AVATAR System + mises à jour à vie</span><span class="vp">97€</span></div>
       <div class="v-row total"><span class="vn">VALEUR TOTALE</span><span class="vp" style="font-size:1.4rem;font-weight:900;color:var(--greyli);">249€</span></div>
       <div class="v-row highlight"><span class="vn">TON PRIX</span><span class="vp">27€</span></div>
     </div>
@@ -1286,13 +1412,71 @@
 
 
 <!-- ═══════════════════════════════════════════════
+     TÉMOIGNAGES
+═══════════════════════════════════════════════ -->
+<section id="temoignages" style="padding:60px 0;">
+  <div class="wrap">
+
+    <div class="sec-head rv">
+      <span class="slash">// 006</span>
+      <span class="line"></span>
+      <span>ILS L'ONT TESTÉ</span>
+    </div>
+
+    <h2 class="temoignages-title rv d1">Les résultats <span class="accent">parlent d'eux-mêmes.</span></h2>
+
+    <div class="temoignages-grid rv d2">
+
+      <div class="temoignage-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-quote">« Je veux juste te dire BRAVO. En fait, je me suis reconnu dans ton parcours avec les métiers galère, etc., et franchement, bravo à toi. En plus la formation, elle est cool, elle est bien expliquée. Tu m'as appris plein de choses, tu l'as remis à jour, donc franchement, merci beaucoup et bravo pour ton parcours. Ça fait plaisir de voir ce genre de personne. »</p>
+        <p class="temo-name">— Bernie</p>
+      </div>
+
+      <div class="temoignage-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-quote">« Tu es un génie frère ✌️ Merci pour ton guide j'ai tout compris comment bien géré dès le départ avec mon character sheet, donc merci beaucoup frère ! 🫶 »</p>
+        <p class="temo-name">— Majoric</p>
+      </div>
+
+      <div class="temoignage-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-quote">« Hello Chris ! Merci infiniment pour les vidéos tuto c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie ! T'es vraiment trop fort je vais suivre ta formation à la lettre 🤩 »</p>
+        <p class="temo-name">— Kevin</p>
+      </div>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  ZONE TÉMOIGNAGES — ajoute tes captures ici ║
+           ║                                              ║
+           ║  Modèle capture :                            ║
+           ║  <div class="temoignage-card">               ║
+           ║    <img src="CAPTURE_NOM.png" alt="..." />   ║
+           ║    <p class="temo-name">@pseudo</p>          ║
+           ║    <p class="temo-result">+215k vues</p>     ║
+           ║  </div>                                      ║
+           ║                                              ║
+           ║  Modèle avis texte :                         ║
+           ║  <div class="temoignage-card">               ║
+           ║    <div class="temo-stars">★★★★★</div>       ║
+           ║    <p class="temo-quote">« ... »</p>         ║
+           ║    <p class="temo-name">— Prénom</p>         ║
+           ║  </div>                                      ║
+           ╚══════════════════════════════════════════════╝ -->
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
      FAQ
 ═══════════════════════════════════════════════ -->
 <section id="faq">
   <div class="wrap">
 
     <div class="sec-head rv">
-      <span class="slash">// 006</span>
+      <span class="slash">// 007</span>
       <span class="line"></span>
       <span>FAQ</span>
     </div>
