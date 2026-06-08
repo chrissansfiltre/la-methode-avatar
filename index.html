@@ -742,11 +742,10 @@
     .bernie-player { position:relative; cursor:pointer; margin-bottom:10px; border-radius:8px; overflow:hidden; }
     .bernie-play {
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:52px; height:52px; border-radius:50%;
-      background:var(--orange); color:#fff;
-      font-size:1.3rem; display:flex; align-items:center; justify-content:center;
-      padding-left:4px;
-      box-shadow:0 4px 20px rgba(255,107,0,.5);
+      width:56px; height:56px; border-radius:50%;
+      background:var(--orange);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 24px rgba(255,107,0,.6);
       transition:opacity .2s;
       pointer-events:none;
     }
@@ -1353,8 +1352,10 @@
       <div class="temoignage-card">
         <div class="temo-stars">★★★★★</div>
         <div class="bernie-player" onclick="var v=this.querySelector('video');var b=this.querySelector('.bernie-play');if(v.paused){v.play();b.style.opacity='0';}else{v.pause();b.style.opacity='1';}">
-          <video src="avis%20client%20audio.mp4" style="width:100%;border-radius:8px;display:block;background:#111;"></video>
-          <div class="bernie-play">▶</div>
+          <video src="avis%20client%20audio.mp4" preload="metadata" style="width:100%;border-radius:8px;display:block;background:#111;"></video>
+          <div class="bernie-play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
         </div>
         <p class="temo-name">— Bernie</p>
       </div>
