@@ -206,6 +206,7 @@
   }
   .vsl-video iframe {
     position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block;
+    background: #0a0a0b;   /* iOS : évite le fond blanc par défaut de l'iframe autour de la vidéo */
   }
 
   /* ---- Façade click-to-play : miniature + gros bouton play (pas de contrôles tant qu'on n'a pas cliqué) ----
@@ -1049,7 +1050,7 @@
         <div class="vsl-wrapper">
           <!-- data-src = vidéo chargée au clic (autoplay).
                Pour afficher TA miniature : ajoute style="background-image:url('TON_THUMBNAIL.jpg')" sur le bouton .vsl-poster ci-dessous. -->
-          <div class="vsl-video" data-src="https://player.mediadelivery.net/embed/684215/9758f5ed-e32f-495f-80c7-6f2a37e82cce?autoplay=true&loop=false&muted=false&preload=true&responsive=true">
+          <div class="vsl-video" data-src="https://player.mediadelivery.net/embed/684215/9758f5ed-e32f-495f-80c7-6f2a37e82cce?autoplay=true&loop=false&muted=false&preload=true">
             <button class="vsl-poster" id="vsl-play" type="button" aria-label="Lire la vidéo"
                     style="background-image:url('MINIA-VSL.png')">
               <span class="vsl-playbtn">
