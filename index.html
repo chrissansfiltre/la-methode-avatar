@@ -843,11 +843,10 @@
     width: 100% !important;
     border: 0;
     display: block;
-    /* Plancher assez haut pour afficher TOUT le checkout sans scroll interne.
-       Whop auto-resize au-dessus de cette valeur si son contenu est plus grand ;
-       en dessous, ce plancher garantit que le formulaire entier reste visible. */
-    min-height: 860px;
-    height: auto !important;
+    /* On laisse Whop gérer SA propre hauteur (auto-resize via son loader).
+       min-height = simple plancher anti-flash avant le redimensionnement ;
+       surtout PAS de height !important, sinon Whop ne peut plus ajuster et du vide apparaît. */
+    min-height: 480px;
   }
 
   .offer__reassure {
