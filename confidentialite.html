@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NT29CX1YG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2NT29CX1YG');
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Méthode AVATAR — @chris.sans.filtre</title>
-  <link rel="icon" type="image/png" href="MON_LOGO.png">
-  <link rel="apple-touch-icon" href="MON_LOGO.png">
+  <title>Le Système Ai AVATAR — @chris.sans.filtre</title>
+  <link rel="icon" type="image/png" href="v2/MON_LOGO.png">
+  <link rel="apple-touch-icon" href="v2/MON_LOGO.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -200,7 +192,7 @@
 <div class="page-wrap">
 
   <h1 class="page-title">Politique de confidentialité</h1>
-  <p class="page-updated">Dernière mise à jour : 27 avril 2026</p>
+  <p class="page-updated">Dernière mise à jour : 20 juin 2026</p>
 
   <nav class="anchor-nav">
     <a href="#responsable">Responsable</a>
@@ -228,7 +220,9 @@
   <section class="legal-section" id="responsable">
     <h2>1. Responsable du traitement</h2>
     <div class="legal-highlight">
-      <strong>Chris</strong> — @chris.sans.filtre<br/>
+      <strong>Christopher Jacob</strong> — Entrepreneur individuel (micro-entreprise)<br/>
+      SIRET : 103 241 808 00015<br/>
+      42 C rue du Faubourg Perpreuil, 21200 Beaune, France<br/>
       Contact : <a href="mailto:christophervaslopes@gmail.com">christophervaslopes@gmail.com</a>
     </div>
   </section>
@@ -243,13 +237,15 @@
       <li>Nom, prénom</li>
       <li>Adresse email</li>
       <li>Pays de résidence</li>
-      <li>Données de paiement (gérées par Stan Store — je n'y ai pas accès)</li>
+      <li>Données de paiement (gérées par Whop, je n'y ai pas accès)</li>
     </ul>
 
     <h3>Lors de la navigation</h3>
+    <p>Uniquement si vous y consentez via le bandeau cookies, l'outil Microsoft Clarity collecte :</p>
     <ul>
-      <li>Adresse IP, type de navigateur, pages visitées, durée de visite</li>
-      <li>Identifiants de cookies analytiques (Google Analytics)</li>
+      <li>Adresse IP (tronquée), type de navigateur et d'appareil, pages visitées, durée de visite</li>
+      <li>Interactions de navigation (clics, mouvements, défilement) et enregistrement de session, à des fins de mesure d'audience et d'amélioration du site</li>
+      <li>Identifiants des cookies de mesure Microsoft Clarity</li>
     </ul>
   </section>
 
@@ -282,9 +278,9 @@
     <h2>5. Destinataires</h2>
     <p>Vos données sont partagées uniquement avec :</p>
     <ul>
-      <li><strong style="color:var(--white);">Stan Store Inc.</strong> — paiement et livraison du produit</li>
-      <li><strong style="color:var(--white);">Cloudflare Inc.</strong> — hébergement du site</li>
-      <li><strong style="color:var(--white);">Google LLC</strong> — analytics via Google Analytics</li>
+      <li><strong style="color:var(--white);">Whop (Whop Inc.)</strong> — paiement et accès au produit</li>
+      <li><strong style="color:var(--white);">GitHub, Inc.</strong> — hébergement du site</li>
+      <li><strong style="color:var(--white);">Microsoft Corporation</strong> — mesure d'audience et analyse de navigation via Microsoft Clarity (uniquement avec votre consentement)</li>
     </ul>
     <div class="legal-highlight">
       Aucune donnée n'est vendue. Les transferts hors UE sont encadrés par les clauses contractuelles types
@@ -347,10 +343,61 @@
 </div>
 
 <footer class="page-footer">
-  © 2026 Chris — La Méthode AVATAR ·
+  © 2026 Chris — Le Système Ai AVATAR ·
   <a href="index.html">Retour au site</a> ·
-  <a href="mentions-legales.html">Mentions légales</a>
+  <a href="mentions-legales.html">Mentions légales</a> ·
+  <a href="#" onclick="openCookiePrefs();return false;">Gérer les cookies</a>
 </footer>
+
+<!-- ============================================================
+     BANDEAU CONSENTEMENT COOKIES — charge Microsoft Clarity seulement après accord
+     ============================================================ -->
+<style>
+  #cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;display:none;background:#111;border-top:1px solid rgba(255,255,255,.12);box-shadow:0 -8px 30px rgba(0,0,0,.5);font-family:'Inter',system-ui,sans-serif;}
+  #cookie-banner .cookie-inner{max-width:960px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;}
+  #cookie-banner p{margin:0;color:#cfcfcf;font-size:.9rem;line-height:1.5;flex:1 1 320px;}
+  #cookie-banner a{color:#FF6B00;text-decoration:underline;}
+  #cookie-banner .cookie-actions{display:flex;gap:10px;flex-shrink:0;}
+  #cookie-banner button{cursor:pointer;border-radius:10px;padding:11px 22px;font-size:.88rem;font-weight:600;font-family:inherit;border:1px solid transparent;transition:opacity .15s,background .15s;}
+  #cookie-banner .cookie-refuse{background:transparent;border-color:rgba(255,255,255,.25);color:#eee;}
+  #cookie-banner .cookie-refuse:hover{background:rgba(255,255,255,.08);}
+  #cookie-banner .cookie-accept{background:#FF6B00;color:#1a0a00;}
+  #cookie-banner .cookie-accept:hover{opacity:.9;}
+</style>
+<div id="cookie-banner" role="dialog" aria-label="Consentement cookies">
+  <div class="cookie-inner">
+    <p>Ce site utilise des cookies de mesure d'audience pour améliorer ton expérience. Ils ne sont déposés qu'avec ton accord. <a href="cookies.html">En savoir plus</a>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-refuse" id="cookie-refuse">Refuser</button>
+      <button type="button" class="cookie-accept" id="cookie-accept">Accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='csf_cookie_consent';
+  function loadClarity(){
+    if(window.__clarityLoaded)return;window.__clarityLoaded=true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","wwniwwb0xp");
+  }
+  function hide(){var b=document.getElementById('cookie-banner');if(b)b.style.display='none';}
+  function show(){var b=document.getElementById('cookie-banner');if(b)b.style.display='block';}
+  function set(v){try{localStorage.setItem(KEY,v);}catch(e){}hide();if(v==='accepted')loadClarity();}
+  window.openCookiePrefs=function(){show();};
+  document.addEventListener('DOMContentLoaded',function(){
+    var c=null;try{c=localStorage.getItem(KEY);}catch(e){}
+    if(c==='accepted'){loadClarity();}
+    else if(c!=='refused'){show();}
+    var a=document.getElementById('cookie-accept'),r=document.getElementById('cookie-refuse');
+    if(a)a.onclick=function(){set('accepted');};
+    if(r)r.onclick=function(){set('refused');};
+  });
+})();
+</script>
 
 </body>
 </html>

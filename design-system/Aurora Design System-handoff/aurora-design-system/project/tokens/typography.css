@@ -1,0 +1,58 @@
+/* ============================================================
+   Aurora — Typography tokens
+   Geometric, highly legible sans. Inter as the brand face,
+   system stack as the runtime fallback (never SF Pro by name).
+   Marked hierarchy: thin large titles, airy body, tight
+   letter-spacing on display sizes.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo",
+               "Consolas", monospace;
+
+  /* ---- Weights ---- */
+  --weight-thin:     300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ---- Type scale (px, fluid-friendly) ----
+     Display sizes are meant to be thin + tightly tracked. */
+  --text-display-xl: 80px;
+  --text-display-l:  64px;
+  --text-display-m:  48px;
+  --text-h1:         40px;
+  --text-h2:         32px;
+  --text-h3:         24px;
+  --text-h4:         20px;
+  --text-body-lg:    19px;
+  --text-body:       17px;  /* base reading size */
+  --text-body-sm:    15px;
+  --text-caption:    13px;
+  --text-micro:      11px;
+
+  /* ---- Line heights ---- */
+  --leading-tight:   1.05;  /* display */
+  --leading-snug:    1.18;  /* headings */
+  --leading-normal:  1.3;
+  --leading-relaxed: 1.5;   /* body copy */
+
+  /* ---- Letter spacing ---- */
+  --tracking-tighter: -0.025em;  /* big display */
+  --tracking-tight:   -0.015em;  /* headings */
+  --tracking-normal:  -0.01em;   /* body */
+  --tracking-wide:    0.02em;
+  --tracking-caps:    0.06em;    /* eyebrows / overlines */
+
+  /* ---- Semantic roles ---- */
+  --font-display:  var(--weight-thin)     var(--text-display-l)/var(--leading-tight) var(--font-sans);
+  --font-h1:       var(--weight-semibold) var(--text-h1)/var(--leading-snug) var(--font-sans);
+  --font-h2:       var(--weight-semibold) var(--text-h2)/var(--leading-snug) var(--font-sans);
+  --font-h3:       var(--weight-semibold) var(--text-h3)/var(--leading-normal) var(--font-sans);
+  --font-body:     var(--weight-regular)  var(--text-body)/var(--leading-relaxed) var(--font-sans);
+  --font-caption:  var(--weight-regular)  var(--text-caption)/var(--leading-normal) var(--font-sans);
+}

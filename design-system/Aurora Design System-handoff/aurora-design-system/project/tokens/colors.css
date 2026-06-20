@@ -1,0 +1,120 @@
+/* ============================================================
+   Aurora — Color tokens
+   Light base, neutral grays, single dynamic accent.
+   Base values first, then semantic aliases. Dark mode at end.
+   ============================================================ */
+
+:root {
+  /* ---- Neutral ramp (warm-leaning grays, Apple-like) ---- */
+  --gray-0:  #ffffff;
+  --gray-50: #fbfbfd;  /* off-white page base */
+  --gray-100:#f5f5f7;  /* subtle fills, hover wells */
+  --gray-150:#eeeef0;
+  --gray-200:#e3e3e6;  /* hairline borders */
+  --gray-300:#d2d2d7;  /* default borders */
+  --gray-400:#aeaeb2;
+  --gray-500:#86868b;  /* tertiary text / icons */
+  --gray-600:#6e6e73;  /* secondary text */
+  --gray-700:#48484a;
+  --gray-800:#2b2b2e;
+  --gray-900:#1d1d1f;  /* primary text / titles */
+  --gray-950:#0a0a0a;
+
+  /* ---- Accent (dynamic, overridable) ---- */
+  --accent-50:  #eaf4ff;
+  --accent-100: #cfe6ff;
+  --accent-300: #5aa7f0;
+  --accent-500: #0071e3;  /* primary accent */
+  --accent-600: #0066cc;  /* hover */
+  --accent-700: #0055ad;  /* pressed */
+  --accent-glow: 113, 177, 255;  /* @kind other */ /* rgb for glows */
+
+  /* ---- Semantic status ---- */
+  --green-500: #1d9d52;
+  --amber-500: #c98a00;
+  --red-500:   #e5484d;
+  --red-600:   #d33840;
+
+  /* ---- Glass material (light) ---- */
+  --glass-bg:        rgba(255, 255, 255, 0.62);
+  --glass-bg-strong: rgba(255, 255, 255, 0.78);
+  --glass-border:    rgba(255, 255, 255, 0.7);
+  --glass-hairline:  rgba(0, 0, 0, 0.06);
+
+  /* ============================================================
+     SEMANTIC ALIASES — reference these in components
+     ============================================================ */
+  --bg-base:        var(--gray-50);
+  --bg-subtle:      var(--gray-100);
+  --bg-sunken:      var(--gray-150);
+
+  --surface-card:   var(--gray-0);
+  --surface-raised: var(--gray-0);
+  --surface-glass:  var(--glass-bg);
+  --surface-glass-strong: var(--glass-bg-strong);
+
+  --text-title:     var(--gray-900);
+  --text-body:      var(--gray-700);
+  --text-secondary: var(--gray-600);
+  --text-tertiary:  var(--gray-500);
+  --text-on-accent: #ffffff;
+  --text-link:      var(--accent-600);
+
+  --border-hairline: var(--gray-200);
+  --border-default:  var(--gray-300);
+  --border-strong:   var(--gray-400);
+  --border-glass:    var(--glass-border);
+
+  --accent:         var(--accent-500);
+  --accent-hover:   var(--accent-600);
+  --accent-pressed: var(--accent-700);
+  --accent-tint:    var(--accent-50);
+  --focus-ring:     rgba(0, 113, 227, 0.45);
+
+  --success: var(--green-500);
+  --warning: var(--amber-500);
+  --danger:  var(--red-500);
+
+  color-scheme: light;
+}
+
+/* ============================================================
+   DARK MODE — anthracite translucent surfaces
+   Activated by [data-theme="dark"] OR system preference when
+   [data-theme="auto"] / unset on a .dark root.
+   ============================================================ */
+:root[data-theme="dark"],
+.dark {
+  --bg-base:        #000000;
+  --bg-subtle:      #161618;
+  --bg-sunken:      #0c0c0d;
+
+  --surface-card:   #1c1c1e;
+  --surface-raised: #242426;
+  --surface-glass:        rgba(30, 30, 33, 0.6);
+  --surface-glass-strong: rgba(30, 30, 33, 0.82);
+
+  --text-title:     #f5f5f7;
+  --text-body:      #d6d6d9;
+  --text-secondary: #a1a1a6;
+  --text-tertiary:  #86868b;
+  --text-on-accent: #ffffff;
+  --text-link:      #2f9bff;
+
+  --border-hairline: rgba(255, 255, 255, 0.09);
+  --border-default:  rgba(255, 255, 255, 0.16);
+  --border-strong:   rgba(255, 255, 255, 0.28);
+
+  --glass-bg:        rgba(30, 30, 33, 0.6);
+  --glass-bg-strong: rgba(30, 30, 33, 0.82);
+  --glass-border:    rgba(255, 255, 255, 0.12);
+  --glass-hairline:  rgba(255, 255, 255, 0.08);
+
+  --accent:         #0a84ff;
+  --accent-hover:   #2f9bff;
+  --accent-pressed: #0066cc;
+  --accent-tint:    rgba(10, 132, 255, 0.16);
+  --focus-ring:     rgba(10, 132, 255, 0.55);
+
+  color-scheme: dark;
+}

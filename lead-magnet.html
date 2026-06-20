@@ -53,20 +53,7 @@
   }
   .cta-hotspot:hover { opacity: .55; background: rgba(255,107,0,.12); }
 </style>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2NT29CX1YG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2NT29CX1YG');
-</script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwniwwb0xp");
-</script>
+<!-- Microsoft Clarity : chargé uniquement après acceptation du bandeau cookies (voir fin de page) -->
 </head>
 <body>
 
@@ -83,9 +70,59 @@
   <img src="lead-magnet-pages/page-10.jpg" alt="Page 10" loading="lazy" />
   <div class="last-page">
     <img src="lead-magnet-pages/page-11.jpg" alt="La Méthode AVATAR" loading="lazy" />
-    <a class="cta-hotspot" href="index.html" aria-label="La Méthode AVATAR" onclick="try{gtag('event','lead_magnet_cta_click');}catch(e){}"></a>
+    <a class="cta-hotspot" href="index.html" aria-label="La Méthode AVATAR"></a>
   </div>
 </div>
+
+<!-- ============================================================
+     BANDEAU CONSENTEMENT COOKIES — charge Microsoft Clarity seulement après accord
+     ============================================================ -->
+<style>
+  #cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;display:none;background:#111;border-top:1px solid rgba(255,255,255,.12);box-shadow:0 -8px 30px rgba(0,0,0,.5);font-family:'Inter',system-ui,sans-serif;}
+  #cookie-banner .cookie-inner{max-width:960px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;}
+  #cookie-banner p{margin:0;color:#cfcfcf;font-size:.9rem;line-height:1.5;flex:1 1 320px;}
+  #cookie-banner a{color:#FF6B00;text-decoration:underline;}
+  #cookie-banner .cookie-actions{display:flex;gap:10px;flex-shrink:0;}
+  #cookie-banner button{cursor:pointer;border-radius:10px;padding:11px 22px;font-size:.88rem;font-weight:600;font-family:inherit;border:1px solid transparent;transition:opacity .15s,background .15s;}
+  #cookie-banner .cookie-refuse{background:transparent;border-color:rgba(255,255,255,.25);color:#eee;}
+  #cookie-banner .cookie-refuse:hover{background:rgba(255,255,255,.08);}
+  #cookie-banner .cookie-accept{background:#FF6B00;color:#1a0a00;}
+  #cookie-banner .cookie-accept:hover{opacity:.9;}
+</style>
+<div id="cookie-banner" role="dialog" aria-label="Consentement cookies">
+  <div class="cookie-inner">
+    <p>Ce site utilise des cookies de mesure d'audience pour améliorer ton expérience. Ils ne sont déposés qu'avec ton accord. <a href="cookies.html">En savoir plus</a>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-refuse" id="cookie-refuse">Refuser</button>
+      <button type="button" class="cookie-accept" id="cookie-accept">Accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='csf_cookie_consent';
+  function loadClarity(){
+    if(window.__clarityLoaded)return;window.__clarityLoaded=true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","wwniwwb0xp");
+  }
+  function hide(){var b=document.getElementById('cookie-banner');if(b)b.style.display='none';}
+  function show(){var b=document.getElementById('cookie-banner');if(b)b.style.display='block';}
+  function set(v){try{localStorage.setItem(KEY,v);}catch(e){}hide();if(v==='accepted')loadClarity();}
+  window.openCookiePrefs=function(){show();};
+  document.addEventListener('DOMContentLoaded',function(){
+    var c=null;try{c=localStorage.getItem(KEY);}catch(e){}
+    if(c==='accepted'){loadClarity();}
+    else if(c!=='refused'){show();}
+    var a=document.getElementById('cookie-accept'),r=document.getElementById('cookie-refuse');
+    if(a)a.onclick=function(){set('accepted');};
+    if(r)r.onclick=function(){set('refused');};
+  });
+})();
+</script>
 
 </body>
 </html>
