@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio — Chris Sans Filtre</title>
+<meta name="description" content="Mes meilleures vidéos générées par IA. Pubs produit, fan films IA, UGC, motion." />
+<link rel="icon" type="image/png" href="../v2/MON_LOGO.png" />
+
+<!-- AURORA DESIGN SYSTEM -->
+<link rel="stylesheet" href="../design-system/Aurora Design System-handoff/aurora-design-system/project/styles.css" />
+
+<style>
+  /* OVERRIDE accent BLEU -> ORANGE (identique au site principal) */
+  :root {
+    --accent-50:#fff3e9; --accent-100:#ffe1c7; --accent-300:#ffae5c;
+    --accent-500:#ff6b00; --accent-600:#e85f00; --accent-700:#c44f00; --accent-glow:255,154,76;
+    --accent:var(--accent-500); --accent-hover:var(--accent-600); --accent-pressed:var(--accent-700);
+    --accent-tint:var(--accent-50); --text-link:var(--accent-600); --focus-ring:rgba(255,107,0,.45);
+    --glow-accent:0 6px 22px rgba(255,107,0,.32); --glow-accent-strong:0 8px 30px rgba(255,107,0,.45);
+  }
+  :root[data-theme="dark"] {
+    --accent:#ff7a1a; --accent-hover:#ff9442; --accent-pressed:#e35f00;
+    --accent-tint:rgba(255,122,26,.16); --text-link:#ff9442; --focus-ring:rgba(255,122,26,.55);
+    --glow-accent:0 6px 24px rgba(255,122,26,.45); --glow-accent-strong:0 8px 34px rgba(255,122,26,.6);
+  }
+
+  .aur-btn { --_h:var(--control-h-md); display:inline-flex; align-items:center; justify-content:center; gap:var(--space-3);
+    height:var(--_h); padding:0 var(--space-7); font:var(--weight-medium) var(--text-body-sm)/1 var(--font-sans);
+    letter-spacing:var(--tracking-normal); border-radius:var(--radius-pill); border:1px solid transparent;
+    cursor:pointer; user-select:none; white-space:nowrap; text-decoration:none;
+    transition:transform var(--dur-base) var(--ease-spring-soft), background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+  .aur-btn:active { transform:scale(var(--press-scale)); }
+  .aur-btn--primary { color:var(--text-on-accent);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent)); box-shadow:var(--shadow-sm); }
+  .aur-btn--primary:hover { transform:scale(var(--hover-scale)); box-shadow:var(--glow-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-hover)); }
+
+  body { margin:0; background:var(--bg-base); overflow-x:hidden; font-family:var(--font-sans);
+    font-size:17px; line-height:var(--leading-relaxed); font-weight:var(--weight-regular); color:var(--text-body); }
+  .page { position:relative; overflow:hidden; }
+  .page-bg { position:absolute; inset:0; height:900px; pointer-events:none; z-index:0;
+    background:radial-gradient(60% 50% at 18% 8%, rgba(255,122,26,.18), transparent 60%),
+               radial-gradient(50% 45% at 88% 4%, rgba(255,80,0,.14), transparent 60%); }
+  main, .nav { position:relative; z-index:1; }
+
+  /* Nav */
+  .nav { position:sticky; top:0; z-index:30; display:flex; justify-content:center; padding:14px var(--space-5); }
+  .nav__bar { display:flex; align-items:center; gap:var(--space-5); width:min(var(--container-wide),100%);
+    padding:10px 12px 10px 18px; border-radius:var(--radius-pill); background:var(--surface-glass);
+    -webkit-backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate));
+    border:1px solid var(--glass-border); box-shadow:var(--shadow-lg), var(--glass-inner-highlight); }
+  .nav__brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:17px; color:var(--text-title); letter-spacing:-.02em; }
+  .nav__brand-logo { width:26px; height:26px; border-radius:7px; object-fit:cover; }
+  .nav__actions { margin-left:auto; display:flex; gap:10px; }
+  .nav__cta-full { display:none; }
+  @media (min-width:560px){ .nav__cta-full { display:inline; } }
+
+  /* Hero */
+  .hero { max-width:var(--container-max); margin:0 auto; text-align:center;
+    padding:clamp(28px,6vw,60px) var(--space-5) clamp(24px,5vw,44px); }
+  .hero__eyebrow { display:inline-block; margin-bottom:var(--space-5); }
+  .hero__title { font-weight:var(--weight-thin); font-size:clamp(38px,9vw,68px); line-height:1.04;
+    letter-spacing:var(--tracking-tighter); color:var(--text-title); margin:0; }
+  .hero__title .accent { color:var(--accent); font-weight:var(--weight-regular); }
+  .hero__sub { font-size:clamp(16px,4.4vw,var(--text-body-lg)); line-height:1.5; color:var(--text-secondary);
+    max-width:46ch; margin:var(--space-6) auto 0; }
+
+  /* Grille portfolio (masonry par colonnes, gère 16:9 et 9:16) */
+  .works { max-width:var(--container-max); margin:0 auto; padding:0 var(--space-5) clamp(48px,8vw,80px); }
+  .grid { columns:1; column-gap:var(--space-5); }
+  @media (min-width:760px){ .grid { columns:2; } }
+  .work { break-inside:avoid; margin-bottom:var(--space-5);
+    border-radius:var(--radius-xl); overflow:hidden;
+    background:var(--surface-card); border:1px solid var(--border-hairline); box-shadow:var(--shadow-sm); }
+  .work video { display:block; width:100%; height:auto; background:#050505; }
+
+  /* Bouton play orange au centre (les contrôles natifs n'arrivent qu'à la lecture) */
+  .work__player { position:relative; }
+  .work__play { position:absolute; inset:0; z-index:2; border:0; padding:0; margin:0; cursor:pointer;
+    display:grid; place-items:center;
+    background:radial-gradient(circle at 50% 45%, rgba(0,0,0,.10), rgba(0,0,0,.42)); }
+  .work__player.is-playing .work__play { display:none; }
+  .work__playbtn { width:clamp(58px,12vw,76px); aspect-ratio:1; border-radius:50%;
+    display:grid; place-items:center; color:#fff;
+    background:radial-gradient(circle at 50% 35%, var(--accent-hover), var(--accent));
+    box-shadow:0 0 0 8px rgba(255,122,26,.12), 0 0 50px 10px rgba(255,122,26,.5), var(--shadow-lg);
+    animation:pf-pulse 2.1s var(--ease-in-out) infinite;
+    transition:transform var(--dur-base) var(--ease-spring-soft); }
+  .work__play:hover .work__playbtn { transform:scale(1.08); }
+  .work__playbtn svg { width:38%; height:38%; margin-left:8%; }
+  @keyframes pf-pulse {
+    0%,100% { box-shadow:0 0 0 0 rgba(255,122,26,.45), 0 0 36px 6px rgba(255,122,26,.4), var(--shadow-lg); }
+    50%     { box-shadow:0 0 0 14px rgba(255,122,26,0), 0 0 60px 14px rgba(255,122,26,.55), var(--shadow-lg); }
+  }
+  @media (prefers-reduced-motion: reduce){ .work__playbtn { animation:none; } }
+  .work__meta { display:flex; align-items:center; gap:var(--space-4); padding:14px 18px; }
+  .work__title { font:var(--weight-semibold) var(--text-body)/1.2 var(--font-sans); color:var(--text-title); margin:0; }
+  .work__tag { margin-left:auto; flex:none; padding:5px 12px; border-radius:var(--radius-pill);
+    font:var(--weight-semibold) var(--text-micro)/1 var(--font-sans); letter-spacing:var(--tracking-caps); text-transform:uppercase;
+    color:var(--accent); background:var(--accent-tint); border:1px solid var(--glass-border); }
+
+  /* CTA bas de page */
+  .outro { text-align:center; padding:0 var(--space-5) clamp(56px,9vw,90px); }
+  .outro__title { font-weight:var(--weight-thin); font-size:clamp(26px,6.5vw,40px); line-height:1.1;
+    letter-spacing:var(--tracking-tight); color:var(--text-title); margin:0 0 var(--space-6); }
+  .outro__title .accent { color:var(--accent); }
+
+  /* Footer minimal */
+  .footer { border-top:1px solid var(--border-hairline); background:var(--bg-subtle);
+    padding:clamp(28px,5vw,40px) var(--space-5); text-align:center; }
+  .footer__links { display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-5) var(--space-7); margin-bottom:var(--space-5); }
+  .footer__links a { font-size:var(--text-caption); color:var(--text-secondary); }
+  .footer__links a:hover { color:var(--accent); }
+  .footer__copy { font-size:var(--text-micro); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--text-tertiary); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-bg"></div>
+
+  <nav class="nav">
+    <div class="nav__bar">
+      <div class="nav__brand"><img class="nav__brand-logo" src="../v2/MON_LOGO.png" alt="Chris Sans Filtre" /> Chris Sans Filtre</div>
+      <div class="nav__actions">
+        <a class="aur-btn aur-btn--primary" href="https://www.instagram.com/chris.sans.filtre/" target="_blank" rel="noopener">Me contacter</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="hero">
+      <span class="aurora-eyebrow hero__eyebrow">Portfolio</span>
+      <h1 class="hero__title">Mes vidéos <span class="accent">IA.</span></h1>
+      <p class="hero__sub">
+        Pubs produit, fan films IA, UGC, motion. Tout ce que tu vois ici est généré par IA, avec le système que j'enseigne.
+      </p>
+    </header>
+
+    <!-- GRILLE -->
+    <section class="works" aria-label="Vidéos">
+      <div class="grid">
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/volt.mp4" poster="posters/volt.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">Energy Drink VOLT</h2><span class="work__tag">Pub produit</span></div>
+        </div>
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/let-him-cook.mp4" poster="posters/let-him-cook.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">Let Him Cook</h2><span class="work__tag">Reel</span></div>
+        </div>
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/france-maroc.mp4" poster="posters/france-maroc.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">France vs Maroc</h2><span class="work__tag">Fan film IA</span></div>
+        </div>
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/kinzo.mp4" poster="posters/kinzo.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">Kinzo</h2><span class="work__tag">Pub produit</span></div>
+        </div>
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/paga.mp4" poster="posters/paga.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">PAGA</h2><span class="work__tag">Promo musique</span></div>
+        </div>
+        <div class="work">
+          <div class="work__player">
+            <video src="videos/version-169.mp4" poster="posters/version-169.jpg" preload="metadata" playsinline></video>
+            <button class="work__play" type="button" aria-label="Lire la vidéo"><span class="work__playbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg></span></button>
+          </div>
+          <div class="work__meta"><h2 class="work__title">France vs Spain</h2><span class="work__tag">Fan film IA</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTRO -->
+    <section class="outro">
+      <h2 class="outro__title">Un projet<br/><span class="accent">en tête ?</span></h2>
+      <a class="aur-btn aur-btn--primary" href="https://www.instagram.com/chris.sans.filtre/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer__links">
+    <a href="https://www.tiktok.com/@chris.sans.filtre" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.instagram.com/chris.sans.filtre/" target="_blank" rel="noopener">Instagram</a>
+    <a href="../mentions-legales.html">Mentions légales</a>
+    <a href="../confidentialite.html">Confidentialité</a>
+  </div>
+  <div class="footer__copy">© 2026 Chris Sans Filtre · Tous droits réservés</div>
+</footer>
+
+<script>
+  // Bouton play orange : lance la vidéo et active les contrôles natifs.
+  // Une seule vidéo à la fois. À la fin, le bouton revient.
+  var vids = document.querySelectorAll('.work__player video');
+  document.querySelectorAll('.work__player').forEach(function (p) {
+    var v = p.querySelector('video');
+    var btn = p.querySelector('.work__play');
+    btn.addEventListener('click', function () {
+      v.controls = true;
+      v.play();
+    });
+    v.addEventListener('play', function () {
+      p.classList.add('is-playing');
+      vids.forEach(function (o) { if (o !== v) o.pause(); });
+    });
+    v.addEventListener('ended', function () {
+      p.classList.remove('is-playing');
+      v.controls = false;
+    });
+  });
+</script>
+</body>
+</html>

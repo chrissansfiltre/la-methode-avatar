@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="design-system/Aurora Design System-handoff/aurora-design-system/project/styles.css" />
+<style>
+  :root, :root[data-theme="dark"]{
+    --accent:#ff7a1a; --accent-2:#ff9442; --accent-3:#e35f00;
+    --ink:#f5f5f7; --ink2:#c8c8cc; --ink3:#8e8e94;
+    --card:#161618; --card-2:#1d1d20; --line:rgba(255,255,255,.10);
+  }
+  @page { size:210mm 297mm; margin:0; }
+  *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; box-sizing:border-box; margin:0; }
+  html,body{ background:#000; }
+  body{ font-family:"Inter",-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink2); }
+
+  /* Chaque .sheet = une page A4 exacte */
+  .sheet{ width:210mm; height:296mm; overflow:hidden; position:relative;
+    padding:16mm 16mm 14mm; page-break-after:always; display:flex; flex-direction:column; }
+  .sheet:last-child{ page-break-after:auto; }
+
+  /* Halo orange d'ambiance en haut de chaque page */
+  .glow{ position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(55% 30% at 20% 0%, rgba(255,122,26,.16), transparent 65%),
+      radial-gradient(45% 25% at 85% 0%, rgba(255,80,0,.10), transparent 60%); }
+  .sheet > *{ position:relative; }
+
+  .brand{ display:flex; align-items:center; gap:9px; }
+  .brand img{ width:26px; height:26px; border-radius:7px; object-fit:cover; }
+  .brand span{ font-weight:600; font-size:14px; color:var(--ink); letter-spacing:-.02em; }
+  .brand .dot{ margin-left:auto; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); }
+
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+
+  /* ---------- PAGE 1 ---------- */
+  .p1-head{ margin-top:12mm; }
+  h1{ font-weight:300; font-size:52px; line-height:1.03; letter-spacing:-.025em; color:var(--ink); margin:10px 0 12px; }
+  h1 .a{ color:var(--accent); font-weight:400; }
+  .lead{ font-size:16.5px; line-height:1.55; color:var(--ink2); max-width:58ch; }
+
+  .cmp{ margin-top:11mm; border-radius:26px; padding:22px 22px 18px;
+    background:linear-gradient(168deg, var(--accent-2) 0%, var(--accent) 55%, var(--accent-3) 100%);
+    box-shadow:0 18px 60px rgba(255,122,26,.28); }
+  .cmp__grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .cmp figure{ text-align:center; }
+  .cmp figcaption{ display:inline-block; margin-bottom:10px; padding:8px 18px; border-radius:999px;
+    font-weight:700; font-size:13.5px; letter-spacing:.05em; text-transform:uppercase; }
+  .tab-off{ background:#ffffff; color:#171310; }
+  .tab-on{ background:#171310; color:#ffffff; }
+  .cmp img{ width:100%; aspect-ratio:9/15; object-fit:cover; object-position:top;
+    border-radius:16px; display:block; background:#050505; }
+  .cmp__cap{ margin-top:14px; text-align:center; font-size:14px; font-weight:500; color:#2a201a; }
+  .cmp__cap b{ color:#171310; font-weight:800; }
+
+  .p1-foot{ margin-top:auto; display:flex; align-items:center; justify-content:center; gap:10px;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); }
+  .p1-foot svg{ width:14px; height:14px; color:var(--accent); }
+
+  /* ---------- PAGE 2 ---------- */
+  h2{ font-weight:300; font-size:38px; line-height:1.06; letter-spacing:-.02em; color:var(--ink); margin:8px 0 4px; }
+  h2 .a{ color:var(--accent); font-weight:400; }
+  .p2-sub{ font-size:14.5px; color:var(--ink2); margin-bottom:9mm; }
+
+  .mods{ display:flex; flex-direction:column; gap:9px; }
+  .mod{ display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line);
+    border-radius:16px; padding:11px 16px 11px 11px; }
+  .mod__t{ position:relative; flex:none; width:98px; aspect-ratio:3/2; border-radius:11px; overflow:hidden;
+    border:1px solid rgba(255,122,26,.55); background:#0a0a0b; }
+  .mod__t img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .mod__t::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.04) 45%, rgba(0,0,0,.55)); }
+  .mod__no{ position:absolute; left:8px; bottom:4px; z-index:1; font-weight:700; font-size:21px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.65); }
+  .mod__ti{ font-weight:600; font-size:15.5px; color:var(--ink); margin-bottom:2px; letter-spacing:-.01em; }
+  .mod__d{ font-size:12.5px; line-height:1.42; color:var(--ink3); }
+  .mod--bonus{ border-color:var(--accent); background:linear-gradient(180deg, rgba(255,122,26,.10), rgba(255,122,26,.04)), var(--card);
+    box-shadow:0 6px 26px rgba(255,122,26,.22); }
+  .mod__badge{ position:absolute; left:6px; top:5px; z-index:1; font-weight:800; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:#171310; background:var(--accent); padding:3px 8px; border-radius:999px; }
+
+  /* ---------- PAGE 3 ---------- */
+  .p3{ align-items:center; text-align:center; justify-content:center; }
+  .p3 .eyebrow{ margin-bottom:10px; }
+  .p3 h2{ font-size:46px; margin-bottom:8mm; }
+  .recap{ list-style:none; padding:0; margin:0 auto 12mm; max-width:120mm; text-align:left; }
+  .recap li{ display:flex; align-items:flex-start; gap:12px; padding:11px 0; border-bottom:1px solid var(--line);
+    font-size:15.5px; line-height:1.45; color:var(--ink2); }
+  .recap li:last-child{ border-bottom:none; }
+  .recap b{ color:var(--ink); }
+  .recap .chk{ flex:none; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; margin-top:1px;
+    background:linear-gradient(180deg, var(--accent-2), var(--accent)); color:#fff; font-size:12px; font-weight:800; }
+
+  .bigcta{ display:block; width:100%; max-width:158mm; text-decoration:none; text-align:center;
+    padding:11mm 10mm; border-radius:999px; color:#ffffff; font-weight:800; font-size:30px; letter-spacing:-.01em;
+    background:linear-gradient(180deg, var(--accent-2), var(--accent) 60%, var(--accent-3));
+    box-shadow:0 14px 60px rgba(255,122,26,.55), inset 0 1px 0 rgba(255,255,255,.35); }
+  .bigcta small{ display:block; margin-top:6px; font-weight:600; font-size:15px; color:rgba(255,255,255,.85); letter-spacing:.02em; }
+  .url{ margin-top:8mm; font-size:13px; letter-spacing:.06em; color:var(--ink3); }
+  .url b{ color:var(--accent); font-weight:600; }
+  .p3-brand{ margin-top:14mm; display:flex; align-items:center; gap:9px; justify-content:center; }
+  .p3-brand img{ width:24px; height:24px; border-radius:7px; }
+  .p3-brand span{ font-size:13px; font-weight:600; color:var(--ink3); }
+</style>
+</head>
+<body>
+
+  <!-- ═══════════ PAGE 1 ═══════════ -->
+  <section class="sheet">
+    <div class="glow"></div>
+    <div class="brand">
+      <img src="v2/MON_LOGO.png" alt="" /><span>Chris Sans Filtre</span>
+      <span class="dot">Formation Montage</span>
+    </div>
+
+    <div class="p1-head">
+      <p class="eyebrow">Formation Montage CapCut</p>
+      <h1>Monte tes vidéos<br/>comme un <span class="a">vrai créateur.</span></h1>
+      <p class="lead">Un montage propre, et tes vues décollent. Découvre exactement comment je monte mes vidéos, sur CapCut, étape par étape, même si t'as jamais monté de ta vie.</p>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp__grid">
+        <figure>
+          <figcaption class="tab-off">Sans montage</figcaption>
+          <img src="pdf-frame-sans.jpg" alt="Sans montage" />
+        </figure>
+        <figure>
+          <figcaption class="tab-on">Avec montage</figcaption>
+          <img src="pdf-frame-st.jpg" alt="Avec montage" />
+        </figure>
+      </div>
+      <p class="cmp__cap">Un montage carré et des sous-titres qui accrochent, c'est en moyenne <b>+40% de vues</b> sur tes vidéos.</p>
+    </div>
+
+    <div class="p1-foot">
+      Le programme complet
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE 2 ═══════════ -->
+  <section class="sheet">
+    <div class="glow"></div>
+    <div class="brand">
+      <img src="v2/MON_LOGO.png" alt="" /><span>Chris Sans Filtre</span>
+      <span class="dot">Le programme</span>
+    </div>
+
+    <div style="margin-top:8mm;">
+      <p class="eyebrow">La formation Montage</p>
+      <h2>De zéro à <span class="a">monteur.</span></h2>
+      <p class="p2-sub">Sur CapCut, sur mobile ou PC. Tu suis, tu reproduis, tu publies.</p>
+    </div>
+
+    <div class="mods">
+      <div class="mod"><div class="mod__t"><img src="minia1.jpg" alt="" /><span class="mod__no">01</span></div><div><p class="mod__ti">Présentation du logiciel</p><p class="mod__d">On prend l'outil en main de A à Z. Même si t'as jamais monté, tu sais où cliquer en quelques minutes.</p></div></div>
+      <div class="mod"><div class="mod__t"><img src="minia2.jpg" alt="" /><span class="mod__no">02</span></div><div><p class="mod__ti">Découpage Voix OFF</p><p class="mod__d">Caler ton montage sur ta voix off, découper au bon rythme pour que ça percute et que ça retienne.</p></div></div>
+      <div class="mod"><div class="mod__t"><img src="minia3.jpg" alt="" /><span class="mod__no">03</span></div><div><p class="mod__ti">Placement des B-roll</p><p class="mod__d">Placer les bons plans de coupe au bon moment pour illustrer et garder l'oeil accroché du début à la fin.</p></div></div>
+      <div class="mod"><div class="mod__t"><img src="minia4.jpg" alt="" /><span class="mod__no">04</span></div><div><p class="mod__ti">Crée un background design</p><p class="mod__d">Monter des fonds et décors propres qui donnent direct un rendu pro à tes vidéos.</p></div></div>
+      <div class="mod mod--bonus"><div class="mod__t"><img src="minia5.jpg" alt="" /><span class="mod__no">05</span><span class="mod__badge">Bonus</span></div><div><p class="mod__ti">Motion design avec Remotion</p><p class="mod__d">Tu illustres ta voix-off avec du motion design pour un rendu beaucoup plus pro.</p></div></div>
+      <div class="mod"><div class="mod__t"><img src="minia6.jpg" alt="" /><span class="mod__no">06</span></div><div><p class="mod__ti">Les Sous-titres</p><p class="mod__d">Des sous-titres lisibles et animés qui boostent la rétention, même sans le son.</p></div></div>
+      <div class="mod"><div class="mod__t"><img src="minia7.jpg" alt="" /><span class="mod__no">07</span></div><div><p class="mod__ti">Les SFX</p><p class="mod__d">Les effets sonores calés au bon endroit, ce petit truc qui rend une vidéo satisfaisante à regarder.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE 3 ═══════════ -->
+  <section class="sheet p3">
+    <div class="glow"></div>
+
+    <p class="eyebrow">Tout est prêt, il manque que toi</p>
+    <h2>Passe au montage<br/><span class="a">qui fait des vues.</span></h2>
+
+    <ul class="recap">
+      <li><span class="chk">✓</span><span><b>Les 7 modules</b>, de la prise en main aux SFX.</span></li>
+      <li><span class="chk">✓</span><span><b>Mon workflow de montage</b>, celui que j'utilise sur mes vidéos.</span></li>
+      <li><span class="chk">✓</span><span><b>Le bonus motion design</b> pour habiller tes montages.</span></li>
+      <li><span class="chk">✓</span><span><b>Accès à vie</b> + toutes les mises à jour incluses.</span></li>
+    </ul>
+
+    <a class="bigcta" href="https://chrissansfiltre.com/montage.html">
+      Je veux la formation Montage
+      <small>Clique ici, accès immédiat</small>
+    </a>
+
+    <p class="url">Le lien direct : <b>chrissansfiltre.com/montage.html</b></p>
+
+    <div class="p3-brand"><img src="v2/MON_LOGO.png" alt="" /><span>Chris Sans Filtre</span></div>
+  </section>
+
+</body>
+</html>
