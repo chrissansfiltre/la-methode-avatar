@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Cinema Studio — Chris Sans Filtre</title>
+<meta name="description" content="Des vidéos de cinéma générées par IA. Sans caméra, sans acteurs, sans budget. Je t'apprends à faire pareil." />
+<link rel="icon" type="image/png" href="../v2/MON_LOGO.png" />
+
+<!-- AURORA DESIGN SYSTEM -->
+<link rel="stylesheet" href="../design-system/Aurora Design System-handoff/aurora-design-system/project/styles.css" />
+<!-- WHOP checkout loader (utilisé plus bas dans la page, section #commander) -->
+<script async defer src="https://js.whop.com/static/checkout/loader.js"></script>
+
+<style>
+  /* OVERRIDE accent BLEU -> ORANGE (identique au site principal) */
+  :root {
+    --accent-50:#f3e8ff; --accent-100:#e9d5ff; --accent-300:#c084fc;
+    --accent-500:#9333ea; --accent-600:#7e22ce; --accent-700:#6b21a8; --accent-glow:176,107,255;
+    --accent:var(--accent-500); --accent-hover:var(--accent-600); --accent-pressed:var(--accent-700);
+    --accent-tint:var(--accent-50); --text-link:var(--accent-600); --focus-ring:rgba(147,51,234,.45);
+    --glow-accent:0 6px 22px rgba(147,51,234,.32); --glow-accent-strong:0 8px 30px rgba(147,51,234,.45);
+  }
+  :root[data-theme="dark"] {
+    --accent:#b06bff; --accent-hover:#c78bff; --accent-pressed:#7e22ce;
+    --accent-tint:rgba(176,107,255,.16); --text-link:#c78bff; --focus-ring:rgba(176,107,255,.55);
+    --glow-accent:0 6px 24px rgba(176,107,255,.45); --glow-accent-strong:0 8px 34px rgba(176,107,255,.6);
+  }
+
+  .aur-btn { --_h:var(--control-h-md); display:inline-flex; align-items:center; justify-content:center; gap:var(--space-3);
+    height:var(--_h); padding:0 var(--space-7); font:var(--weight-medium) var(--text-body-sm)/1 var(--font-sans);
+    letter-spacing:var(--tracking-normal); border-radius:var(--radius-pill); border:1px solid transparent;
+    cursor:pointer; user-select:none; white-space:nowrap; text-decoration:none;
+    transition:transform var(--dur-base) var(--ease-spring-soft), background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+  .aur-btn:active { transform:scale(var(--press-scale)); }
+  .aur-btn--lg { --_h:var(--control-h-lg); padding:0 var(--space-9); font-size:17px; }
+  .aur-btn--primary { color:var(--text-on-accent);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent)); box-shadow:var(--shadow-sm); }
+  .aur-btn--primary:hover { transform:scale(var(--hover-scale)); box-shadow:var(--glow-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-hover)); }
+
+  body { margin:0; background:var(--bg-base); overflow-x:hidden; font-family:var(--font-sans);
+    font-size:17px; line-height:var(--leading-relaxed); font-weight:var(--weight-regular); color:var(--text-body); }
+  .page { position:relative; overflow:hidden; }
+  .page-bg { position:absolute; inset:0; height:1000px; pointer-events:none; z-index:0;
+    background:radial-gradient(60% 50% at 18% 8%, rgba(176,107,255,.18), transparent 60%),
+               radial-gradient(50% 45% at 88% 4%, rgba(126,34,206,.14), transparent 60%); }
+  main, .nav { position:relative; z-index:1; }
+
+  /* Nav */
+  .nav { position:sticky; top:0; z-index:30; display:flex; justify-content:center; padding:14px var(--space-5); }
+  .nav__bar { display:flex; align-items:center; gap:var(--space-5); width:min(var(--container-wide),100%);
+    padding:10px 12px 10px 18px; border-radius:var(--radius-pill); background:var(--surface-glass);
+    -webkit-backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate));
+    border:1px solid var(--glass-border); box-shadow:var(--shadow-lg), var(--glass-inner-highlight); }
+  .nav__brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:17px; color:var(--text-title); letter-spacing:-.02em; }
+  .nav__brand-logo { width:26px; height:26px; border-radius:7px; object-fit:cover; }
+  .nav__actions { margin-left:auto; display:flex; gap:10px; }
+
+  /* Hero cinéma */
+  .hero { max-width:var(--container-max); margin:0 auto; text-align:center;
+    padding:clamp(28px,6vw,60px) var(--space-5) 0;
+    display:flex; flex-direction:column; align-items:center; }
+  .hero__after { max-width:var(--container-max); margin:0 auto; text-align:center;
+    padding:0 var(--space-5) clamp(36px,6vw,60px);
+    display:flex; flex-direction:column; align-items:center; }
+  .hero__eyebrow { margin-bottom:var(--space-5); }
+  .hero__title { font-weight:var(--weight-thin); font-size:clamp(34px,8.5vw,64px); line-height:1.04;
+    letter-spacing:var(--tracking-tighter); color:var(--text-title); margin:0; }
+  .hero__title .accent { color:var(--accent); font-weight:var(--weight-regular); }
+  .hero__sub { font-size:clamp(16px,4.4vw,var(--text-body-lg)); line-height:1.5; color:var(--text-secondary);
+    max-width:46ch; margin:var(--space-6) auto 0; }
+
+  /* Écran ciné : carrousel coverflow plein écran, en boucle infinie */
+  .screen { --slide-w:80vw; --gap:12px; --step:calc(var(--slide-w) + var(--gap));
+    position:relative; width:100%; margin:clamp(26px,5vw,40px) 0 0; text-align:center; }
+  @media (min-width:760px){ .screen { --slide-w:min(62vw, 900px); --gap:22px; } }
+  .screen::before { content:""; position:absolute; z-index:0; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:min(80vw,900px); height:70%; border-radius:50%;
+    background:radial-gradient(closest-side, rgba(176,107,255,.32), transparent 72%); filter:blur(44px); pointer-events:none; }
+
+  .screen__stage { position:relative; z-index:1; width:100%; overflow:hidden;
+    height:calc(var(--slide-w) * 0.5625 + 26px); }
+  .slide { position:absolute; top:50%; left:50%; width:var(--slide-w); aspect-ratio:16/9;
+    border-radius:var(--radius-xl); overflow:hidden; background:#050505;
+    border:1px solid var(--glass-border); cursor:pointer; z-index:1;
+    transform:translate(-50%,-50%) translateX(calc(var(--rel,0) * var(--step))) scale(.86);
+    filter:brightness(.3) saturate(.55);
+    transition:transform var(--dur-slow) var(--ease-out), filter var(--dur-slow) var(--ease-out),
+               box-shadow var(--dur-slow) var(--ease-out), border-color var(--dur-slow) var(--ease-out); }
+  .slide video { display:block; width:100%; height:100%; object-fit:cover; }
+  .slide.is-active { z-index:3; cursor:default; filter:none;
+    transform:translate(-50%,-50%) translateX(0) scale(1);
+    border-color:color-mix(in srgb, var(--accent) 45%, var(--glass-border));
+    box-shadow:var(--shadow-xl), 0 0 70px rgba(176,107,255,.3); }
+  .slide.is-near { z-index:2; }
+  .screen__badge { position:absolute; top:14px; left:14px; z-index:2; display:inline-flex; align-items:center; gap:7px;
+    padding:7px 13px; border-radius:var(--radius-pill); opacity:0; pointer-events:none;
+    transition:opacity var(--dur-slow) var(--ease-out);
+    font:var(--weight-semibold) var(--text-micro)/1 var(--font-sans); letter-spacing:var(--tracking-caps); text-transform:uppercase;
+    color:#fff; background:rgba(0,0,0,.55); border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .slide.is-active .screen__badge { opacity:1; }
+  /* Sur mobile, on masque le patch "100% généré par IA" */
+  @media (max-width:640px){ .screen__badge { display:none; } }
+  /* Badge de vues (bas gauche) */
+  .screen__views { position:absolute; left:14px; bottom:14px; z-index:2; opacity:0;
+    display:inline-flex; align-items:center; padding:5px 11px; border-radius:var(--radius-pill);
+    background:rgba(0,0,0,.55); border:1px solid var(--glass-border);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    transition:opacity var(--dur-slow) var(--ease-out); }
+  .slide.is-active .screen__views { opacity:1; }
+  .screen__views img { height:20px; width:auto; display:block; }
+
+  /* Ajustements mobile : bouton son en icône seule + badge vues plus petit */
+  @media (max-width:640px){
+    .screen__sound { padding:9px; gap:0; }
+    .screen__sound .sound-label { display:none; }
+    .screen__views { padding:3px 8px; }
+    .screen__views img { height:14px; }
+  }
+  .screen__badge i { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent); }
+  .screen__sound { position:absolute; right:14px; bottom:14px; z-index:2;
+    display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border:1px solid var(--glass-border); cursor:pointer;
+    border-radius:var(--radius-pill); font:var(--weight-semibold) var(--text-caption)/1 var(--font-sans);
+    color:#fff; background:rgba(0,0,0,.55); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    opacity:0; pointer-events:none; transition:background var(--dur-fast) var(--ease-out), opacity var(--dur-slow) var(--ease-out); }
+  .slide.is-active .screen__sound { opacity:1; pointer-events:auto; }
+  .screen__sound:hover { background:rgba(176,107,255,.75); }
+  .screen__sound svg { width:16px; height:16px; }
+  .screen__caption { margin:var(--space-4) 0 0; font-size:var(--text-caption); color:var(--text-tertiary); letter-spacing:var(--tracking-wide); }
+  .screen__caption b { color:var(--accent); font-weight:var(--weight-semibold); }
+
+  /* Flèches du carrousel */
+  .screen__arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:clamp(38px,9vw,48px); aspect-ratio:1; border-radius:50%; border:1px solid var(--glass-border);
+    display:grid; place-items:center; cursor:pointer; color:#fff;
+    background:rgba(0,0,0,.55); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  .screen__arrow:hover { background:var(--accent); transform:translateY(-50%) scale(1.08); }
+  .screen__arrow svg { width:45%; height:45%; }
+  .screen__arrow--prev { left:clamp(6px,2vw,14px); }
+  .screen__arrow--next { right:clamp(6px,2vw,14px); }
+
+  /* Points de position */
+  .screen__dots { display:flex; justify-content:center; gap:8px; margin-top:var(--space-4); }
+  .screen__dots i { width:8px; height:8px; border-radius:50%; background:var(--border-default);
+    transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  .screen__dots i.on { background:var(--accent); transform:scale(1.25); box-shadow:0 0 8px var(--accent); }
+
+  .hero__cta { margin-top:clamp(24px,5vw,34px); width:100%; max-width:460px; }
+  .hero__cta .aur-btn { width:100%; }
+  .reassure { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:var(--space-3) var(--space-5);
+    margin:var(--space-7) auto 0; padding:0; max-width:680px; list-style:none; }
+  .reassure li { display:inline-flex; align-items:center; gap:7px; font-size:var(--text-caption);
+    font-weight:var(--weight-medium); color:var(--text-secondary); letter-spacing:var(--tracking-wide); white-space:nowrap; }
+  .reassure svg { width:15px; height:15px; color:var(--accent); flex:none; }
+
+  .aur-btn--glass { color:var(--text-title); background:var(--surface-glass);
+    -webkit-backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate));
+    border-color:var(--glass-border); box-shadow:var(--shadow-sm), var(--glass-inner-highlight); }
+  .aur-btn--glass:hover { transform:scale(var(--hover-scale)); box-shadow:var(--shadow-md), var(--glass-inner-highlight); }
+
+  /* ============================================================
+     PREUVE SOCIALE (version cinéma)
+     ============================================================ */
+  .proof { max-width:var(--container-max); margin:0 auto; padding:0 var(--space-5); }
+  .proof__bar { border-radius:var(--radius-xl); background:var(--surface-glass);
+    -webkit-backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-md)) saturate(var(--glass-saturate));
+    border:1px solid var(--glass-border); box-shadow:var(--shadow-lg), var(--glass-inner-highlight);
+    padding:clamp(22px,5vw,32px) clamp(18px,4vw,36px); }
+  .proof__lead { display:flex; flex-direction:column; align-items:center; gap:var(--space-2);
+    text-align:center; margin-bottom:var(--space-7); }
+  .proof__lead-num { font-weight:var(--weight-thin); letter-spacing:var(--tracking-tighter);
+    font-size:clamp(40px,11vw,64px); line-height:1; color:var(--text-title); }
+  .proof__lead-num .accent { color:var(--accent); }
+  .proof__lead-label { font-size:clamp(15px,4vw,var(--text-body-lg)); color:var(--text-secondary); max-width:34ch; }
+  /* iPhone mockup qui flotte, avec la vidéo dedans */
+  .proof__visual-wrap { position:relative; width:100%; max-width:240px; margin:0 auto var(--space-7); }
+  .proof__visual-wrap::before { content:""; position:absolute; z-index:0; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:150%; height:85%; border-radius:50%;
+    background:radial-gradient(closest-side, rgba(176,107,255,.45), rgba(176,107,255,.14) 60%, transparent 72%);
+    filter:blur(38px); pointer-events:none; }
+  .phone { position:relative; z-index:1; width:100%;
+    border-radius:34px; padding:9px; background:linear-gradient(155deg, #3a3a3e, #131315 45%, #2c2c30);
+    box-shadow:var(--shadow-xl), 0 0 60px rgba(176,107,255,.28), inset 0 1px 0 rgba(255,255,255,.18);
+    animation:proof-float 4.5s var(--ease-in-out) infinite; }
+  /* L'écran suit exactement le format de la vidéo (9:16) : aucun rognage. */
+  .phone__screen { position:relative; width:100%; aspect-ratio:9/16; border-radius:26px; overflow:hidden; background:#000; }
+  .phone__screen video { width:100%; height:100%; object-fit:contain; display:block; }
+  /* Encoche */
+  .phone__notch { position:absolute; z-index:2; top:8px; left:50%; transform:translateX(-50%);
+    width:34%; height:16px; border-radius:999px; background:#000; }
+  /* Boutons latéraux */
+  .phone::before, .phone::after { content:""; position:absolute; width:3px; border-radius:3px;
+    background:linear-gradient(180deg, #4a4a4f, #2a2a2e); }
+  .phone::before { left:-3px; top:22%; height:9%; box-shadow:0 26px 0 #3a3a3f, 0 46px 0 #3a3a3f; }
+  .phone::after { right:-3px; top:30%; height:13%; }
+  @keyframes proof-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+  @media (prefers-reduced-motion: reduce){ .phone { animation:none; } }
+  .proof__stats { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4);
+    border-top:1px solid var(--glass-hairline); padding-top:var(--space-7); }
+  .proof__stat { text-align:center; }
+  .proof__stat-num { display:block; font-weight:var(--weight-semibold); color:var(--accent);
+    font-size:clamp(20px,5.5vw,28px); letter-spacing:var(--tracking-tight); line-height:1.1; }
+  .proof__stat-label { display:block; margin-top:6px; font-size:var(--text-caption); color:var(--text-tertiary);
+    letter-spacing:var(--tracking-wide); }
+  @media (max-width:460px){ .proof__stat-label { font-size:var(--text-micro); } }
+
+  /* ============================================================
+     SECTIONS (base commune)
+     ============================================================ */
+  .section { max-width:var(--container-max); margin:0 auto; padding:clamp(30px,5vw,52px) var(--space-5); }
+  .section__head { text-align:center; margin:0 auto clamp(28px,6vw,44px); }
+  .section__eyebrow { display:inline-block; margin-bottom:var(--space-4); }
+  .section__title { font-weight:var(--weight-thin); letter-spacing:var(--tracking-tighter);
+    font-size:clamp(34px,8.5vw,64px); line-height:1.04; color:var(--text-title); margin:0; }
+  .section__title .accent { color:var(--accent); font-weight:var(--weight-regular); }
+  .section__intro { font-size:clamp(16px,4.2vw,var(--text-body-lg)); color:var(--text-secondary);
+    line-height:1.55; max-width:52ch; margin:var(--space-6) auto 0; }
+
+  /* ============================================================
+     MÉCANISME (3 temps, version ciné)
+     ============================================================ */
+  .steps { display:grid; grid-template-columns:1fr; gap:var(--space-5); max-width:920px; margin:0 auto; }
+  @media (min-width:800px){ .steps { grid-template-columns:repeat(3,1fr); gap:var(--space-6); } }
+  .step { padding:clamp(20px,4vw,26px); border-radius:var(--radius-xl); text-align:left;
+    background:var(--surface-card); border:1px solid var(--border-hairline); box-shadow:var(--shadow-sm); }
+  .step__head { display:flex; align-items:center; gap:var(--space-4); margin-bottom:var(--space-5); }
+  .step__num { flex:none; display:grid; place-items:center; width:44px; height:44px; border-radius:var(--radius-md);
+    font:var(--weight-semibold) 21px/1 var(--font-sans); color:var(--text-on-accent);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent));
+    box-shadow:var(--glow-accent); }
+  .step__title { font:var(--weight-semibold) var(--text-h4)/1.2 var(--font-sans);
+    letter-spacing:var(--tracking-tight); color:var(--text-title); margin:0; }
+  .step__visual { position:relative; aspect-ratio:2.4/1; margin-bottom:var(--space-5); overflow:hidden;
+    border-radius:var(--radius-md); background:var(--bg-subtle); border:1px solid var(--glass-hairline);
+    display:grid; place-items:center; }
+  .step__desc { margin:0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.5; }
+  .step__desc b { color:var(--accent); font-weight:var(--weight-semibold); }
+
+  /* Visuel 1 : travelling sur la ref sheet du personnage (casting verrouillé) */
+  .castv { position:absolute; inset:0; overflow:hidden; background:#0a0a0b; }
+  .castv img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    transform:scale(1);
+    animation:cv-zoom 14s var(--ease-in-out) infinite alternate; }
+  @keyframes cv-zoom {
+    from { transform:scale(1); }
+    to   { transform:scale(1.07); }
+  }
+  .castv__scan { position:absolute; left:0; right:0; top:0; height:38%; pointer-events:none;
+    background:linear-gradient(180deg, transparent, rgba(176,107,255,.45), transparent);
+    animation:cv-scan 3.2s var(--ease-in-out) infinite; }
+  @keyframes cv-scan { 0%{transform:translateY(-110%);} 50%{transform:translateY(170%);} 100%{transform:translateY(-110%);} }
+  .castv__lock { position:absolute; right:8px; bottom:8px; display:grid; place-items:center;
+    width:26px; height:26px; border-radius:50%; color:#fff; background:var(--accent); box-shadow:var(--glow-accent);
+    animation:cv-pop 3.2s var(--ease-spring) infinite; }
+  .castv__lock svg { width:14px; height:14px; }
+  @keyframes cv-pop { 0%,42%{transform:scale(.5);opacity:.3;} 58%,100%{transform:scale(1);opacity:1;} }
+  @media (prefers-reduced-motion: reduce){ .castv img, .castv__scan, .castv__lock { animation:none; transform:none; } }
+
+  /* Visuel 2 : prompt -> scène */
+  .promptv { display:flex; align-items:center; gap:12px; }
+  .promptv__bar { display:flex; align-items:center; gap:7px; padding:9px 13px; border-radius:var(--radius-pill);
+    background:var(--surface-card); border:1px solid var(--border-hairline); }
+  .promptv__dot { width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.3; animation:cv-type 1.5s infinite; }
+  .promptv__dot:nth-child(2){ animation-delay:.2s; }
+  .promptv__dot:nth-child(3){ animation-delay:.4s; }
+  @keyframes cv-type { 0%,100%{opacity:.3;transform:translateY(0);} 50%{opacity:1;transform:translateY(-3px);} }
+  .promptv__arrow { width:18px; height:18px; color:var(--text-tertiary); animation:cv-slide 1.6s var(--ease-in-out) infinite; }
+  @keyframes cv-slide { 0%,100%{transform:translateX(0);opacity:.5;} 50%{transform:translateX(5px);opacity:1;} }
+  .promptv__clap { width:32px; height:32px; color:var(--accent); animation:cv-spark 1.6s var(--ease-in-out) infinite; }
+  @keyframes cv-spark {
+    0%,100%{ transform:scale(.85); filter:drop-shadow(0 0 0 rgba(176,107,255,0)); }
+    50%    { transform:scale(1.12); filter:drop-shadow(0 0 9px rgba(176,107,255,.85)); }
+  }
+
+  /* Visuel 3 : la scène finale qui joue */
+  .filmv { position:absolute; inset:0; }
+  .filmv video { width:100%; height:100%; object-fit:cover; display:block; }
+  .filmv::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.15); }
+
+  .cta-row { display:flex; justify-content:center; margin-top:clamp(32px,6vw,48px); }
+  .cta-row .aur-btn { width:100%; max-width:460px; }
+
+  /* ============================================================
+     LES 10 MODULES
+     ============================================================ */
+  .modules { display:grid; grid-template-columns:1fr; gap:var(--space-3); max-width:900px; margin:0 auto; align-items:start; }
+  @media (min-width:760px){ .modules { grid-template-columns:1fr 1fr; gap:var(--space-4); } }
+  .module { display:flex; align-items:center; gap:var(--space-4); padding:clamp(10px,2.5vw,14px);
+    border-radius:var(--radius-lg); background:var(--surface-card); border:1px solid var(--border-hairline);
+    box-shadow:var(--shadow-sm); text-align:left; }
+  .module__thumb { position:relative; flex:none; width:clamp(84px,24vw,108px); aspect-ratio:3/4;
+    border-radius:var(--radius-md); overflow:hidden; background:#0a0a0b;
+    border:1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+  .module__thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .module__thumb::after { content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.05) 40%, rgba(0,0,0,.6)); }
+  .module__no-over { position:absolute; left:10px; bottom:6px; z-index:1;
+    font:var(--weight-bold) clamp(28px,7vw,36px)/1 var(--font-sans); color:#fff;
+    letter-spacing:-.02em; text-shadow:0 2px 10px rgba(0,0,0,.65); }
+  .module__body { min-width:0; }
+  .module__title { font:var(--weight-semibold) var(--text-body)/1.25 var(--font-sans);
+    letter-spacing:var(--tracking-tight); color:var(--text-title); margin:0 0 4px; }
+  .module__benefit { margin:0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.45; }
+
+  /* Modules ciné (cartes 16:9 avec durée) */
+  .cmods { display:grid; grid-template-columns:1fr; gap:var(--space-4); max-width:980px; margin:0 auto; }
+  @media (min-width:600px){ .cmods { grid-template-columns:1fr 1fr; } }
+  @media (min-width:920px){ .cmods { grid-template-columns:1fr 1fr 1fr; } }
+  .cmod { border-radius:var(--radius-xl); overflow:hidden; background:var(--surface-card);
+    border:1px solid var(--border-hairline); box-shadow:var(--shadow-sm); }
+  .cmod__thumb { position:relative; aspect-ratio:16/9; overflow:hidden; background:#0a0a0b; }
+  .cmod__thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .cmod__thumb::after { content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, transparent 30%, transparent 60%, rgba(0,0,0,.55)); }
+  .cmod__no { position:absolute; left:12px; top:9px; z-index:1;
+    font:var(--weight-bold) clamp(22px,5vw,28px)/1 var(--font-sans); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.7); }
+  .cmod__dur { position:absolute; right:10px; bottom:10px; z-index:1; display:inline-flex; align-items:center; gap:5px;
+    padding:5px 11px; border-radius:var(--radius-pill);
+    font:var(--weight-bold) var(--text-caption)/1 var(--font-sans);
+    color:var(--text-on-accent); background:var(--accent); box-shadow:var(--glow-accent); }
+  .cmod__dur svg { width:13px; height:13px; }
+  .cmod__body { padding:14px 16px 16px; }
+  .cmod__title { font:var(--weight-semibold) var(--text-body)/1.25 var(--font-sans);
+    letter-spacing:var(--tracking-tight); color:var(--text-title); margin:0 0 4px; }
+  .cmod__meta { margin:0; font-size:var(--text-caption); color:var(--text-tertiary); letter-spacing:var(--tracking-wide); }
+
+  .cmod-note { max-width:980px; margin:var(--space-5) auto 0; display:flex; align-items:center; gap:var(--space-4);
+    padding:clamp(16px,3.5vw,20px) clamp(18px,4vw,24px); border-radius:var(--radius-lg);
+    background:var(--accent-tint); border:1px dashed color-mix(in srgb, var(--accent) 55%, transparent); }
+  .cmod-note__ic { flex:none; width:40px; height:40px; border-radius:var(--radius-md); display:grid; place-items:center;
+    color:var(--accent); background:var(--surface-card); border:1px solid var(--glass-border); }
+  .cmod-note__ic svg { width:20px; height:20px; }
+  .cmod-note p { margin:0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.45; }
+  .cmod-note b { color:var(--text-title); font-weight:var(--weight-semibold); }
+
+  /* ============================================================
+     BONUS
+     ============================================================ */
+  .bonus__grid { display:grid; grid-template-columns:1fr; gap:var(--space-4); max-width:900px; margin:0 auto; }
+  @media (min-width:760px){ .bonus__grid { grid-template-columns:1fr 1fr; } }
+  .bonus__card { position:relative; display:flex; align-items:center; gap:var(--space-5);
+    padding:clamp(16px,4vw,22px); border-radius:var(--radius-xl); background:var(--surface-card);
+    border:1px solid var(--border-hairline); box-shadow:var(--shadow-sm); text-align:left; }
+  .bonus__card--wide { grid-column:1/-1; }
+  .bonus__icon { flex:none; display:block; width:clamp(88px,24vw,112px); aspect-ratio:1;
+    border-radius:var(--radius-md); object-fit:cover;
+    border:1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    animation:bonus-float 4s var(--ease-in-out) infinite; }
+  .bonus__card:nth-child(2) .bonus__icon { animation-delay:.6s; }
+  .bonus__card:nth-child(3) .bonus__icon { animation-delay:1.2s; }
+  @keyframes bonus-float { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
+  @media (prefers-reduced-motion: reduce){ .bonus__icon { animation:none; } }
+  .bonus__body { min-width:0; }
+  .bonus__tag { display:inline-flex; align-items:center; gap:6px; padding:5px 11px; margin-bottom:var(--space-4);
+    border-radius:var(--radius-pill); font:var(--weight-semibold) var(--text-micro)/1 var(--font-sans);
+    letter-spacing:var(--tracking-caps); text-transform:uppercase;
+    color:var(--accent); background:var(--accent-tint); border:1px solid var(--glass-border); }
+  .bonus__tag i { width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); }
+  .bonus__desc { margin:0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.5; }
+  .bonus__desc b { color:var(--text-title); font-weight:var(--weight-semibold); }
+
+  /* ============================================================
+     OFFRE + CHECKOUT
+     ============================================================ */
+  .offer__card { max-width:620px; margin:0 auto; border-radius:var(--radius-2xl);
+    background:var(--surface-glass-strong);
+    -webkit-backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate));
+    border:1px solid var(--glass-border); box-shadow:var(--shadow-xl), var(--glass-inner-highlight);
+    padding:clamp(22px,5vw,38px); }
+  .offer__heading { text-align:center; font:var(--weight-semibold) var(--text-h3)/1.2 var(--font-sans);
+    letter-spacing:var(--tracking-tight); color:var(--text-title); margin:0 0 var(--space-5); }
+
+  /* Clap de cinéma animé */
+  .clap { width:120px; margin:clamp(50px,9vw,66px) auto var(--space-7);
+    filter:drop-shadow(0 8px 22px rgba(176,107,255,.42)); }
+  .clap__top { height:22px; border-radius:4px; position:relative; z-index:2; transform-origin:bottom left;
+    background:repeating-linear-gradient(115deg, #101013 0 12px, #f2f2f4 12px 24px);
+    border:1px solid rgba(255,255,255,.18);
+    animation:clap-snap 2.6s var(--ease-out) infinite; }
+  .clap__body { position:relative; height:76px; margin-top:4px; border-radius:4px 4px 7px 7px;
+    background:#131316; border:1px solid rgba(255,255,255,.12); overflow:hidden; }
+  .clap__body::before { content:""; position:absolute; top:0; left:0; right:0; height:17px;
+    background:repeating-linear-gradient(65deg, #f2f2f4 0 12px, #101013 12px 24px); }
+  .clap__body::after { content:""; position:absolute; left:14px; right:14px; top:37px; height:2px; border-radius:2px;
+    background:rgba(176,107,255,.6); box-shadow:0 11px 0 rgba(255,255,255,.14), 0 22px 0 rgba(255,255,255,.14); }
+  @keyframes clap-snap {
+    0% { transform:rotate(0); }
+    20% { transform:rotate(-27deg); }
+    36% { transform:rotate(-27deg); }
+    43% { transform:rotate(0); }
+    100% { transform:rotate(0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .clap__top { animation:none; } }
+  .vstack { list-style:none; margin:0 0 var(--space-6); padding:0; }
+  .vstack li { display:flex; align-items:flex-start; gap:var(--space-4); padding:var(--space-4) 0;
+    border-bottom:1px solid var(--glass-hairline); }
+  .vstack li:first-child { padding-top:0; }
+  .vstack__check { flex:none; width:22px; height:22px; border-radius:50%; margin-top:1px;
+    display:grid; place-items:center; color:var(--text-on-accent);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent)); }
+  .vstack__check svg { width:13px; height:13px; }
+  .vstack__label { flex:1; min-width:0; font-size:var(--text-body-sm); color:var(--text-body); line-height:1.4; }
+  .vstack__label b { color:var(--text-title); font-weight:var(--weight-semibold); }
+  .vstack li.is-bonus { align-items:center; background:var(--accent-tint); border-bottom:none;
+    border-radius:var(--radius-md); padding:var(--space-3) var(--space-4); margin:6px 0; }
+  .vstack li.is-bonus .vstack__check { box-shadow:var(--glow-accent); }
+  .vstack__tag { flex:none; margin-left:auto; align-self:center; padding:3px 9px; border-radius:var(--radius-pill);
+    font:var(--weight-bold) var(--text-micro)/1 var(--font-sans); letter-spacing:var(--tracking-caps);
+    text-transform:uppercase; color:var(--text-on-accent); background:var(--accent); white-space:nowrap; }
+
+  .offer__price { text-align:center; padding:var(--space-6) 0 var(--space-4); border-top:1px dashed var(--border-default); }
+  .offer__price-now { display:flex; align-items:baseline; justify-content:center; gap:var(--space-3); }
+  .offer__price-amount { font-weight:var(--weight-thin); letter-spacing:var(--tracking-tighter);
+    font-size:clamp(56px,16vw,88px); line-height:1; color:var(--accent); }
+  .offer__price-cur { font-weight:var(--weight-thin); font-size:clamp(28px,8vw,40px); color:var(--accent); }
+  .offer__price-sub { margin:var(--space-4) 0 0; font-size:var(--text-body-sm); color:var(--text-secondary); }
+  .offer__price-sub b { color:var(--text-title); font-weight:var(--weight-medium); }
+
+  .whop-mount { margin-top:var(--space-5); border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-md); }
+  .whop-mount iframe { width:100% !important; border:0; display:block; min-height:540px; }
+  .offer__reassure { display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3) var(--space-6);
+    margin:var(--space-6) 0 0; padding:0; list-style:none; font-size:var(--text-caption); color:var(--text-tertiary); }
+  .offer__reassure li { display:inline-flex; align-items:center; gap:6px; }
+  .offer__reassure svg { width:14px; height:14px; color:var(--accent); flex:none; }
+
+  /* ============================================================
+     GARANTIE
+     ============================================================ */
+  .guarantee__card { max-width:620px; margin:0 auto; text-align:center; border-radius:var(--radius-2xl);
+    background:var(--surface-card); border:1px solid var(--border-hairline); box-shadow:var(--shadow-md);
+    padding:clamp(28px,6vw,44px) clamp(22px,5vw,40px); }
+  .guarantee__badge { width:64px; height:64px; margin:0 auto var(--space-6); display:grid; place-items:center;
+    border-radius:50%; color:var(--accent); background:var(--accent-tint); border:1px solid var(--glass-border); }
+  .guarantee__badge svg { width:32px; height:32px; }
+  .guarantee__title { font-weight:var(--weight-thin); letter-spacing:var(--tracking-tight);
+    font-size:clamp(26px,6.5vw,40px); line-height:1.1; color:var(--text-title); margin:0 0 var(--space-5); }
+  .guarantee__title .accent { color:var(--accent); }
+  .guarantee__text { margin:0 auto; max-width:48ch; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.6; }
+  .guarantee__text b { color:var(--text-title); font-weight:var(--weight-medium); }
+  .guarantee__text + .guarantee__text { margin-top:var(--space-4); }
+
+  /* ============================================================
+     FAQ
+     ============================================================ */
+  .faq { max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:var(--space-3); }
+  .faq__item { border-radius:var(--radius-lg); background:var(--surface-card);
+    border:1px solid var(--border-hairline); box-shadow:var(--shadow-xs); overflow:hidden; }
+  .faq__q { display:flex; align-items:center; justify-content:space-between; gap:var(--space-5);
+    padding:clamp(16px,3.5vw,20px) clamp(16px,4vw,24px); cursor:pointer; list-style:none; user-select:none;
+    font:var(--weight-medium) var(--text-body)/1.35 var(--font-sans); letter-spacing:var(--tracking-tight);
+    color:var(--text-title); transition:color var(--dur-fast) var(--ease-out); }
+  .faq__q::-webkit-details-marker { display:none; }
+  .faq__q:hover { color:var(--accent); }
+  .faq__icon { flex:none; width:24px; height:24px; position:relative;
+    transition:transform var(--dur-base) var(--ease-spring-soft); }
+  .faq__icon::before, .faq__icon::after { content:""; position:absolute; top:50%; left:50%;
+    width:13px; height:2px; border-radius:2px; background:var(--accent); transform:translate(-50%,-50%); }
+  .faq__icon::after { transform:translate(-50%,-50%) rotate(90deg); }
+  .faq__item[open] .faq__icon { transform:rotate(135deg); }
+  .faq__a { padding:0 clamp(16px,4vw,24px) clamp(16px,3.5vw,20px);
+    font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.6; }
+  .faq__a b { color:var(--text-title); font-weight:var(--weight-medium); }
+
+  /* ============================================================
+     CTA FINAL
+     ============================================================ */
+  .final { position:relative; overflow:hidden; }
+  .final__bg { position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(55% 60% at 50% 0%, rgba(176,107,255,.22), transparent 65%),
+               radial-gradient(50% 50% at 80% 100%, rgba(126,34,206,.12), transparent 60%); }
+  .final > * { position:relative; z-index:1; }
+  .final__title { text-align:center; font-weight:var(--weight-thin); letter-spacing:var(--tracking-tighter);
+    font-size:clamp(34px,8.5vw,64px); line-height:1.04; color:var(--text-title); margin:0 auto; }
+  .final__title .accent { color:var(--accent); }
+  .final__options { display:grid; grid-template-columns:1fr; gap:var(--space-4); max-width:760px;
+    margin:clamp(28px,5vw,40px) auto 0; }
+  @media (min-width:720px){ .final__options { grid-template-columns:1fr 1fr; } }
+  .opt { padding:clamp(20px,4vw,26px); border-radius:var(--radius-xl); text-align:left;
+    background:var(--surface-card); border:1px solid var(--border-hairline); }
+  .opt--no { opacity:.82; }
+  .opt--yes { border-color:var(--accent); box-shadow:var(--glow-accent); }
+  .opt__tag { display:inline-block; margin-bottom:var(--space-3);
+    font:var(--weight-semibold) var(--text-micro)/1 var(--font-sans);
+    letter-spacing:var(--tracking-caps); text-transform:uppercase; }
+  .opt--no .opt__tag { color:var(--text-tertiary); }
+  .opt--yes .opt__tag { color:var(--accent); }
+  .opt p { margin:0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.5; }
+  .opt--yes p { color:var(--text-body); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer { position:relative; z-index:1; border-top:1px solid var(--border-hairline); background:var(--bg-subtle);
+    padding:clamp(40px,7vw,64px) var(--space-5) clamp(110px,18vw,48px); }
+  .footer__inner { max-width:var(--container-max); margin:0 auto; display:grid; grid-template-columns:1fr; gap:var(--space-9); }
+  @media (min-width:760px){ .footer__inner { grid-template-columns:1.6fr 1fr 1fr; gap:var(--space-11); align-items:start; } }
+  .footer__brand-row { display:flex; align-items:center; gap:10px; }
+  .footer__logo { width:28px; height:28px; border-radius:8px; object-fit:cover; }
+  .footer__brand-name { font-weight:600; font-size:17px; color:var(--text-title); letter-spacing:-.02em; }
+  .footer__desc { margin:var(--space-5) 0; font-size:var(--text-body-sm); color:var(--text-secondary); line-height:1.5; max-width:42ch; }
+  .footer__social { display:flex; gap:var(--space-5); font-size:var(--text-caption);
+    letter-spacing:var(--tracking-caps); text-transform:uppercase; }
+  .footer__social a { color:var(--text-tertiary); }
+  .footer__social a:hover { color:var(--accent); }
+  .footer__col-label { font-size:var(--text-micro); letter-spacing:var(--tracking-caps); text-transform:uppercase;
+    color:var(--text-tertiary); margin-bottom:var(--space-5); }
+  .footer__links { display:flex; flex-direction:column; gap:var(--space-4); }
+  .footer__links a { font-size:var(--text-body-sm); color:var(--text-secondary); }
+  .footer__links a:hover { color:var(--accent); }
+  .footer__copy { max-width:var(--container-max); margin:clamp(32px,6vw,48px) auto 0; padding-top:var(--space-7);
+    border-top:1px solid var(--border-hairline); font-size:var(--text-micro);
+    letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--text-tertiary); }
+
+  /* Barre CTA sticky mobile */
+  .sticky-cta { position:fixed; left:0; right:0; bottom:0; z-index:40;
+    padding:var(--space-4) var(--space-5) calc(var(--space-4) + env(safe-area-inset-bottom,0px));
+    background:var(--surface-glass-strong);
+    -webkit-backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate));
+    border-top:1px solid var(--glass-border); box-shadow:0 -8px 30px rgba(0,0,0,.4);
+    transform:translateY(110%); transition:transform var(--dur-base) var(--ease-spring-soft); }
+  .sticky-cta.is-visible { transform:translateY(0); }
+  .sticky-cta .aur-btn { width:100%; }
+  @media (min-width:760px){ .sticky-cta { display:none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-bg"></div>
+
+  <nav class="nav">
+    <div class="nav__bar">
+      <div class="nav__brand"><img class="nav__brand-logo" src="../v2/MON_LOGO.png" alt="Chris Sans Filtre" /> Chris Sans Filtre</div>
+      <div class="nav__actions">
+        <a class="aur-btn aur-btn--primary" href="#commander">JE LE VEUX</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ───────────── HERO ───────────── -->
+    <header class="hero">
+      <span class="aurora-eyebrow hero__eyebrow">AI Cinema Studio · Chris Sans Filtre</span>
+
+      <h1 class="hero__title">Crée des vidéos IA cinématiques.<br/><span class="accent">Sans tourner une seule scène.</span></h1>
+
+      <p class="hero__sub">
+        Pas de caméra, pas d'acteurs, pas de budget. Juste l'IA et mon système.
+      </p>
+    </header>
+
+    <!-- Écran ciné : carrousel plein écran, en boucle -->
+    <section class="screen" aria-label="Mes films IA">
+      <div class="screen__stage" id="screen-stage">
+            <div class="slide is-active">
+              <video src="../portfolio/videos/version-169.mp4" poster="../portfolio/posters/version-169.jpg" autoplay loop muted playsinline preload="auto"></video>
+              <span class="screen__badge"><i></i> 100% généré par IA</span>
+              <span class="screen__views"><img src="badge-views.png" alt="724k vues" /></span>
+              <button class="screen__sound" type="button">
+                <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
+                <svg class="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+                <span class="sound-label">Activer le son</span>
+              </button>
+            </div>
+            <div class="slide">
+              <video src="../portfolio/videos/kinzo.mp4" poster="../portfolio/posters/kinzo.jpg" loop muted playsinline preload="none"></video>
+              <span class="screen__badge"><i></i> 100% généré par IA</span>
+              <button class="screen__sound" type="button">
+                <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
+                <svg class="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+                <span class="sound-label">Activer le son</span>
+              </button>
+            </div>
+            <div class="slide">
+              <video src="../portfolio/videos/paga.mp4" poster="../portfolio/posters/paga.jpg" loop muted playsinline preload="none"></video>
+              <span class="screen__badge"><i></i> 100% généré par IA</span>
+              <button class="screen__sound" type="button">
+                <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
+                <svg class="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+                <span class="sound-label">Activer le son</span>
+              </button>
+            </div>
+            <div class="slide">
+              <video src="../portfolio/videos/messi-last-star.mp4" poster="../portfolio/posters/messi-last-star.jpg" loop muted playsinline preload="none"></video>
+              <span class="screen__badge"><i></i> 100% généré par IA</span>
+              <button class="screen__sound" type="button">
+                <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
+                <svg class="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+                <span class="sound-label">Activer le son</span>
+              </button>
+            </div>
+            <div class="slide">
+              <video src="../portfolio/videos/france-maroc.mp4" poster="../portfolio/posters/france-maroc.jpg" loop muted playsinline preload="none"></video>
+              <span class="screen__badge"><i></i> 100% généré par IA</span>
+              <button class="screen__sound" type="button">
+                <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
+                <svg class="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+                <span class="sound-label">Activer le son</span>
+              </button>
+            </div>
+        <button class="screen__arrow screen__arrow--prev" id="screen-prev" type="button" aria-label="Vidéo précédente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="screen__arrow screen__arrow--next" id="screen-next" type="button" aria-label="Vidéo suivante">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="screen__dots" id="screen-dots"></div>
+      <p class="screen__caption" id="screen-caption"><b>« Mbappé Dragon »</b>, un fan film créé à 100% avec le AI Cinema Studio.</p>
+    </section>
+
+    <div class="hero__after">
+      <div class="hero__cta">
+        <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 6 18l-3-3 3.94-3.94"/><path d="m12 2 1.9 5.8a2 2 0 0 0 1.3 1.3L21 11l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 20l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 11l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+          Je veux le AI Cinema Studio
+        </a>
+      </div>
+
+      <ul class="reassure">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Paiement sécurisé</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Accès immédiat à vie</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Mises à jour incluses</li>
+      </ul>
+    </div>
+
+    <!-- ───────────── PREUVE SOCIALE ───────────── -->
+    <section class="proof" aria-label="Preuve sociale">
+      <div class="proof__bar">
+        <div class="proof__lead">
+          <span class="proof__lead-num"><span class="accent">+6M</span> de vues</span>
+          <span class="proof__lead-label">générées avec mes vidéos IA, dont des fan films comme celui que tu viens de voir.</span>
+        </div>
+        <div class="proof__visual-wrap">
+          <div class="phone">
+            <div class="phone__screen">
+              <span class="phone__notch"></span>
+              <video src="screen-vue.mp4" autoplay loop muted playsinline preload="none"></video>
+            </div>
+          </div>
+        </div>
+        <div class="proof__stats">
+          <div class="proof__stat">
+            <span class="proof__stat-num">+170 000</span>
+            <span class="proof__stat-label">abonnés sur mes comptes</span>
+          </div>
+          <div class="proof__stat">
+            <span class="proof__stat-num">+150</span>
+            <span class="proof__stat-label">ventes en automatique</span>
+          </div>
+          <div class="proof__stat">
+            <span class="proof__stat-num">0</span>
+            <span class="proof__stat-label">caméra, 0 acteur</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:var(--space-7);">
+          <a class="aur-btn aur-btn--glass" href="../portfolio/" target="_blank" rel="noopener">
+            Voir mon portfolio de vidéos IA
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── MÉCANISME ───────────── -->
+    <section class="section" id="methode" aria-label="Comment ça marche">
+      <div class="section__head">
+        <span class="aurora-eyebrow section__eyebrow">Le AI Cinema Studio</span>
+        <h2 class="section__title">Ton film.<br/><span class="accent">3 temps.</span></h2>
+        <p class="section__intro">
+          Pas besoin d'être réalisateur. Tu décris ta scène, le système la tourne pour toi.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step__head">
+            <span class="step__num">1</span>
+            <h3 class="step__title">Tu castes tes personnages.</h3>
+          </div>
+          <div class="step__visual">
+            <div class="castv">
+              <img src="cast-sheet.jpg" alt="Fiche personnage sous tous les angles" loading="lazy" />
+              <span class="castv__scan"></span>
+              <span class="castv__lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+            </div>
+          </div>
+          <p class="step__desc">Le système <b>verrouille leur identité</b>, même visage d'un plan à l'autre. Aucun acteur à payer.</p>
+        </div>
+
+        <div class="step">
+          <div class="step__head">
+            <span class="step__num">2</span>
+            <h3 class="step__title">Tu décris ta scène.</h3>
+          </div>
+          <div class="step__visual">
+            <div class="promptv">
+              <div class="promptv__bar">
+                <span class="promptv__dot"></span><span class="promptv__dot"></span><span class="promptv__dot"></span>
+              </div>
+              <svg class="promptv__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              <svg class="promptv__clap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 11 15-4"/><path d="M4 11v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9z"/><path d="M4 11 3 7l15-4 1 4"/><path d="m8.5 9.5-1.5-4"/><path d="m13.5 8-1.5-4"/></svg>
+            </div>
+          </div>
+          <p class="step__desc">En français. Le système <b>écrit les prompts, la lumière, les plans</b> et génère via les meilleurs modèles.</p>
+        </div>
+
+        <div class="step">
+          <div class="step__head">
+            <span class="step__num">3</span>
+            <h3 class="step__title">Tu sors ton film.</h3>
+          </div>
+          <div class="step__visual">
+            <div class="filmv">
+              <video src="../portfolio/videos/version-169.mp4" poster="../portfolio/posters/version-169.jpg" autoplay loop muted playsinline preload="none"></video>
+            </div>
+          </div>
+          <p class="step__desc">Plan par plan, tu montes une <b>vraie scène de cinéma</b>. Comme celles du carrousel là-haut.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 6 18l-3-3 3.94-3.94"/><path d="m12 2 1.9 5.8a2 2 0 0 0 1.3 1.3L21 11l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 20l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 11l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+          Je veux le AI Cinema Studio
+        </a>
+      </div>
+    </section>
+
+    <!-- ───────────── LES MODULES ───────────── -->
+    <section class="section" id="formation" aria-label="Le contenu de la formation">
+      <div class="section__head">
+        <span class="aurora-eyebrow section__eyebrow">La formation</span>
+        <h2 class="section__title">De zéro à<br/><span class="accent">réalisateur IA.</span></h2>
+        <p class="section__intro">
+          <b style="color:var(--text-title)">Déjà 1h25 de vidéo</b>, step by step, de l'installation au film monté. Tu suis, tu reproduis, tu sors ta scène.
+        </p>
+      </div>
+
+      <div class="cmods">
+        <div class="cmod">
+          <div class="cmod__thumb">
+            <img src="minia1.jpg" alt="" loading="lazy" />
+            <span class="cmod__no">01</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 min</span>
+          </div>
+          <div class="cmod__body">
+            <h3 class="cmod__title">L'installation du système</h3>
+            <p class="cmod__meta">2 leçons</p>
+          </div>
+        </div>
+        <div class="cmod">
+          <div class="cmod__thumb">
+            <img src="minia2.jpg" alt="" loading="lazy" />
+            <span class="cmod__no">02</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 7 min</span>
+          </div>
+          <div class="cmod__body">
+            <h3 class="cmod__title">Projet & Script</h3>
+            <p class="cmod__meta">1 leçon</p>
+          </div>
+        </div>
+        <div class="cmod">
+          <div class="cmod__thumb">
+            <img src="minia3.jpg" alt="" loading="lazy" />
+            <span class="cmod__no">03</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 min</span>
+          </div>
+          <div class="cmod__body">
+            <h3 class="cmod__title">Création des éléments</h3>
+            <p class="cmod__meta">1 leçon</p>
+          </div>
+        </div>
+        <div class="cmod">
+          <div class="cmod__thumb">
+            <img src="minia4.jpg" alt="" loading="lazy" />
+            <span class="cmod__no">04</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 min</span>
+          </div>
+          <div class="cmod__body">
+            <h3 class="cmod__title">Découpage & storyboard</h3>
+            <p class="cmod__meta">1 leçon</p>
+          </div>
+        </div>
+        <div class="cmod">
+          <div class="cmod__thumb">
+            <img src="minia5.jpg" alt="" loading="lazy" />
+            <span class="cmod__no">05</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 54 min</span>
+          </div>
+          <div class="cmod__body">
+            <h3 class="cmod__title">Génération & Montage</h3>
+            <p class="cmod__meta">6 leçons</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmod-note">
+        <span class="cmod-note__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+        <p><b>De nouveaux modules sont en cours de construction</b> et ajoutés régulièrement. Accès à vie : tu récupères tout ce qui arrive, sans jamais repayer.</p>
+      </div>
+
+      <div class="cta-row">
+        <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 6 18l-3-3 3.94-3.94"/><path d="m12 2 1.9 5.8a2 2 0 0 0 1.3 1.3L21 11l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 20l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 11l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+          Je veux le AI Cinema Studio
+        </a>
+      </div>
+    </section>
+
+    <!-- ───────────── OFFRE + CHECKOUT ───────────── -->
+    <section class="section" id="commander" aria-label="Commander le système">
+      <div class="section__head">
+        <span class="aurora-eyebrow section__eyebrow">L'offre complète</span>
+        <h2 class="section__title">Tout ce que tu reçois<br/><span class="accent">aujourd'hui.</span></h2>
+        <p class="section__intro">
+          Tu paies une fois. T'as tout, pour toujours. Mises à jour comprises.
+        </p>
+      </div>
+
+      <div class="offer__card">
+        <h3 class="offer__heading">Le AI Cinema Studio</h3>
+
+        <div class="clap" aria-hidden="true">
+          <div class="clap__top"></div>
+          <div class="clap__body"></div>
+        </div>
+
+        <ul class="vstack">
+          <li>
+            <span class="vstack__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="vstack__label"><b>Le AI Cinema Studio complet</b>, la formation pour créer des vidéos IA cinématiques de A à Z.</span>
+          </li>
+          <li>
+            <span class="vstack__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="vstack__label"><b>Mon workflow complet</b> de création cinématique, avec des exemples concrets prêts à copier.</span>
+          </li>
+          <li>
+            <span class="vstack__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="vstack__label"><b>Tous les prompts et réglages</b> pour verrouiller tes personnages et générer tes scènes.</span>
+          </li>
+          <li>
+            <span class="vstack__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="vstack__label"><b>Les mises à jour à vie</b>, le système évolue en continu, tu suis sans repayer.</span>
+          </li>
+        </ul>
+
+        <div class="offer__price">
+          <div class="offer__price-now">
+            <span class="offer__price-amount">97</span>
+            <span class="offer__price-cur">€</span>
+          </div>
+          <p class="offer__price-sub"><b>Paiement unique.</b> Accès à vie. Mises à jour incluses.</p>
+        </div>
+
+        <!-- Checkout Whop embarqué (inline, thème dark, accent orange) -->
+        <div class="whop-mount" id="checkout">
+          <div
+            data-whop-checkout-plan-id="plan_Q5TVOvCuVGfmq"
+            data-whop-checkout-theme="dark"
+            data-whop-checkout-theme-accent-color="#b06bff"
+          ></div>
+        </div>
+
+        <ul class="offer__reassure">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Paiement sécurisé</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Accès immédiat</li>
+          </ul>
+      </div>
+    </section>
+
+    <!-- ───────────── FAQ ───────────── -->
+    <section class="section" id="faq" aria-label="Questions fréquentes">
+      <div class="section__head">
+        <span class="aurora-eyebrow section__eyebrow">Avant de te lancer</span>
+        <h2 class="section__title">Questions<br/><span class="accent">fréquentes.</span></h2>
+      </div>
+
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q">Faut-il être réalisateur ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">Non, zéro. Je n'ai jamais fait d'école de cinéma. Tu décris ta scène en français, le système s'occupe des prompts, de la lumière et des plans. Tu apprends en reproduisant.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Faut-il être technique ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">Non plus. Tout est expliqué clic par clic, du tout début à la fin. Si tu sais envoyer un message, tu sais suivre le système. C'est justement pour les gens qui veulent pas devenir des geeks que je l'ai construit comme ça.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Combien de temps pour faire un film comme les tiens ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">Tes premiers plans, tu peux les sortir le jour même. Un film complet comme ceux du haut de la page, ça demande plus de travail et de patience, mais tu as exactement ma méthode et mon workflow pour y arriver.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">J'ai besoin de quels outils en plus ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">Tu travailles avec Claude Code et quelques générateurs (images et vidéos). Certains ont une version gratuite, d'autres sont payants à l'usage. Je te montre exactement quoi prendre et comment, sans que tu claques ton budget pour rien.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">C'est quoi Claude Code exactement ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">C'est l'outil d'IA sur lequel tourne tout le système. C'est lui qui écrit les prompts, génère et orchestre tes vidéos à partir de ton idée. Tu as pas besoin de comprendre comment ça marche dessous : je te file tout prêt, t'as plus qu'à l'utiliser.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Je paie une fois ou c'est un abonnement ?<span class="faq__icon"></span></summary>
+          <div class="faq__a">Paiement unique, 97€. Accès à vie, et toutes les mises à jour incluses. Le système évolue en continu, tu suis sans jamais repayer. Et le prix montera au fur et à mesure que j'ajoute du contenu : ceux qui rentrent maintenant gardent tout.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ───────────── CTA FINAL ───────────── -->
+    <section class="section final" aria-label="Dernière étape">
+      <div class="final__bg"></div>
+
+      <h2 class="final__title">T'as deux<br/><span class="accent">options.</span></h2>
+
+      <div class="final__options">
+        <div class="opt opt--no">
+          <span class="opt__tag">Option 1</span>
+          <p>Tu fermes cette page. Et tu continues à regarder les films des autres en te disant que t'aurais bien aimé savoir faire ça.</p>
+        </div>
+        <div class="opt opt--yes">
+          <span class="opt__tag">Option 2</span>
+          <p>Tu récupères le système aujourd'hui, et cette semaine tu sors ta première scène. Sans caméra, sans acteurs, sans budget.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 6 18l-3-3 3.94-3.94"/><path d="m12 2 1.9 5.8a2 2 0 0 0 1.3 1.3L21 11l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 20l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 11l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+          Je veux le AI Cinema Studio
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__brand-row">
+        <img class="footer__logo" src="../v2/MON_LOGO.png" alt="Chris Sans Filtre" />
+        <span class="footer__brand-name">Chris Sans Filtre</span>
+      </div>
+      <p class="footer__desc">Le AI Cinema Studio : crée des vidéos IA cinématiques, sans caméra, sans acteurs. Par @chris.sans.filtre.</p>
+      <div class="footer__social">
+        <a href="https://www.tiktok.com/@chris.sans.filtre" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.instagram.com/chris.sans.filtre/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <div class="footer__col-label">Navigation</div>
+      <nav class="footer__links">
+        <a href="#methode">Le système</a>
+        <a href="#formation">La formation</a>
+        <a href="../portfolio/" target="_blank" rel="noopener">Portfolio</a>
+        <a href="#faq">FAQ</a>
+        <a href="#commander">Commander</a>
+      </nav>
+    </div>
+
+    <div class="footer__col">
+      <div class="footer__col-label">Légal</div>
+      <nav class="footer__links">
+        <a href="../mentions-legales.html">Mentions légales</a>
+        <a href="../mentions-legales.html#cgv">CGV</a>
+        <a href="../confidentialite.html">Confidentialité</a>
+        <a href="../cookies.html">Cookies</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer__copy">© 2026 AI Cinema Studio · Tous droits réservés</div>
+</footer>
+
+<!-- Barre CTA sticky mobile -->
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">Je veux le AI Cinema Studio</a>
+</div>
+
+<script>
+  // Carrousel coverflow en boucle infinie : chaque slide est placée selon sa
+  // distance (bouclée) à la slide active. Après la dernière vient la première.
+  (function () {
+    var CAPS = [
+      '<b>« Mbappé Dragon »</b>, un fan film créé à 100% avec le AI Cinema Studio.',
+      '<b>« Kinzo »</b>, une pub produit 100% générée par IA.',
+      '<b>« PAGA »</b>, une vidéo promo pour la sortie du son d\'un DJ, 100% IA.',
+      '<b>« Messi the last Star »</b>, un fan film 100% généré par IA.',
+      '<b>« France vs Maroc »</b>, un fan film 100% généré par IA.'
+    ];
+    var stage = document.getElementById('screen-stage');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var cap = document.getElementById('screen-caption');
+    var dots = document.getElementById('screen-dots');
+    var n = slides.length;
+    var i = 0;
+
+    slides.forEach(function () { dots.appendChild(document.createElement('i')); });
+
+    // Distance à la slide active, bouclée : donne -2..2 pour 5 slides.
+    function rel(k) {
+      var d = k - i;
+      if (d > n / 2) d -= n;
+      if (d < -n / 2) d += n;
+      return d;
+    }
+
+    function syncSound(sl) {
+      var v = sl.querySelector('video');
+      sl.querySelector('.sound-label').textContent = v.muted ? 'Activer le son' : 'Couper le son';
+      sl.querySelector('.ic-muted').style.display = v.muted ? 'block' : 'none';
+      sl.querySelector('.ic-sound').style.display = v.muted ? 'none' : 'block';
+    }
+
+    function place() {
+      slides.forEach(function (sl, k) {
+        var r = rel(k);
+        var prev = sl.dataset.rel === undefined ? r : parseFloat(sl.dataset.rel);
+        // Une slide qui saute d'un bout à l'autre (bouclage) se téléporte sans animation.
+        var jump = Math.abs(r - prev) > 1;
+        if (jump) sl.style.transition = 'none';
+        sl.style.setProperty('--rel', r);
+        sl.style.opacity = Math.abs(r) > 2 ? '0' : '1';
+        sl.classList.toggle('is-active', r === 0);
+        sl.classList.toggle('is-near', Math.abs(r) === 1);
+        if (jump) { void sl.offsetWidth; sl.style.transition = ''; }
+        sl.dataset.rel = r;
+
+        var v = sl.querySelector('video');
+        if (r === 0) {
+          if (!v.dataset.loaded) { v.preload = 'auto'; v.dataset.loaded = '1'; }
+          v.play().catch(function () {});
+        } else {
+          v.pause(); v.muted = true; syncSound(sl);
+        }
+      });
+      dots.querySelectorAll('i').forEach(function (d, k) { d.className = (k === i) ? 'on' : ''; });
+      cap.innerHTML = CAPS[i];
+    }
+
+    function go(k) { i = (k + n) % n; place(); }
+
+    slides.forEach(function (sl, k) {
+      sl.addEventListener('click', function (e) {
+        if (e.target.closest('.screen__sound')) return;
+        if (k !== i) go(k);
+      });
+      sl.querySelector('.screen__sound').addEventListener('click', function (e) {
+        e.stopPropagation();
+        var v = sl.querySelector('video');
+        v.muted = !v.muted;
+        syncSound(sl);
+      });
+    });
+
+    document.getElementById('screen-prev').addEventListener('click', function () { go(i - 1); });
+    document.getElementById('screen-next').addEventListener('click', function () { go(i + 1); });
+    place();
+  })();
+
+  // Smooth-scroll : les CTA "#commander" atterrissent directement sur le checkout, centré.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (id === 'commander') {
+      var co = document.getElementById('checkout');
+      if (co) { e.preventDefault(); co.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    }
+    var t = document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Barre CTA sticky mobile : apparaît une fois le hero passé,
+  // se masque quand le bloc de commande est à l'écran.
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var hero = document.querySelector('.hero');
+    var checkout = document.getElementById('commander');
+    if (!bar || !hero) return;
+    var heroPassed = false, checkoutVisible = false;
+    function update() {
+      if (heroPassed && !checkoutVisible) {
+        bar.classList.add('is-visible'); bar.setAttribute('aria-hidden', 'false');
+      } else {
+        bar.classList.remove('is-visible'); bar.setAttribute('aria-hidden', 'true');
+      }
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { heroPassed = !en[0].isIntersecting; update(); }, { threshold: 0 }).observe(hero);
+      if (checkout) new IntersectionObserver(function (en) { checkoutVisible = en[0].isIntersecting; update(); }, { threshold: 0 }).observe(checkout);
+    }
+  })();
+</script>
+</body>
+</html>
