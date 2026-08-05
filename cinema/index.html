@@ -365,6 +365,23 @@
   /* ============================================================
      OFFRE + CHECKOUT
      ============================================================ */
+  /* Compteur 48h */
+  .countdown { max-width:620px; margin:0 auto var(--space-6); padding:clamp(16px,4vw,22px);
+    border-radius:var(--radius-xl); text-align:center;
+    background:linear-gradient(180deg, rgba(176,107,255,.16), rgba(176,107,255,.06));
+    border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow:0 0 40px rgba(176,107,255,.22); }
+  .countdown__label { font:var(--weight-semibold) var(--text-body-sm)/1.35 var(--font-sans);
+    color:var(--text-title); letter-spacing:var(--tracking-tight); margin-bottom:var(--space-4); }
+  .countdown__label b { color:var(--accent); }
+  .countdown__timer { display:flex; align-items:flex-start; justify-content:center; gap:var(--space-3); }
+  .cd__unit { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:56px;
+    padding:8px 4px; border-radius:var(--radius-md); background:rgba(0,0,0,.35); border:1px solid var(--glass-border); }
+  .cd__num { font:var(--weight-bold) clamp(26px,7vw,36px)/1 var(--font-sans); color:var(--accent);
+    font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+  .cd__lab { font-size:var(--text-micro); letter-spacing:var(--tracking-caps); text-transform:uppercase; color:var(--text-tertiary); }
+  .cd__sep { font:var(--weight-bold) clamp(22px,6vw,30px)/1.4 var(--font-sans); color:var(--accent); opacity:.7; }
+
   .offer__card { max-width:620px; margin:0 auto; border-radius:var(--radius-2xl);
     background:var(--surface-glass-strong);
     -webkit-backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate)); backdrop-filter:blur(var(--blur-lg)) saturate(var(--glass-saturate));
@@ -412,7 +429,9 @@
     text-transform:uppercase; color:var(--text-on-accent); background:var(--accent); white-space:nowrap; }
 
   .offer__price { text-align:center; padding:var(--space-6) 0 var(--space-4); border-top:1px dashed var(--border-default); }
-  .offer__price-now { display:flex; align-items:baseline; justify-content:center; gap:var(--space-3); }
+  .offer__old { font-size:clamp(24px,7vw,34px); color:var(--text-tertiary); font-weight:var(--weight-thin);
+    text-decoration:line-through; text-decoration-color:var(--accent); }
+  .offer__price-now { display:flex; align-items:baseline; justify-content:center; gap:var(--space-4); }
   .offer__price-amount { font-weight:var(--weight-thin); letter-spacing:var(--tracking-tighter);
     font-size:clamp(56px,16vw,88px); line-height:1; color:var(--accent); }
   .offer__price-cur { font-weight:var(--weight-thin); font-size:clamp(28px,8vw,40px); color:var(--accent); }
@@ -735,7 +754,7 @@
         <span class="aurora-eyebrow section__eyebrow">La formation</span>
         <h2 class="section__title">De zéro à<br/><span class="accent">réalisateur IA.</span></h2>
         <p class="section__intro">
-          <b style="color:var(--text-title)">Déjà 1h25 de vidéo</b>, step by step, de l'installation au film monté. Tu suis, tu reproduis, tu sors ta scène.
+          <b style="color:var(--text-title)">Déjà 1h54 de vidéo</b>, step by step, de l'installation au film monté. Tu suis, tu reproduis, tu sors ta scène.
         </p>
       </div>
 
@@ -788,11 +807,11 @@
           <div class="cmod__thumb">
             <img src="minia5.jpg" alt="" loading="lazy" />
             <span class="cmod__no">05</span>
-            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 54 min</span>
+            <span class="cmod__dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 1h23</span>
           </div>
           <div class="cmod__body">
             <h3 class="cmod__title">Génération & Montage</h3>
-            <p class="cmod__meta">6 leçons</p>
+            <p class="cmod__meta">10 leçons</p>
           </div>
         </div>
       </div>
@@ -818,6 +837,17 @@
         <p class="section__intro">
           Tu paies une fois. T'as tout, pour toujours. Mises à jour comprises.
         </p>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="countdown__label">Le prix de lancement à <b>67€</b> expire dans :</div>
+        <div class="countdown__timer">
+          <div class="cd__unit"><span class="cd__num js-cd-h">48</span><span class="cd__lab">Heures</span></div>
+          <span class="cd__sep">:</span>
+          <div class="cd__unit"><span class="cd__num js-cd-m">00</span><span class="cd__lab">Min</span></div>
+          <span class="cd__sep">:</span>
+          <div class="cd__unit"><span class="cd__num js-cd-s">00</span><span class="cd__lab">Sec</span></div>
+        </div>
       </div>
 
       <div class="offer__card">
@@ -849,7 +879,8 @@
 
         <div class="offer__price">
           <div class="offer__price-now">
-            <span class="offer__price-amount">97</span>
+            <span class="offer__old">97€</span>
+            <span class="offer__price-amount">67</span>
             <span class="offer__price-cur">€</span>
           </div>
           <p class="offer__price-sub"><b>Paiement unique.</b> Accès à vie. Mises à jour incluses.</p>
@@ -901,7 +932,7 @@
         </details>
         <details class="faq__item">
           <summary class="faq__q">Je paie une fois ou c'est un abonnement ?<span class="faq__icon"></span></summary>
-          <div class="faq__a">Paiement unique, 97€. Accès à vie, et toutes les mises à jour incluses. Le système évolue en continu, tu suis sans jamais repayer. Et le prix montera au fur et à mesure que j'ajoute du contenu : ceux qui rentrent maintenant gardent tout.</div>
+          <div class="faq__a">Paiement unique, 67€ (au lieu de 97€). Accès à vie, et toutes les mises à jour incluses. Le système évolue en continu, tu suis sans jamais repayer. Et le prix montera au fur et à mesure que j'ajoute du contenu : ceux qui rentrent maintenant gardent tout.</div>
         </details>
       </div>
     </section>
@@ -978,6 +1009,33 @@
 </div>
 
 <script>
+  // Compteur 48h par visiteur : le deadline est stocké à la 1re visite,
+  // et reprend là où il en est aux visites suivantes. Passé 48h, une nouvelle
+  // fenêtre de 48h démarre (offre de lancement toujours "en cours").
+  (function () {
+    var KEY = 'aics_deadline_67';
+    var WINDOW = 48 * 60 * 60 * 1000;
+    var now = Date.now();
+    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (!deadline || deadline <= now) { deadline = now + WINDOW; localStorage.setItem(KEY, String(deadline)); }
+
+    var hEls = document.querySelectorAll('.js-cd-h');
+    var mEls = document.querySelectorAll('.js-cd-m');
+    var sEls = document.querySelectorAll('.js-cd-s');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function set(els, v) { for (var i = 0; i < els.length; i++) els[i].textContent = v; }
+
+    function tick() {
+      var rem = deadline - Date.now();
+      if (rem < 0) rem = 0;
+      var h = Math.floor(rem / 3600000);
+      var m = Math.floor((rem % 3600000) / 60000);
+      var s = Math.floor((rem % 60000) / 1000);
+      set(hEls, pad(h)); set(mEls, pad(m)); set(sEls, pad(s));
+    }
+    if (hEls.length) { tick(); setInterval(tick, 1000); }
+  })();
+
   // Carrousel coverflow en boucle infinie : chaque slide est placée selon sa
   // distance (bouclée) à la slide active. Après la dernière vient la première.
   (function () {
