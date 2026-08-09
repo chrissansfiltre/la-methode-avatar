@@ -365,6 +365,42 @@
   /* ============================================================
      OFFRE + CHECKOUT
      ============================================================ */
+  /* ============================================================
+     PREUVE (avis + captures résultats/DM)
+     ============================================================ */
+  .proofs__label { text-align:center; font-size:var(--text-caption); color:var(--text-tertiary);
+    letter-spacing:var(--tracking-caps); text-transform:uppercase; margin:0 0 var(--space-5); }
+  .shots { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-2);
+    max-width:760px; margin:0 auto clamp(32px,6vw,48px); }
+  @media (min-width:720px){ .shots { gap:var(--space-4); } }
+  .shot { aspect-ratio:9/16; border-radius:var(--radius-lg); overflow:hidden; background:var(--surface-card);
+    border:1px solid color-mix(in srgb, var(--accent) 45%, var(--border-hairline)); box-shadow:var(--shadow-sm); display:block; }
+  .shot img { width:100%; height:100%; object-fit:cover; display:block; }
+  .quotes { display:grid; grid-template-columns:1fr; gap:var(--space-4); max-width:900px; margin:0 auto; }
+  @media (min-width:720px){ .quotes { grid-template-columns:repeat(3,1fr); } }
+  .quote { padding:clamp(20px,4vw,26px); border-radius:var(--radius-xl); background:var(--surface-card);
+    border:1px solid var(--border-hairline); box-shadow:var(--shadow-sm); text-align:left;
+    display:flex; flex-direction:column; gap:var(--space-4); }
+  .quote__stars { display:flex; gap:3px; color:var(--accent); }
+  .quote__stars svg { width:16px; height:16px; }
+  .quote__text { margin:0; font-size:var(--text-body-sm); color:var(--text-body); line-height:1.5; }
+  .quote__who { display:flex; align-items:center; gap:10px; margin-top:auto; }
+  .quote__avatar { width:38px; height:38px; border-radius:50%; flex:none;
+    background:linear-gradient(140deg, var(--accent), var(--accent-hover)); opacity:.9; }
+  .quote__name { font-size:var(--text-caption); color:var(--text-title); font-weight:var(--weight-medium); }
+  .quote__handle { font-size:var(--text-micro); color:var(--text-tertiary); }
+  .quote__audio { display:flex; align-items:center; gap:var(--space-4); width:100%; padding:var(--space-4);
+    border-radius:var(--radius-md); background:var(--bg-subtle); border:1px solid var(--border-hairline);
+    cursor:pointer; text-align:left; color:var(--text-secondary);
+    font:var(--weight-medium) var(--text-body-sm)/1.3 var(--font-sans); transition:border-color var(--dur-fast) var(--ease-out); }
+  .quote__audio:hover { border-color:color-mix(in srgb, var(--accent) 50%, transparent); }
+  .quote__audio-btn { flex:none; width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+    color:#fff; background:linear-gradient(180deg, var(--accent-hover), var(--accent)); box-shadow:var(--glow-accent); }
+  .quote__audio-btn svg { width:18px; height:18px; }
+  .quote__audio-btn .ic-pause { display:none; }
+  .quote__audio.is-playing .ic-play { display:none; }
+  .quote__audio.is-playing .ic-pause { display:block; }
+
   /* Compteur 48h */
   .countdown { max-width:620px; margin:0 auto var(--space-6); padding:clamp(16px,4vw,22px);
     border-radius:var(--radius-xl); text-align:center;
@@ -838,6 +874,74 @@
       </div>
     </section>
 
+    <!-- ───────────── PREUVE (avis + captures) ───────────── -->
+    <section class="section" id="temoignages" aria-label="Témoignages et résultats">
+      <div class="section__head">
+        <span class="aurora-eyebrow section__eyebrow">C'est pas que de la théorie</span>
+        <h2 class="section__title">Les résultats<br/><span class="accent">parlent.</span></h2>
+        <p class="section__intro">
+          Poster des vidéos cinématiques, ça attire les marques et les clients. Ça te ramène des prestations IA, et les prestations IA, ça rapporte.
+        </p>
+      </div>
+
+      <p class="proofs__label">Captures de résultats &amp; DM</p>
+      <div class="shots">
+        <div class="shot"><img src="Preuve-vues.PNG" alt="Preuve de vues" loading="lazy" /></div>
+        <div class="shot"><img src="preuve-presta.png" alt="Preuve de prestation" loading="lazy" /></div>
+        <div class="shot"><img src="../VRAI-dm.jpg" alt="Vrais DM" loading="lazy" /></div>
+      </div>
+
+      <div class="quotes">
+        <div class="quote">
+          <div class="quote__stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <button class="quote__audio" type="button">
+            <span class="quote__audio-btn">
+              <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg>
+              <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            </span>
+            Écouter l'avis vocal de Bernie
+          </button>
+          <audio src="../avis%20client%20audio.mp4" preload="none"></audio>
+          <div class="quote__who"><span class="quote__avatar"></span><div><div class="quote__name">Bernie</div><div class="quote__handle">Avis vocal</div></div></div>
+        </div>
+        <div class="quote">
+          <div class="quote__stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <p class="quote__text">« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère ! 🫶 »</p>
+          <div class="quote__who"><span class="quote__avatar"></span><div><div class="quote__name">Majoric</div><div class="quote__handle">Élève</div></div></div>
+        </div>
+        <div class="quote">
+          <div class="quote__stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <p class="quote__text">« Hello Chris ! Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie ! T'es vraiment trop fort, je vais suivre ta formation à la lettre 🤩 »</p>
+          <div class="quote__who"><span class="quote__avatar"></span><div><div class="quote__name">Kevin</div><div class="quote__handle">Élève</div></div></div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="aur-btn aur-btn--primary aur-btn--lg" href="#commander">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 6 18l-3-3 3.94-3.94"/><path d="m12 2 1.9 5.8a2 2 0 0 0 1.3 1.3L21 11l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 20l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 11l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+          Je veux le AI Cinema Studio
+        </a>
+      </div>
+    </section>
+
     <!-- ───────────── OFFRE + CHECKOUT ───────────── -->
     <section class="section" id="commander" aria-label="Commander le système">
       <div class="section__head">
@@ -1018,6 +1122,25 @@
 </div>
 
 <script>
+  // Témoignage audio (Bernie) : lecture/pause au clic, un seul à la fois.
+  (function () {
+    var players = document.querySelectorAll('.quote__audio');
+    players.forEach(function (btn) {
+      var audio = btn.parentElement.querySelector('audio');
+      if (!audio) return;
+      btn.addEventListener('click', function () {
+        if (audio.paused) {
+          players.forEach(function (o) {
+            var a = o.parentElement.querySelector('audio');
+            if (a && a !== audio) { a.pause(); o.classList.remove('is-playing'); }
+          });
+          audio.play(); btn.classList.add('is-playing');
+        } else { audio.pause(); btn.classList.remove('is-playing'); }
+      });
+      audio.addEventListener('ended', function () { btn.classList.remove('is-playing'); });
+    });
+  })();
+
   // Compteur 48h par visiteur : le deadline est stocké à la 1re visite,
   // et reprend là où il en est aux visites suivantes. Passé 48h, une nouvelle
   // fenêtre de 48h démarre (offre de lancement toujours "en cours").
