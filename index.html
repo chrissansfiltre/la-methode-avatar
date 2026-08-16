@@ -694,12 +694,46 @@
     text-align: center; font-size: var(--text-caption); color: var(--text-tertiary);
     letter-spacing: var(--tracking-caps); text-transform: uppercase; margin: 0 0 var(--space-5);
   }
-  /* Grille de captures (résultats / DM) — format vertical type screenshot */
-  .shots {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2);
-    max-width: 760px; margin: 0 auto clamp(32px, 6vw, 48px);
+  /* Chaîne de preuve : vues -> clients -> virements */
+  .flow {
+    display: flex; flex-direction: column; align-items: center;
+    gap: var(--space-3); max-width: 380px;
+    margin: 0 auto clamp(32px, 6vw, 48px);
   }
-  @media (min-width: 720px) { .shots { gap: var(--space-4); } }
+  .flow__step { width: 100%; }
+  .flow__cap {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin: 0 0 var(--space-3); text-align: left;
+  }
+  .flow__num {
+    flex: none; width: 24px; height: 24px; border-radius: 999px;
+    display: grid; place-items: center;
+    background: var(--accent); color: #0b0b0c;
+    font-size: 13px; font-weight: 700; line-height: 1;
+  }
+  .flow__txt { margin: 0; }
+  .flow__txt strong {
+    display: block; color: var(--text-primary);
+    font-size: var(--text-body); font-weight: 600; line-height: 1.3;
+  }
+  .flow__txt span {
+    display: block; margin-top: 3px;
+    font-size: var(--text-caption); color: var(--text-tertiary); line-height: 1.35;
+  }
+  .flow__shots { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+  .flow__step--double .flow__shots { grid-template-columns: repeat(2, 1fr); }
+  .flow__arrow { flex: none; width: 26px; height: 26px; color: var(--accent); opacity: .9; }
+
+  @media (min-width: 900px) {
+    .flow {
+      flex-direction: row; align-items: stretch; justify-content: center;
+      max-width: 1040px; gap: var(--space-4);
+    }
+    .flow__step { width: 200px; flex: none; }
+    .flow__step--double { width: 416px; }
+    .flow__cap { min-height: 74px; }
+    .flow__arrow { align-self: center; transform: rotate(-90deg); }
+  }
   .shot {
     aspect-ratio: 9 / 16; border-radius: var(--radius-lg); overflow: hidden;
     background: var(--surface-card);
@@ -723,7 +757,7 @@
     display: grid; grid-template-columns: 1fr; gap: var(--space-4);
     max-width: 900px; margin: 0 auto;
   }
-  @media (min-width: 720px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 720px) { .quotes { grid-template-columns: repeat(2, 1fr); } }
   .quote {
     padding: clamp(20px, 4vw, 26px); border-radius: var(--radius-xl);
     background: var(--surface-card); border: 1px solid var(--border-hairline);
@@ -1133,12 +1167,6 @@
             <span class="proof__stat-label">fois à la caméra</span>
           </div>
         </div>
-        <div style="display:flex; justify-content:center; margin-top:var(--space-7);">
-          <a class="aur-btn aur-btn--glass" href="portfolio/" target="_blank" rel="noopener">
-            Voir mon portfolio de vidéos IA
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -1529,16 +1557,61 @@
         <span class="aurora-eyebrow section__eyebrow">C'est pas que de la théorie</span>
         <h2 class="section__title">Les résultats<br/><span class="accent">parlent.</span></h2>
         <p class="section__intro">
-          Des vraies vues, des vraies ventes, des vrais DM. Pas des promesses en l'air.
+          Des vraies vues, des vrais DM, des vrais virements. Pas des promesses en l'air.
         </p>
       </div>
 
       <!-- Captures de résultats / DM -->
-      <p class="proofs__label">Captures de résultats &amp; DM</p>
-      <div class="shots">
-        <div class="shot"><img src="VRAI-vues.jpg" alt="Vraies vues" loading="lazy" /></div>
-        <div class="shot"><img src="VRAI-ventes.jpg" alt="Vraies ventes" loading="lazy" /></div>
-        <div class="shot"><img src="VRAI-dm.jpg" alt="Vrais DM" loading="lazy" /></div>
+      <p class="proofs__label">Des vues, des clients, des virements</p>
+      <div class="flow">
+
+        <!-- 1. Les vues -->
+        <div class="flow__step">
+          <div class="flow__cap">
+            <span class="flow__num">1</span>
+            <p class="flow__txt">
+              <strong>L'IA te fait faire des vues.</strong>
+              <span>223 254 vues et 2 075 followers en 3 semaines.</span>
+            </p>
+          </div>
+          <div class="flow__shots">
+            <div class="shot"><img src="VRAI-vues.jpg" alt="Statistiques Instagram : 223 254 vues" loading="lazy" /></div>
+          </div>
+        </div>
+
+        <svg class="flow__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="m19 13-7 7-7-7"/></svg>
+
+        <!-- 2. Les clients -->
+        <div class="flow__step">
+          <div class="flow__cap">
+            <span class="flow__num">2</span>
+            <p class="flow__txt">
+              <strong>Les vues t'amènent des clients.</strong>
+              <span>Des marques t'écrivent en DM pour bosser avec toi.</span>
+            </p>
+          </div>
+          <div class="flow__shots">
+            <div class="shot"><img src="VRAI-dm.jpg" alt="DM d'une marque qui demande une prestation" loading="lazy" /></div>
+          </div>
+        </div>
+
+        <svg class="flow__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="m19 13-7 7-7-7"/></svg>
+
+        <!-- 3. L'argent -->
+        <div class="flow__step flow__step--double">
+          <div class="flow__cap">
+            <span class="flow__num">3</span>
+            <p class="flow__txt">
+              <strong>Et les clients, ça rapporte.</strong>
+              <span>Des vrais virements qui tombent sur le compte.</span>
+            </p>
+          </div>
+          <div class="flow__shots">
+            <div class="shot"><img src="VRAI-ventes.jpg" alt="Virements reçus sur le compte bancaire" loading="lazy" /></div>
+            <div class="shot"><img src="VRAI-ventes2.png" alt="Virements reçus sur le compte bancaire" loading="lazy" /></div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Témoignages réels (repris de l'ancienne page) -->
@@ -1560,6 +1633,24 @@
           </button>
           <audio src="avis%20client%20audio.mp4" preload="none"></audio>
           <div class="quote__who"><span class="quote__avatar"></span><div><div class="quote__name">Bernie</div><div class="quote__handle">Avis vocal</div></div></div>
+        </div>
+        <div class="quote">
+          <div class="quote__stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <button class="quote__audio" type="button">
+            <span class="quote__audio-btn">
+              <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5 20 12 6 20.5z"/></svg>
+              <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            </span>
+            Écouter l'avis vocal de Laura
+          </button>
+          <audio src="avis%20client%20audio%202.MP3" preload="none"></audio>
+          <div class="quote__who"><span class="quote__avatar"></span><div><div class="quote__name">Laura</div><div class="quote__handle">Avis vocal</div></div></div>
         </div>
         <div class="quote">
           <div class="quote__stars">
