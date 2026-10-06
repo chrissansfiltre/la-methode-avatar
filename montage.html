@@ -10,7 +10,7 @@
 <!-- AURORA DESIGN SYSTEM -->
 <link rel="stylesheet" href="design-system/Aurora Design System-handoff/aurora-design-system/project/styles.css" />
 <!-- WHOP checkout loader -->
-<script async defer src="https://js.whop.com/static/checkout/loader.js"></script>
+<script src="https://cdn.whop.com/elements/amber/elements.js" data-whop-elements></script>
 
 <style>
   /* OVERRIDE accent BLEU -> ORANGE (identique à la page principale) */
@@ -449,11 +449,7 @@
 
         <!-- Checkout Whop embarqué. Remplace le plan-id ci-dessous par celui de ta formation montage. -->
         <div class="whop-mount" id="checkout">
-          <div
-            data-whop-checkout-plan-id="plan_eu91dNNXiwpAH"
-            data-whop-checkout-theme="dark"
-            data-whop-checkout-theme-accent-color="#ff7a1a"
-          ></div>
+          <div data-whop-plan="plan_eu91dNNXiwpAH" data-whop-palette="orange" data-whop-accent="#ff7a1a"></div>
         </div>
 
         <ul class="offer__reassure">
@@ -531,6 +527,26 @@
       if (checkout) new IntersectionObserver(function(en){ checkoutVisible = en[0].isIntersecting; u(); }, {threshold:0}).observe(checkout);
     }
   })();
+</script>
+
+<!-- ============================================================
+     WHOP ELEMENTS — le paiement intégré (remplace l'ancien loader.js, que Whop coupe le 21 octobre 2026).
+     Chaque bloc [data-whop-plan] reçoit le paiement de son offre : thème sombre, en français, bouton aux couleurs
+     de la page (data-whop-accent). Le paiement se fait dans le cadre sécurisé de Whop ; après une étape de
+     vérification bancaire (3D Secure), l'acheteur revient sur cette page.
+     ============================================================ -->
+<script type="module">
+  (function monterWhop(essai) {
+    if (typeof window.WhopElements !== 'function') { if (essai < 50) setTimeout(function () { monterWhop(essai + 1); }, 200); return; }
+    document.querySelectorAll('[data-whop-plan]').forEach(function (zone) {
+      var accent = zone.dataset.whopAccent || '#ff7a1a';
+      var whop = window.WhopElements({ locale: 'fr', appearance: {
+        theme: { appearance: 'dark', accentColor: zone.dataset.whopPalette || 'orange' },
+        classes: { 'whop-CheckoutPayButton': { backgroundColor: accent, color: '#0b0b0d', fontWeight: '700' } } } });
+      whop.checkout.create({ plan: zone.dataset.whopPlan, returnUrl: location.origin + location.pathname })
+        .create('checkout').mount(zone);
+    });
+  })(0);
 </script>
 </body>
 </html>
