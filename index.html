@@ -920,7 +920,7 @@ input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.12); box-shad
   // la soirée : survoler une tâche allume sa part de la barre et affiche son temps
   const segs = [...soiree.querySelectorAll(".barre-jour i")], lignes = [...soiree.querySelectorAll(".taches li")], total = document.getElementById("soiree-total");
   lignes.forEach((li, i) => {
-    li.addEventListener("pointerenter", () => { soiree.classList.add("sonde"); li.classList.add("chaud"); segs[i] && segs[i].classList.add("chaud"); total.textContent = li.querySelector("s").textContent; });
+    li.addEventListener("pointerenter", e => { if (e.pointerType !== "mouse") return; /* au doigt, le défilement passait pour un survol */ soiree.classList.add("sonde"); li.classList.add("chaud"); segs[i] && segs[i].classList.add("chaud"); total.textContent = li.querySelector("s").textContent; });
     li.addEventListener("pointerleave", () => { soiree.classList.remove("sonde"); li.classList.remove("chaud"); segs[i] && segs[i].classList.remove("chaud"); total.textContent = "5 h"; });
   });
 
