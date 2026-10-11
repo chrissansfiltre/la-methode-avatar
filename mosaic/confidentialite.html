@@ -8,34 +8,73 @@
 <link rel="icon" type="image/png" href="../assets/chris.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root { --fond: #0A0A0B; --carte: #131315; --bord: #26262B; --texte: #F4F4F5; --texte-2: #B2B2BA; --texte-3: #7A7A83; --o: #F97316; --o2: #FB923C; --o3: #FDBA74;
-  --titre: "Sora", system-ui, sans-serif; --corps: "Inter", system-ui, sans-serif; color-scheme: dark; }
+/* le branding de la nouvelle page de vente : fond crème grillagé, Archivo + Playfair italique + JetBrains Mono, orange #F96C22 */
+:root { --papier: #E1DCD2; --encre: #111113; --encre-2: #4E4E56; --encre-3: #8D8D96; --trait: #D3CDC2; --o: #F96C22; --o2: #FF8A4C; --nuit: #111113;
+  --titre: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif; --serif: "Playfair Display", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace; color-scheme: light; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--fond); color: var(--texte-2); font: 400 16px/1.65 var(--corps); -webkit-font-smoothing: antialiased; }
-.col { max-width: 760px; margin: 0 auto; padding: 28px 18px 60px; }
-.retour { display: inline-block; color: var(--o2); text-decoration: none; font-weight: 600; font-size: 14.5px; margin-bottom: 22px; }
-h1 { font: 800 clamp(28px, 6vw, 40px)/1.1 var(--titre); letter-spacing: -.03em; color: var(--texte); margin: 0 0 8px; }
-.maj { color: var(--texte-3); font-size: 14px; margin: 0 0 28px; }
-.resume { background: linear-gradient(170deg, rgba(249,115,22,.14), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.45); border-radius: 18px; padding: 18px 20px; margin: 0 0 30px; }
-.resume h2 { margin: 0 0 10px; font: 700 17px/1.3 var(--titre); color: var(--texte); }
-.resume ul { margin: 0; padding-left: 20px; } .resume li { margin: 4px 0; color: var(--texte); }
-section { border-top: 1px solid var(--bord); padding: 22px 0 6px; }
-h2 { font: 700 19px/1.3 var(--titre); letter-spacing: -.015em; color: var(--texte); margin: 0 0 10px; }
-h2 span { color: var(--o2); margin-right: 8px; }
-p { margin: 0 0 12px; } ul { margin: 0 0 12px; padding-left: 20px; } li { margin: 5px 0; }
-b, strong { color: var(--texte); font-weight: 600; }
-a { color: var(--o2); }
-.a-remplir { outline: 1.5px dashed rgba(249,115,22,.9); outline-offset: 3px; border-radius: 6px; padding: 2px 6px; color: var(--o3); }
-footer nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
-footer { border-top: 1px solid var(--bord); margin-top: 26px; padding-top: 18px; font-size: 13.5px; color: var(--texte-3); }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--papier); color: var(--encre-2); font: 400 16px/1.7 var(--titre); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(to right, rgba(17,17,19,.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,19,.12) 1px, transparent 1px); background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); }
+::selection { background: rgba(249,108,34,.25); }
+.nav { position: sticky; top: 0; z-index: 30; background: rgba(225,220,210,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.nav-in { max-width: 1180px; margin: 0 auto; padding: 0 22px; height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.marque { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; text-decoration: none; color: var(--encre); font: 700 19px/1 var(--titre); letter-spacing: -.03em; }
+.marque svg { width: 22px; height: 22px; } .marque .ai { color: var(--o); } .marque .m-studio { font-weight: 500; color: var(--encre-3); }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; font: 600 14px/1 var(--titre); padding: 12px 18px; border-radius: 999px;
+  background: var(--nuit); color: #fff; box-shadow: 0 12px 30px -14px rgba(17,17,19,.7); transition: background .2s, transform .2s; }
+.btn:hover { background: #2B2B30; transform: translateY(-1px); } .btn span { display: inline-block; transition: transform .3s; } .btn:hover span { transform: translateX(3px); }
+.col { max-width: 820px; margin: 22px auto 40px; padding: 44px 48px 30px; background: #fff; border-radius: 28px; border: 1px solid var(--trait); box-shadow: 0 40px 90px -50px rgba(17,17,19,.5); }
+.retour { display: inline-flex; align-items: center; gap: 8px; color: var(--encre-2); text-decoration: none; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  padding: 8px 12px; border-radius: 999px; border: 1px solid var(--trait); background: var(--papier); margin-bottom: 26px; transition: color .2s, border-color .2s; }
+.retour:hover { color: var(--o); border-color: var(--o); }
+h1 { font: 500 clamp(32px, 5.4vw, 48px)/1.05 var(--titre); letter-spacing: -.035em; color: var(--encre); margin: 0 0 12px; }
+h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--o); letter-spacing: -.01em; }
+.maj { font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--encre-3); margin: 0 0 30px; }
+.resume { position: relative; overflow: hidden; background: var(--nuit); color: rgba(255,255,255,.82); border-radius: 20px; padding: 24px 26px; margin: 0 0 34px; isolation: isolate; }
+.resume::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 90% at 100% 0%, rgba(249,108,34,.32), transparent 70%); }
+.resume h2 { margin: 0 0 12px; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--o2); }
+.resume ul { margin: 0; padding: 0; list-style: none; }
+.resume li { margin: 0; padding: 10px 0 10px 26px; position: relative; color: #fff; border-top: 1px solid rgba(255,255,255,.12); }
+.resume li:first-child { border-top: 0; padding-top: 2px; }
+.resume li::before { content: "✓"; position: absolute; left: 0; top: 10px; color: var(--o2); }
+.resume li:first-child::before { top: 2px; }
+.resume b, .resume strong { color: #fff; } .resume a { color: var(--o2); }
+section { border-top: 1px solid var(--trait); padding: 26px 0 8px; }
+h2 { font: 600 20px/1.3 var(--titre); letter-spacing: -.02em; color: var(--encre); margin: 0 0 12px; display: flex; align-items: baseline; gap: 10px; }
+h2 span { flex: none; display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 999px; border: 1.5px solid var(--o); color: var(--o); font: 500 12px/1 var(--mono); align-self: center; }
+p { margin: 0 0 14px; } ul { margin: 0 0 14px; padding-left: 20px; } li { margin: 6px 0; } li::marker { color: var(--o); }
+b, strong { color: var(--encre); font-weight: 600; }
+a { color: var(--o); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.a-remplir { outline: 1.5px dashed rgba(249,108,34,.9); outline-offset: 3px; border-radius: 6px; padding: 2px 6px; color: var(--o); }
+footer { border-top: 1px solid var(--trait); margin-top: 30px; padding-top: 20px; font: 500 11px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--encre-3); }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+footer nav a { text-decoration: none; color: var(--encre-2); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--trait); transition: color .2s, border-color .2s, background .2s; overflow-wrap: normal; }
+footer nav a:hover { color: var(--o); border-color: var(--o); }
+footer nav a[aria-current="page"] { background: var(--nuit); border-color: var(--nuit); color: #fff; }
+@media (max-width: 700px) {
+  .nav-in { padding: 0 16px; }
+  .col { margin: 12px 12px 28px; padding: 28px 20px 22px; border-radius: 22px; }
+  .resume { padding: 20px; }
+  h2 { font-size: 18px; }
+}
+@media (max-width: 370px) { .marque .m-studio { display: none; } .btn { padding: 10px 12px; font-size: 12.5px; gap: 6px; } }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sg" viewBox="0 0 120 120"><g fill="currentColor"><rect x="9" y="9" width="18" height="18" rx="2.5" opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" opacity=".73"/><rect x="9" y="30" width="18" height="18" rx="2.5" opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" opacity=".73"/><rect x="93" y="30" width="18" height="18" rx="2.5" opacity=".58"/><rect x="9" y="51" width="18" height="18" rx="2.5" opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" opacity=".73"/><rect x="72" y="51" width="18" height="18" rx="2.5" opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" opacity=".5"/><rect x="9" y="72" width="18" height="18" rx="2.5" opacity=".73"/><rect x="51" y="72" width="18" height="18" rx="2.5" opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" opacity=".43"/><rect x="30" y="93" width="18" height="18" rx="2.5" opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" opacity=".36"/></g><g fill="#F96C22"><rect x="93" y="9" width="18" height="18" rx="2.5"/><rect x="72" y="30" width="18" height="18" rx="2.5"/><rect x="51" y="51" width="18" height="18" rx="2.5"/><rect x="30" y="72" width="18" height="18" rx="2.5"/><rect x="9" y="93" width="18" height="18" rx="2.5"/></g></symbol>
+</svg>
+<header class="nav"><div class="nav-in">
+  <a class="marque" href="../"><svg aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C <span class="m-studio">Studio</span></span></a>
+  <a class="btn" href="../#offre">Je veux mon studio <span>→</span></a>
+</div></header>
 <div class="col">
   <a class="retour" href="../">← Retour à MOSAIC Studio</a>
-  <h1>Politique de confidentialité</h1>
+  <h1>Politique de <em>confidentialité</em></h1>
   <p class="maj">MOSAIC Studio · Dernière mise à jour : 28 septembre 2026</p>
 
   <div class="resume">
@@ -105,7 +144,7 @@ footer { border-top: 1px solid var(--bord); margin-top: 26px; padding-top: 18px;
     <p>Cette politique peut évoluer, par exemple avec une nouvelle fonction du studio. La date en haut de page indique sa dernière version.</p>
   </section>
 
-  <footer><nav><a href="cgv.html">Conditions de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cookies.html">Cookies</a></nav>MOSAIC Studio · Chris Sans Filtre · © 2026</footer>
+  <footer><nav><a href="cgv.html">Conditions de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html" aria-current="page">Confidentialité</a><a href="cookies.html">Cookies</a></nav>MOSAIC Studio · Chris Sans Filtre · © 2026</footer>
 </div>
 </body>
 </html>

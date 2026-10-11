@@ -3,774 +3,869 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MOSAIC Studio — Ton Reel monté en automatique en 15 minutes avec ton avatar IA</title>
-<meta name="description" content="Tu tapes ton idée, MOSAIC Studio écrit, génère et monte ton Reel, directement dans l'appli. Même avec 1 h le soir. Par Chris Sans Filtre.">
+<title>MOSAIC Studio — Décuple ta créativité, pas ton temps de travail</title>
+<meta name="description" content="Tu tapes ton idée, MOSAIC Studio écrit, génère et monte ton Reel avec ton avatar IA, directement dans l'appli. Par Chris Sans Filtre.">
 <link rel="icon" type="image/png" href="assets/chris.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap">
 <script>document.documentElement.classList.add("js");</script>
-<!-- WHOP : le chargeur du paiement intégré (le même que sur chrissansfiltre.com) -->
 <script src="https://cdn.whop.com/elements/amber/elements.js" data-whop-elements></script>
 <style>
 :root {
-  --fond: #0A0A0B; --carte: #131315; --carte-2: #18181B; --bord: #26262B; --bord-2: #34343B;
-  --texte: #F4F4F5; --texte-2: #A8A8B1; --texte-3: #707079;
-  --o: #F97316; --o2: #FB923C; --o3: #FDBA74; --o-voile: rgba(249,115,22,.14);
-  --grad: linear-gradient(90deg, #F97316, #FB923C, #FDBA74);
-  --rouge: #FF7A7A; --vert: #4ADE80;
-  --titre: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --corps: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  color-scheme: dark;
+  --nuit: #111113; --nuit-2: #18181B; --nuit-3: #222226; --gris: #3D3D40;
+  --papier: #E1DCD2; --blanc: #FFFFFF; --encre: #111113; --encre-2: #5B5B63; --encre-3: #8D8D96; --trait: #D3CDC2;
+  --o: #F96C22; --o2: #FF8A4C; --o3: #FFB98F; --o-voile: rgba(249,108,34,.1);
+  --vert: #2FB36B; --rouge: #E5484D;
+  --titre: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Playfair Display", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  color-scheme: light;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--fond); color: var(--texte); font: 400 16.5px/1.55 var(--corps); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--papier); color: var(--encre); font: 400 16.5px/1.6 var(--titre); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 img, video { display: block; max-width: 100%; }
-b, strong { font-weight: 700; color: var(--texte); }
 a { color: inherit; }
-::selection { background: rgba(249,115,22,.35); }
+b, strong { font-weight: 600; }
+::selection { background: rgba(249,108,34,.25); }
+em.s { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--o); letter-spacing: -.01em; }
+.sombre em.s, .hero em.s { color: var(--o2); }
+.mono { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+.cadre { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+section { padding: 96px 0; position: relative; }
+h1, h2, h3 { margin: 0; font-family: var(--titre); font-weight: 500; letter-spacing: -.025em; }
+h2 { font-size: clamp(30px, 4.2vw, 46px); line-height: 1.08; }
+.chapo { color: var(--encre-2); font-size: 17px; max-width: 520px; margin: 18px 0 0; }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; border: 0; cursor: pointer; font: 600 15px/1 var(--titre);
+  padding: 16px 24px; border-radius: 999px; transition: transform .2s, box-shadow .2s, background .2s; white-space: nowrap; }
+.btn .fl { transition: transform .2s; } .btn:hover .fl { transform: translateX(3px); }
+.btn.clair { background: #fff; color: var(--encre); box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
+.btn.noir { background: var(--nuit); color: #fff; box-shadow: 0 12px 30px -14px rgba(17,17,19,.7); }
+.btn.orange { background: var(--o); color: #fff; box-shadow: 0 14px 34px -14px rgba(249,108,34,.9); }
+.btn:hover { transform: translateY(-1px); }
+.lien { display: inline-flex; gap: 8px; align-items: center; color: inherit; text-decoration: none; font-weight: 500; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 
-.fond { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(60% 40% at 50% -6%, rgba(249,115,22,.22), transparent 70%), var(--fond); }
-.fond::after { content: ""; position: absolute; inset: 0;
-  background-image: linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+/* ---------- le grillage du fond (repris de la page en ligne) : carrés de 46 px, fixé à l'écran, qui s'estompe en descendant ---------- */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(to right, rgba(17,17,19,.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,19,.12) 1px, transparent 1px);
   background-size: 46px 46px;
-  -webkit-mask-image: radial-gradient(120% 60% at 50% 0%, #000, transparent 80%); mask-image: radial-gradient(120% 60% at 50% 0%, #000, transparent 80%); }
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); }
 
-.col { width: 100%; max-width: 660px; margin: 0 auto; padding: 0 18px; }
-.large { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 18px; }
-section { padding: 40px 0; }
-.o { color: var(--o2); }
-.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.sur { font: 800 12px/1 var(--corps); letter-spacing: .16em; text-transform: uppercase; color: var(--o2); text-align: center; margin: 0 0 12px; }
-h1, h2, h3 { font-family: var(--titre); margin: 0; }
-h2 { font-weight: 800; font-size: clamp(28px, 6.4vw, 44px); line-height: 1.08; letter-spacing: -.035em; text-align: center; }
-.intro { text-align: center; color: var(--texte-2); font-size: 17px; margin: 14px auto 0; max-width: 540px; }
-.intro b { color: var(--texte); }
-
-/* ---------- les boutons ---------- */
-.cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; text-decoration: none; border: 0; cursor: pointer;
-  font: 800 16.5px/1 var(--corps); letter-spacing: .04em; text-transform: uppercase; color: #0A0A0B; background: var(--o); padding: 20px 22px; border-radius: 14px;
-  box-shadow: 0 14px 40px -12px rgba(249,115,22,.85), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .2s, background .2s; }
-.cta:hover { transform: translateY(-2px); background: #FF8126; }
-.cta .fl { transition: transform .2s; } .cta:hover .fl { transform: translateX(4px); }
-.cta-bloc { max-width: 440px; margin: 30px auto 0; }
-.rassure { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 14px; margin-top: 12px; font: 500 13px/1.3 var(--corps); color: var(--texte-3); }
-.rassure span::before { content: "✓ "; color: var(--vert); }
-
-/* ---------- le signe MOSAIC ---------- */
-.sg { width: 1.15em; height: 1.15em; color: var(--texte); flex: none; }
-.marque { display: inline-flex; align-items: center; gap: .32em; font: 800 20px/1 var(--titre); letter-spacing: -.05em; }
+/* ---------- la barre du haut ---------- */
+.nav { position: sticky; top: 0; z-index: 30; background: rgba(225,220,210,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.nav .cadre { display: flex; align-items: center; justify-content: space-between; height: 66px; max-width: 1280px; }
+.marque { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; text-decoration: none; font: 700 19px/1 var(--titre); letter-spacing: -.03em; }
+.marque svg { width: 22px; height: 22px; }
 .marque .ai { color: var(--o); }
-.marque .studio { font: 600 8.5px/1 var(--corps); letter-spacing: .3em; text-transform: uppercase; color: var(--texte-2); margin-left: .3em; }
+.nav-liens { display: flex; gap: 30px; font-size: 14.5px; color: var(--encre-2); }
+.nav-liens a { text-decoration: none; } .nav-liens a:hover { color: var(--encre); }
+.nav .btn { padding: 12px 18px; font-size: 14px; }
 
-/* ---------- HERO ---------- */
-.hero { padding: 22px 0 26px; text-align: center; }
-.profil { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 999px; background: rgba(19,19,21,.8); border: 1px solid var(--bord); text-align: left; }
-.profil img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--o); }
-.profil b { display: flex; align-items: center; gap: 6px; font-size: 15px; }
-.profil b i { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: #3B82F6; color: #fff; font: 900 10px/1 var(--corps); font-style: normal; }
-.profil span { display: block; font-size: 12.5px; color: var(--texte-2); }
-.profil span em { font-style: normal; color: var(--o2); font-weight: 700; }
-.hero h1 { font-weight: 800; font-size: clamp(31px, 8.6vw, 58px); line-height: 1.04; letter-spacing: -.035em; text-transform: uppercase; margin: 26px 0 0; }
-.pill { display: inline-block; background: var(--o); color: #0A0A0B; padding: 0 .16em; border-radius: .14em; line-height: 1.12; transform: rotate(-1.5deg); }
-.sans-sans { margin: 18px auto 0; max-width: 480px; font-size: 16.5px; font-style: italic; color: var(--texte-2); }
-.sans-sans b { font-style: normal; color: var(--texte); text-transform: uppercase; font-weight: 800; }
-.vsl { margin: 26px auto 0; max-width: 460px; padding: 16px; border-radius: 26px; background: linear-gradient(180deg, rgba(249,115,22,.95), rgba(234,88,12,.95)); box-shadow: 0 30px 80px -24px rgba(249,115,22,.7); }
-.vsl-tete { font: 800 14.5px/1.3 var(--corps); color: #0A0A0B; margin: 2px 0 12px; }
-.lecteur { position: relative; width: 100%; aspect-ratio: 9/16; max-height: 70vh; margin: 0 auto; border-radius: 16px; overflow: hidden; background: #000; }
-.lecteur video { width: 100%; height: 100%; object-fit: cover; }
-.lecteur .play { position: absolute; inset: 0; display: grid; place-items: center; border: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55)); cursor: pointer; }
-.lecteur .play span { width: 84px; height: 84px; border-radius: 50%; background: rgba(10,10,11,.72); border: 2px solid rgba(255,255,255,.85); display: grid; place-items: center; backdrop-filter: blur(4px); transition: transform .2s; }
-.lecteur .play:hover span { transform: scale(1.06); }
-.lecteur .play span::after { content: ""; border-left: 24px solid #fff; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 7px; }
-.lecteur .play small { position: absolute; bottom: 14px; left: 0; right: 0; font: 700 13px/1 var(--corps); color: #fff; letter-spacing: .02em; }
-.lecteur.joue .play { display: none; }
-.vsl .cta { margin-top: 14px; background: #0A0A0B; color: #fff; box-shadow: 0 12px 30px -12px rgba(0,0,0,.8); }
-.vsl .cta:hover { background: #1A1A1D; }
-.chiffres-reel { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 18px auto 0; max-width: 520px; }
-.chiffres-reel span { font: 700 13px/1 var(--corps); padding: 9px 12px; border-radius: 999px; background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
-.chiffres-reel span b { color: var(--o2); }
-.chiffres-note { font-size: 13px; color: var(--texte-3); margin: 10px 0 0; }
-.bande-cadre { overflow: hidden; overflow-x: clip; overflow-y: visible; padding: max(26px, 2.2vw) 0; }
-.bande { background: var(--o); color: #0A0A0B; transform: rotate(-2deg); margin: 0 -30px; padding: 13px 0; box-shadow: 0 16px 40px -14px rgba(249,115,22,.8); }
-.bande-in { display: flex; width: max-content; animation: bande 26s linear infinite; }
-.bande-in span { font: 800 17px/1 var(--titre); letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; padding-right: 22px; }
-@keyframes bande { to { transform: translateX(-50%); } }
+/* ---------- le hero : une carte arrondie, verre cannelé, aux couleurs de la DA ---------- */
+.hero-zone { padding: 6px 12px 0; max-width: 1400px; margin: 0 auto; }
+.hero { position: relative; overflow: hidden; border-radius: 28px; min-height: min(760px, 92vh); color: #fff; display: flex; align-items: flex-end;
+  background: radial-gradient(70% 70% at var(--l1x) var(--l1y), rgba(255,138,76,.75), transparent 60%), radial-gradient(60% 60% at var(--l2x) var(--l2y), rgba(249,108,34,.55), transparent 65%),
+    radial-gradient(90% 80% at 50% 110%, #0B0B0C, transparent 70%), linear-gradient(180deg, #2A160C 0%, #141012 55%, var(--nuit) 100%);
+  animation: lueurs 14s ease-in-out infinite alternate; }
+/* les lueurs se déplacent derrière les cannelures (les centres des dégradés sont animés) */
+@property --l1x { syntax: "<percentage>"; inherits: false; initial-value: 18%; }
+@property --l1y { syntax: "<percentage>"; inherits: false; initial-value: 8%; }
+@property --l2x { syntax: "<percentage>"; inherits: false; initial-value: 85%; }
+@property --l2y { syntax: "<percentage>"; inherits: false; initial-value: 20%; }
+@keyframes lueurs {
+  0%   { --l1x: 12%; --l1y: 6%;  --l2x: 88%; --l2y: 22%; }
+  33%  { --l1x: 38%; --l1y: 16%; --l2x: 66%; --l2y: 4%; }
+  66%  { --l1x: 62%; --l1y: 2%;  --l2x: 34%; --l2y: 18%; }
+  100% { --l1x: 82%; --l1y: 12%; --l2x: 14%; --l2y: 8%; }
+}
+.hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,.13) 10px, rgba(255,255,255,0) 22px, rgba(0,0,0,.18) 34px, rgba(255,255,255,0) 44px);
+  filter: blur(2.5px); -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.75) 45%, transparent 85%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.75) 45%, transparent 85%); }
+.hero::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; opacity: .9; }
+.hero-in { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: end; padding: 0 64px 70px; }
+.hero .mono { color: rgba(255,255,255,.78); margin: 0 0 18px; }
+.hero h1 { font-size: clamp(42px, 6.2vw, 84px); line-height: 1.0; font-weight: 500; letter-spacing: -.035em; }
+.hero h1 em.s { font-weight: 400; }
+.hero-droite p { margin: 0 0 24px; font-size: 16.5px; color: rgba(255,255,255,.86); max-width: 430px; }
+.hero-droite .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.hero-droite .lien { color: rgba(255,255,255,.9); font-size: 15px; }
 
-/* ---------- les chiffres de Chris ---------- */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.stats div { text-align: center; padding: 18px 8px; border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); }
-.stats b { display: block; font: 800 clamp(24px, 6vw, 34px)/1 var(--titre); letter-spacing: -.04em; }
-.stats b.o { color: var(--o2); }
-.stats span { display: block; margin-top: 6px; font-size: 12.5px; color: var(--texte-2); line-height: 1.3; }
+/* le bandeau sous le hero */
+.bandeau-n { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 22px 0 0; font-size: 14px; color: var(--encre-2); }
+.bandeau-n .pastille { font: 500 10.5px/1 var(--mono); letter-spacing: .08em; padding: 5px 9px; border: 1px solid var(--trait); border-radius: 999px; background: #fff; color: var(--encre-3); }
+.bandeau-n a { color: var(--encre); text-decoration: none; font-weight: 500; }
+.outils { margin: 26px auto 0; max-width: 1180px; padding: 16px 22px; display: flex; align-items: center; gap: 26px; overflow: hidden; border-radius: 18px; background: #fff;
+  box-shadow: 0 14px 40px -26px rgba(17,17,19,.35); }
+.outils .mono { color: var(--encre-3); white-space: nowrap; font-size: 10.5px; }
+.outils .piste { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.outils ul { list-style: none; margin: 0; padding: 0; display: flex; width: max-content; white-space: nowrap; color: var(--encre-2); font: 500 15px/1 var(--titre); animation: defile 32s linear infinite; }
+.outils li { display: flex; align-items: center; padding: 4px 0; }
+.outils li::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--o); opacity: .55; margin: 0 22px; }
+.outils:hover ul { animation-play-state: paused; }
 
-/* ---------- tu te reconnais ---------- */
-.maux { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
-.maux li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: center; padding: 16px 18px; border-radius: 16px; background: var(--carte); border: 1px solid var(--bord); font: 600 16px/1.4 var(--corps); }
-.maux li::before { content: "✕"; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,122,122,.1); border: 1px solid rgba(255,122,122,.25); color: var(--rouge); font: 800 13px/1 var(--corps); }
-.coup { margin: 28px 0 0; text-align: center; font: 800 clamp(22px, 5.4vw, 30px)/1.25 var(--titre); letter-spacing: -.03em; }
+/* ---------- le recadrage : la soirée découpée ---------- */
+.recadre { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: center; }
+.chrono { --n: 54px; display: flex; align-items: flex-start; gap: 18px; margin-top: 38px; }
+.chrono .avant { font: 400 var(--n)/1 var(--mono); color: var(--encre-3); }
+.chrono .avant .n { text-decoration: line-through; text-decoration-thickness: 2px; }
+.chrono .apres { font: 500 var(--n)/1 var(--mono); color: var(--o); }
+/* la flèche est centrée en hauteur sur les chiffres, pas sur les légendes */
+.chrono .fl { font-size: 22px; line-height: 1; color: var(--o); margin-top: calc(var(--n) / 2 - 11px); }
+.chrono small { display: block; margin-top: 8px; font: 400 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--encre-3); }
+.chrono .apres small { color: var(--o); }
+.soiree { border-radius: 22px; background: #fff; padding: 28px; box-shadow: 0 30px 70px -36px rgba(17,17,19,.45); border: 1px solid var(--trait); }
+.soiree-tete { display: flex; justify-content: space-between; align-items: baseline; }
+.soiree-tete b { font: 500 34px/1 var(--mono); }
+.soiree-tete .mono { color: var(--encre-3); }
+.barre-jour { display: flex; height: 12px; border-radius: 99px; overflow: hidden; background: #EFEBE4; margin: 20px 0 6px; }
+.barre-jour i { display: block; height: 100%; transition: width 1.2s cubic-bezier(.2,.8,.2,1); width: 0; }
+.legende-jour { display: flex; justify-content: space-between; font: 400 10.5px/1 var(--mono); color: var(--encre-3); }
+.taches { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--trait); }
+.taches li { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--trait); font-size: 15px; }
+.taches li i { width: 10px; height: 10px; border-radius: 3px; }
+.taches li s { color: var(--encre-3); font-family: var(--mono); font-size: 13px; }
+.taches li b { font: 500 13px/1 var(--mono); color: var(--o); }
+/* la dernière ligne suit les colonnes de la liste : le texte sous les tâches, le temps sous les zéros */
+.soiree-pied { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-top: 16px; }
+.soiree-pied span:first-child { grid-column: 2; font-weight: 600; font-size: 15px; line-height: 1.35; }
+.soiree-pied span:last-child { color: var(--o); font: 600 15px/1 var(--mono); white-space: nowrap; text-align: right; }
+.paires { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 72px; }
+.paire { border-radius: 18px; background: #fff; padding: 20px; box-shadow: 0 18px 46px -30px rgba(17,17,19,.4); border: 1px solid var(--trait); }
+.paire .mono { color: var(--encre-3); }
+.paire h3 { font-size: 17px; font-weight: 600; margin: 12px 0 6px; letter-spacing: -.01em; }
+.paire p { margin: 0; color: var(--encre-2); font-size: 14.5px; }
+.paire .alors { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--trait); color: var(--encre); font-weight: 500; font-size: 14.5px; }
+.paire .alors::before { content: "→"; color: var(--o); margin-right: .4em; }
 
-/* ---------- la solution ---------- */
-.solution { border-radius: 26px; padding: 30px 22px; text-align: center; background: linear-gradient(180deg, rgba(249,115,22,.16), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.4); }
-.solution .marque { font-size: 30px; }
-.solution .marque .studio { font-size: 11px; }
-.solution h2 { margin-top: 16px; }
+/* ---------- les sections sombres, granuleuses ---------- */
+.sombre { background: radial-gradient(60% 50% at 10% 60%, rgba(249,108,34,.16), transparent 70%), radial-gradient(50% 40% at 95% 5%, rgba(255,138,76,.14), transparent 70%), var(--nuit); color: #fff; }
+.sombre::before { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
+.sombre .chapo { color: rgba(255,255,255,.72); }
+.systeme { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 280px minmax(0, 1.15fr); gap: 16px; align-items: stretch; }
+.sys-titre { display: flex; flex-direction: column; justify-content: center; padding: 10px 14px 6px 0; }
+.sys-titre .mono { color: var(--o2); margin-bottom: 16px; }
+.sys-titre h2 { font-size: clamp(30px, 3.2vw, 40px); }
+.tel { position: relative; margin: 0; border-radius: 26px; overflow: hidden; aspect-ratio: 9/16; align-self: center; background: #000;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 40px 80px -40px #000; }
+.tel video, .tel img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.tel figcaption { position: absolute; left: 12px; top: 12px; font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: var(--o); color: #fff; }
+.carte-photo { position: relative; border-radius: 22px; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; padding: 34px; isolation: isolate; }
+.carte-photo img, .carte-photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.carte-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(17,17,19,.05) 20%, rgba(17,17,19,.88) 100%); }
+.carte-photo.ecran { background: #1A1A1D; flex-direction: column; justify-content: space-between; align-items: stretch; }
+.carte-photo.ecran img { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 1440/760; flex: none; margin-bottom: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12); object-position: left top; z-index: 0; box-shadow: 0 24px 60px -30px #000; }
+.carte-photo.ecran::after { display: none; }
+.carte-photo h2 { font-size: clamp(28px, 3.2vw, 38px); }
+.carte-photo .texte p { margin: 0 0 18px; color: rgba(255,255,255,.86); }
+.coches { list-style: none; margin: 0; padding: 0; }
+.coches li { display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.16); font-size: 14.5px; }
+.coches li::before { content: "✓"; color: var(--o2); }
+.stats { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); }
+.stats b { display: block; font: 400 clamp(28px, 2.8vw, 36px)/1 var(--titre); letter-spacing: -.03em; }
+.stats .mono { display: block; margin-top: 10px; color: rgba(255,255,255,.6); font-size: 10px; line-height: 1.45; }
 
-/* ---------- les étapes (vraies captures) ---------- */
-.etapes { display: grid; gap: 14px; margin-top: 24px; }
-.etapes { grid-template-columns: minmax(0, 1fr); }
-.etape > div, .fenetre, .tl-defile { min-width: 0; }
-.etape { border-radius: 24px; background: var(--carte); border: 1px solid var(--bord); padding: 22px 18px 18px; }
-.etape-tete { display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: start; margin-bottom: 16px; }
-.etape-tete .n { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--o); color: #0A0A0B; font: 800 17px/1 var(--titre); }
-.etape h3 { font-size: 20px; letter-spacing: -.02em; line-height: 1.2; }
-.etape p { margin: 5px 0 0; color: var(--texte-2); font-size: 15px; }
-.fenetre { border-radius: 14px; overflow: hidden; border: 1px solid var(--bord-2); background: #0D0D0F; box-shadow: 0 24px 50px -24px rgba(0,0,0,.9); }
-.fenetre .barre-f { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; background: #17171A; border-bottom: 1px solid var(--bord); }
-.fenetre .barre-f i { width: 9px; height: 9px; border-radius: 50%; background: #3A3A41; }
-.fenetre .barre-f i:first-child { background: #FF5F57; } .fenetre .barre-f i:nth-child(2) { background: #FEBC2E; } .fenetre .barre-f i:nth-child(3) { background: #28C840; }
-.fenetre .barre-f span { margin-left: 8px; font: 600 11px/1 var(--corps); color: var(--texte-3); }
-.fenetre { position: relative; }
-.fenetre img { width: 100%; }
-.tl-defile { overflow-x: auto; scrollbar-width: thin; }
-.tl-aide { display: none; }
-@media (max-width: 700px) { .tl-defile img { width: 860px; max-width: none; } .tl-aide { display: block; } }
+/* ---------- le calcul ---------- */
+.calcul { position: relative; overflow: hidden; border-radius: 28px; color: #fff; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 30px; padding: 46px;
+  background: radial-gradient(60% 80% at var(--l1x) var(--l1y), rgba(255,138,76,.55), transparent 60%), radial-gradient(60% 60% at var(--l2x) var(--l2y), rgba(249,108,34,.4), transparent 70%), linear-gradient(160deg, #24140C, var(--nuit));
+  --l1x: 15%; --l1y: 0%; --l2x: 90%; --l2y: 100%; animation: lueurs-calcul 12s ease-in-out infinite alternate; }
+@keyframes lueurs-calcul {
+  0%   { --l1x: 10%; --l1y: 0%;   --l2x: 92%; --l2y: 100%; }
+  50%  { --l1x: 50%; --l1y: 20%;  --l2x: 55%; --l2y: 80%; }
+  100% { --l1x: 88%; --l1y: 4%;   --l2x: 12%; --l2y: 96%; }
+}
+.calcul::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,.08) 10px, rgba(255,255,255,0) 22px); filter: blur(2px); }
+.calcul > * { position: relative; }
+.calcul h2 { font-size: clamp(30px, 3.6vw, 42px); }
+.reglette { margin-top: 34px; }
+.reglette label { display: flex; justify-content: space-between; font: 500 15px/1.3 var(--titre); color: rgba(255,255,255,.85); }
+.reglette label { gap: 14px; align-items: center; }
+.reglette label b { font: 500 22px/1 var(--mono); color: #fff; white-space: nowrap; }
+.reglette label b small { font-size: 13px; color: rgba(255,255,255,.7); margin-left: 4px; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; background: transparent; cursor: pointer; margin: 8px 0 22px; }
+input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, #fff var(--p, 30%), rgba(255,255,255,.25) var(--p, 30%)); }
+input[type=range]::-moz-range-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, #fff var(--p, 30%), rgba(255,255,255,.25) var(--p, 30%)); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; margin-top: -9px; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 0; }
+.resultat { border-radius: 22px; background: #fff; color: var(--encre); padding: 28px; display: flex; flex-direction: column; }
+.resultat .mono { color: var(--encre-3); font-size: 10.5px; }
+.resultat .gros { font: 400 64px/1 var(--titre); letter-spacing: -.04em; margin-top: 10px; }
+.resultat .gros small { font-size: 16px; color: var(--encre-2); letter-spacing: 0; margin-left: 6px; }
+.resultat .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; padding-top: 18px; border-top: 1px solid var(--trait); }
+.resultat .deux b { display: block; font: 400 26px/1 var(--titre); }
+.resultat .deux span { font-size: 12.5px; color: var(--encre-3); }
+.resultat .btn { justify-content: center; margin-top: auto; }
+.resultat .note { margin: 12px 0 0; font-size: 12px; color: var(--encre-3); }
 
-/* ---------- avant / après ---------- */
-.duo-v { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; position: relative; }
-.duo-v figure { margin: 0; }
-.duo-v .tag { white-space: nowrap; display: inline-block; font: 800 11.5px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; padding: 8px 11px; border-radius: 8px; margin-bottom: 10px; }
-.duo-v .avant .tag { background: #fff; color: #0A0A0B; }
-.duo-v .apres .tag { background: var(--o); color: #0A0A0B; }
-.duo-v video { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 16px; background: #000; border: 1px solid var(--bord); }
-.duo-v .apres video { border-color: rgba(249,115,22,.6); box-shadow: 0 20px 50px -20px rgba(249,115,22,.6); }
-.duo-v .fleche { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: #0A0A0B; border: 2px solid var(--o); display: grid; place-items: center; color: var(--o2); font: 800 20px/1 var(--corps); z-index: 2; }
-.v-cadre { position: relative; }
-.son { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); cursor: pointer; white-space: nowrap; font: 700 12px/1 var(--corps); color: #fff; background: rgba(10,10,11,.8); border: 1px solid rgba(255,255,255,.25); padding: 8px 11px; border-radius: 999px; }
-.son.actif { background: var(--o); color: #0A0A0B; border-color: transparent; }
-.legende-v { margin: 16px 0 0; text-align: center; color: var(--texte-2); font-size: 15px; }
+/* ---------- ce que le studio fait : les cartes en verre ---------- */
+.intro-fait { display: grid; grid-template-columns: 250px 1fr; gap: 56px; align-items: center; }
+.intro-fait .carte-photo { min-height: 0; aspect-ratio: 9/16; padding: 22px; }
+.intro-fait .carte-photo b { font-size: 18px; font-weight: 500; line-height: 1.25; }
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; margin-top: 46px; }
+.verre { position: relative; overflow: hidden; border-radius: 22px; padding: 26px; color: #fff; display: flex; flex-direction: column; isolation: isolate; min-height: 270px;
+  background: radial-gradient(70% 60% at 20% 10%, rgba(255,138,76,.55), transparent 60%), radial-gradient(60% 70% at 100% 100%, rgba(249,108,34,.35), transparent 65%), linear-gradient(160deg, #26160E, #121214 70%); }
+.verre::before { content: ""; position: absolute; inset: 0; background: var(--grain); z-index: -1; }
+.verre:nth-child(2n) { background: radial-gradient(60% 60% at 85% 10%, rgba(255,138,76,.45), transparent 60%), radial-gradient(70% 70% at 0% 100%, rgba(120,60,30,.55), transparent 65%), linear-gradient(200deg, #1F1410, #111113 70%); }
+.verre h3 { font-size: 22px; font-weight: 500; line-height: 1.2; }
+.verre p { margin: 8px 0 0; color: rgba(255,255,255,.76); font-size: 14.5px; max-width: 460px; }
+.verre .tag { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.16); font-family: var(--serif); font-style: italic; font-size: 17px; color: #fff; }
+.verre .tag::after { content: ""; }
+.verre .vis { margin: 20px 0; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 24px 60px -30px #000; }
+.v-grand { grid-column: span 7; grid-row: span 2; }
+.v-moyen { grid-column: span 5; }
+.v-tiers { grid-column: span 4; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.duo figure { margin: 0; position: relative; }
+.duo video { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); }
+.duo figcaption { position: absolute; left: 8px; top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: rgba(17,17,19,.75); }
+.duo .apres figcaption { background: var(--o); }
+.son { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); cursor: pointer; white-space: nowrap; font: 600 11.5px/1 var(--titre); color: #fff; background: rgba(17,17,19,.8); border: 1px solid rgba(255,255,255,.25); padding: 7px 10px; border-radius: 999px; }
+.son.actif { background: var(--o); border-color: transparent; }
+/* carrousel (4:5) et story (9:16) côte à côte, à la même hauteur, sans rien couper */
+.vis-mini { display: grid; grid-template-columns: 4fr 2.8125fr; gap: 8px; margin: 18px 0; align-items: start; }
+.vis-mini img { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); }
+.vis-mini img:first-child { aspect-ratio: 4/5; } .vis-mini img:last-child { aspect-ratio: 9/16; }
+.chaine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; counter-reset: c; }
+.chaine li { counter-increment: c; border-radius: 12px; padding: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); font-size: 12.5px; line-height: 1.35; color: rgba(255,255,255,.7);
+  transition: background .4s, border-color .4s, translate .4s cubic-bezier(.2,.8,.2,1); }
+.chaine li::before { content: "0" counter(c); display: block; font: 500 10px/1 var(--mono); color: var(--o2); margin-bottom: 8px; }
+.chaine li b { display: block; color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.chaine li:hover { background: rgba(255,255,255,.12); border-color: rgba(255,138,76,.5); translate: 0 -2px; }
+.v-grand .duo { margin-bottom: 10px; }
+.sous-cta { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
+.sous-cta .mono { color: var(--encre-3); font-size: 10.5px; }
+.puces { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; text-align: center; }
+.puces span { white-space: nowrap; }
+.puces span::before { content: "✓ "; color: var(--o); }
 
-/* ---------- le chrono ---------- */
-.temps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
-.t { border-radius: 20px; padding: 18px; }
-.t small { display: block; font: 800 11px/1.2 var(--corps); letter-spacing: .12em; text-transform: uppercase; }
-.t b { display: block; font: 800 clamp(40px, 11vw, 60px)/1 var(--titre); letter-spacing: -.05em; margin: 10px 0 4px; }
-.t span { font-size: 13.5px; }
-.t.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); }
-.t.sans b { color: #7E7E87; text-decoration: line-through; text-decoration-color: rgba(255,122,122,.75); text-decoration-thickness: 4px; }
-.t.avec { background: linear-gradient(160deg, rgba(249,115,22,.24), rgba(249,115,22,.06)); border: 1px solid rgba(249,115,22,.55); color: var(--o3); }
-.t.avec b { color: #fff; }
-.gagne { margin: 14px 0 0; text-align: center; font: 800 19px/1.3 var(--titre); letter-spacing: -.02em; }
-.soirs { display: grid; gap: 10px; margin-top: 26px; }
-.soir { border-radius: 18px; padding: 18px; }
-.soir h3 { font-size: 15px; margin-bottom: 12px; }
-.soir ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.soir li { display: grid; grid-template-columns: 54px 1fr; gap: 8px; font-size: 15px; line-height: 1.35; }
-.soir li b { font: 800 14.5px/1.35 var(--titre); }
-.soir.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
-.soir.sans h3, .soir.sans li b { color: var(--texte-3); }
-.soir.sans li:last-child { color: var(--rouge); }
-.soir.avec { background: linear-gradient(170deg, rgba(249,115,22,.14), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.45); }
-.soir.avec li b { color: var(--o2); }
-.soir.avec li:last-child { color: #fff; font-weight: 700; }
-.calcul { margin-top: 26px; border-radius: 22px; background: #111113; border: 1px solid var(--bord-2); padding: 22px 18px; }
-.calcul label { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font: 600 15px/1.3 var(--corps); color: var(--texte-2); }
-.calcul label b { font: 800 26px/1 var(--titre); color: var(--texte); white-space: nowrap; }
-input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 38px; background: transparent; margin: 10px 0 16px; cursor: pointer; }
-input[type=range]::-webkit-slider-runnable-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--o) var(--p, 28%), #2A2A30 var(--p, 28%)); }
-input[type=range]::-moz-range-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--o) var(--p, 28%), #2A2A30 var(--p, 28%)); }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 5px solid var(--o); margin-top: -10px; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
-input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 5px solid var(--o); }
-.res { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.r { border-radius: 16px; padding: 14px 16px; }
-.r small { display: block; font: 800 10.5px/1.2 var(--corps); letter-spacing: .12em; text-transform: uppercase; }
-.r b { display: block; font: 800 44px/1 var(--titre); letter-spacing: -.05em; margin: 8px 0 2px; }
-.r span { font-size: 14px; }
-.r.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); } .r.sans b { color: #8A8A93; }
-.r.avec { background: linear-gradient(160deg, rgba(249,115,22,.22), rgba(249,115,22,.06)); border: 1px solid rgba(249,115,22,.5); color: var(--o3); } .r.avec b { color: #fff; }
-.mois { text-align: center; margin: 14px 0 0; font: 700 16px/1.4 var(--titre); }
-.mois em { font-style: normal; color: var(--o2); }
-.petit { text-align: center; font-size: 12.5px; color: var(--texte-3); margin: 14px 0 0; }
+/* ---------- les étapes ---------- */
+.etapes-zone { padding: 0 12px; max-width: 1400px; margin: 0 auto; }
+.etapes-bloc { border-radius: 28px; padding: 70px 0; }
+.etapes-tete { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+.etapes-tete .compteur { text-align: right; font: 500 14px/1 var(--mono); color: rgba(255,255,255,.6); }
+.etapes-tete p { color: rgba(255,255,255,.75); margin: 0; max-width: 460px; }
+.etape { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 30px; align-items: center; border-radius: 22px; background: #fff; color: var(--encre); padding: 30px; margin-top: 18px; position: relative; }
+.etape .num { display: flex; gap: 10px; align-items: center; }
+.etape .num .mono { color: var(--encre-3); }
+.etape .num span:last-child { font: 500 12px/1 var(--titre); padding: 6px 10px; border-radius: 999px; background: var(--papier); color: var(--encre-2); }
+.etape h3 { font-size: 30px; margin: 18px 0 8px; }
+.etape p { margin: 0; color: var(--encre-2); }
+.etape .infos { display: grid; grid-template-columns: 1fr 1fr; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--trait); }
+.etape .infos .mono { display: block; color: var(--encre-3); font-size: 10px; margin-bottom: 6px; }
+.etape .infos div + div { padding-left: 18px; border-left: 1px solid var(--trait); }
+.etape .ecran { border-radius: 16px; background: #F1EEE8; padding: 16px; }
+.etape .ecran img { border-radius: 10px; box-shadow: 0 20px 44px -26px rgba(17,17,19,.6); }
+.etape .tl { overflow-x: auto; }
 
-/* ---------- la galerie (vrais exports) ---------- */
-.serie { margin-top: 22px; }
-.serie-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin: 0 0 12px; }
-.serie-tete h3 { font-size: 18px; letter-spacing: -.02em; }
-.serie-tete span { font-size: 13px; color: var(--texte-3); white-space: nowrap; }
-/* la galerie : un rang de slides (défile au téléphone, en grille à l'ordinateur), puis le mur des créations */
-.cree-tag { display: inline-block; font: 800 11px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; color: #0A0A0B; background: var(--o); padding: 7px 10px; border-radius: 7px; }
-.serie-tete .cree-tag { font-size: 12px; color: #0A0A0B; }
-.rang { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 18px 10px; margin: 0 -18px; scrollbar-width: none; }
-.rang::-webkit-scrollbar { display: none; }
-.rang img { flex: none; width: 62%; max-width: 260px; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; scroll-snap-align: center; border: 1px solid var(--bord); }
-.rang.story img { width: 42%; max-width: 200px; aspect-ratio: 9/16; }
-.mur { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px;
-  grid-template-areas: "prune prune" "pack video" "chris chris" "fiche fiche" "env env"; }
-.c-prune { grid-area: prune; } .c-pack { grid-area: pack; } .c-video { grid-area: video; } .c-chris { grid-area: chris; } .c-fiche { grid-area: fiche; } .c-env { grid-area: env; }
-.cree { margin: 0; display: flex; flex-direction: column; border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); overflow: hidden; }
-.cree .media { position: relative; aspect-ratio: 16/9; background: #000; }
-.cree.etroit .media { aspect-ratio: 4/5; }
-.c-env .media { aspect-ratio: 16/9; }
-.cree .media img, .cree .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.cree .media .cree-tag { position: absolute; top: 10px; left: 10px; box-shadow: 0 6px 16px rgba(0,0,0,.5); }
-.cree figcaption { padding: 11px 14px 13px; font: 600 14px/1.35 var(--corps); color: var(--texte-2); }
-.defile { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 18px 10px; margin: 0 -18px; scrollbar-width: none; }
-.defile::-webkit-scrollbar { display: none; }
-.defile img { flex: none; width: 62%; max-width: 260px; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; scroll-snap-align: center; border: 1px solid var(--bord); box-shadow: 0 16px 34px -18px rgba(0,0,0,.9); }
-.defile.story img { width: 46%; max-width: 200px; aspect-ratio: 9/16; }
-.glisse { text-align: center; font: 600 12.5px/1 var(--corps); color: var(--texte-3); margin-top: 8px; }
+/* ---------- les preuves ---------- */
+.preuves { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 46px; }
+.cas { border-radius: 22px; background: #fff; border: 1px solid var(--trait); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 22px 50px -34px rgba(17,17,19,.4); }
+.cas .img { aspect-ratio: 2/3; overflow: hidden; background: #EEE; }
+.cas .img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.cas .txt { padding: 22px; }
+.cas .mono { color: var(--encre-3); }
+.cas h3 { font-size: 20px; margin: 10px 0 12px; line-height: 1.25; }
+.cas .res { font-size: 14px; color: var(--encre-2); padding-top: 12px; border-top: 1px solid var(--trait); }
+.cas .res b { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; color: var(--o); margin-right: 6px; }
+.honnete { margin: 20px 0 0; font-size: 13px; color: var(--encre-3); }
 
-/* ---------- tout ce que le studio fait ---------- */
-.pastille { display: flex; justify-content: center; margin: 22px 0 0; }
-.pastille span { font: 800 14px/1.3 var(--corps); color: #0A0A0B; background: var(--o); padding: 12px 18px; border-radius: 999px; text-align: center; box-shadow: 0 12px 30px -12px rgba(249,115,22,.8); }
-.fonctions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
-.f { border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); padding: 16px; }
-.f .n { font: 800 12px/1 var(--titre); color: var(--o2); }
-.f h3 { font-size: 15.5px; letter-spacing: -.015em; margin: 10px 0 5px; line-height: 1.25; }
-.f p { margin: 0; font-size: 13.5px; color: var(--texte-2); line-height: 1.45; }
-.fonctions .f:last-child { grid-column: span 2; }
-.f.star { border-color: rgba(249,115,22,.5); background: linear-gradient(170deg, rgba(249,115,22,.14), var(--carte) 60%); }
-
-/* ---------- résultats ---------- */
-.preuves { display: grid; gap: 14px; margin-top: 28px; }
-.preuve { border-radius: 22px; background: var(--carte); border: 1px solid var(--bord); padding: 18px; }
-.preuve-tete { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-bottom: 14px; }
-.preuve-tete .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); color: var(--o2); font: 800 15px/1 var(--titre); }
-.preuve h3 { font-size: 18px; letter-spacing: -.02em; }
-.preuve p { margin: 3px 0 0; font-size: 14.5px; color: var(--texte-2); }
-.captures { display: flex; gap: 10px; }
-.captures img { flex: 1; min-width: 0; max-height: 420px; object-fit: cover; object-position: top; border-radius: 12px; border: 1px solid var(--bord); }
-
-/* ---------- avis ---------- */
-.avis { display: grid; gap: 12px; margin-top: 28px; }
-.a { border-radius: 20px; background: var(--carte); border: 1px solid var(--bord); padding: 18px; }
-.a p { margin: 0; font-size: 16px; line-height: 1.5; }
-.a .qui { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; color: var(--texte-3); }
-.a .qui i { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--o), #7C2D12); display: grid; place-items: center; font: 800 14px/1 var(--titre); color: #fff; font-style: normal; }
-.a .qui b { display: block; color: var(--texte); font-size: 14.5px; }
-.etoiles { color: #FBBF24; letter-spacing: 2px; font-size: 14px; margin-bottom: 8px; }
-.vocal { display: flex; align-items: center; gap: 14px; width: 100%; border: 0; cursor: pointer; text-align: left; padding: 0; background: none; color: inherit; font: inherit; }
-.vocal .bouton { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--o); display: grid; place-items: center; box-shadow: 0 10px 26px -10px rgba(249,115,22,.9); }
-.vocal .bouton::after { content: ""; border-left: 15px solid #0A0A0B; border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
-.vocal.joue .bouton::after { border: 0; width: 14px; height: 16px; margin: 0; background: linear-gradient(90deg, #0A0A0B 0 5px, transparent 5px 9px, #0A0A0B 9px); }
-.vocal .onde { flex: 1; height: 34px; background: repeating-linear-gradient(90deg, rgba(249,115,22,.55) 0 3px, transparent 3px 7px); -webkit-mask: linear-gradient(0deg, transparent 20%, #000 20% 80%, transparent 80%), radial-gradient(60% 100% at 50% 50%, #000, transparent); mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); border-radius: 6px; }
+/* ---------- les avis ---------- */
+.avis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.a { border-radius: 20px; background: #fff; border: 1px solid var(--trait); padding: 22px; display: flex; flex-direction: column; }
+.a p { margin: 0 0 18px; font-size: 15px; }
+.a .qui { margin-top: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--encre-3); }
+.a .qui i { width: 34px; height: 34px; border-radius: 50%; background: var(--nuit); color: #fff; display: grid; place-items: center; font: 600 14px/1 var(--titre); font-style: normal; }
+.a .qui b { display: block; color: var(--encre); font-size: 14px; }
+.vocal { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; cursor: pointer; text-align: left; padding: 0; background: none; color: inherit; font: inherit; margin-bottom: 18px; }
+.vocal .bouton { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--o); display: grid; place-items: center; }
+.vocal .bouton::after { content: ""; border-left: 13px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
+.vocal.joue .bouton::after { border: 0; width: 12px; height: 14px; margin: 0; background: linear-gradient(90deg, #fff 0 4px, transparent 4px 8px, #fff 8px); }
+.vocal .onde { flex: 1; height: 28px; background: repeating-linear-gradient(90deg, rgba(249,108,34,.6) 0 2px, transparent 2px 6px); -webkit-mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); }
 .vocal.joue .onde { animation: onde .9s linear infinite; }
-@keyframes onde { to { background-position: 14px 0; } }
-.vocal .lbl { font: 700 13px/1.2 var(--corps); color: var(--texte-2); white-space: nowrap; }
+@keyframes onde { to { background-position: 12px 0; } }
 
-/* ---------- pour toi / pas pour toi ---------- */
-.pour { display: grid; gap: 12px; margin-top: 28px; }
-.p { border-radius: 22px; padding: 20px; }
-.p h3 { font: 800 21px/1.2 var(--titre); letter-spacing: -.02em; margin-bottom: 12px; }
-.p ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.p li { display: grid; grid-template-columns: 24px 1fr; gap: 10px; font-size: 15.5px; line-height: 1.4; }
-.p li::before { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font: 800 12px/1 var(--corps); }
-.p.oui { background: linear-gradient(170deg, rgba(249,115,22,.14), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.45); }
-.p.oui li::before { content: "✓"; background: var(--o); color: #0A0A0B; }
-.p.non { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
-.p.non li::before { content: "✕"; background: rgba(255,122,122,.1); border: 1px solid rgba(255,122,122,.25); color: var(--rouge); }
+/* ---------- le chat de la formation : les captures brutes ---------- */
+.chat { position: relative; overflow: hidden; margin-top: 18px; border-radius: 28px; padding: 46px; color: #fff; isolation: isolate;
+  background: radial-gradient(60% 50% at 0% 0%, rgba(249,108,34,.22), transparent 70%), radial-gradient(50% 50% at 100% 100%, rgba(255,138,76,.14), transparent 70%), var(--nuit); }
+.chat::before { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; z-index: -1; }
+.chat-tete { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 30px; }
+.chat-tete h3 { font-size: clamp(24px, 2.6vw, 32px); max-width: 560px; line-height: 1.15; }
+.chat-tete .mono { color: rgba(255,255,255,.55); font-size: 10.5px; white-space: nowrap; }
+.mur { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.mur-col { display: grid; gap: 16px; }
+.capture { margin: 0; cursor: zoom-in; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); background: #121212;
+  box-shadow: 0 30px 60px -36px #000; transition: translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, border-color .4s; }
+.capture img { width: 100%; height: auto; }
+.capture:hover { translate: 0 -4px; border-color: rgba(255,138,76,.45); box-shadow: 0 44px 80px -40px #000; }
+.inclus { max-width: 380px; border-radius: 16px; padding: 18px 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+.inclus .mono { color: var(--o2); font-size: 10.5px; }
+.inclus p { margin: 8px 0 0; color: rgba(255,255,255,.8); font-size: 14.5px; }
+.loupe { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(10,10,11,.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: zoom-out; opacity: 0; transition: opacity .25s; }
+.loupe.ouverte { opacity: 1; }
+.loupe img { max-width: min(1100px, 100%); max-height: 100%; border-radius: 14px; box-shadow: 0 40px 100px -30px #000; }
+.inclus p b { color: #fff; }
 
-/* ---------- les bonus : mes deux autres formations, offertes (6 oct. 2026) ---------- */
-.bonus { display: grid; gap: 14px; margin-top: 28px; }
-.bn { position: relative; border-radius: 22px; overflow: hidden; background: var(--carte); border: 1px solid var(--bord); }
-.bn img { display: block; width: 100%; aspect-ratio: 590 / 396; object-fit: cover; }
-.bn-txt { padding: 16px 18px 18px; }
-.bn-tag { position: absolute; top: 12px; left: 12px; padding: 7px 12px; border-radius: 999px; background: var(--o); color: #0A0A0B; font: 800 12px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
-.bn h3 { font: 800 21px/1.2 var(--titre); letter-spacing: -.02em; }
-.bn p { margin: 6px 0 0; font-size: 14.5px; color: var(--texte-2); line-height: 1.45; }
-.bn .meta { margin-top: 10px; font-size: 13px; color: var(--texte-3); }
-.bn .valeur { margin-top: 12px; display: flex; align-items: baseline; gap: 10px; }
-.bn .valeur s { font: 800 18px/1 var(--titre); color: var(--texte-3); text-decoration-color: rgba(255,122,122,.8); }
-.bn .valeur b { font: 800 18px/1 var(--titre); color: var(--vert); }
-.bonus-total { margin: 18px auto 0; display: table; padding: 12px 18px; border-radius: 14px; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); font: 700 14.5px/1.35 var(--corps); color: var(--o3); text-align: center; }
-/* les deux lignes bonus de l'offre : un bandeau à part, qui se voit avant le paiement */
-.liste li.offert { grid-template-columns: 34px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 14px;
-  background: linear-gradient(120deg, rgba(249,115,22,.22), rgba(249,115,22,.06) 70%); border: 1px solid rgba(249,115,22,.55);
-  box-shadow: 0 10px 30px -14px rgba(249,115,22,.7); }
-.liste li.offert::before { content: "🎁"; width: 34px; height: 34px; border-radius: 10px; background: var(--o); font-size: 17px; margin: 0; box-shadow: 0 4px 14px rgba(249,115,22,.5); }
-.liste li.offert b { color: var(--o3); }
-.liste li.offert small { color: var(--texte-2); }
-.liste li.offert + li.offert { margin-top: -2px; }
-.liste .sep-bonus { display: flex; align-items: center; gap: 10px; margin-top: 6px; font: 800 11.5px/1 var(--corps); letter-spacing: .16em; text-transform: uppercase; color: var(--o2); }
-.liste .sep-bonus::before, .liste .sep-bonus::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(249,115,22,.55), transparent); }
-.liste li.sep-bonus::before { width: auto; height: 1px; border-radius: 0; background: linear-gradient(90deg, transparent, rgba(249,115,22,.55)); margin: 0; content: ""; }
-.liste li.sep-bonus { grid-template-columns: 1fr auto 1fr; }
-.liste .tag-offert { display: inline-block; margin-left: 8px; padding: 3px 8px; border-radius: 999px; background: rgba(74,222,128,.14); border: 1px solid rgba(74,222,128,.45); color: var(--vert); font: 800 11px/1.2 var(--corps); letter-spacing: .06em; text-transform: uppercase; vertical-align: 2px; }
+/* ---------- Chris ---------- */
+.chris { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: center; }
+.chris-photo { border-radius: 50%; overflow: hidden; aspect-ratio: 1; background: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 0 0 10px rgba(255,255,255,.04), 0 40px 80px -40px #000; }
+.chris-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.chris .mono { color: var(--o2); }
+.chris h3 { font-size: 34px; margin: 12px 0 10px; }
+.chris p { color: rgba(255,255,255,.78); margin: 0 0 18px; max-width: 560px; }
+.defile { position: relative; overflow: hidden; margin-top: 56px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.defile-in { display: flex; gap: 10px; width: max-content; animation: defile 40s linear infinite; }
+.defile span { white-space: nowrap; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.8); font-size: 14px; }
+@keyframes defile { to { transform: translateX(-50%); } }
 
 /* ---------- l'offre ---------- */
-.offre { border-radius: 28px; padding: 2px; background: linear-gradient(160deg, var(--o), rgba(249,115,22,.2) 45%, rgba(255,255,255,.08) 70%, var(--o)); box-shadow: 0 40px 120px -40px rgba(249,115,22,.6); margin-top: 28px; }
-.offre-in { border-radius: 26px; background: #111113; padding: 26px 20px; }
-.urgence { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); font: 700 13.5px/1.3 var(--corps); color: var(--o3); text-align: center; }
-.urgence::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--o); box-shadow: 0 0 10px var(--o); animation: clign 1.4s infinite; flex: none; }
+.offre { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 50px; align-items: start; }
+.offre-carte { border-radius: 26px; background: #fff; border: 1px solid var(--trait); padding: 34px; box-shadow: 0 40px 90px -50px rgba(17,17,19,.55); }
+.urgence { display: inline-flex; align-items: center; gap: 8px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--o); }
+.urgence::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--o); animation: clign 1.4s infinite; }
 @keyframes clign { 50% { opacity: .3; } }
-.offre .marque { display: flex; justify-content: center; font-size: 28px; margin: 22px 0 0; }
-.offre .marque .studio { font-size: 10.5px; }
-.prix { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 16px 0 4px; flex-wrap: wrap; }
-.prix s { font: 800 26px/1 var(--titre); color: var(--texte-3); text-decoration-color: rgba(255,122,122,.8); }
-.prix b { font: 800 64px/1 var(--titre); letter-spacing: -.05em; }
-.modalite { text-align: center; font-size: 14px; color: var(--texte-2); margin: 8px auto 0; display: table; }
-.liste { list-style: none; margin: 24px auto 0; padding: 0; display: grid; gap: 12px; width: fit-content; max-width: 100%; }
-.liste li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 15.5px; line-height: 1.4; }
-.liste li::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--vert); color: #0A0A0B; font: 900 12px/1 var(--corps); margin-top: 1px; }
-.liste li small { display: block; color: var(--texte-3); font-size: 13px; }
-.paiement { margin-top: 24px; }
-.whop-mount { margin-top: 24px; border-radius: 16px; overflow: hidden; background: #0E0E10; min-height: 480px; }
+.prix { display: flex; align-items: baseline; gap: 14px; margin: 18px 0 4px; }
+.prix s { font: 400 26px/1 var(--mono); color: var(--encre-3); }
+.prix b { font: 500 76px/1 var(--titre); letter-spacing: -.045em; }
+.prix b small { font-size: 30px; color: var(--o); }
+.modalite { color: var(--encre-2); margin: 0; font-size: 14.5px; }
+.liste { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--trait); }
+.liste li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--trait); font-size: 15px; }
+.liste li::before { content: "✓"; color: var(--o); font-weight: 700; }
+.liste li small { display: block; color: var(--encre-3); font-size: 13px; }
+.liste li.offert::before { content: "+"; }
+.liste li.offert b { color: var(--o); }
+.whop-mount { margin-top: 24px; border-radius: 16px; overflow: hidden; background: #fff; min-height: 480px; }
 .whop-mount > div, .whop-mount [data-whop-plan] { width: 100%; }
-/* l'iframe de Whop règle sa hauteur elle-même : jamais de height imposée, seulement un plancher */
 .whop-mount iframe { width: 100% !important; border: 0; display: block; min-height: 480px; }
-.garantie-legale { margin: 12px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--texte-2); text-align: center; }
-.a-cote { margin: 18px 0 0; padding: 14px; border-radius: 12px; background: #19191C; border: 1px solid var(--bord); font-size: 13.5px; color: var(--texte-2); line-height: 1.5; }
+.petit { margin: 12px 0 0; font-size: 13px; color: var(--encre-3); }
+.bonus { display: grid; gap: 12px; margin-top: 30px; }
+.offre-gauche { position: sticky; top: 96px; }
+.apres-achat { margin-top: 14px; border-radius: 18px; background: var(--nuit); color: #fff; padding: 24px; position: relative; overflow: hidden; isolation: isolate; }
+.apres-achat::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 90% at 100% 0%, rgba(249,108,34,.3), transparent 70%), var(--grain); }
+.apres-achat .mono { color: var(--o2); font-size: 10.5px; }
+.apres-achat ol { list-style: none; margin: 16px 0 0; padding: 0; counter-reset: e; }
+.apres-achat li { counter-increment: e; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 14.5px; color: rgba(255,255,255,.8); }
+.apres-achat li:first-child { border-top: 0; padding-top: 0; }
+.apres-achat li::before { content: "0" counter(e); font: 500 11px/1 var(--mono); color: #fff; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+.apres-achat li b { display: block; color: #fff; font-weight: 600; }
+.surete { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.surete span { font: 500 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--encre-2); padding: 9px 12px; border-radius: 999px; background: #fff; border: 1px solid var(--trait); }
+.surete span::before { content: "✓ "; color: var(--o); }
+.bn { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; border-radius: 18px; background: #fff; border: 1px solid var(--trait); padding: 12px; }
+.bn img { border-radius: 12px; aspect-ratio: 590/396; object-fit: cover; }
+.bn .mono { color: var(--o); font-size: 10px; }
+.bn b { display: block; font-size: 16px; font-weight: 600; margin: 4px 0 2px; }
+.bn span { font-size: 13.5px; color: var(--encre-2); }
+.bn .duree { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; font-style: normal; }
+.bn .duree i { font: 500 10px/1 var(--mono); font-style: normal; letter-spacing: .03em; color: var(--encre); padding: 5px 7px; border-radius: 6px; background: var(--papier); border: 1px solid var(--trait); white-space: nowrap; }
 
 /* ---------- FAQ ---------- */
-.faq { display: grid; gap: 10px; margin-top: 26px; }
-.faq details { background: var(--carte); border: 1px solid var(--bord); border-radius: 16px; }
-.faq details[open] { border-color: var(--bord-2); }
-.faq summary { list-style: none; cursor: pointer; padding: 18px 58px 18px 18px; font: 700 16px/1.35 var(--titre); letter-spacing: -.01em; position: relative; }
+.faq { display: grid; grid-template-columns: 360px 1fr; gap: 50px; }
+.faq-gauche { position: sticky; top: 96px; align-self: start; }
+.question-plus { margin-top: 34px; border-radius: 20px; background: #fff; border: 1px solid var(--trait); padding: 22px; box-shadow: 0 22px 50px -34px rgba(17,17,19,.4); }
+.question-plus .qui { display: flex; align-items: center; gap: 12px; }
+.question-plus img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: #fff; border: 1px solid var(--trait); }
+.question-plus .qui b { display: block; font-size: 15px; } .question-plus .qui span { font-size: 13px; color: var(--encre-3); }
+.question-plus p { margin: 16px 0 18px; color: var(--encre-2); font-size: 15px; }
+.question-plus .btn { width: 100%; justify-content: center; }
+.faq details { border-bottom: 1px solid var(--trait); }
+.faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 52px 1fr 24px; gap: 12px; padding: 20px 0; font-size: 18px; font-weight: 500; align-items: center; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(249,115,22,.5); color: var(--o2); display: grid; place-items: center; font: 500 20px/1 var(--corps); transition: transform .25s; }
-.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-.faq details p { margin: 0; padding: 0 18px 18px; color: var(--texte-2); font-size: 15px; }
+/* le numéro de la question, dans un petit rond cerclé d'orange */
+.faq summary .n { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--o); display: grid; place-items: center; font: 500 13px/1 var(--mono); color: var(--o); transition: background .3s, color .3s; }
+.faq details[open] summary .n, .faq summary:hover .n { background: var(--o); color: #fff; }
+.faq summary::after { content: "+"; color: var(--o); font-size: 22px; line-height: 1; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: -6px 0 22px 64px; color: var(--encre-2); font-size: 15.5px; }
 
-/* ---------- deux options ---------- */
-.options { display: grid; gap: 10px; margin-top: 26px; }
-.opt { border-radius: 20px; padding: 20px; }
-.opt small { display: block; font: 800 11.5px/1 var(--corps); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
-.opt p { margin: 0; font: 700 17.5px/1.4 var(--titre); letter-spacing: -.015em; }
-.opt.o1 { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); } .opt.o1 p { color: var(--texte-2); }
-.opt.o2 { background: linear-gradient(160deg, rgba(249,115,22,.22), rgba(249,115,22,.05)); border: 1px solid rgba(249,115,22,.55); color: var(--o3); } .opt.o2 p { color: #fff; }
+/* ---------- la fin ---------- */
+.fin-zone { padding: 0 12px 12px; max-width: 1400px; margin: 0 auto; }
+.fin { border-radius: 28px; padding: 90px 64px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; overflow: hidden; }
+.fin h2 { font-size: clamp(34px, 4.6vw, 58px); position: relative; }
+.fin p { color: rgba(255,255,255,.75); margin: 16px 0 0; position: relative; }
+.fin ul { list-style: none; margin: 22px 0 0; padding: 0; position: relative; }
+.fin li { display: flex; gap: 10px; padding: 7px 0; font-size: 14.5px; color: rgba(255,255,255,.85); }
+.fin li::before { content: "→"; color: var(--o2); }
+.fin .btn { position: relative; }
+footer { padding: 36px 0 30px; color: var(--encre-3); font-size: 13px; }
+footer .cadre { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
+footer a { color: var(--encre-2); text-decoration: none; }
+.avert { max-width: 640px; margin: 18px auto 0; text-align: center; font-size: 12px; color: var(--encre-3); }
 
-footer { padding: 30px 0 20px; text-align: center; color: var(--texte-3); font-size: 12.5px; }
-footer nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 12px; }
-footer nav a { color: var(--texte-2); }
-.avert { max-width: 520px; margin: 14px auto 0; padding: 12px; border-radius: 12px; border: 1px solid var(--bord); font-size: 12px; line-height: 1.5; }
+/* ---------- au survol (repris de serensee.com, aux couleurs de la DA) ---------- */
+/* les boutons changent de teinte, la flèche glisse */
+.btn.noir:hover { background: #2B2B30; } .btn.orange:hover { background: #FF7A35; } .btn.clair:hover { background: #F3EFE8; }
+.lien span { display: inline-block; transition: transform .3s; } .lien:hover span { transform: translateX(3px); }
+.nav-liens a { transition: color .3s; }
+.outils li { transition: color .3s; } .outils li:hover { color: var(--encre); }
+/* les quatre problèmes : la carte s'incline vers la souris, un halo la suit, le problème se barre */
+.paire { position: relative; overflow: hidden; --gx: 50%; --gy: 50%; transition: box-shadow 1.2s cubic-bezier(.2,.8,.2,1), border-color 1.2s, background-color 1.2s; will-change: transform; }
+.paire::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s cubic-bezier(.2,.8,.2,1);
+  background: radial-gradient(260px 260px at var(--gx) var(--gy), rgba(249,108,34,.16), rgba(255,138,76,.06) 45%, transparent 72%); }
+.paire > * { position: relative; }
+.paire .mono { transition: color 1.2s; }
+.paire h3 { text-decoration: line-through 1.5px transparent; transition: color .9s, text-decoration-color .9s; }
+.paire .alors::before { display: inline-block; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.paire:hover { border-color: #fff; box-shadow: 0 1px 0 #fff inset, 0 34px 70px -34px rgba(249,108,34,.5); }
+.paire:hover::before { opacity: 1; }
+.paire:hover .mono { color: var(--o); }
+.paire:hover h3 { color: var(--encre-3); text-decoration-color: var(--encre-3); }
+.paire:hover .alors::before { transform: translateX(3px); }
+/* la soirée : la tâche survolée s'allume dans la barre */
+.taches li { cursor: default; transition: color .3s; }
+.barre-jour i { transition: width 1.2s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+.soiree.sonde .barre-jour i { opacity: .25; } .soiree.sonde .barre-jour i.chaud { opacity: 1; }
+.taches li.chaud { color: var(--o); }
+.soiree-tete b { transition: color .3s; } .soiree.sonde .soiree-tete b { color: var(--o); }
+/* les cartes qui se soulèvent (translate, pour ne pas gêner l'apparition) */
+.verre, .cas, .bn, .a, .resultat, .etape { transition: translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s cubic-bezier(.2,.8,.2,1), background-position 1.2s cubic-bezier(.2,.8,.2,1); }
+.js .rv.verre, .js .rv.cas, .js .rv.a, .js .rv.etape { transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1), translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s cubic-bezier(.2,.8,.2,1), background-position 1.2s cubic-bezier(.2,.8,.2,1); }
+.verre, .verre:nth-child(2n) { background-size: 130% 130%; background-position: 30% 40%; box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 20px 50px -30px rgba(17,17,19,.7); }
+.verre:hover, .verre:nth-child(2n):hover { translate: 0 -4px; background-position: 70% 60%; box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 44px 90px -40px rgba(17,17,19,.85); }
+.cas:hover { translate: 0 -3px; box-shadow: 0 40px 80px -40px rgba(17,17,19,.55); }
+.cas .img img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .cas:hover .img img { transform: scale(1.05); }
+.bn { overflow: hidden; } .bn img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.bn:hover { translate: 0 -3px; box-shadow: 0 30px 60px -36px rgba(17,17,19,.5); border-color: #D9D3C9; }
+.bn:hover img { transform: scale(1.06) rotate(-3deg); }
+.a:hover { translate: 0 -3px; box-shadow: 0 30px 60px -36px rgba(17,17,19,.45); }
+.etape .ecran img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .etape:hover .ecran img { transform: scale(1.015); }
+.tel:hover video { transform: scale(1.03); }
+.chris-photo:hover img { transform: scale(1.06); }
+.carte-photo.ecran img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .carte-photo.ecran:hover img { transform: translateY(-3px); }
+/* le défilé s'arrête sous la souris, la poignée des réglettes grossit */
+.defile:hover .defile-in { animation-play-state: paused; }
+.defile span { transition: background .3s, border-color .3s, color .3s; } .defile span:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); color: #fff; }
+input[type=range]::-webkit-slider-thumb { transition: transform .2s, box-shadow .2s; }
+input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(255,255,255,.14), 0 8px 20px rgba(0,0,0,.45); }
+.faq summary { transition: color .3s; }
+/* le hero : en descendant, la carte bascule et recule, le fond glisse */
+.hero { --p: 0; transform-origin: 50% 100%; }
+.hero::before { transform: translateY(calc(var(--p) * 5%)) scale(calc(1 + var(--p) * .08)); }
+.hero-in { transform: translateY(calc(var(--p) * -70px)); opacity: calc(1 - var(--p) * .45); }
 
-/* ---------- la barre collée en bas ---------- */
-
-.a-remplir { position: relative; outline: 1.5px dashed rgba(249,115,22,.9); outline-offset: 4px; border-radius: 8px; }
-.a-remplir::after { content: "À REMPLIR"; position: absolute; top: -13px; right: 6px; font: 800 9px/1 var(--corps); letter-spacing: .12em; color: #0A0A0B; background: var(--o3); padding: 3px 6px; border-radius: 4px; }
-
-.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+/* ---------- apparitions ---------- */
+.js .rv { opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
 .js .rv.vu { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .rv { opacity: 1; transform: none; }
-}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .rv { opacity: 1; transform: none; } }
 
-/* ---------- ordinateur : on respire un peu plus ---------- */
-@media (max-width: 420px) { .duo-v .tag { font-size: 10px; letter-spacing: .03em; padding: 7px 8px; } }
-@media (min-width: 900px) {
-  body { font-size: 17px; }
-  section { padding: 52px 0; }
-  .hero { padding-top: 34px; }
-  .etape { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 26px; align-items: center; padding: 26px; }
-  .etape-tete { margin: 0; }
-  .etapes.large-etapes { max-width: 1040px; }
-  .defile { margin: 0; padding: 2px 0 10px; }
-  .defile img { width: 240px; }
-  .defile.story img { width: 190px; }
-  .glisse { display: none; }
-  .fonctions { grid-template-columns: repeat(3, 1fr); }
-  .rang { display: grid; overflow: visible; margin: 0; padding: 0; gap: 12px; }
-  .rang-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .rang-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .rang img, .rang.story img { width: 100%; max-width: none; }
-  .rang-aide { display: none; }
-  /* le mur en damier : chaque rang a la hauteur de sa grande image, la petite la remplit */
-  .mur { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; grid-template-areas: "prune prune pack" "video chris chris" "fiche fiche env"; }
-  .cree.etroit .media, .c-video .media, .c-env .media { aspect-ratio: auto; flex: 1; min-height: 0; }
-  .fonctions .f:last-child { grid-column: auto; }
-  .preuves { grid-template-columns: repeat(3, 1fr); }
-  .bonus { grid-template-columns: 1fr 1fr; }
-  .captures { flex-direction: column; }
+/* ---------- téléphone ---------- */
+@media (max-width: 960px) {
+  section { padding: 70px 0; }
+  .nav-liens { display: none; }
+  .hero { min-height: 640px; border-radius: 22px; }
+  .hero-in { grid-template-columns: 1fr; padding: 0 24px 34px; gap: 22px; }
+  .outils { margin: 20px 12px 0; }
+  .recadre, .systeme, .calcul, .intro-fait, .etapes-tete, .etape, .chris, .offre, .faq, .fin { grid-template-columns: 1fr; }
+  .tel { width: min(280px, 100%); justify-self: center; }
+  /* téléphone : les images seules sur leur ligne et le texte autour sont dans l'axe */
+  .intro-fait .carte-photo, .chris-photo { justify-self: center; }
+  .sys-titre, .intro-fait > div:last-child, .chris > div:last-child { text-align: center; }
+  .intro-fait .chapo, .chris p { margin-left: auto; margin-right: auto; }
+  .intro-fait { gap: 30px; } .intro-fait > div:last-child { order: -1; } /* le titre et le texte avant la vidéo */
+  .sys-titre .stats { text-align: center; }
+  .intro-fait .carte-photo { width: min(250px, 100%); }
+  .chris-photo { width: min(260px, 100%); }
+  .chaine { grid-template-columns: 1fr 1fr; }
+  .sys-titre { padding: 0; }
+  .chat { padding: 26px 16px; border-radius: 22px; }
+  .chat-tete { flex-direction: column; align-items: start; gap: 10px; }
+  .mur { grid-template-columns: 1fr; }
+  .paires, .preuves { grid-template-columns: 1fr 1fr; }
   .avis { grid-template-columns: 1fr 1fr; }
-  .offre-in { padding: 34px 44px; }
-  .pour, .options, .soirs { grid-template-columns: 1fr 1fr; }
+  .bento { grid-template-columns: 1fr; }
+  .v-grand, .v-moyen, .v-tiers { grid-column: auto; grid-row: auto; }
+  .calcul { padding: 26px; }
+  .etapes-bloc { padding: 50px 0; }
+  .etapes-tete .compteur { text-align: left; }
+  .faq-gauche, .offre-gauche { position: static; }
+  .surete { justify-content: center; }
+  .question-plus { margin-top: 24px; }
+  .faq details p { margin-left: 0; }
+  .fin { padding: 50px 26px; }
+}
+@media (max-width: 560px) {
+  .stats { gap: 10px; } .stats b { font-size: 26px; } .stats .mono { font-size: 9.5px; letter-spacing: .05em; }
+  .apres-achat { padding: 20px; }
+  .bandeau-n { flex-wrap: wrap; padding: 0 20px; text-align: center; font-size: 13.5px; gap: 8px; line-height: 1.4; }
+  .outils { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px 0 14px; margin: 18px 16px 0; border-radius: 16px; }
+  .outils > .mono { text-align: center; }
+  .outils ul { font-size: 14px; animation-duration: 26s; }
+  .outils li::after { margin: 0 16px; }
+  .marque { font-size: 17px; } .nav .btn { padding: 11px 14px; font-size: 13px; }
+  .cadre { padding: 0 16px; }
+  .paires, .preuves, .avis { grid-template-columns: 1fr; }
+  /* téléphone : trois colonnes, la flèche au centre de l'écran, les chiffres collés contre elle */
+  /* téléphone : « 5 h », la flèche vers le bas, « 15 min », tout empilé et centré (symétrique quelle que soit la largeur) */
+  .chrono { --n: 44px; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .chrono .fl { margin: 0; transform: rotate(90deg); }
+  .soiree { padding: 22px 20px; }
+  .soiree-pied span:first-child { font-size: 14.5px; }
+  .soiree-pied span:last-child { font-size: 13.5px; }
+  .faq summary { grid-template-columns: 40px 1fr 20px; font-size: 16.5px; }
+  .faq summary .n { width: 30px; height: 30px; font-size: 12px; }
+  .bn { grid-template-columns: 100px 1fr; }
+  .prix b { font-size: 60px; }
+  .carte-photo { min-height: 380px; padding: 22px; }
+  .etape { padding: 20px; }
+  .etape h3 { font-size: 24px; }
+}
+@media (max-width: 370px) {
+  .m-studio { display: none; }
+  .nav .btn { padding: 10px 12px; font-size: 12.5px; gap: 6px; }
+  .question-plus .btn { white-space: normal; text-align: center; }
 }
 </style>
 </head>
 <body>
-<div class="fond" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="sg" viewBox="0 0 120 120">
-    <rect x="9" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="93" y="9" width="18" height="18" rx="2.5" fill="#F97316"/>
-    <rect x="9" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="72" y="30" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="93" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/>
-    <rect x="9" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="51" y="51" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="72" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/>
-    <rect x="9" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="30" y="72" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="51" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".43"/>
-    <rect x="9" y="93" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="30" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".36"/>
-  </symbol>
+  <symbol id="sg" viewBox="0 0 120 120"><g fill="currentColor"><rect x="9" y="9" width="18" height="18" rx="2.5" opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" opacity=".73"/><rect x="9" y="30" width="18" height="18" rx="2.5" opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" opacity=".73"/><rect x="93" y="30" width="18" height="18" rx="2.5" opacity=".58"/><rect x="9" y="51" width="18" height="18" rx="2.5" opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" opacity=".73"/><rect x="72" y="51" width="18" height="18" rx="2.5" opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" opacity=".5"/><rect x="9" y="72" width="18" height="18" rx="2.5" opacity=".73"/><rect x="51" y="72" width="18" height="18" rx="2.5" opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" opacity=".43"/><rect x="30" y="93" width="18" height="18" rx="2.5" opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" opacity=".36"/></g><g fill="#F96C22"><rect x="93" y="9" width="18" height="18" rx="2.5"/><rect x="72" y="30" width="18" height="18" rx="2.5"/><rect x="51" y="51" width="18" height="18" rx="2.5"/><rect x="30" y="72" width="18" height="18" rx="2.5"/><rect x="9" y="93" width="18" height="18" rx="2.5"/></g></symbol>
 </svg>
+
+<header class="nav">
+  <div class="cadre">
+    <a class="marque" href="#"><svg aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C <span class="m-studio" style="font-weight:500;color:var(--encre-3)">Studio</span></span></a>
+    <nav class="nav-liens"><a href="#comment">Comment ça marche</a><a href="#exemples">Ce qu'il fait</a><a href="#resultats">Résultats</a><a href="#faq">Questions</a></nav>
+    <a class="btn noir" href="#offre">Je veux mon studio <span class="fl">→</span></a>
+  </div>
+</header>
 
 <main>
 
 <!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="col">
-    <div class="profil"><img src="assets/chris.png" alt="Chris Sans Filtre"><div><b>@chris.sans.filtre <i>✓</i></b><span>Chris Sans Filtre · <em>10.5K abonnés</em></span></div></div>
-    <h1>Ton Reel monté <span class="pill">en automatique</span> en <span class="o">15&nbsp;min</span></h1>
-    <p class="sans-sans"><b>Sans</b> écrire un seul prompt, <b>sans</b> même ouvrir une seule fois CapCut.</p>
-
-    <div class="vsl">
-      <p class="vsl-tete">▼ Ce Reel, le studio l'a monté en automatique ▼</p>
-      <div class="lecteur" id="vsl">
-        <video src="assets/reel-quinze-minutes.mp4" poster="assets/reel-quinze-minutes.jpg" playsinline preload="none"></video>
-        <button class="play" type="button" aria-label="Lire la vidéo avec le son"><span></span><small>Clique pour regarder, avec le son</small></button>
+<div class="hero-zone">
+  <div class="hero">
+    <div class="hero-in">
+      <div>
+        <p class="mono">Le studio IA des créateurs · par Chris Sans Filtre</p>
+        <h1>Décuple ta <em class="s">créativité</em>, pas ton temps de travail.</h1>
       </div>
-      <a class="cta js-achat" href="#offre">Je veux mon studio <span class="fl">→</span></a>
-    </div>
-    <div class="rassure"><span>Paiement sécurisé</span><span>Accès immédiat</span><span>Mises à jour incluses</span></div>
-
-    <div class="chiffres-reel"><span><b>64 s</b> de Reel</span><span><b>25</b> plans</span><span><b>208</b> sous-titres</span><span><b>31</b> bruitages</span></div>
-    <p class="chiffres-note">Tout posé <b class="o">en automatique</b> par le studio. Pas un seul à la main.</p>
-  </div>
-</section>
-
-<!-- ================= LES CHIFFRES DE CHRIS ================= -->
-<section style="padding-top:0">
-  <div class="col">
-    <div class="stats rv">
-      <div><b>+170k</b><span>abonnés sur mes comptes IA</span></div>
-      <div><b>+10M</b><span>de vues générées</span></div>
-      <div><b class="o">0</b><span>fois à la caméra</span></div>
+      <div class="hero-droite">
+        <p>MOSAIC Studio écrit, génère et monte tes Reels, tes carrousels et tes stories avec ton avatar IA. Une appli sur ton ordi : tu tapes ton idée, tu valides, c'est prêt.</p>
+        <div class="actions">
+          <a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a>
+          <a class="lien" href="#exemples">Voir un Reel monté par le studio <span>→</span></a>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- ================= LA BANDE « EN AUTOMATIQUE » ================= -->
-<div class="bande-cadre" aria-label="Script, découpage, sous-titres, bruitages et montage en automatique">
-  <div class="bande" aria-hidden="true"><div class="bande-in">
-    <span>Script en automatique ✦</span><span>Découpage en automatique ✦</span><span>Sous-titres en automatique ✦</span><span>Bruitages en automatique ✦</span><span>Montage en automatique ✦</span>
-    <span>Script en automatique ✦</span><span>Découpage en automatique ✦</span><span>Sous-titres en automatique ✦</span><span>Bruitages en automatique ✦</span><span>Montage en automatique ✦</span>
-  </div></div>
+  <p class="bandeau-n"><span class="pastille">CALCUL</span><a href="#calcul">Combien de Reels tu pourrais sortir en 1 heure →</a></p>
+  <div class="outils"><span class="mono">Le studio pilote pour toi</span>
+    <div class="piste"><ul><li>Claude</li><li>Seedance 2.5</li><li>Kling</li><li>Nano Banana</li><li>Higgsfield</li><li>Magnific</li><li>ElevenLabs</li><li>Whisper</li><li aria-hidden="true">Claude</li><li aria-hidden="true">Seedance 2.5</li><li aria-hidden="true">Kling</li><li aria-hidden="true">Nano Banana</li><li aria-hidden="true">Higgsfield</li><li aria-hidden="true">Magnific</li><li aria-hidden="true">ElevenLabs</li><li aria-hidden="true">Whisper</li></ul></div></div>
 </div>
 
-<!-- ================= TU TE RECONNAIS ================= -->
+<!-- ================= LE RECADRAGE ================= -->
 <section>
-  <div class="col">
-    <p class="sur">Sois honnête 2 secondes</p>
-    <h2 class="rv">Tu te reconnais&nbsp;?</h2>
-    <ul class="maux">
-      <li class="rv">Tu bosses toute la journée. Le soir, il te reste 1&nbsp;h.</li>
-      <li class="rv">Tu passes plus de temps dans CapCut qu'à créer.</li>
-      <li class="rv">Ton avatar change de tête d'une vidéo à l'autre.</li>
-      <li class="rv">T'as 15 idées de Reels en tête. Et 0 de posté.</li>
-    </ul>
-    <p class="coup rv">Le problème, c'est pas toi.<br><span class="grad">C'est le temps que ça te prend.</span></p>
-  </div>
-</section>
+  <div class="cadre">
+    <div class="recadre">
+      <div class="rv">
+        <h2>T'as pas besoin de plus de temps. T'as besoin d'un <em class="s">studio</em>.</h2>
+        <p class="chapo">Tu bosses toute la journée. Le soir, il te reste une heure, et tout passe encore par toi : le script, les prompts, l'avatar qui change de tête, le montage.</p>
+        <div class="chrono">
+          <div class="avant"><span class="n">5 h</span><small>Un Reel, à la main</small></div>
+          <span class="fl">→</span>
+          <div class="apres">15 min<small>Avec MOSAIC Studio</small></div>
+        </div>
+      </div>
+      <div class="soiree rv" id="soiree">
+        <div class="soiree-tete"><span class="mono">Un Reel · aujourd'hui</span><b id="soiree-total">5 h</b></div>
+        <div class="barre-jour"><i data-l="13" style="background:#F96C22"></i><i data-l="12" style="background:#FF8A4C"></i><i data-l="15" style="background:#FFB98F"></i><i data-l="40" style="background:#3D3D40"></i><i data-l="20" style="background:#8D8D96"></i></div>
+        <div class="legende-jour"><span>21 h</span><span>2 h du matin</span></div>
+        <ul class="taches">
+          <li><i style="background:#F96C22"></i>Écrire le script <s>40 min</s><b>0</b></li>
+          <li><i style="background:#FF8A4C"></i>Les prompts, en anglais <s>35 min</s><b>0</b></li>
+          <li><i style="background:#FFB98F"></i>Régénérer l'avatar qui a changé de tête <s>45 min</s><b>0</b></li>
+          <li><i style="background:#3D3D40"></i>Le montage : coupes, sous-titres, sons <s>2 h</s><b>0</b></li>
+          <li><i style="background:#8D8D96"></i>Les allers-retours <s>1 h</s><b>0</b></li>
+        </ul>
+        <div class="soiree-pied"><span>Ce que tu fais encore</span><span>Valider · 15 min</span></div>
+      </div>
+    </div>
 
-<!-- ================= LA SOLUTION ================= -->
-<section style="padding-top:0">
-  <div class="col">
-    <div class="solution rv">
-      <span class="marque"><svg class="sg" aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C</span><span class="studio">Studio</span></span>
-      <h2>Le studio bosse <span class="grad">en automatique.</span><br>Toi, tu valides.</h2>
-      <p class="intro">Une appli sur ton ordi. Tu tapes ton idée : elle écrit, génère et <b>monte ton Reel, directement dans l'appli</b>.</p>
+    <div class="paires">
+      <div class="paire rv"><span class="mono">01</span><h3>Ton avatar change de tête</h3><p>D'une vidéo à l'autre, ce n'est jamais le même.</p><p class="alors">Une planche, le même visage partout.</p></div>
+      <div class="paire rv"><span class="mono">02</span><h3>Des prompts à rallonge</h3><p>En anglais, réécrits dix fois.</p><p class="alors">Zéro prompt à écrire.</p></div>
+      <div class="paire rv"><span class="mono">03</span><h3>Deux heures de montage</h3><p>Coupes, sous-titres, bruitages, à la main.</p><p class="alors">Monté dans l'appli.</p></div>
+      <div class="paire rv"><span class="mono">04</span><h3>Quinze idées, zéro posté</h3><p>Les idées sont là, le temps non.</p><p class="alors">Une idée tapée, un Reel prêt.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ================= COMMENT ÇA MARCHE (vraies captures) ================= -->
-<section id="comment">
-  <div class="col">
-    <p class="sur">Comment ça marche</p>
-    <h2 class="rv">3 étapes.<br><span class="grad">C'est tout.</span></h2>
-  </div>
-  <div class="large">
-    <div class="etapes">
-      <div class="etape rv">
-        <div class="etape-tete"><span class="n">1</span><div><h3>Tu choisis ce que tu veux créer</h3><p>Un Reel, un carrousel, des stories. Le studio te guide étape par étape.</p></div></div>
-        <div class="fenetre"><div class="barre-f"><i></i><i></i><i></i><span>MOSAIC Studio</span></div><picture><source media="(max-width: 700px)" srcset="assets/studio-accueil-m.jpg"><img src="assets/studio-accueil.jpg" alt="L'accueil de MOSAIC Studio : que voulez-vous créer ?" loading="lazy"></picture></div>
-      </div>
-      <div class="etape rv">
-        <div class="etape-tete"><span class="n">2</span><div><h3>Le studio écrit et découpe tout</h3><p>Script, voix, plans, prompts. Ton accroche reste mot pour mot.</p></div></div>
-        <div class="fenetre"><div class="barre-f"><i></i><i></i><i></i><span>Le découpage du Reel</span></div><picture><source media="(max-width: 700px)" srcset="assets/studio-reel-decoupage-m.jpg"><img src="assets/studio-reel-decoupage.jpg" alt="Le découpage d'un Reel dans MOSAIC Studio" loading="lazy"></picture></div>
-      </div>
-      <div class="etape rv">
-        <div class="etape-tete"><span class="n">3</span><div><h3>Ton Reel sort monté, prêt à poster</h3><p>Plans, sous-titres mot à mot, voix, bruitages, musique : tout est monté <b class="o">en automatique</b>, directement dans l'appli. Un détail à changer ? Tu le demandes, le studio le corrige.</p></div></div>
-        <div><div class="fenetre tl"><div class="barre-f"><i></i><i></i><i></i><span>La timeline posée par le studio</span></div><div class="tl-defile"><img src="assets/timeline-capcut.jpg" alt="La timeline d'un Reel monté par le studio : plans, sous-titres, voix off, bruitages, musique" loading="lazy"></div></div>
-        <p class="glisse tl-aide">← glisse la timeline →</p></div>
-      </div>
+<!-- ================= LE SYSTÈME ================= -->
+<section class="sombre">
+  <div class="cadre">
+    <div class="systeme">
+      <div class="sys-titre rv"><span class="mono">Le studio autour de l'IA</span>
+        <h2>L'IA n'est qu'un outil. Ce qui change tout, c'est le <em class="s">système</em> qui le pilote.</h2>
+        <div class="stats">
+          <div><b>+170k</b><span class="mono">abonnés sur mes comptes IA</span></div>
+          <div><b>+10M</b><span class="mono">de vues générées</span></div>
+          <div><b>0</b><span class="mono">fois à la caméra</span></div>
+        </div></div>
+      <figure class="tel rv"><video data-auto src="assets/reel-quinze-minutes.mp4" poster="assets/reel-quinze-minutes.jpg" muted loop playsinline preload="none"></video><figcaption>Monté par le studio</figcaption></figure>
+      <div class="carte-photo ecran rv"><img src="assets/studio-accueil.jpg" alt="" loading="lazy">
+        <div class="texte"><p>Les outils sont les mêmes pour tout le monde. MOSAIC les pilote à ta place, dans le bon ordre, avec ton avatar, ta DA et ta façon de parler. Chaque création suit le même chemin.</p>
+          <ul class="coches"><li>Ton avatar, ta DA, ta voix : réglés une fois</li><li>Le prix affiché avant chaque génération</li><li>Monté et exporté dans l'appli, sans logiciel en plus</li></ul></div></div>
     </div>
   </div>
 </section>
 
-<!-- ================= AVANT / APRÈS ================= -->
-<section>
-  <div class="col">
-    <p class="sur">Avant / après</p>
-    <h2 class="rv">Du clip brut<br><span class="grad">au Reel monté.</span></h2>
-    <div class="duo-v rv">
-      <figure class="avant"><span class="tag">Les clips bruts</span><video src="assets/avant-brut.mp4" poster="assets/avant-brut.jpg" muted loop playsinline autoplay preload="metadata"></video></figure>
-      <span class="fleche" aria-hidden="true">→</span>
-      <figure class="apres"><span class="tag">Monté en automatique</span><div class="v-cadre"><video src="assets/apres-monte.mp4" poster="assets/apres-monte.jpg" muted loop playsinline autoplay preload="metadata"></video><button class="son" type="button">🔇 Touche pour le son</button></div></figure>
-    </div>
-    <p class="legende-v rv">Les 20 premières secondes du même Reel. Coupes, sous-titres mot à mot, mots forts en couleur, bruitages : <b>tout en automatique.</b></p>
-    <div class="cta-bloc rv"><a class="cta js-achat" href="#offre">Je veux faire ces Reels <span class="fl">→</span></a></div>
-  </div>
-</section>
-
-<!-- ================= LE CHRONO ================= -->
-<section id="chrono">
-  <div class="col">
-    <p class="sur">Le chrono</p>
-    <h2 class="rv">Le même Reel.<br><span class="grad">Pas le même chrono.</span></h2>
-    <div class="temps rv">
-      <div class="t sans"><small>Sans le studio</small><b>5&nbsp;h</b><span>script, prompts, montage à la main</span></div>
-      <div class="t avec"><small>Avec MOSAIC Studio</small><b>15&nbsp;min</b><span>tu valides, il fait le reste</span></div>
-    </div>
-    <p class="gagne rv">4&nbsp;h&nbsp;45 récupérées. <span class="o">Par Reel.</span></p>
-
-    <div class="soirs">
-      <div class="soir sans rv">
-        <h3>Ta soirée, sans le studio</h3>
-        <ol><li><b>21h00</b>Tu ouvres ChatGPT pour le script.</li><li><b>21h40</b>Tu traduis tes prompts en anglais.</li><li><b>22h15</b>Ton avatar a changé de tête. Tu regénères.</li><li><b>23h00</b>T'as pas ouvert CapCut. Tu lâches.</li></ol>
-      </div>
-      <div class="soir avec rv">
-        <h3>Ta soirée, avec MOSAIC Studio</h3>
-        <ol><li><b>21h00</b>Tu tapes ton idée.</li><li><b>21h04</b>Tu valides le script, tu poses ta voix.</li><li><b>21h09</b>Tu valides les images. Il génère les vidéos.</li><li><b>21h15</b>Ton Reel est monté. Posté.</li></ol>
-      </div>
-    </div>
-
+<!-- ================= LE CALCUL ================= -->
+<section id="calcul">
+  <div class="cadre">
     <div class="calcul rv">
-      <label for="heures">T'as combien de temps par semaine&nbsp;? <b id="h-val">5 h</b></label>
-      <input type="range" id="heures" min="1" max="15" step="1" value="5">
-      <div class="res" aria-live="polite">
-        <div class="r sans"><small>Sans le studio</small><b id="r-sans">1</b><span id="r-sans-l">Reel</span></div>
-        <div class="r avec"><small>Avec MOSAIC Studio</small><b id="r-avec">20</b><span id="r-avec-l">Reels</span></div>
+      <div>
+        <h2>Combien de <em class="s">Reels</em> tu pourrais sortir&nbsp;?</h2>
+        <div class="reglette">
+          <label for="heures">Le temps que tu as par semaine <b id="h-val">5 h</b></label>
+          <input type="range" id="heures" min="1" max="15" step="1" value="5">
+          <label for="prix-v">Prestation IA vendue <b id="p-val">50 €<small>/ vidéo</small></b></label>
+          <input type="range" id="prix-v" min="0" max="300" step="10" value="50">
+        </div>
       </div>
-      <p class="mois" id="mois">Sur un mois : <em>80 Reels</em> au lieu de 4.</p>
-    </div>
-    <p class="petit">Temps indicatifs. L'attente des générations n'est pas comptée : elles tournent pendant que tu fais autre chose.</p>
-  </div>
-</section>
-
-<!-- ================= LA GALERIE : un exemple de chaque (vrais rendus du studio) ================= -->
-<section id="exemples">
-  <div class="col">
-    <p class="sur">Fait avec MOSAIC Studio</p>
-    <h2 class="rv">Tout ça,<br><span class="grad">c'est le studio.</span></h2>
-    <p class="intro rv">Un exemple de chaque. <b>Tout sort du studio, tel quel.</b></p>
-  </div>
-  <div class="large">
-    <div class="serie rv">
-      <div class="serie-tete"><span class="cree-tag">Carrousel</span><span>6 slides à ta DA · sans crédit</span></div>
-      <div class="rang rang-6">
-        <img src="assets/slide-pmub9nw45-1.jpg" alt="Slide 1 : shoots produit IA" loading="lazy"><img src="assets/slide-pmub9nw45-2.jpg" alt="Slide 2" loading="lazy"><img src="assets/slide-pmub9nw45-3.jpg" alt="Slide 3" loading="lazy"><img src="assets/slide-pmub9nw45-4.jpg" alt="Slide 4" loading="lazy"><img src="assets/slide-pmub9nw45-5.jpg" alt="Slide 5" loading="lazy"><img src="assets/slide-pmub9nw45-6.jpg" alt="Slide 6" loading="lazy">
+      <div class="resultat">
+        <span class="mono">Tu pourrais sortir</span>
+        <div class="gros"><span id="r-avec">80</span><small>Reels par mois</small></div>
+        <div class="deux"><div><b id="r-sans">4 Reels</b><span>sans le studio</span></div><div><b id="r-euros">400 €</b><span id="r-vendus">si tu en vends 8/80</span></div></div>
+        <a class="btn orange" href="#offre">Je veux mon studio <span class="fl">→</span></a>
+        <p class="note">Calcul : 5 h par Reel à la main, 15 min avec le studio. L'attente des générations n'est pas comptée : elles tournent pendant que tu fais autre chose. Ce n'est pas une promesse de gains.</p>
       </div>
-    </div>
-    <div class="serie rv">
-      <div class="serie-tete"><span class="cree-tag">Stories</span><span>prêtes à poster</span></div>
-      <div class="rang rang-5 story">
-        <img src="assets/slide-pmubmynmi-1.jpg" alt="Story 1" loading="lazy"><img src="assets/slide-pmubmynmi-2.jpg" alt="Story 2" loading="lazy"><img src="assets/slide-pmubmynmi-3.jpg" alt="Story 3" loading="lazy"><img src="assets/slide-pmubmynmi-4.jpg" alt="Story 4" loading="lazy"><img src="assets/slide-pmubmynmi-5.jpg" alt="Story 5" loading="lazy">
-      </div>
-    </div>
-    <p class="glisse rang-aide">← glisse pour voir →</p>
-    <div class="mur">
-      <figure class="cree c-prune rv"><div class="media"><img src="assets/cree-avatar-prune.jpg" alt="Planche avatar de Prune, sous tous les angles" loading="lazy"><span class="cree-tag">Planche avatar</span></div><figcaption>Le même visage dans chaque image</figcaption></figure>
-      <figure class="cree c-pack etroit rv"><div class="media"><img src="assets/cree-packshot.jpg" alt="Packshot de la crème Golosa" loading="lazy"><span class="cree-tag">Packshot</span></div><figcaption>Ton produit, comme en studio</figcaption></figure>
-      <figure class="cree c-video etroit rv"><div class="media"><video src="assets/cree-broll.mp4" poster="assets/cree-broll.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="cree-tag">Vidéo B-roll</span></div><figcaption>Ton avatar et ton produit, en un plan</figcaption></figure>
-      <figure class="cree c-chris rv"><div class="media"><img src="assets/cree-avatar-chris.jpg" alt="Planche avatar de Chris, son clone IA" loading="lazy"><span class="cree-tag">Ton clone</span></div><figcaption>Ou toi, en avatar IA</figcaption></figure>
-      <figure class="cree c-fiche rv"><div class="media"><img src="assets/cree-fiche-produit.jpg" alt="Fiche produit d'un mug sous tous les angles" loading="lazy"><span class="cree-tag">Fiche produit</span></div><figcaption>Ton objet sous tous les angles</figcaption></figure>
-      <figure class="cree c-env etroit rv"><div class="media"><img src="assets/cree-environnement.jpg" alt="Environnement : un studio photo" loading="lazy"><span class="cree-tag">Environnement</span></div><figcaption>Un lieu, retrouvé à l'identique</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- ================= TOUT CE QUE LE STUDIO FAIT ================= -->
-<section id="dedans">
-  <div class="col">
-    <p class="sur">Ce que tu reçois</p>
-    <h2 class="rv">Tout ce que<br><span class="grad">le studio fait pour toi.</span></h2>
-    <div class="pastille rv"><span>4 parcours guidés · 6 outils · mises à jour incluses</span></div>
-  </div>
-  <div class="large">
-    <div class="fonctions">
-      <div class="f star rv"><span class="n">01</span><h3>Le Reel monté en automatique</h3><p>De l'idée à la vidéo finie : script, voix, vidéos, sous-titres, bruitages, montage. Tout dans l'appli.</p></div>
-      <div class="f rv"><span class="n">02</span><h3>Les carrousels</h3><p>Écrits et mis en page à ta DA. Tu retouches tout à la main.</p></div>
-      <div class="f rv"><span class="n">03</span><h3>Les stories</h3><p>Rien sous les zones qu'Instagram recouvre. Export prêt à poster.</p></div>
-      <div class="f rv"><span class="n">04</span><h3>Le B-roll</h3><p>Une vidéo en un plan, avec ton avatar, ton lieu, ton produit.</p></div>
-      <div class="f star rv"><span class="n">05</span><h3>Le reproducteur</h3><p>Tu déposes un Reel qui cartonne, il devient ton format.</p></div>
-      <div class="f rv"><span class="n">06</span><h3>Ton avatar verrouillé</h3><p>Sa planche une fois, le même visage dans chaque vidéo.</p></div>
-      <div class="f rv"><span class="n">07</span><h3>Tes DA</h3><p>Couleurs, polices, fonds, sous-titres. Une par client si tu veux.</p></div>
-      <div class="f rv"><span class="n">08</span><h3>Voix &amp; son</h3><p>Ta voix ou une voix IA, et 34 bruitages libres de droits offerts.</p></div>
-      <div class="f rv"><span class="n">09</span><h3>Tes lieux et tes produits</h3><p>Créés une fois, retrouvés à l'identique partout.</p></div>
+<!-- ================= CE QUE LE STUDIO FAIT ================= -->
+<section id="exemples" style="padding-top:20px">
+  <div class="cadre">
+    <div class="intro-fait">
+      <div class="carte-photo rv" style="color:#fff"><video src="assets/cree-broll.mp4" poster="assets/cree-broll.jpg" muted loop playsinline autoplay preload="metadata"></video><b>Fait avec le studio,<br>tel quel.</b></div>
+      <div class="rv"><h2>Ce que le studio fait à ta place, <em class="s">concrètement</em>.</h2>
+        <p class="chapo">Tu gardes la main sur ce qui compte : l'idée, le ton, la validation. Le reste ne passe plus par toi.</p></div>
     </div>
+
+    <div class="bento">
+      <div class="verre v-grand rv">
+        <h3>Le Reel monté de A à Z</h3>
+        <p>Script, voix, vidéos, sous-titres mot à mot, bruitages, montage. Un détail à changer ? Tu le demandes, le studio le corrige.</p>
+        <div class="duo">
+          <figure class="avant"><figcaption>Les clips bruts</figcaption><video src="assets/avant-brut.mp4" poster="assets/avant-brut.jpg" muted loop playsinline autoplay preload="metadata"></video></figure>
+          <figure class="apres"><figcaption>Monté par le studio</figcaption><video src="assets/apres-monte.mp4" poster="assets/apres-monte.jpg" muted loop playsinline autoplay preload="metadata"></video><button class="son" type="button">🔇 Le son</button></figure>
+        </div>
+        <ol class="chaine"><li><b>Script</b>ton accroche, mot pour mot</li><li><b>Voix</b>la tienne ou une voix IA</li><li><b>Vidéos</b>ton avatar dans chaque plan</li><li><b>Montage</b>sous-titres, sons, export</li></ol>
+        <span class="tag">monté dans l'appli, sans logiciel</span>
+      </div>
+      <div class="verre v-moyen rv">
+        <h3>Ton avatar, verrouillé</h3>
+        <p>Sa planche une fois. Ensuite, le même visage dans chaque image et chaque vidéo. Ou toi, en clone IA.</p>
+        <div class="vis"><img src="assets/cree-avatar-chris.jpg" alt="La planche du clone IA de Chris" loading="lazy"></div>
+        <span class="tag">le même visage partout</span>
+      </div>
+      <div class="verre v-moyen rv">
+        <h3>Les carrousels et les stories</h3>
+        <p>Écrits et mis en page à ta DA, retouchables à la main, prêts à poster.</p>
+        <div class="vis-mini"><img src="assets/slide-pmub9nw45-1.jpg" alt="Un carrousel fait avec le studio" loading="lazy"><img src="assets/slide-pmubmynmi-1.jpg" alt="Des stories faites avec le studio" loading="lazy"></div>
+        <span class="tag">sans un seul crédit pour la mise en page</span>
+      </div>
+      <div class="verre v-tiers rv"><h3>Le reproducteur</h3><p>Tu déposes un Reel qui cartonne : son rythme et ses coupes deviennent ton format.</p><span class="tag">un viral devient ton format</span></div>
+      <div class="verre v-tiers rv"><h3>Ta voix, tes sons</h3><p>Ta voix ou une voix IA, et 34 bruitages libres de droits, posés au bon mot.</p><span class="tag">34 bruitages offerts</span></div>
+      <div class="verre v-tiers rv"><h3>Le prix avant tout</h3><p>Chaque génération affiche son coût avant de partir. Le montage, lui, ne coûte rien.</p><span class="tag">jamais de surprise</span></div>
+    </div>
+    <div class="sous-cta rv"><a class="btn noir" href="#offre">Je veux mon studio <span class="fl">→</span></a><span class="mono puces"><span>Paiement unique</span><span>Accès immédiat</span><span>Mises à jour incluses</span></span></div>
   </div>
 </section>
+
+<!-- ================= LES ÉTAPES ================= -->
+<div class="etapes-zone" id="comment">
+  <div class="etapes-bloc sombre">
+    <div class="cadre" style="position:relative">
+      <div class="etapes-tete rv"><h2>Trois étapes, de l'idée au Reel <em class="s">posté</em>.</h2>
+        <div><div class="compteur">01 — 03</div><p style="margin-top:14px">Le studio te guide écran par écran. Chaque étape a sa durée et ce que tu as à la fin.</p></div></div>
+      <div class="etape rv">
+        <div><div class="num"><span class="mono">01</span><span>Tu choisis</span></div>
+          <h3>Ce que tu veux créer</h3><p>Un Reel, un carrousel, des stories. Tu tapes ton idée en une phrase, avec ton avatar et ta DA.</p>
+          <div class="infos"><div><span class="mono">Durée</span>1 minute</div><div><span class="mono">Ce que tu as</span>Ton idée, cadrée</div></div></div>
+        <div class="ecran"><picture><source media="(max-width: 700px)" srcset="assets/studio-accueil-m.jpg"><img src="assets/studio-accueil.jpg" alt="L'accueil de MOSAIC Studio" loading="lazy"></picture></div>
+      </div>
+      <div class="etape rv">
+        <div><div class="num"><span class="mono">02</span><span>Le studio écrit</span></div>
+          <h3>Le script, la voix, le découpage</h3><p>Plan par plan, avec le prix de chaque vidéo avant de générer. Ton accroche reste mot pour mot.</p>
+          <div class="infos"><div><span class="mono">Durée</span>5 minutes</div><div><span class="mono">Ce que tu as</span>Ton Reel, plan par plan</div></div></div>
+        <div class="ecran"><picture><source media="(max-width: 700px)" srcset="assets/studio-reel-decoupage-m.jpg"><img src="assets/studio-reel-decoupage.jpg" alt="Le découpage d'un Reel" loading="lazy"></picture></div>
+      </div>
+      <div class="etape rv">
+        <div><div class="num"><span class="mono">03</span><span>Le studio monte</span></div>
+          <h3>Ton Reel sort monté</h3><p>Plans, sous-titres, voix, bruitages : posés en automatique, exporté en vidéo prête à poster.</p>
+          <div class="infos"><div><span class="mono">Durée</span>Pendant que tu fais autre chose</div><div><span class="mono">Ce que tu as</span>La vidéo finie</div></div></div>
+        <div class="ecran tl"><img src="assets/timeline-capcut.jpg" alt="Le montage posé par le studio" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ================= RÉSULTATS ================= -->
 <section id="resultats">
-  <div class="col">
-    <p class="sur">C'est pas de la théorie</p>
-    <h2 class="rv">Les vues, les clients,<br><span class="grad">les virements.</span></h2>
-  </div>
-  <div class="large">
+  <div class="cadre">
+    <h2 class="rv">Ce que ça donne, <em class="s">en vrai</em>.</h2>
+    <p class="chapo rv">Mes comptes, mes captures. Trois étapes que l'IA m'a fait franchir.</p>
     <div class="preuves">
-      <div class="preuve rv"><div class="preuve-tete"><span class="n">1</span><div><h3>L'IA te fait faire des vues.</h3><p>223 254 vues et 2 075 abonnés en 3 semaines.</p></div></div><div class="captures"><img src="assets/preuve-vues.jpg" alt="Statistiques Instagram : 223 254 vues" loading="lazy"></div></div>
-      <div class="preuve rv"><div class="preuve-tete"><span class="n">2</span><div><h3>Les vues t'amènent des clients.</h3><p>Des marques t'écrivent en DM pour bosser avec toi.</p></div></div><div class="captures"><img src="assets/preuve-dm.jpg" alt="Des marques écrivent en message privé" loading="lazy"></div></div>
-      <div class="preuve rv"><div class="preuve-tete"><span class="n">3</span><div><h3>Et les clients, ça rapporte.</h3><p>De vrais virements qui tombent sur le compte.</p></div></div><div class="captures"><img src="assets/preuve-ventes2.png" alt="Virements reçus en juillet" loading="lazy"></div></div>
+      <div class="cas rv"><div class="img"><img src="assets/preuve-vues.jpg" alt="Statistiques Instagram : 223 254 vues" loading="lazy"></div>
+        <div class="txt"><span class="mono">Les vues</span><h3>Un compte IA, sans jamais me montrer.</h3><p class="res"><b>RÉSULTAT</b>223 254 vues et 2 075 abonnés en 3 semaines.</p></div></div>
+      <div class="cas rv"><div class="img"><img src="assets/preuve-dm.jpg" alt="Des marques écrivent en message privé" loading="lazy"></div>
+        <div class="txt"><span class="mono">Les clients</span><h3>Les vues amènent les marques.</h3><p class="res"><b>RÉSULTAT</b>Des marques qui écrivent en DM pour bosser avec moi.</p></div></div>
+      <div class="cas rv"><div class="img"><img src="assets/preuve-ventes2.png" alt="Virements reçus en juillet" loading="lazy"></div>
+        <div class="txt"><span class="mono">Les ventes</span><h3>Et les clients, ça rapporte.</h3><p class="res"><b>RÉSULTAT</b>De vrais virements, tombés en juillet.</p></div></div>
     </div>
-  </div>
-</section>
+    <p class="honnete rv">Ce sont mes résultats, pas des projections. Créer du contenu demande du travail et de la régularité.</p>
 
-<!-- ================= AVIS ================= -->
-<section>
-  <div class="col">
-    <p class="sur">Ils sont déjà dedans</p>
-    <h2 class="rv">Ce que disent<br><span class="grad">mes élèves et mes clients.</span></h2>
-  </div>
-  <div class="large">
+    <h2 class="rv" style="margin-top:96px">Ils sont <em class="s">déjà</em> dedans.</h2>
     <div class="avis">
-      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4"><span class="bouton"></span><span class="onde"></span><span class="lbl">Avis vocal</span></button><div class="qui"><i>B</i><div><b>Bernie</b>Élève · avis vocal</div></div></div>
-      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3"><span class="bouton"></span><span class="onde"></span><span class="lbl">Avis vocal</span></button><div class="qui"><i>L</i><div><b>Laura</b>Cliente · avis vocal</div></div></div>
+      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4"><span class="bouton"></span><span class="onde"></span></button><div class="qui"><i>B</i><div><b>Bernie</b>Élève · avis vocal</div></div></div>
+      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3"><span class="bouton"></span><span class="onde"></span></button><div class="qui"><i>L</i><div><b>Laura</b>Cliente · avis vocal</div></div></div>
       <div class="a rv"><p>« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère&nbsp;! 🫶 »</p><div class="qui"><i>M</i><div><b>Majoric</b>Élève</div></div></div>
-      <div class="a rv"><p>« Hello Chris&nbsp;! Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! T'es vraiment trop fort, je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><i>K</i><div><b>Kevin</b>Élève</div></div></div>
+      <div class="a rv"><p>« Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! Je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><i>K</i><div><b>Kevin</b>Élève</div></div></div>
+    </div>
+
+    <div class="chat rv">
+      <div class="chat-tete"><div><span class="mono">Captures brutes · non retouchées</span><h3 style="margin-top:12px">Et dans le chat de la formation, <em class="s">ça donne&nbsp;ça</em>.</h3></div>
+        <div class="inclus"><span class="mono">Inclus avec le studio</span><p><b>Le chat de la communauté.</b> Tu postes ta création, ta question ou ton bug : c'est moi qui te réponds, et chaque retour devient une mise à jour.</p></div></div>
+      <div class="mur">
+        <div class="mur-col">
+          <figure class="capture"><img src="assets/chat-suavewretch.jpg" alt="Un élève partage les créations de son avatar IA et remercie Chris" loading="lazy" width="1091" height="939"></figure>
+          <figure class="capture"><img src="assets/chat-stephen.jpg" alt="« Salut l'équipe, ravi de faire partie de cette formation ! »" loading="lazy" width="837" height="237"></figure>
+          <figure class="capture"><img src="assets/chat-yanimehami.jpg" alt="« Je viens aussi d'installer, franchement beau travail de fou, bravo à toi »" loading="lazy" width="1121" height="269"></figure>
+        </div>
+        <div class="mur-col">
+          <figure class="capture"><img src="assets/chat-p2lv.jpg" alt="Un élève partage sa première vidéo IA : un saut en parachute avec une canette" loading="lazy" width="993" height="1189"></figure>
+          <figure class="capture"><img src="assets/chat-js.jpg" alt="« Avoir accès à Mosaic Studio en étant membre historique de la formation, c'est la folie ! »" loading="lazy" width="1121" height="313"></figure>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= POUR TOI / PAS POUR TOI ================= -->
-<section>
-  <div class="col">
-    <p class="sur">Est-ce fait pour toi&nbsp;?</p>
-    <h2 class="rv">Pas forcément.</h2>
-    <div class="pour">
-      <div class="p oui rv"><h3>C'est pour toi si…</h3><ul>
-        <li>T'as un job et peu de temps le soir.</li>
-        <li>Tu veux poster régulièrement sans y passer tes soirées.</li>
-        <li>Tu veux créer avec un avatar IA, sans te montrer.</li>
-        <li>T'as jamais monté une vidéo de ta vie.</li>
-      </ul></div>
-      <div class="p non rv"><h3>C'est pas pour toi si…</h3><ul>
-        <li>Tu veux un bouton qui poste à ta place sans rien valider.</li>
-        <li>Tu refuses de payer le moindre outil (il te faut Claude et des crédits).</li>
-        <li>T'as pas d'ordinateur : le studio tourne sur PC et Mac.</li>
-      </ul></div>
+<!-- ================= CHRIS ================= -->
+<section class="sombre">
+  <div class="cadre" style="position:relative">
+    <div class="chris">
+      <div class="chris-photo rv"><img src="assets/chris.png" alt="Chris Sans Filtre" loading="lazy"></div>
+      <div class="rv"><span class="mono">Un créateur, pas une agence</span>
+        <h3>Chris Sans <em class="s">Filtre</em></h3>
+        <p>J'ai construit MOSAIC pour moi d'abord : pour sortir mes Reels IA sans y passer mes soirées. +170k abonnés sur mes comptes IA, +10M de vues, et jamais une seule fois devant la caméra.</p>
+        <p>Celui qui a construit le studio est celui qui te répond dans la communauté. Chaque retour d'élève devient une mise à jour.</p>
+        <a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a></div>
     </div>
-  </div>
-</section>
-
-<!-- ================= LES BONUS : mes deux autres formations, offertes (6 oct. 2026, Chris) ================= -->
-<section id="bonus">
-  <div class="col">
-    <p class="sur">En bonus</p>
-    <h2 class="rv">Mes 2 autres formations.<br><span class="grad">Offertes.</span></h2>
-    <p class="intro rv">Avec le studio, tu reçois aussi <b>mes deux formations</b>, en entier, sur Whop.</p>
-    <div class="bonus">
-      <div class="bn rv"><span class="bn-tag">Offert</span><img src="assets/bonus-ai-avatar-system.jpg" alt="AI AVATAR System" loading="lazy">
-        <div class="bn-txt"><h3>AI AVATAR System</h3>
-          <p>Crée des vidéos virales avec ton avatar IA. Sans caméra, sans équipe, de zéro à la monétisation.</p>
-          <div class="meta">13 chapitres · 18 leçons · 1 h 18</div>
-          <div class="valeur"><s>47&nbsp;€</s><b>0&nbsp;€</b></div></div></div>
-      <div class="bn rv"><span class="bn-tag">Offert</span><img src="assets/bonus-ai-cinema-studio.jpg" alt="AI Cinema Studio" loading="lazy">
-        <div class="bn-txt"><h3>AI Cinema Studio</h3>
-          <p>Crée des vidéos IA cinématiques, sans tourner une seule scène. Pas de caméra, pas d'acteurs, pas de budget.</p>
-          <div class="meta">8 chapitres · 15 leçons · 1 h 56</div>
-          <div class="valeur"><s>67&nbsp;€</s><b>0&nbsp;€</b></div></div></div>
-    </div>
-    <p class="bonus-total rv">114&nbsp;€ de formations, offertes avec MOSAIC Studio.</p>
+    <div class="defile" aria-hidden="true"><div class="defile-in">
+      <span>Reels montés</span><span>Carrousels</span><span>Stories</span><span>B-roll</span><span>Avatar verrouillé</span><span>Clone IA</span><span>Reproducteur</span><span>Voix IA</span><span>Bruitages</span><span>Sous-titres mot à mot</span><span>Packshots</span><span>Environnements</span><span>DA</span><span>Mises à jour</span>
+      <span>Reels montés</span><span>Carrousels</span><span>Stories</span><span>B-roll</span><span>Avatar verrouillé</span><span>Clone IA</span><span>Reproducteur</span><span>Voix IA</span><span>Bruitages</span><span>Sous-titres mot à mot</span><span>Packshots</span><span>Environnements</span><span>DA</span><span>Mises à jour</span>
+    </div></div>
   </div>
 </section>
 
 <!-- ================= L'OFFRE ================= -->
 <section id="offre">
-  <div class="col">
-    <p class="sur">L'offre complète</p>
-    <h2 class="rv">Tout ce que tu reçois<br><span class="grad">aujourd'hui.</span></h2>
-    <div class="offre rv">
-      <div class="offre-in">
-        <div class="urgence">Prix de lancement. Il monte à chaque grosse mise à jour : ce que tu prends aujourd'hui, tu le gardes.</div>
-        <span class="marque"><svg class="sg" aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C</span><span class="studio">Studio</span></span>
-        <div class="prix"><s>397&nbsp;€</s><b>147&nbsp;€</b></div>
-        <p class="modalite">Paiement unique · Accès à vie · Mises à jour incluses</p>
+  <div class="cadre">
+    <div class="offre">
+      <div class="offre-gauche rv">
+        <h2>Un accès à vie, un seul <em class="s">paiement</em>.</h2>
+        <p class="chapo">Le studio complet, les modules vidéo pas à pas, toutes les mises à jour. Et mes deux autres formations, offertes.</p>
+        <div class="bonus">
+          <div class="bn"><img src="assets/bonus-ai-avatar-system.jpg" alt="AI AVATAR System" loading="lazy"><div><span class="mono">Bonus offert · valeur 47 €</span><b>AI AVATAR System</b><span>Crée des vidéos virales avec ton avatar IA, de zéro à la monétisation.</span><em class="duree"><i>13&nbsp;chapitres</i><i>18&nbsp;leçons</i><i>1&nbsp;h&nbsp;18</i></em></div></div>
+          <div class="bn"><img src="assets/bonus-ai-cinema-studio.jpg" alt="AI Cinema Studio" loading="lazy"><div><span class="mono">Bonus offert · valeur 67 €</span><b>AI Cinema Studio</b><span>Des vidéos IA cinématiques, sans tourner une seule scène.</span><em class="duree"><i>8&nbsp;chapitres</i><i>15&nbsp;leçons</i><i>1&nbsp;h&nbsp;56</i></em></div></div>
+        </div>
+        <div class="apres-achat">
+          <span class="mono">Ce qui se passe juste après</span>
+          <ol>
+            <li><span><b>Tu paies ici, une seule fois</b>Paiement unique, sans abonnement.</span></li>
+            <li><span><b>Ta clé t'attend sur Whop</b>Avec le studio à télécharger, Windows ou Mac.</span></li>
+            <li><span><b>Double-clic, le studio s'installe</b>Le premier module vidéo te guide jusqu'à ton premier Reel.</span></li>
+          </ol>
+        </div>
+        <div class="surete"><span>Paiement sécurisé</span><span>Accès immédiat</span><span>Mises à jour incluses</span></div>
+      </div>
+      <div class="offre-carte rv">
+        <span class="urgence">Prix de lancement · il monte à chaque grosse mise à jour</span>
+        <div class="prix"><s>397 €</s><b>147<small>€</small></b></div>
+        <p class="modalite">Paiement unique · accès à vie · aucun abonnement</p>
         <ul class="liste">
-          <li><span><b>Le studio complet</b>, Windows et Mac<small>les 4 parcours et les 6 outils</small></span></li>
+          <li><span><b>Le studio complet</b>, Windows et Mac<small>Reels, carrousels, stories, B-roll, reproducteur</small></span></li>
           <li><span><b>Les modules vidéo pas à pas</b>, sur Whop<small>de l'installation à ton premier Reel monté</small></span></li>
           <li><span><b>34 bruitages libres de droits</b>, livrés avec</span></li>
           <li><span><b>Toutes les mises à jour</b>, installées d'un clic</span></li>
-          <li><span><b>Le chat de la communauté</b>, pour jamais rester bloqué</span></li>
+          <li><span><b>Le chat de la communauté</b>, pour ne jamais rester bloqué</span></li>
           <li><span><b>Ta clé de licence</b>, reçue tout de suite<small>un ordinateur à la fois, transférable</small></span></li>
-          <li class="sep-bonus" aria-hidden="true"><span>+ En bonus, offert</span></li>
-          <li class="offert"><span><b>Bonus : AI AVATAR System</b>, ma formation complète<span class="tag-offert">Offert</span><small>13 chapitres · 18 leçons · valeur 47&nbsp;€</small></span></li>
-          <li class="offert"><span><b>Bonus : AI Cinema Studio</b>, ma formation complète<span class="tag-offert">Offert</span><small>8 chapitres · 15 leçons · valeur 67&nbsp;€</small></span></li>
+          <li class="offert"><span><b>AI AVATAR System</b> + <b>AI Cinema Studio</b>, offertes<small>114&nbsp;€ de formations · 3&nbsp;h&nbsp;14 de vidéo</small></span></li>
         </ul>
-        <!-- Le paiement Whop intégré (thème sombre) -->
-        <div class="whop-mount" id="paiement">
-          <div data-whop-plan="plan_F2UvpPNi9F4at" data-whop-palette="orange" data-whop-accent="#ff7a1a"></div>
-        </div>
-        <p class="garantie-legale"><b>Garantie légale de conformité&nbsp;:</b> si le studio ne fonctionne pas chez toi, il est réparé, ou remboursé.</p>
-        <div class="rassure"><span>Paiement sécurisé par Whop</span><span>Accès immédiat</span></div>
+        <div class="whop-mount" id="paiement"><div data-whop-plan="plan_F2UvpPNi9F4at" data-whop-palette="orange" data-whop-accent="#F96C22"></div></div>
+        <p class="petit"><b>Le prix que tu paies aujourd'hui est définitif</b>, même quand il augmentera. Garantie légale de conformité : si le studio ne fonctionne pas chez toi, il est réparé, ou remboursé.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= FAQ ================= -->
-<section id="faq">
-  <div class="col">
-    <h2 class="rv">Questions fréquentes</h2>
-    <div class="faq rv">
-      <details><summary>Je reçois le studio quand&nbsp;?</summary><p>Tout de suite après le paiement. Tu télécharges le studio et ta clé t'attend dans ton espace Whop.</p></details>
-      <details><summary>Faut être technique&nbsp;?</summary><p>Non, zéro. Un double-clic et le studio s'installe tout seul. Pas de terminal, pas de code. Les modules vidéo te montrent chaque écran.</p></details>
-      <details><summary>J'ai qu'une heure le soir. Ça suffit&nbsp;?</summary><p>Oui, c'est fait pour ça. Tu lances, tu valides. Les vidéos se génèrent pendant que tu fais autre chose.</p></details>
-      <details><summary>Est-ce qu'il y a des frais en plus&nbsp;?</summary><p>Oui, et je te le dis cash : ton abonnement Claude (Pro ou Max) et les crédits de ta plateforme, Higgsfield ou Magnific. Le studio affiche le prix avant chaque génération. Pour te donner une idée, le Reel en haut de la page a coûté 76 crédits. Le montage, lui, ne coûte rien : il se fait dans l'appli.</p></details>
-      <details><summary>Mon avatar garde le même visage&nbsp;?</summary><p>Oui. Tu crées sa planche de référence une fois. Ensuite, chaque image et chaque vidéo la reprend.</p></details>
-      <details><summary>Ça marche sur Mac&nbsp;? Sur téléphone&nbsp;?</summary><p>Sur Windows et Mac, oui. Sur téléphone, non : le studio tourne sur ton ordinateur.</p></details>
-      <details><summary>Je peux l'utiliser sur plusieurs ordis&nbsp;?</summary><p>Un à la fois. Tu changes de PC&nbsp;? Tu réinitialises ta clé depuis Whop et tu l'actives sur le nouveau.</p></details>
-      <details><summary>Le prix va rester à 147&nbsp;€&nbsp;?</summary><p>Non. C'est le prix de lancement : il monte à chaque grosse mise à jour. Ce que tu prends aujourd'hui, tu le gardes, mises à jour comprises.</p></details>
-      <details><summary>Et si ça me plaît pas&nbsp;?</summary><p>Le studio est un contenu numérique livré tout de suite&nbsp;: en l'achetant, tu demandes l'accès immédiat et tu renonces à ton droit de rétractation de 14&nbsp;jours. Pas de «&nbsp;satisfait ou remboursé&nbsp;». Par contre, si le studio ne fonctionne pas chez toi, je le répare, et si je n'y arrive pas, je te rembourse. Tout est écrit dans les <a href="mosaic/cgv.html">conditions de vente</a>.</p></details>
+<section id="faq" style="padding-top:20px">
+  <div class="cadre">
+    <div class="faq">
+      <div class="faq-gauche rv">
+        <h2>Ce qu'on me demande avant de <em class="s">commencer</em>.</h2>
+        <div class="question-plus">
+          <div class="qui"><img src="assets/chris.png" alt="" loading="lazy"><div><b>Chris Sans Filtre</b><span>Je réponds moi-même</span></div></div>
+          <p>Ta question n'est pas dans la liste ? Une fois dedans, tu la poses dans le chat de la formation, et c'est moi qui te réponds.</p>
+          <a class="btn noir" href="#offre">Je veux mon studio · 147 € <span class="fl">→</span></a>
+        </div>
+      </div>
+      <div class="rv">
+        <details><summary><span class="n">1</span>Je peux le faire sans aucune compétence ?</summary><p>Oui, zéro. Un double-clic et le studio s'installe tout seul. Pas de terminal, pas de code. Les modules vidéo te montrent chaque écran.</p></details>
+        <details><summary><span class="n">2</span>Est-ce que je dois me montrer ?</summary><p>Non. Ton avatar IA joue à ta place. Et si tu veux, tu crées ton propre clone d'après une photo de toi.</p></details>
+        <details><summary><span class="n">3</span>Je reçois le studio quand ?</summary><p>Tout de suite après le paiement. Tu télécharges le studio et ta clé t'attend dans ton espace Whop.</p></details>
+        <details><summary><span class="n">4</span>J'ai qu'une heure le soir. Ça suffit ?</summary><p>Oui, c'est fait pour ça. Tu lances, tu valides. Les vidéos se génèrent pendant que tu fais autre chose.</p></details>
+        <details><summary><span class="n">5</span>Est-ce qu'il y a des frais en plus ?</summary><p>Oui, et je te le dis cash : ton abonnement Claude (Pro ou Max) et les crédits de ta plateforme, Higgsfield ou Magnific. Le studio affiche le prix avant chaque génération. Pour te donner une idée, le Reel de cette page a coûté 76 crédits. Le montage, lui, ne coûte rien : il se fait dans l'appli.</p></details>
+        <details><summary><span class="n">6</span>Ça marche sur Mac ? Sur téléphone ?</summary><p>Sur Windows et Mac, oui. Sur téléphone, non : le studio tourne sur ton ordinateur.</p></details>
+        <details><summary><span class="n">7</span>Je peux l'utiliser sur plusieurs ordis ?</summary><p>Un à la fois. Tu changes de PC ? Tu réinitialises ta clé depuis Whop et tu l'actives sur le nouveau.</p></details>
+        <details><summary><span class="n">8</span>Le prix va rester à 147 € ?</summary><p>Non. C'est le prix de lancement : il monte à chaque grosse mise à jour. Ce que tu prends aujourd'hui, tu le gardes, mises à jour comprises.</p></details>
+        <details><summary><span class="n">9</span>Et si ça me plaît pas ?</summary><p>Le studio est un contenu numérique livré tout de suite : en l'achetant, tu demandes l'accès immédiat et tu renonces à ton droit de rétractation de 14 jours. Pas de « satisfait ou remboursé ». Par contre, si le studio ne fonctionne pas chez toi, je le répare, et si je n'y arrive pas, je te rembourse. Tout est écrit dans les <a href="mosaic/cgv.html">conditions de vente</a>.</p></details>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= DEUX OPTIONS ================= -->
-<section>
-  <div class="col">
-    <h2 class="rv">T'as deux options.</h2>
-    <div class="options">
-      <div class="opt o1 rv"><small>Option 1</small><p>Tu fermes cette page. Ce soir, ton heure part dans CapCut. Comme hier.</p></div>
-      <div class="opt o2 rv"><small>Option 2</small><p>Tu prends le studio. Ce soir à 21h15, ton premier Reel est monté.</p></div>
-    </div>
-    <div class="cta-bloc rv"><a class="cta js-achat" href="#offre">Je veux mon studio <span class="fl">→</span></a></div>
+<!-- ================= LA FIN ================= -->
+<div class="fin-zone">
+  <div class="fin sombre">
+    <div><h2>Décuple ta créativité. Pas ton temps de <em class="s">travail</em>.</h2>
+      <p>Ce soir, ton heure peut partir dans CapCut. Ou ton premier Reel peut être monté à 21 h 15.</p></div>
+    <div style="position:relative"><a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a>
+      <ul><li>Le studio et ta clé, tout de suite</li><li>Les modules vidéo, de l'installation au premier Reel</li><li>Le chat de la communauté, pour ne jamais rester bloqué</li></ul></div>
   </div>
-</section>
+</div>
 
 </main>
 
 <footer>
-  <div class="col">
+  <div class="cadre">
+    <span>MOSAIC Studio · par Chris Sans Filtre · © 2026</span>
     <nav><a href="mosaic/cgv.html">Conditions de vente</a><a href="mosaic/mentions-legales.html">Mentions légales</a><a href="mosaic/confidentialite.html">Confidentialité</a><a href="mosaic/cookies.html">Cookies</a></nav>
-    <div>MOSAIC Studio · par Chris Sans Filtre · © 2026</div>
-    <p class="avert">Les résultats présentés viennent de mon expérience personnelle et ne garantissent aucun gain. Créer du contenu demande de la régularité.</p>
   </div>
+  <p class="avert">Les résultats présentés viennent de mon expérience personnelle et ne garantissent aucun gain. Créer du contenu demande de la régularité.</p>
 </footer>
 
-
 <script>
-/* Le calcul : un Reel ≈ 5 h sans le studio, ≈ 15 min avec (les mêmes chiffres que le chrono). */
-const MIN_SANS = 300, MIN_AVEC = 15;
-
 (function () {
-  // Tous les boutons mènent à l'offre : le paiement Whop y est intégré
-  document.querySelectorAll(".js-achat").forEach(a => { a.href = "#offre"; });
+  // la soirée découpée : les barres se remplissent quand la carte apparaît
+  const soiree = document.getElementById("soiree");
+  const remplir = () => soiree.querySelectorAll(".barre-jour i").forEach(i => { i.style.width = i.dataset.l + "%"; });
 
-  // La vidéo du haut : lecture avec le son au clic
-  const vsl = document.getElementById("vsl"), vid = vsl.querySelector("video");
-  vsl.querySelector(".play").addEventListener("click", () => { vid.controls = true; vid.muted = false; vid.play(); vsl.classList.add("joue"); });
-
-  // L'avant / après : le son du Reel monté au toucher (les deux vidéos repartent ensemble)
+  // le son du Reel monté
   const apres = document.querySelector(".apres video"), bSon = document.querySelector(".apres .son");
-  const basculerSon = () => {
-    apres.muted = !apres.muted;
-    if (!apres.muted) { apres.currentTime = 0; document.querySelector(".avant video").currentTime = 0; apres.play(); }
-    bSon.textContent = apres.muted ? "🔇 Touche pour le son" : "🔊 Son activé"; bSon.classList.toggle("actif", !apres.muted);
-  };
-  bSon.addEventListener("click", basculerSon); apres.addEventListener("click", basculerSon);
+  if (apres && bSon) {
+    const basculer = () => { apres.muted = !apres.muted; if (!apres.muted) { apres.currentTime = 0; document.querySelector(".avant video").currentTime = 0; apres.play(); }
+      bSon.textContent = apres.muted ? "🔇 Le son" : "🔊 Son activé"; bSon.classList.toggle("actif", !apres.muted); };
+    bSon.addEventListener("click", basculer);
+  }
 
-  // Les avis vocaux : un seul à la fois
+  // les avis vocaux : un seul à la fois
   let enCours = null;
   document.querySelectorAll(".vocal").forEach(b => {
     const son = new Audio(); son.preload = "none"; son.src = b.dataset.audio;
@@ -781,42 +876,109 @@ const MIN_SANS = 300, MIN_AVEC = 15;
     });
   });
 
+  // les apparitions
   if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("vu"); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -30px 0px" });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("vu"); if (e.target === soiree) remplir(); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -30px 0px" });
     document.querySelectorAll(".rv").forEach(el => io.observe(el));
-  } else { document.querySelectorAll(".rv").forEach(el => el.classList.add("vu")); }
+  } else { document.querySelectorAll(".rv").forEach(el => el.classList.add("vu")); remplir(); }
 
-  // Le calcul
-  const curseur = document.getElementById("heures");
-  const reels = n => n <= 1 ? "Reel" : "Reels";
-  function calculer() {
-    const h = +curseur.value, s = Math.floor(h * 60 / MIN_SANS), a = Math.floor(h * 60 / MIN_AVEC);
-    document.getElementById("h-val").textContent = h + " h";
-    document.getElementById("r-sans").textContent = s;
-    document.getElementById("r-sans-l").textContent = s === 0 ? "Reel. Pas un seul." : reels(s);
-    document.getElementById("r-avec").textContent = a;
-    document.getElementById("r-avec-l").textContent = reels(a);
-    document.getElementById("mois").innerHTML = "Sur un mois : <em>" + a * 4 + " " + reels(a * 4) + "</em> au lieu de " + s * 4 + ".";
-    curseur.style.setProperty("--p", ((h - 1) / 14 * 100) + "%");
+  const fin = matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // les quatre problèmes : la carte s'incline de 2° vers la souris (avec un ressort), le halo la suit
+  if (fin) document.querySelectorAll(".paire").forEach(c => {
+    let cx = .5, cy = .5, x = .5, y = .5, anim = null, dedans = false;
+    const pas = () => {
+      x += (cx - x) * .08; y += (cy - y) * .08;
+      c.style.transform = "perspective(900px) rotateX(" + ((.5 - y) * 4).toFixed(2) + "deg) rotateY(" + ((x - .5) * 4).toFixed(2) + "deg)";
+      c.style.setProperty("--gx", (x * 100).toFixed(1) + "%"); c.style.setProperty("--gy", (y * 100).toFixed(1) + "%");
+      if (dedans || Math.abs(cx - x) + Math.abs(cy - y) > .002) anim = requestAnimationFrame(pas); else { anim = null; c.style.transform = ""; }
+    };
+    c.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); cx = (e.clientX - r.left) / r.width; cy = (e.clientY - r.top) / r.height; if (!anim) anim = requestAnimationFrame(pas); });
+    c.addEventListener("pointerenter", () => { dedans = true; c.style.transition = "opacity .8s, box-shadow 1.2s cubic-bezier(.2,.8,.2,1), border-color 1.2s, background-color 1.2s"; brouiller(c.querySelector(".alors")); });
+    c.addEventListener("pointerleave", () => { dedans = false; cx = .5; cy = .5; if (!anim) anim = requestAnimationFrame(pas); });
+  });
+
+  // le texte-solution se brouille puis se recompose, lettre par lettre
+  const SIGNES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  function brouiller(el) {
+    if (!el || el.dataset.brouille === "1" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const vrai = el.dataset.vrai || (el.dataset.vrai = el.textContent);
+    el.dataset.brouille = "1";
+    const t0 = performance.now(), duree = 700;
+    const tour = now => {
+      const k = Math.min(1, (now - t0) / duree), n = Math.floor(vrai.length * k);
+      el.textContent = vrai.slice(0, n) + [...vrai.slice(n)].map(ch => ch === " " ? " " : SIGNES[Math.floor(Math.random() * SIGNES.length)]).join("");
+      if (k < 1) requestAnimationFrame(tour); else { el.textContent = vrai; el.dataset.brouille = ""; }
+    };
+    requestAnimationFrame(tour);
   }
-  curseur.addEventListener("input", calculer); calculer();
+  if ("IntersectionObserver" in window) {
+    const ioB = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const i = [...document.querySelectorAll(".paire")].indexOf(e.target.closest(".paire")); setTimeout(() => brouiller(e.target), 500 + 160 * i); ioB.unobserve(e.target); } }), { threshold: .6 });
+    document.querySelectorAll(".paire .alors").forEach(el => ioB.observe(el));
+  }
+
+  // la soirée : survoler une tâche allume sa part de la barre et affiche son temps
+  const segs = [...soiree.querySelectorAll(".barre-jour i")], lignes = [...soiree.querySelectorAll(".taches li")], total = document.getElementById("soiree-total");
+  lignes.forEach((li, i) => {
+    li.addEventListener("pointerenter", () => { soiree.classList.add("sonde"); li.classList.add("chaud"); segs[i] && segs[i].classList.add("chaud"); total.textContent = li.querySelector("s").textContent; });
+    li.addEventListener("pointerleave", () => { soiree.classList.remove("sonde"); li.classList.remove("chaud"); segs[i] && segs[i].classList.remove("chaud"); total.textContent = "5 h"; });
+  });
+
+  // le hero : en descendant, il bascule légèrement en arrière et recule
+  const hero = document.querySelector(".hero");
+  if (hero && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let tic = false;
+    const maj = () => { tic = false; const p = Math.min(1, Math.max(0, scrollY / hero.offsetHeight));
+      hero.style.setProperty("--p", p.toFixed(3));
+      hero.style.transform = p ? "perspective(1400px) rotateX(" + p.toFixed(3) + "deg) scale(" + (1 - p * .05).toFixed(4) + ")" : "";
+      hero.style.borderRadius = (28 + p * 16).toFixed(1) + "px"; };
+    addEventListener("scroll", () => { if (!tic) { tic = true; requestAnimationFrame(maj); } }, { passive: true }); maj();
+  }
+
+  // la vidéo du Reel ne se charge et ne tourne que quand elle est à l'écran
+  if ("IntersectionObserver" in window) {
+    const ioV = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); } else v.pause(); }), { threshold: .25 });
+    document.querySelectorAll("video[data-auto]").forEach(v => ioV.observe(v));
+  }
+
+  // les captures du chat s'ouvrent en grand au clic
+  document.querySelectorAll(".capture img").forEach(img => img.addEventListener("click", () => {
+    const l = document.createElement("div"); l.className = "loupe"; l.innerHTML = '<img alt="">'; l.firstChild.src = img.src; l.firstChild.alt = img.alt;
+    const fermer = () => { l.classList.remove("ouverte"); setTimeout(() => l.remove(), 250); removeEventListener("keydown", echap); };
+    const echap = e => { if (e.key === "Escape") fermer(); };
+    l.addEventListener("click", fermer); addEventListener("keydown", echap);
+    document.body.appendChild(l); void l.offsetWidth; l.classList.add("ouverte");
+  }));
+
+  // le calcul : un Reel ≈ 5 h à la main, ≈ 15 min avec le studio
+  const h = document.getElementById("heures"), p = document.getElementById("prix-v");
+  const reels = n => n + (n > 1 ? " Reels" : " Reel");
+  function calculer() {
+    const heures = +h.value, prix = +p.value;
+    const sans = Math.floor(heures * 60 / 300) * 4, avec = Math.floor(heures * 60 / 15) * 4;
+    document.getElementById("h-val").textContent = heures + " h";
+    document.getElementById("p-val").innerHTML = prix ? prix + " €<small>/ vidéo</small>" : "je n'en vends pas";
+    document.getElementById("r-avec").textContent = avec;
+    document.getElementById("r-sans").textContent = reels(sans);
+    const vendus = Math.round(avec / 10);
+    document.getElementById("r-euros").textContent = prix ? vendus * prix + " €" : "—";
+    document.getElementById("r-vendus").textContent = prix ? "si tu en vends " + vendus + "/" + avec : "tu n'en vends pas";
+    h.style.setProperty("--p", ((heures - 1) / 14 * 100) + "%");
+    p.style.setProperty("--p", (prix / 300 * 100) + "%");
+  }
+  h.addEventListener("input", calculer); p.addEventListener("input", calculer); calculer();
 })();
 </script>
 
-<!-- ============================================================
-     WHOP ELEMENTS — le paiement intégré (remplace l'ancien loader.js, que Whop coupe le 21 octobre 2026).
-     Chaque bloc [data-whop-plan] reçoit le paiement de son offre : thème sombre, en français, bouton aux couleurs
-     de la page (data-whop-accent). Le paiement se fait dans le cadre sécurisé de Whop ; après une étape de
-     vérification bancaire (3D Secure), l'acheteur revient sur cette page.
-     ============================================================ -->
+<!-- WHOP ELEMENTS — le paiement intégré (le même que sur la page en ligne) -->
 <script type="module">
   (function monterWhop(essai) {
     if (typeof window.WhopElements !== 'function') { if (essai < 50) setTimeout(function () { monterWhop(essai + 1); }, 200); return; }
     document.querySelectorAll('[data-whop-plan]').forEach(function (zone) {
-      var accent = zone.dataset.whopAccent || '#ff7a1a';
+      var accent = zone.dataset.whopAccent || '#F96C22';
       var whop = window.WhopElements({ locale: 'fr', appearance: {
-        theme: { appearance: 'dark', accentColor: zone.dataset.whopPalette || 'orange' },
-        classes: { 'whop-CheckoutPayButton': { backgroundColor: accent, color: '#0b0b0d', fontWeight: '700' } } } });
+        theme: { appearance: 'light', accentColor: zone.dataset.whopPalette || 'orange' },
+        classes: { 'whop-CheckoutPayButton': { backgroundColor: accent, color: '#ffffff', fontWeight: '600' } } } });
       whop.checkout.create({ plan: zone.dataset.whopPlan, returnUrl: location.origin + location.pathname })
         .create('checkout').mount(zone);
     });
