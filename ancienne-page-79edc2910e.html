@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>MOSAIC Studio — Ton Reel monté en automatique en 15 minutes avec ton avatar IA</title>
+<meta name="description" content="Tu tapes ton idée, MOSAIC Studio écrit, génère et monte ton Reel, directement dans l'appli. Même avec 1 h le soir. Par Chris Sans Filtre.">
+<link rel="icon" type="image/png" href="assets/chris.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js");</script>
+<!-- WHOP : le chargeur du paiement intégré (le même que sur chrissansfiltre.com) -->
+<style>
+:root {
+  --fond: #0A0A0B; --carte: #131315; --carte-2: #18181B; --bord: #26262B; --bord-2: #34343B;
+  --texte: #F4F4F5; --texte-2: #A8A8B1; --texte-3: #707079;
+  --o: #F97316; --o2: #FB923C; --o3: #FDBA74; --o-voile: rgba(249,115,22,.14);
+  --grad: linear-gradient(90deg, #F97316, #FB923C, #FDBA74);
+  --rouge: #FF7A7A; --vert: #4ADE80;
+  --titre: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --corps: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fond); color: var(--texte); font: 400 16.5px/1.55 var(--corps); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+img, video { display: block; max-width: 100%; }
+b, strong { font-weight: 700; color: var(--texte); }
+a { color: inherit; }
+::selection { background: rgba(249,115,22,.35); }
+
+.fond { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(60% 40% at 50% -6%, rgba(249,115,22,.22), transparent 70%), var(--fond); }
+.fond::after { content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(120% 60% at 50% 0%, #000, transparent 80%); mask-image: radial-gradient(120% 60% at 50% 0%, #000, transparent 80%); }
+
+.col { width: 100%; max-width: 660px; margin: 0 auto; padding: 0 18px; }
+.large { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 18px; }
+section { padding: 40px 0; }
+.o { color: var(--o2); }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sur { font: 800 12px/1 var(--corps); letter-spacing: .16em; text-transform: uppercase; color: var(--o2); text-align: center; margin: 0 0 12px; }
+h1, h2, h3 { font-family: var(--titre); margin: 0; }
+h2 { font-weight: 800; font-size: clamp(28px, 6.4vw, 44px); line-height: 1.08; letter-spacing: -.035em; text-align: center; }
+.intro { text-align: center; color: var(--texte-2); font-size: 17px; margin: 14px auto 0; max-width: 540px; }
+.intro b { color: var(--texte); }
+
+/* ---------- les boutons ---------- */
+.cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; text-decoration: none; border: 0; cursor: pointer;
+  font: 800 16.5px/1 var(--corps); letter-spacing: .04em; text-transform: uppercase; color: #0A0A0B; background: var(--o); padding: 20px 22px; border-radius: 14px;
+  box-shadow: 0 14px 40px -12px rgba(249,115,22,.85), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .2s, background .2s; }
+.cta:hover { transform: translateY(-2px); background: #FF8126; }
+.cta .fl { transition: transform .2s; } .cta:hover .fl { transform: translateX(4px); }
+.cta-bloc { max-width: 440px; margin: 30px auto 0; }
+.rassure { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 14px; margin-top: 12px; font: 500 13px/1.3 var(--corps); color: var(--texte-3); }
+.rassure span::before { content: "✓ "; color: var(--vert); }
+
+/* ---------- le signe MOSAIC ---------- */
+.sg { width: 1.15em; height: 1.15em; color: var(--texte); flex: none; }
+.marque { display: inline-flex; align-items: center; gap: .32em; font: 800 20px/1 var(--titre); letter-spacing: -.05em; }
+.marque .ai { color: var(--o); }
+.marque .studio { font: 600 8.5px/1 var(--corps); letter-spacing: .3em; text-transform: uppercase; color: var(--texte-2); margin-left: .3em; }
+
+/* ---------- HERO ---------- */
+.hero { padding: 22px 0 26px; text-align: center; }
+.profil { display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 999px; background: rgba(19,19,21,.8); border: 1px solid var(--bord); text-align: left; }
+.profil img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--o); }
+.profil b { display: flex; align-items: center; gap: 6px; font-size: 15px; }
+.profil b i { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: #3B82F6; color: #fff; font: 900 10px/1 var(--corps); font-style: normal; }
+.profil span { display: block; font-size: 12.5px; color: var(--texte-2); }
+.profil span em { font-style: normal; color: var(--o2); font-weight: 700; }
+.hero h1 { font-weight: 800; font-size: clamp(31px, 8.6vw, 58px); line-height: 1.04; letter-spacing: -.035em; text-transform: uppercase; margin: 26px 0 0; }
+.pill { display: inline-block; background: var(--o); color: #0A0A0B; padding: 0 .16em; border-radius: .14em; line-height: 1.12; transform: rotate(-1.5deg); }
+.sans-sans { margin: 18px auto 0; max-width: 480px; font-size: 16.5px; font-style: italic; color: var(--texte-2); }
+.sans-sans b { font-style: normal; color: var(--texte); text-transform: uppercase; font-weight: 800; }
+.vsl { margin: 26px auto 0; max-width: 460px; padding: 16px; border-radius: 26px; background: linear-gradient(180deg, rgba(249,115,22,.95), rgba(234,88,12,.95)); box-shadow: 0 30px 80px -24px rgba(249,115,22,.7); }
+.vsl-tete { font: 800 14.5px/1.3 var(--corps); color: #0A0A0B; margin: 2px 0 12px; }
+.lecteur { position: relative; width: 100%; aspect-ratio: 9/16; max-height: 70vh; margin: 0 auto; border-radius: 16px; overflow: hidden; background: #000; }
+.lecteur video { width: 100%; height: 100%; object-fit: cover; }
+.lecteur .play { position: absolute; inset: 0; display: grid; place-items: center; border: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55)); cursor: pointer; }
+.lecteur .play span { width: 84px; height: 84px; border-radius: 50%; background: rgba(10,10,11,.72); border: 2px solid rgba(255,255,255,.85); display: grid; place-items: center; backdrop-filter: blur(4px); transition: transform .2s; }
+.lecteur .play:hover span { transform: scale(1.06); }
+.lecteur .play span::after { content: ""; border-left: 24px solid #fff; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 7px; }
+.lecteur .play small { position: absolute; bottom: 14px; left: 0; right: 0; font: 700 13px/1 var(--corps); color: #fff; letter-spacing: .02em; }
+.lecteur.joue .play { display: none; }
+.vsl .cta { margin-top: 14px; background: #0A0A0B; color: #fff; box-shadow: 0 12px 30px -12px rgba(0,0,0,.8); }
+.vsl .cta:hover { background: #1A1A1D; }
+.chiffres-reel { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 18px auto 0; max-width: 520px; }
+.chiffres-reel span { font: 700 13px/1 var(--corps); padding: 9px 12px; border-radius: 999px; background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
+.chiffres-reel span b { color: var(--o2); }
+.chiffres-note { font-size: 13px; color: var(--texte-3); margin: 10px 0 0; }
+.bande-cadre { overflow: hidden; overflow-x: clip; overflow-y: visible; padding: max(26px, 2.2vw) 0; }
+.bande { background: var(--o); color: #0A0A0B; transform: rotate(-2deg); margin: 0 -30px; padding: 13px 0; box-shadow: 0 16px 40px -14px rgba(249,115,22,.8); }
+.bande-in { display: flex; width: max-content; animation: bande 26s linear infinite; }
+.bande-in span { font: 800 17px/1 var(--titre); letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; padding-right: 22px; }
+@keyframes bande { to { transform: translateX(-50%); } }
+
+/* ---------- les chiffres de Chris ---------- */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stats div { text-align: center; padding: 18px 8px; border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); }
+.stats b { display: block; font: 800 clamp(24px, 6vw, 34px)/1 var(--titre); letter-spacing: -.04em; }
+.stats b.o { color: var(--o2); }
+.stats span { display: block; margin-top: 6px; font-size: 12.5px; color: var(--texte-2); line-height: 1.3; }
+
+/* ---------- tu te reconnais ---------- */
+.maux { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+.maux li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: center; padding: 16px 18px; border-radius: 16px; background: var(--carte); border: 1px solid var(--bord); font: 600 16px/1.4 var(--corps); }
+.maux li::before { content: "✕"; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,122,122,.1); border: 1px solid rgba(255,122,122,.25); color: var(--rouge); font: 800 13px/1 var(--corps); }
+.coup { margin: 28px 0 0; text-align: center; font: 800 clamp(22px, 5.4vw, 30px)/1.25 var(--titre); letter-spacing: -.03em; }
+
+/* ---------- la solution ---------- */
+.solution { border-radius: 26px; padding: 30px 22px; text-align: center; background: linear-gradient(180deg, rgba(249,115,22,.16), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.4); }
+.solution .marque { font-size: 30px; }
+.solution .marque .studio { font-size: 11px; }
+.solution h2 { margin-top: 16px; }
+
+/* ---------- les étapes (vraies captures) ---------- */
+.etapes { display: grid; gap: 14px; margin-top: 24px; }
+.etapes { grid-template-columns: minmax(0, 1fr); }
+.etape > div, .fenetre, .tl-defile { min-width: 0; }
+.etape { border-radius: 24px; background: var(--carte); border: 1px solid var(--bord); padding: 22px 18px 18px; }
+.etape-tete { display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: start; margin-bottom: 16px; }
+.etape-tete .n { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--o); color: #0A0A0B; font: 800 17px/1 var(--titre); }
+.etape h3 { font-size: 20px; letter-spacing: -.02em; line-height: 1.2; }
+.etape p { margin: 5px 0 0; color: var(--texte-2); font-size: 15px; }
+.fenetre { border-radius: 14px; overflow: hidden; border: 1px solid var(--bord-2); background: #0D0D0F; box-shadow: 0 24px 50px -24px rgba(0,0,0,.9); }
+.fenetre .barre-f { display: flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; background: #17171A; border-bottom: 1px solid var(--bord); }
+.fenetre .barre-f i { width: 9px; height: 9px; border-radius: 50%; background: #3A3A41; }
+.fenetre .barre-f i:first-child { background: #FF5F57; } .fenetre .barre-f i:nth-child(2) { background: #FEBC2E; } .fenetre .barre-f i:nth-child(3) { background: #28C840; }
+.fenetre .barre-f span { margin-left: 8px; font: 600 11px/1 var(--corps); color: var(--texte-3); }
+.fenetre { position: relative; }
+.fenetre img { width: 100%; }
+.tl-defile { overflow-x: auto; scrollbar-width: thin; }
+.tl-aide { display: none; }
+@media (max-width: 700px) { .tl-defile img { width: 860px; max-width: none; } .tl-aide { display: block; } }
+
+/* ---------- avant / après ---------- */
+.duo-v { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; position: relative; }
+.duo-v figure { margin: 0; }
+.duo-v .tag { white-space: nowrap; display: inline-block; font: 800 11.5px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; padding: 8px 11px; border-radius: 8px; margin-bottom: 10px; }
+.duo-v .avant .tag { background: #fff; color: #0A0A0B; }
+.duo-v .apres .tag { background: var(--o); color: #0A0A0B; }
+.duo-v video { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 16px; background: #000; border: 1px solid var(--bord); }
+.duo-v .apres video { border-color: rgba(249,115,22,.6); box-shadow: 0 20px 50px -20px rgba(249,115,22,.6); }
+.duo-v .fleche { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: #0A0A0B; border: 2px solid var(--o); display: grid; place-items: center; color: var(--o2); font: 800 20px/1 var(--corps); z-index: 2; }
+.v-cadre { position: relative; }
+.son { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); cursor: pointer; white-space: nowrap; font: 700 12px/1 var(--corps); color: #fff; background: rgba(10,10,11,.8); border: 1px solid rgba(255,255,255,.25); padding: 8px 11px; border-radius: 999px; }
+.son.actif { background: var(--o); color: #0A0A0B; border-color: transparent; }
+.legende-v { margin: 16px 0 0; text-align: center; color: var(--texte-2); font-size: 15px; }
+
+/* ---------- le chrono ---------- */
+.temps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+.t { border-radius: 20px; padding: 18px; }
+.t small { display: block; font: 800 11px/1.2 var(--corps); letter-spacing: .12em; text-transform: uppercase; }
+.t b { display: block; font: 800 clamp(40px, 11vw, 60px)/1 var(--titre); letter-spacing: -.05em; margin: 10px 0 4px; }
+.t span { font-size: 13.5px; }
+.t.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); }
+.t.sans b { color: #7E7E87; text-decoration: line-through; text-decoration-color: rgba(255,122,122,.75); text-decoration-thickness: 4px; }
+.t.avec { background: linear-gradient(160deg, rgba(249,115,22,.24), rgba(249,115,22,.06)); border: 1px solid rgba(249,115,22,.55); color: var(--o3); }
+.t.avec b { color: #fff; }
+.gagne { margin: 14px 0 0; text-align: center; font: 800 19px/1.3 var(--titre); letter-spacing: -.02em; }
+.soirs { display: grid; gap: 10px; margin-top: 26px; }
+.soir { border-radius: 18px; padding: 18px; }
+.soir h3 { font-size: 15px; margin-bottom: 12px; }
+.soir ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.soir li { display: grid; grid-template-columns: 54px 1fr; gap: 8px; font-size: 15px; line-height: 1.35; }
+.soir li b { font: 800 14.5px/1.35 var(--titre); }
+.soir.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
+.soir.sans h3, .soir.sans li b { color: var(--texte-3); }
+.soir.sans li:last-child { color: var(--rouge); }
+.soir.avec { background: linear-gradient(170deg, rgba(249,115,22,.14), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.45); }
+.soir.avec li b { color: var(--o2); }
+.soir.avec li:last-child { color: #fff; font-weight: 700; }
+.calcul { margin-top: 26px; border-radius: 22px; background: #111113; border: 1px solid var(--bord-2); padding: 22px 18px; }
+.calcul label { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font: 600 15px/1.3 var(--corps); color: var(--texte-2); }
+.calcul label b { font: 800 26px/1 var(--titre); color: var(--texte); white-space: nowrap; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 38px; background: transparent; margin: 10px 0 16px; cursor: pointer; }
+input[type=range]::-webkit-slider-runnable-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--o) var(--p, 28%), #2A2A30 var(--p, 28%)); }
+input[type=range]::-moz-range-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--o) var(--p, 28%), #2A2A30 var(--p, 28%)); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 5px solid var(--o); margin-top: -10px; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 5px solid var(--o); }
+.res { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.r { border-radius: 16px; padding: 14px 16px; }
+.r small { display: block; font: 800 10.5px/1.2 var(--corps); letter-spacing: .12em; text-transform: uppercase; }
+.r b { display: block; font: 800 44px/1 var(--titre); letter-spacing: -.05em; margin: 8px 0 2px; }
+.r span { font-size: 14px; }
+.r.sans { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); } .r.sans b { color: #8A8A93; }
+.r.avec { background: linear-gradient(160deg, rgba(249,115,22,.22), rgba(249,115,22,.06)); border: 1px solid rgba(249,115,22,.5); color: var(--o3); } .r.avec b { color: #fff; }
+.mois { text-align: center; margin: 14px 0 0; font: 700 16px/1.4 var(--titre); }
+.mois em { font-style: normal; color: var(--o2); }
+.petit { text-align: center; font-size: 12.5px; color: var(--texte-3); margin: 14px 0 0; }
+
+/* ---------- la galerie (vrais exports) ---------- */
+.serie { margin-top: 22px; }
+.serie-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin: 0 0 12px; }
+.serie-tete h3 { font-size: 18px; letter-spacing: -.02em; }
+.serie-tete span { font-size: 13px; color: var(--texte-3); white-space: nowrap; }
+/* la galerie : un rang de slides (défile au téléphone, en grille à l'ordinateur), puis le mur des créations */
+.cree-tag { display: inline-block; font: 800 11px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; color: #0A0A0B; background: var(--o); padding: 7px 10px; border-radius: 7px; }
+.serie-tete .cree-tag { font-size: 12px; color: #0A0A0B; }
+.rang { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 18px 10px; margin: 0 -18px; scrollbar-width: none; }
+.rang::-webkit-scrollbar { display: none; }
+.rang img { flex: none; width: 62%; max-width: 260px; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; scroll-snap-align: center; border: 1px solid var(--bord); }
+.rang.story img { width: 42%; max-width: 200px; aspect-ratio: 9/16; }
+.mur { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px;
+  grid-template-areas: "prune prune" "pack video" "chris chris" "fiche fiche" "env env"; }
+.c-prune { grid-area: prune; } .c-pack { grid-area: pack; } .c-video { grid-area: video; } .c-chris { grid-area: chris; } .c-fiche { grid-area: fiche; } .c-env { grid-area: env; }
+.cree { margin: 0; display: flex; flex-direction: column; border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); overflow: hidden; }
+.cree .media { position: relative; aspect-ratio: 16/9; background: #000; }
+.cree.etroit .media { aspect-ratio: 4/5; }
+.c-env .media { aspect-ratio: 16/9; }
+.cree .media img, .cree .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cree .media .cree-tag { position: absolute; top: 10px; left: 10px; box-shadow: 0 6px 16px rgba(0,0,0,.5); }
+.cree figcaption { padding: 11px 14px 13px; font: 600 14px/1.35 var(--corps); color: var(--texte-2); }
+.defile { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 18px 10px; margin: 0 -18px; scrollbar-width: none; }
+.defile::-webkit-scrollbar { display: none; }
+.defile img { flex: none; width: 62%; max-width: 260px; aspect-ratio: 4/5; object-fit: cover; border-radius: 14px; scroll-snap-align: center; border: 1px solid var(--bord); box-shadow: 0 16px 34px -18px rgba(0,0,0,.9); }
+.defile.story img { width: 46%; max-width: 200px; aspect-ratio: 9/16; }
+.glisse { text-align: center; font: 600 12.5px/1 var(--corps); color: var(--texte-3); margin-top: 8px; }
+
+/* ---------- tout ce que le studio fait ---------- */
+.pastille { display: flex; justify-content: center; margin: 22px 0 0; }
+.pastille span { font: 800 14px/1.3 var(--corps); color: #0A0A0B; background: var(--o); padding: 12px 18px; border-radius: 999px; text-align: center; box-shadow: 0 12px 30px -12px rgba(249,115,22,.8); }
+.fonctions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.f { border-radius: 18px; background: var(--carte); border: 1px solid var(--bord); padding: 16px; }
+.f .n { font: 800 12px/1 var(--titre); color: var(--o2); }
+.f h3 { font-size: 15.5px; letter-spacing: -.015em; margin: 10px 0 5px; line-height: 1.25; }
+.f p { margin: 0; font-size: 13.5px; color: var(--texte-2); line-height: 1.45; }
+.fonctions .f:last-child { grid-column: span 2; }
+.f.star { border-color: rgba(249,115,22,.5); background: linear-gradient(170deg, rgba(249,115,22,.14), var(--carte) 60%); }
+
+/* ---------- résultats ---------- */
+.preuves { display: grid; gap: 14px; margin-top: 28px; }
+.preuve { border-radius: 22px; background: var(--carte); border: 1px solid var(--bord); padding: 18px; }
+.preuve-tete { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin-bottom: 14px; }
+.preuve-tete .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); color: var(--o2); font: 800 15px/1 var(--titre); }
+.preuve h3 { font-size: 18px; letter-spacing: -.02em; }
+.preuve p { margin: 3px 0 0; font-size: 14.5px; color: var(--texte-2); }
+.captures { display: flex; gap: 10px; }
+.captures img { flex: 1; min-width: 0; max-height: 420px; object-fit: cover; object-position: top; border-radius: 12px; border: 1px solid var(--bord); }
+
+/* ---------- avis ---------- */
+.avis { display: grid; gap: 12px; margin-top: 28px; }
+.a { border-radius: 20px; background: var(--carte); border: 1px solid var(--bord); padding: 18px; }
+.a p { margin: 0; font-size: 16px; line-height: 1.5; }
+.a .qui { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; color: var(--texte-3); }
+.a .qui i { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--o), #7C2D12); display: grid; place-items: center; font: 800 14px/1 var(--titre); color: #fff; font-style: normal; }
+.a .qui b { display: block; color: var(--texte); font-size: 14.5px; }
+.etoiles { color: #FBBF24; letter-spacing: 2px; font-size: 14px; margin-bottom: 8px; }
+.vocal { display: flex; align-items: center; gap: 14px; width: 100%; border: 0; cursor: pointer; text-align: left; padding: 0; background: none; color: inherit; font: inherit; }
+.vocal .bouton { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--o); display: grid; place-items: center; box-shadow: 0 10px 26px -10px rgba(249,115,22,.9); }
+.vocal .bouton::after { content: ""; border-left: 15px solid #0A0A0B; border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
+.vocal.joue .bouton::after { border: 0; width: 14px; height: 16px; margin: 0; background: linear-gradient(90deg, #0A0A0B 0 5px, transparent 5px 9px, #0A0A0B 9px); }
+.vocal .onde { flex: 1; height: 34px; background: repeating-linear-gradient(90deg, rgba(249,115,22,.55) 0 3px, transparent 3px 7px); -webkit-mask: linear-gradient(0deg, transparent 20%, #000 20% 80%, transparent 80%), radial-gradient(60% 100% at 50% 50%, #000, transparent); mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); border-radius: 6px; }
+.vocal.joue .onde { animation: onde .9s linear infinite; }
+@keyframes onde { to { background-position: 14px 0; } }
+.vocal .lbl { font: 700 13px/1.2 var(--corps); color: var(--texte-2); white-space: nowrap; }
+
+/* ---------- pour toi / pas pour toi ---------- */
+.pour { display: grid; gap: 12px; margin-top: 28px; }
+.p { border-radius: 22px; padding: 20px; }
+.p h3 { font: 800 21px/1.2 var(--titre); letter-spacing: -.02em; margin-bottom: 12px; }
+.p ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.p li { display: grid; grid-template-columns: 24px 1fr; gap: 10px; font-size: 15.5px; line-height: 1.4; }
+.p li::before { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font: 800 12px/1 var(--corps); }
+.p.oui { background: linear-gradient(170deg, rgba(249,115,22,.14), rgba(249,115,22,.03)); border: 1px solid rgba(249,115,22,.45); }
+.p.oui li::before { content: "✓"; background: var(--o); color: #0A0A0B; }
+.p.non { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-2); }
+.p.non li::before { content: "✕"; background: rgba(255,122,122,.1); border: 1px solid rgba(255,122,122,.25); color: var(--rouge); }
+
+/* ---------- les bonus : mes deux autres formations, offertes (6 oct. 2026) ---------- */
+.bonus { display: grid; gap: 14px; margin-top: 28px; }
+.bn { position: relative; border-radius: 22px; overflow: hidden; background: var(--carte); border: 1px solid var(--bord); }
+.bn img { display: block; width: 100%; aspect-ratio: 590 / 396; object-fit: cover; }
+.bn-txt { padding: 16px 18px 18px; }
+.bn-tag { position: absolute; top: 12px; left: 12px; padding: 7px 12px; border-radius: 999px; background: var(--o); color: #0A0A0B; font: 800 12px/1 var(--corps); letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.bn h3 { font: 800 21px/1.2 var(--titre); letter-spacing: -.02em; }
+.bn p { margin: 6px 0 0; font-size: 14.5px; color: var(--texte-2); line-height: 1.45; }
+.bn .meta { margin-top: 10px; font-size: 13px; color: var(--texte-3); }
+.bn .valeur { margin-top: 12px; display: flex; align-items: baseline; gap: 10px; }
+.bn .valeur s { font: 800 18px/1 var(--titre); color: var(--texte-3); text-decoration-color: rgba(255,122,122,.8); }
+.bn .valeur b { font: 800 18px/1 var(--titre); color: var(--vert); }
+.bonus-total { margin: 18px auto 0; display: table; padding: 12px 18px; border-radius: 14px; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); font: 700 14.5px/1.35 var(--corps); color: var(--o3); text-align: center; }
+/* les deux lignes bonus de l'offre : un bandeau à part, qui se voit avant le paiement */
+.liste li.offert { grid-template-columns: 34px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 14px;
+  background: linear-gradient(120deg, rgba(249,115,22,.22), rgba(249,115,22,.06) 70%); border: 1px solid rgba(249,115,22,.55);
+  box-shadow: 0 10px 30px -14px rgba(249,115,22,.7); }
+.liste li.offert::before { content: "🎁"; width: 34px; height: 34px; border-radius: 10px; background: var(--o); font-size: 17px; margin: 0; box-shadow: 0 4px 14px rgba(249,115,22,.5); }
+.liste li.offert b { color: var(--o3); }
+.liste li.offert small { color: var(--texte-2); }
+.liste li.offert + li.offert { margin-top: -2px; }
+.liste .sep-bonus { display: flex; align-items: center; gap: 10px; margin-top: 6px; font: 800 11.5px/1 var(--corps); letter-spacing: .16em; text-transform: uppercase; color: var(--o2); }
+.liste .sep-bonus::before, .liste .sep-bonus::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(249,115,22,.55), transparent); }
+.liste li.sep-bonus::before { width: auto; height: 1px; border-radius: 0; background: linear-gradient(90deg, transparent, rgba(249,115,22,.55)); margin: 0; content: ""; }
+.liste li.sep-bonus { grid-template-columns: 1fr auto 1fr; }
+.liste .tag-offert { display: inline-block; margin-left: 8px; padding: 3px 8px; border-radius: 999px; background: rgba(74,222,128,.14); border: 1px solid rgba(74,222,128,.45); color: var(--vert); font: 800 11px/1.2 var(--corps); letter-spacing: .06em; text-transform: uppercase; vertical-align: 2px; }
+
+/* ---------- l'offre ---------- */
+.offre { border-radius: 28px; padding: 2px; background: linear-gradient(160deg, var(--o), rgba(249,115,22,.2) 45%, rgba(255,255,255,.08) 70%, var(--o)); box-shadow: 0 40px 120px -40px rgba(249,115,22,.6); margin-top: 28px; }
+.offre-in { border-radius: 26px; background: #111113; padding: 26px 20px; }
+.urgence { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; background: var(--o-voile); border: 1px solid rgba(249,115,22,.4); font: 700 13.5px/1.3 var(--corps); color: var(--o3); text-align: center; }
+.urgence::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--o); box-shadow: 0 0 10px var(--o); animation: clign 1.4s infinite; flex: none; }
+@keyframes clign { 50% { opacity: .3; } }
+.offre .marque { display: flex; justify-content: center; font-size: 28px; margin: 22px 0 0; }
+.offre .marque .studio { font-size: 10.5px; }
+.prix { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 16px 0 4px; flex-wrap: wrap; }
+.prix s { font: 800 26px/1 var(--titre); color: var(--texte-3); text-decoration-color: rgba(255,122,122,.8); }
+.prix b { font: 800 64px/1 var(--titre); letter-spacing: -.05em; }
+.modalite { text-align: center; font-size: 14px; color: var(--texte-2); margin: 8px auto 0; display: table; }
+.liste { list-style: none; margin: 24px auto 0; padding: 0; display: grid; gap: 12px; width: fit-content; max-width: 100%; }
+.liste li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 15.5px; line-height: 1.4; }
+.liste li::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--vert); color: #0A0A0B; font: 900 12px/1 var(--corps); margin-top: 1px; }
+.liste li small { display: block; color: var(--texte-3); font-size: 13px; }
+.paiement { margin-top: 24px; }
+.whop-mount { margin-top: 24px; border-radius: 16px; overflow: hidden; background: #0E0E10; min-height: 480px; }
+.whop-mount > div, .whop-mount [data-whop-plan] { width: 100%; }
+/* l'iframe de Whop règle sa hauteur elle-même : jamais de height imposée, seulement un plancher */
+.whop-mount iframe { width: 100% !important; border: 0; display: block; min-height: 480px; }
+.garantie-legale { margin: 12px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--texte-2); text-align: center; }
+.a-cote { margin: 18px 0 0; padding: 14px; border-radius: 12px; background: #19191C; border: 1px solid var(--bord); font-size: 13.5px; color: var(--texte-2); line-height: 1.5; }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 10px; margin-top: 26px; }
+.faq details { background: var(--carte); border: 1px solid var(--bord); border-radius: 16px; }
+.faq details[open] { border-color: var(--bord-2); }
+.faq summary { list-style: none; cursor: pointer; padding: 18px 58px 18px 18px; font: 700 16px/1.35 var(--titre); letter-spacing: -.01em; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(249,115,22,.5); color: var(--o2); display: grid; place-items: center; font: 500 20px/1 var(--corps); transition: transform .25s; }
+.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq details p { margin: 0; padding: 0 18px 18px; color: var(--texte-2); font-size: 15px; }
+
+/* ---------- deux options ---------- */
+.options { display: grid; gap: 10px; margin-top: 26px; }
+.opt { border-radius: 20px; padding: 20px; }
+.opt small { display: block; font: 800 11.5px/1 var(--corps); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+.opt p { margin: 0; font: 700 17.5px/1.4 var(--titre); letter-spacing: -.015em; }
+.opt.o1 { background: var(--carte); border: 1px solid var(--bord); color: var(--texte-3); } .opt.o1 p { color: var(--texte-2); }
+.opt.o2 { background: linear-gradient(160deg, rgba(249,115,22,.22), rgba(249,115,22,.05)); border: 1px solid rgba(249,115,22,.55); color: var(--o3); } .opt.o2 p { color: #fff; }
+
+footer { padding: 30px 0 20px; text-align: center; color: var(--texte-3); font-size: 12.5px; }
+footer nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 12px; }
+footer nav a { color: var(--texte-2); }
+.avert { max-width: 520px; margin: 14px auto 0; padding: 12px; border-radius: 12px; border: 1px solid var(--bord); font-size: 12px; line-height: 1.5; }
+
+/* ---------- la barre collée en bas ---------- */
+
+.a-remplir { position: relative; outline: 1.5px dashed rgba(249,115,22,.9); outline-offset: 4px; border-radius: 8px; }
+.a-remplir::after { content: "À REMPLIR"; position: absolute; top: -13px; right: 6px; font: 800 9px/1 var(--corps); letter-spacing: .12em; color: #0A0A0B; background: var(--o3); padding: 3px 6px; border-radius: 4px; }
+
+.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+.js .rv.vu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv { opacity: 1; transform: none; }
+}
+
+/* ---------- ordinateur : on respire un peu plus ---------- */
+@media (max-width: 420px) { .duo-v .tag { font-size: 10px; letter-spacing: .03em; padding: 7px 8px; } }
+@media (min-width: 900px) {
+  body { font-size: 17px; }
+  section { padding: 52px 0; }
+  .hero { padding-top: 34px; }
+  .etape { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 26px; align-items: center; padding: 26px; }
+  .etape-tete { margin: 0; }
+  .etapes.large-etapes { max-width: 1040px; }
+  .defile { margin: 0; padding: 2px 0 10px; }
+  .defile img { width: 240px; }
+  .defile.story img { width: 190px; }
+  .glisse { display: none; }
+  .fonctions { grid-template-columns: repeat(3, 1fr); }
+  .rang { display: grid; overflow: visible; margin: 0; padding: 0; gap: 12px; }
+  .rang-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .rang-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .rang img, .rang.story img { width: 100%; max-width: none; }
+  .rang-aide { display: none; }
+  /* le mur en damier : chaque rang a la hauteur de sa grande image, la petite la remplit */
+  .mur { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; grid-template-areas: "prune prune pack" "video chris chris" "fiche fiche env"; }
+  .cree.etroit .media, .c-video .media, .c-env .media { aspect-ratio: auto; flex: 1; min-height: 0; }
+  .fonctions .f:last-child { grid-column: auto; }
+  .preuves { grid-template-columns: repeat(3, 1fr); }
+  .bonus { grid-template-columns: 1fr 1fr; }
+  .captures { flex-direction: column; }
+  .avis { grid-template-columns: 1fr 1fr; }
+  .offre-in { padding: 34px 44px; }
+  .pour, .options, .soirs { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="fond" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sg" viewBox="0 0 120 120">
+    <rect x="9" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="93" y="9" width="18" height="18" rx="2.5" fill="#F97316"/>
+    <rect x="9" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="72" y="30" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="93" y="30" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/>
+    <rect x="9" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="51" y="51" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="72" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/>
+    <rect x="9" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".73"/><rect x="30" y="72" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="51" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".43"/>
+    <rect x="9" y="93" width="18" height="18" rx="2.5" fill="#F97316"/><rect x="30" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" fill="currentColor" fill-opacity=".36"/>
+  </symbol>
+</svg>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="col">
+    <div class="profil"><img src="assets/chris.png" alt="Chris Sans Filtre"><div><b>@chris.sans.filtre <i>✓</i></b><span>Chris Sans Filtre · <em>10.5K abonnés</em></span></div></div>
+    <h1>Ton Reel monté <span class="pill">en automatique</span> en <span class="o">15&nbsp;min</span></h1>
+    <p class="sans-sans"><b>Sans</b> écrire un seul prompt, <b>sans</b> même ouvrir une seule fois CapCut.</p>
+
+    <div class="vsl">
+      <p class="vsl-tete">▼ Ce Reel, le studio l'a monté en automatique ▼</p>
+      <div class="lecteur" id="vsl">
+        <video src="assets/reel-quinze-minutes.mp4" poster="assets/reel-quinze-minutes.jpg" playsinline preload="none"></video>
+        <button class="play" type="button" aria-label="Lire la vidéo avec le son"><span></span><small>Clique pour regarder, avec le son</small></button>
+      </div>
+      <a class="cta js-achat" href="#offre">Je veux mon studio <span class="fl">→</span></a>
+    </div>
+    <div class="rassure"><span>Paiement sécurisé</span><span>Accès immédiat</span><span>Mises à jour incluses</span></div>
+
+    <div class="chiffres-reel"><span><b>64 s</b> de Reel</span><span><b>25</b> plans</span><span><b>208</b> sous-titres</span><span><b>31</b> bruitages</span></div>
+    <p class="chiffres-note">Tout posé <b class="o">en automatique</b> par le studio. Pas un seul à la main.</p>
+  </div>
+</section>
+
+<!-- ================= LES CHIFFRES DE CHRIS ================= -->
+<section style="padding-top:0">
+  <div class="col">
+    <div class="stats rv">
+      <div><b>+170k</b><span>abonnés sur mes comptes IA</span></div>
+      <div><b>+10M</b><span>de vues générées</span></div>
+      <div><b class="o">0</b><span>fois à la caméra</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LA BANDE « EN AUTOMATIQUE » ================= -->
+<div class="bande-cadre" aria-label="Script, découpage, sous-titres, bruitages et montage en automatique">
+  <div class="bande" aria-hidden="true"><div class="bande-in">
+    <span>Script en automatique ✦</span><span>Découpage en automatique ✦</span><span>Sous-titres en automatique ✦</span><span>Bruitages en automatique ✦</span><span>Montage en automatique ✦</span>
+    <span>Script en automatique ✦</span><span>Découpage en automatique ✦</span><span>Sous-titres en automatique ✦</span><span>Bruitages en automatique ✦</span><span>Montage en automatique ✦</span>
+  </div></div>
+</div>
+
+<!-- ================= TU TE RECONNAIS ================= -->
+<section>
+  <div class="col">
+    <p class="sur">Sois honnête 2 secondes</p>
+    <h2 class="rv">Tu te reconnais&nbsp;?</h2>
+    <ul class="maux">
+      <li class="rv">Tu bosses toute la journée. Le soir, il te reste 1&nbsp;h.</li>
+      <li class="rv">Tu passes plus de temps dans CapCut qu'à créer.</li>
+      <li class="rv">Ton avatar change de tête d'une vidéo à l'autre.</li>
+      <li class="rv">T'as 15 idées de Reels en tête. Et 0 de posté.</li>
+    </ul>
+    <p class="coup rv">Le problème, c'est pas toi.<br><span class="grad">C'est le temps que ça te prend.</span></p>
+  </div>
+</section>
+
+<!-- ================= LA SOLUTION ================= -->
+<section style="padding-top:0">
+  <div class="col">
+    <div class="solution rv">
+      <span class="marque"><svg class="sg" aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C</span><span class="studio">Studio</span></span>
+      <h2>Le studio bosse <span class="grad">en automatique.</span><br>Toi, tu valides.</h2>
+      <p class="intro">Une appli sur ton ordi. Tu tapes ton idée : elle écrit, génère et <b>monte ton Reel, directement dans l'appli</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMENT ÇA MARCHE (vraies captures) ================= -->
+<section id="comment">
+  <div class="col">
+    <p class="sur">Comment ça marche</p>
+    <h2 class="rv">3 étapes.<br><span class="grad">C'est tout.</span></h2>
+  </div>
+  <div class="large">
+    <div class="etapes">
+      <div class="etape rv">
+        <div class="etape-tete"><span class="n">1</span><div><h3>Tu choisis ce que tu veux créer</h3><p>Un Reel, un carrousel, des stories. Le studio te guide étape par étape.</p></div></div>
+        <div class="fenetre"><div class="barre-f"><i></i><i></i><i></i><span>MOSAIC Studio</span></div><picture><source media="(max-width: 700px)" srcset="assets/studio-accueil-m.jpg"><img src="assets/studio-accueil.jpg" alt="L'accueil de MOSAIC Studio : que voulez-vous créer ?" loading="lazy"></picture></div>
+      </div>
+      <div class="etape rv">
+        <div class="etape-tete"><span class="n">2</span><div><h3>Le studio écrit et découpe tout</h3><p>Script, voix, plans, prompts. Ton accroche reste mot pour mot.</p></div></div>
+        <div class="fenetre"><div class="barre-f"><i></i><i></i><i></i><span>Le découpage du Reel</span></div><picture><source media="(max-width: 700px)" srcset="assets/studio-reel-decoupage-m.jpg"><img src="assets/studio-reel-decoupage.jpg" alt="Le découpage d'un Reel dans MOSAIC Studio" loading="lazy"></picture></div>
+      </div>
+      <div class="etape rv">
+        <div class="etape-tete"><span class="n">3</span><div><h3>Ton Reel sort monté, prêt à poster</h3><p>Plans, sous-titres mot à mot, voix, bruitages, musique : tout est monté <b class="o">en automatique</b>, directement dans l'appli. Un détail à changer ? Tu le demandes, le studio le corrige.</p></div></div>
+        <div><div class="fenetre tl"><div class="barre-f"><i></i><i></i><i></i><span>La timeline posée par le studio</span></div><div class="tl-defile"><img src="assets/timeline-capcut.jpg" alt="La timeline d'un Reel monté par le studio : plans, sous-titres, voix off, bruitages, musique" loading="lazy"></div></div>
+        <p class="glisse tl-aide">← glisse la timeline →</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AVANT / APRÈS ================= -->
+<section>
+  <div class="col">
+    <p class="sur">Avant / après</p>
+    <h2 class="rv">Du clip brut<br><span class="grad">au Reel monté.</span></h2>
+    <div class="duo-v rv">
+      <figure class="avant"><span class="tag">Les clips bruts</span><video src="assets/avant-brut.mp4" poster="assets/avant-brut.jpg" muted loop playsinline autoplay preload="metadata"></video></figure>
+      <span class="fleche" aria-hidden="true">→</span>
+      <figure class="apres"><span class="tag">Monté en automatique</span><div class="v-cadre"><video src="assets/apres-monte.mp4" poster="assets/apres-monte.jpg" muted loop playsinline autoplay preload="metadata"></video><button class="son" type="button">🔇 Touche pour le son</button></div></figure>
+    </div>
+    <p class="legende-v rv">Les 20 premières secondes du même Reel. Coupes, sous-titres mot à mot, mots forts en couleur, bruitages : <b>tout en automatique.</b></p>
+    <div class="cta-bloc rv"><a class="cta js-achat" href="#offre">Je veux faire ces Reels <span class="fl">→</span></a></div>
+  </div>
+</section>
+
+<!-- ================= LE CHRONO ================= -->
+<section id="chrono">
+  <div class="col">
+    <p class="sur">Le chrono</p>
+    <h2 class="rv">Le même Reel.<br><span class="grad">Pas le même chrono.</span></h2>
+    <div class="temps rv">
+      <div class="t sans"><small>Sans le studio</small><b>5&nbsp;h</b><span>script, prompts, montage à la main</span></div>
+      <div class="t avec"><small>Avec MOSAIC Studio</small><b>15&nbsp;min</b><span>tu valides, il fait le reste</span></div>
+    </div>
+    <p class="gagne rv">4&nbsp;h&nbsp;45 récupérées. <span class="o">Par Reel.</span></p>
+
+    <div class="soirs">
+      <div class="soir sans rv">
+        <h3>Ta soirée, sans le studio</h3>
+        <ol><li><b>21h00</b>Tu ouvres ChatGPT pour le script.</li><li><b>21h40</b>Tu traduis tes prompts en anglais.</li><li><b>22h15</b>Ton avatar a changé de tête. Tu regénères.</li><li><b>23h00</b>T'as pas ouvert CapCut. Tu lâches.</li></ol>
+      </div>
+      <div class="soir avec rv">
+        <h3>Ta soirée, avec MOSAIC Studio</h3>
+        <ol><li><b>21h00</b>Tu tapes ton idée.</li><li><b>21h04</b>Tu valides le script, tu poses ta voix.</li><li><b>21h09</b>Tu valides les images. Il génère les vidéos.</li><li><b>21h15</b>Ton Reel est monté. Posté.</li></ol>
+      </div>
+    </div>
+
+    <div class="calcul rv">
+      <label for="heures">T'as combien de temps par semaine&nbsp;? <b id="h-val">5 h</b></label>
+      <input type="range" id="heures" min="1" max="15" step="1" value="5">
+      <div class="res" aria-live="polite">
+        <div class="r sans"><small>Sans le studio</small><b id="r-sans">1</b><span id="r-sans-l">Reel</span></div>
+        <div class="r avec"><small>Avec MOSAIC Studio</small><b id="r-avec">20</b><span id="r-avec-l">Reels</span></div>
+      </div>
+      <p class="mois" id="mois">Sur un mois : <em>80 Reels</em> au lieu de 4.</p>
+    </div>
+    <p class="petit">Temps indicatifs. L'attente des générations n'est pas comptée : elles tournent pendant que tu fais autre chose.</p>
+  </div>
+</section>
+
+<!-- ================= LA GALERIE : un exemple de chaque (vrais rendus du studio) ================= -->
+<section id="exemples">
+  <div class="col">
+    <p class="sur">Fait avec MOSAIC Studio</p>
+    <h2 class="rv">Tout ça,<br><span class="grad">c'est le studio.</span></h2>
+    <p class="intro rv">Un exemple de chaque. <b>Tout sort du studio, tel quel.</b></p>
+  </div>
+  <div class="large">
+    <div class="serie rv">
+      <div class="serie-tete"><span class="cree-tag">Carrousel</span><span>6 slides à ta DA · sans crédit</span></div>
+      <div class="rang rang-6">
+        <img src="assets/slide-pmub9nw45-1.jpg" alt="Slide 1 : shoots produit IA" loading="lazy"><img src="assets/slide-pmub9nw45-2.jpg" alt="Slide 2" loading="lazy"><img src="assets/slide-pmub9nw45-3.jpg" alt="Slide 3" loading="lazy"><img src="assets/slide-pmub9nw45-4.jpg" alt="Slide 4" loading="lazy"><img src="assets/slide-pmub9nw45-5.jpg" alt="Slide 5" loading="lazy"><img src="assets/slide-pmub9nw45-6.jpg" alt="Slide 6" loading="lazy">
+      </div>
+    </div>
+    <div class="serie rv">
+      <div class="serie-tete"><span class="cree-tag">Stories</span><span>prêtes à poster</span></div>
+      <div class="rang rang-5 story">
+        <img src="assets/slide-pmubmynmi-1.jpg" alt="Story 1" loading="lazy"><img src="assets/slide-pmubmynmi-2.jpg" alt="Story 2" loading="lazy"><img src="assets/slide-pmubmynmi-3.jpg" alt="Story 3" loading="lazy"><img src="assets/slide-pmubmynmi-4.jpg" alt="Story 4" loading="lazy"><img src="assets/slide-pmubmynmi-5.jpg" alt="Story 5" loading="lazy">
+      </div>
+    </div>
+    <p class="glisse rang-aide">← glisse pour voir →</p>
+    <div class="mur">
+      <figure class="cree c-prune rv"><div class="media"><img src="assets/cree-avatar-prune.jpg" alt="Planche avatar de Prune, sous tous les angles" loading="lazy"><span class="cree-tag">Planche avatar</span></div><figcaption>Le même visage dans chaque image</figcaption></figure>
+      <figure class="cree c-pack etroit rv"><div class="media"><img src="assets/cree-packshot.jpg" alt="Packshot de la crème Golosa" loading="lazy"><span class="cree-tag">Packshot</span></div><figcaption>Ton produit, comme en studio</figcaption></figure>
+      <figure class="cree c-video etroit rv"><div class="media"><video src="assets/cree-broll.mp4" poster="assets/cree-broll.jpg" muted loop playsinline autoplay preload="metadata"></video><span class="cree-tag">Vidéo B-roll</span></div><figcaption>Ton avatar et ton produit, en un plan</figcaption></figure>
+      <figure class="cree c-chris rv"><div class="media"><img src="assets/cree-avatar-chris.jpg" alt="Planche avatar de Chris, son clone IA" loading="lazy"><span class="cree-tag">Ton clone</span></div><figcaption>Ou toi, en avatar IA</figcaption></figure>
+      <figure class="cree c-fiche rv"><div class="media"><img src="assets/cree-fiche-produit.jpg" alt="Fiche produit d'un mug sous tous les angles" loading="lazy"><span class="cree-tag">Fiche produit</span></div><figcaption>Ton objet sous tous les angles</figcaption></figure>
+      <figure class="cree c-env etroit rv"><div class="media"><img src="assets/cree-environnement.jpg" alt="Environnement : un studio photo" loading="lazy"><span class="cree-tag">Environnement</span></div><figcaption>Un lieu, retrouvé à l'identique</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOUT CE QUE LE STUDIO FAIT ================= -->
+<section id="dedans">
+  <div class="col">
+    <p class="sur">Ce que tu reçois</p>
+    <h2 class="rv">Tout ce que<br><span class="grad">le studio fait pour toi.</span></h2>
+    <div class="pastille rv"><span>4 parcours guidés · 6 outils · mises à jour incluses</span></div>
+  </div>
+  <div class="large">
+    <div class="fonctions">
+      <div class="f star rv"><span class="n">01</span><h3>Le Reel monté en automatique</h3><p>De l'idée à la vidéo finie : script, voix, vidéos, sous-titres, bruitages, montage. Tout dans l'appli.</p></div>
+      <div class="f rv"><span class="n">02</span><h3>Les carrousels</h3><p>Écrits et mis en page à ta DA. Tu retouches tout à la main.</p></div>
+      <div class="f rv"><span class="n">03</span><h3>Les stories</h3><p>Rien sous les zones qu'Instagram recouvre. Export prêt à poster.</p></div>
+      <div class="f rv"><span class="n">04</span><h3>Le B-roll</h3><p>Une vidéo en un plan, avec ton avatar, ton lieu, ton produit.</p></div>
+      <div class="f star rv"><span class="n">05</span><h3>Le reproducteur</h3><p>Tu déposes un Reel qui cartonne, il devient ton format.</p></div>
+      <div class="f rv"><span class="n">06</span><h3>Ton avatar verrouillé</h3><p>Sa planche une fois, le même visage dans chaque vidéo.</p></div>
+      <div class="f rv"><span class="n">07</span><h3>Tes DA</h3><p>Couleurs, polices, fonds, sous-titres. Une par client si tu veux.</p></div>
+      <div class="f rv"><span class="n">08</span><h3>Voix &amp; son</h3><p>Ta voix ou une voix IA, et 34 bruitages libres de droits offerts.</p></div>
+      <div class="f rv"><span class="n">09</span><h3>Tes lieux et tes produits</h3><p>Créés une fois, retrouvés à l'identique partout.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RÉSULTATS ================= -->
+<section id="resultats">
+  <div class="col">
+    <p class="sur">C'est pas de la théorie</p>
+    <h2 class="rv">Les vues, les clients,<br><span class="grad">les virements.</span></h2>
+  </div>
+  <div class="large">
+    <div class="preuves">
+      <div class="preuve rv"><div class="preuve-tete"><span class="n">1</span><div><h3>L'IA te fait faire des vues.</h3><p>223 254 vues et 2 075 abonnés en 3 semaines.</p></div></div><div class="captures"><img src="assets/preuve-vues.jpg" alt="Statistiques Instagram : 223 254 vues" loading="lazy"></div></div>
+      <div class="preuve rv"><div class="preuve-tete"><span class="n">2</span><div><h3>Les vues t'amènent des clients.</h3><p>Des marques t'écrivent en DM pour bosser avec toi.</p></div></div><div class="captures"><img src="assets/preuve-dm.jpg" alt="Des marques écrivent en message privé" loading="lazy"></div></div>
+      <div class="preuve rv"><div class="preuve-tete"><span class="n">3</span><div><h3>Et les clients, ça rapporte.</h3><p>De vrais virements qui tombent sur le compte.</p></div></div><div class="captures"><img src="assets/preuve-ventes2.png" alt="Virements reçus en juillet" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AVIS ================= -->
+<section>
+  <div class="col">
+    <p class="sur">Ils sont déjà dedans</p>
+    <h2 class="rv">Ce que disent<br><span class="grad">mes élèves et mes clients.</span></h2>
+  </div>
+  <div class="large">
+    <div class="avis">
+      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4"><span class="bouton"></span><span class="onde"></span><span class="lbl">Avis vocal</span></button><div class="qui"><i>B</i><div><b>Bernie</b>Élève · avis vocal</div></div></div>
+      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3"><span class="bouton"></span><span class="onde"></span><span class="lbl">Avis vocal</span></button><div class="qui"><i>L</i><div><b>Laura</b>Cliente · avis vocal</div></div></div>
+      <div class="a rv"><p>« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère&nbsp;! 🫶 »</p><div class="qui"><i>M</i><div><b>Majoric</b>Élève</div></div></div>
+      <div class="a rv"><p>« Hello Chris&nbsp;! Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! T'es vraiment trop fort, je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><i>K</i><div><b>Kevin</b>Élève</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POUR TOI / PAS POUR TOI ================= -->
+<section>
+  <div class="col">
+    <p class="sur">Est-ce fait pour toi&nbsp;?</p>
+    <h2 class="rv">Pas forcément.</h2>
+    <div class="pour">
+      <div class="p oui rv"><h3>C'est pour toi si…</h3><ul>
+        <li>T'as un job et peu de temps le soir.</li>
+        <li>Tu veux poster régulièrement sans y passer tes soirées.</li>
+        <li>Tu veux créer avec un avatar IA, sans te montrer.</li>
+        <li>T'as jamais monté une vidéo de ta vie.</li>
+      </ul></div>
+      <div class="p non rv"><h3>C'est pas pour toi si…</h3><ul>
+        <li>Tu veux un bouton qui poste à ta place sans rien valider.</li>
+        <li>Tu refuses de payer le moindre outil (il te faut Claude et des crédits).</li>
+        <li>T'as pas d'ordinateur : le studio tourne sur PC et Mac.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LES BONUS : mes deux autres formations, offertes (6 oct. 2026, Chris) ================= -->
+<section id="bonus">
+  <div class="col">
+    <p class="sur">En bonus</p>
+    <h2 class="rv">Mes 2 autres formations.<br><span class="grad">Offertes.</span></h2>
+    <p class="intro rv">Avec le studio, tu reçois aussi <b>mes deux formations</b>, en entier, sur Whop.</p>
+    <div class="bonus">
+      <div class="bn rv"><span class="bn-tag">Offert</span><img src="assets/bonus-ai-avatar-system.jpg" alt="AI AVATAR System" loading="lazy">
+        <div class="bn-txt"><h3>AI AVATAR System</h3>
+          <p>Crée des vidéos virales avec ton avatar IA. Sans caméra, sans équipe, de zéro à la monétisation.</p>
+          <div class="meta">13 chapitres · 18 leçons · 1 h 18</div>
+          <div class="valeur"><s>47&nbsp;€</s><b>0&nbsp;€</b></div></div></div>
+      <div class="bn rv"><span class="bn-tag">Offert</span><img src="assets/bonus-ai-cinema-studio.jpg" alt="AI Cinema Studio" loading="lazy">
+        <div class="bn-txt"><h3>AI Cinema Studio</h3>
+          <p>Crée des vidéos IA cinématiques, sans tourner une seule scène. Pas de caméra, pas d'acteurs, pas de budget.</p>
+          <div class="meta">8 chapitres · 15 leçons · 1 h 56</div>
+          <div class="valeur"><s>67&nbsp;€</s><b>0&nbsp;€</b></div></div></div>
+    </div>
+    <p class="bonus-total rv">114&nbsp;€ de formations, offertes avec MOSAIC Studio.</p>
+  </div>
+</section>
+
+<!-- ================= L'OFFRE ================= -->
+<section id="offre">
+  <div class="col">
+    <p class="sur">L'offre complète</p>
+    <h2 class="rv">Tout ce que tu reçois<br><span class="grad">aujourd'hui.</span></h2>
+    <div class="offre rv">
+      <div class="offre-in">
+        <div class="urgence">Prix de lancement. Il monte à chaque grosse mise à jour : ce que tu prends aujourd'hui, tu le gardes.</div>
+        <span class="marque"><svg class="sg" aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C</span><span class="studio">Studio</span></span>
+        <div class="prix"><s>397&nbsp;€</s><b>147&nbsp;€</b></div>
+        <p class="modalite">Paiement unique · Accès à vie · Mises à jour incluses</p>
+        <ul class="liste">
+          <li><span><b>Le studio complet</b>, Windows et Mac<small>les 4 parcours et les 6 outils</small></span></li>
+          <li><span><b>Les modules vidéo pas à pas</b>, sur Whop<small>de l'installation à ton premier Reel monté</small></span></li>
+          <li><span><b>34 bruitages libres de droits</b>, livrés avec</span></li>
+          <li><span><b>Toutes les mises à jour</b>, installées d'un clic</span></li>
+          <li><span><b>Le chat de la communauté</b>, pour jamais rester bloqué</span></li>
+          <li><span><b>Ta clé de licence</b>, reçue tout de suite<small>un ordinateur à la fois, transférable</small></span></li>
+          <li class="sep-bonus" aria-hidden="true"><span>+ En bonus, offert</span></li>
+          <li class="offert"><span><b>Bonus : AI AVATAR System</b>, ma formation complète<span class="tag-offert">Offert</span><small>13 chapitres · 18 leçons · valeur 47&nbsp;€</small></span></li>
+          <li class="offert"><span><b>Bonus : AI Cinema Studio</b>, ma formation complète<span class="tag-offert">Offert</span><small>8 chapitres · 15 leçons · valeur 67&nbsp;€</small></span></li>
+        </ul>
+        <!-- Le paiement Whop intégré (thème sombre) -->
+        <div class="whop-mount" id="paiement" style="min-height:0;background:none">
+          <div style="min-height:240px;display:grid;place-items:center;text-align:center;padding:28px;border:1.5px dashed rgba(249,115,22,.6);border-radius:16px;color:#B2B2BA;font-size:15px;line-height:1.5"><div><b style="display:block;color:#F4F4F5;font-size:17px;margin-bottom:6px">Ici : le formulaire de paiement Whop</b>Carte bancaire, 147&nbsp;€ en paiement unique.<br>Retiré de cette copie de relecture.</div></div>
+        </div>
+        <p class="garantie-legale"><b>Garantie légale de conformité&nbsp;:</b> si le studio ne fonctionne pas chez toi, il est réparé, ou remboursé.</p>
+        <div class="rassure"><span>Paiement sécurisé par Whop</span><span>Accès immédiat</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="col">
+    <h2 class="rv">Questions fréquentes</h2>
+    <div class="faq rv">
+      <details><summary>Je reçois le studio quand&nbsp;?</summary><p>Tout de suite après le paiement. Tu télécharges le studio et ta clé t'attend dans ton espace Whop.</p></details>
+      <details><summary>Faut être technique&nbsp;?</summary><p>Non, zéro. Un double-clic et le studio s'installe tout seul. Pas de terminal, pas de code. Les modules vidéo te montrent chaque écran.</p></details>
+      <details><summary>J'ai qu'une heure le soir. Ça suffit&nbsp;?</summary><p>Oui, c'est fait pour ça. Tu lances, tu valides. Les vidéos se génèrent pendant que tu fais autre chose.</p></details>
+      <details><summary>Est-ce qu'il y a des frais en plus&nbsp;?</summary><p>Oui, et je te le dis cash : ton abonnement Claude (Pro ou Max) et les crédits de ta plateforme, Higgsfield ou Magnific. Le studio affiche le prix avant chaque génération. Pour te donner une idée, le Reel en haut de la page a coûté 76 crédits. Le montage, lui, ne coûte rien : il se fait dans l'appli.</p></details>
+      <details><summary>Mon avatar garde le même visage&nbsp;?</summary><p>Oui. Tu crées sa planche de référence une fois. Ensuite, chaque image et chaque vidéo la reprend.</p></details>
+      <details><summary>Ça marche sur Mac&nbsp;? Sur téléphone&nbsp;?</summary><p>Sur Windows et Mac, oui. Sur téléphone, non : le studio tourne sur ton ordinateur.</p></details>
+      <details><summary>Je peux l'utiliser sur plusieurs ordis&nbsp;?</summary><p>Un à la fois. Tu changes de PC&nbsp;? Tu réinitialises ta clé depuis Whop et tu l'actives sur le nouveau.</p></details>
+      <details><summary>Le prix va rester à 147&nbsp;€&nbsp;?</summary><p>Non. C'est le prix de lancement : il monte à chaque grosse mise à jour. Ce que tu prends aujourd'hui, tu le gardes, mises à jour comprises.</p></details>
+      <details><summary>Et si ça me plaît pas&nbsp;?</summary><p>Le studio est un contenu numérique livré tout de suite&nbsp;: en l'achetant, tu demandes l'accès immédiat et tu renonces à ton droit de rétractation de 14&nbsp;jours. Pas de «&nbsp;satisfait ou remboursé&nbsp;». Par contre, si le studio ne fonctionne pas chez toi, je le répare, et si je n'y arrive pas, je te rembourse. Tout est écrit dans les <a href="mosaic/cgv.html">conditions de vente</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEUX OPTIONS ================= -->
+<section>
+  <div class="col">
+    <h2 class="rv">T'as deux options.</h2>
+    <div class="options">
+      <div class="opt o1 rv"><small>Option 1</small><p>Tu fermes cette page. Ce soir, ton heure part dans CapCut. Comme hier.</p></div>
+      <div class="opt o2 rv"><small>Option 2</small><p>Tu prends le studio. Ce soir à 21h15, ton premier Reel est monté.</p></div>
+    </div>
+    <div class="cta-bloc rv"><a class="cta js-achat" href="#offre">Je veux mon studio <span class="fl">→</span></a></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="col">
+    <nav><a href="mosaic/cgv.html">Conditions de vente</a><a href="mosaic/mentions-legales.html">Mentions légales</a><a href="mosaic/confidentialite.html">Confidentialité</a><a href="mosaic/cookies.html">Cookies</a></nav>
+    <div>MOSAIC Studio · par Chris Sans Filtre · © 2026</div>
+    <p class="avert">Les résultats présentés viennent de mon expérience personnelle et ne garantissent aucun gain. Créer du contenu demande de la régularité.</p>
+  </div>
+</footer>
+
+
+<script>
+/* Le calcul : un Reel ≈ 5 h sans le studio, ≈ 15 min avec (les mêmes chiffres que le chrono). */
+const MIN_SANS = 300, MIN_AVEC = 15;
+
+(function () {
+  // Tous les boutons mènent à l'offre : le paiement Whop y est intégré
+  document.querySelectorAll(".js-achat").forEach(a => { a.href = "#offre"; });
+
+  // La vidéo du haut : lecture avec le son au clic
+  const vsl = document.getElementById("vsl"), vid = vsl.querySelector("video");
+  vsl.querySelector(".play").addEventListener("click", () => { vid.controls = true; vid.muted = false; vid.play(); vsl.classList.add("joue"); });
+
+  // L'avant / après : le son du Reel monté au toucher (les deux vidéos repartent ensemble)
+  const apres = document.querySelector(".apres video"), bSon = document.querySelector(".apres .son");
+  const basculerSon = () => {
+    apres.muted = !apres.muted;
+    if (!apres.muted) { apres.currentTime = 0; document.querySelector(".avant video").currentTime = 0; apres.play(); }
+    bSon.textContent = apres.muted ? "🔇 Touche pour le son" : "🔊 Son activé"; bSon.classList.toggle("actif", !apres.muted);
+  };
+  bSon.addEventListener("click", basculerSon); apres.addEventListener("click", basculerSon);
+
+  // Les avis vocaux : un seul à la fois
+  let enCours = null;
+  document.querySelectorAll(".vocal").forEach(b => {
+    const son = new Audio(); son.preload = "none"; son.src = b.dataset.audio;
+    son.addEventListener("ended", () => b.classList.remove("joue"));
+    b.addEventListener("click", () => {
+      if (enCours && enCours.son !== son) { enCours.son.pause(); enCours.b.classList.remove("joue"); }
+      if (son.paused) { son.play(); b.classList.add("joue"); enCours = { son, b }; } else { son.pause(); b.classList.remove("joue"); }
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("vu"); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -30px 0px" });
+    document.querySelectorAll(".rv").forEach(el => io.observe(el));
+  } else { document.querySelectorAll(".rv").forEach(el => el.classList.add("vu")); }
+
+  // Le calcul
+  const curseur = document.getElementById("heures");
+  const reels = n => n <= 1 ? "Reel" : "Reels";
+  function calculer() {
+    const h = +curseur.value, s = Math.floor(h * 60 / MIN_SANS), a = Math.floor(h * 60 / MIN_AVEC);
+    document.getElementById("h-val").textContent = h + " h";
+    document.getElementById("r-sans").textContent = s;
+    document.getElementById("r-sans-l").textContent = s === 0 ? "Reel. Pas un seul." : reels(s);
+    document.getElementById("r-avec").textContent = a;
+    document.getElementById("r-avec-l").textContent = reels(a);
+    document.getElementById("mois").innerHTML = "Sur un mois : <em>" + a * 4 + " " + reels(a * 4) + "</em> au lieu de " + s * 4 + ".";
+    curseur.style.setProperty("--p", ((h - 1) / 14 * 100) + "%");
+  }
+  curseur.addEventListener("input", calculer); calculer();
+})();
+</script>
+
+</body>
+</html>
