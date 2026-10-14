@@ -13,7 +13,6 @@
 <style>
 /* PAGE DE VENTE MOSAIC, version rubber hose (en ligne depuis le 14 oct. 2026) : la page épurée habillée avec le design system
    de LABO/design-rubberhose — encre, papier, fil ; Fraunces doux, Instrument Serif, Inter, DM Mono ; le boing, l'iris, le point. */
-@property --iris { syntax: '<length>'; inherits: false; initial-value: 0px; }
 @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 :root {
   --encre: #0B0B0B; --encre-2: #2F2F2D; --papier: #F3F2EE; --papier-clair: #FBFAF7; --fil: #8C8A84; --craie: #FFFFFF;
@@ -52,17 +51,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .scintille { position: fixed; inset: 0; z-index: 89; pointer-events: none; background: var(--encre); opacity: 0; animation: scintille 7s infinite; }
 @keyframes scintille { 0%, 91%, 100% { opacity: 0; } 92% { opacity: .025; } 93% { opacity: 0; } 95% { opacity: .018; } 96% { opacity: 0; } }
 
-/* l'ouverture : l'amorce du film (3, 2, 1) puis l'iris */
-.amorce { position: fixed; inset: 0; z-index: 100; background: var(--encre); display: grid; place-items: center; cursor: var(--gant);
-  -webkit-mask: radial-gradient(circle at 50% 38%, transparent var(--iris), #000 calc(var(--iris) + 1px)); mask: radial-gradient(circle at 50% 38%, transparent var(--iris), #000 calc(var(--iris) + 1px));
-  transition: --iris 1.05s cubic-bezier(.7, 0, .2, 1); }
-.amorce.ouvre { --iris: 150vmax; }
-.amorce .cadran { position: relative; width: min(56vmin, 420px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: var(--craie); }
-.amorce .cadran::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 0 0 14px var(--encre), 0 0 0 16px rgba(255,255,255,.35); }
-.amorce .balaye { position: absolute; inset: 2px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255,255,255,.16) var(--a, 0deg), transparent 0); }
-.amorce .croix { position: absolute; inset: -18%; pointer-events: none; background: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)) center / 1px 100% no-repeat, linear-gradient(90deg, rgba(255,255,255,.35), rgba(255,255,255,.35)) center / 100% 1px no-repeat; }
-.amorce .chiffre { position: relative; font: italic 800 clamp(120px, 28vmin, 240px)/1 var(--titre); font-variation-settings: var(--doux); }
-.amorce .passer { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font: 400 11px/1 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.45); }
 
 /* le bouton et le tampon */
 .bouton { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; font: 600 15px/1 var(--corps); border-radius: 999px; padding: 17px 26px;
@@ -226,6 +214,13 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .valide .w-statut svg path { animation: coche .45s ease-out .1s both; }
 @keyframes coche { from { stroke-dashoffset: 20; } }
 
+/* l'étape 4 : deux relevés bancaires (le reste flouté), en éventail */
+.virements { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 18px 18px 26px; }
+.vir { position: relative; margin: 0; border-radius: 22px; overflow: hidden; border: 3px solid var(--encre); box-shadow: 5px 5px 0 var(--encre); background: #fff; aspect-ratio: 9 / 15; }
+.vir img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.vir:first-child { rotate: -2deg; } .vir:last-child { rotate: 2deg; translate: 0 14px; }
+.vir .tampon { position: absolute; left: 50%; bottom: 14px; translate: -50% 0; background: var(--o); border-color: var(--encre); font-size: 13px; padding: 9px 13px 8px; box-shadow: 2px 2px 0 var(--encre); }
+
 /* l'étape 2 : le Reel qui tourne, et ses statistiques qui montent */
 .etape.large.inverse { grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr); }
 .stats-bloc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px; }
@@ -309,17 +304,17 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .valeur s { font: 400 20px/1 var(--mono); color: var(--fil); }
 .valeur b { font: italic 800 38px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; color: var(--o); }
 
-/* les preuves */
-.preuves { padding: 70px 0 10px; }
-.preuves h2 { font: 600 clamp(36px, 4.8vw, 58px)/1.02 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; text-align: center; margin: 0; }
-.avis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
-.a { padding: 24px 22px 22px; display: flex; flex-direction: column; transition: transform .45s var(--boing); }
-.a:hover { transform: translateY(-3px) rotate(-.4deg); }
-.a.vue:hover { transform: translateY(-3px) rotate(-.4deg); }
-.a p { margin: 0 0 18px; font: 400 21px/1.22 var(--etiquette); font-style: italic; }
-.a .qui { margin-top: auto; display: flex; align-items: center; gap: 10px; font: 500 10px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fil); }
-.a .qui img { width: 44px; flex: none; }
-.a .qui b { display: block; color: var(--encre); font: 400 21px/1 var(--etiquette); letter-spacing: 0; text-transform: uppercase; margin-bottom: 3px; }
+/* l'avis vocal de Bernie, posé dans le mur du chat (fond sombre) */
+.capture.vocal-carte { cursor: default; padding: 20px 22px 22px; background: #141414; }
+.vocal-carte:hover { transform: translate(-2px, -2px); }
+.vc-tete { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.capture .vc-tete img { width: 52px; height: auto; border-radius: 0; flex: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
+.vc-tete b { display: block; font: 400 26px/1 var(--etiquette); text-transform: uppercase; color: var(--craie); }
+.vc-tete span { display: block; margin-top: 4px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.vocal-carte .vocal { margin: 0; }
+.vocal-carte .vocal .lecture { background: var(--o); box-shadow: 0 0 0 4px #141414, 0 0 0 5.5px var(--o); }
+.vocal-carte .vocal .onde { background: repeating-linear-gradient(90deg, #fff 0 2px, transparent 2px 6px); opacity: .5; }
+.vc-duree { flex: none; color: rgba(255,255,255,.6); font-size: 10.5px; }
 .vocal { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; text-align: left; padding: 0; background: none; color: inherit; font: inherit; margin-bottom: 20px; }
 .vocal .lecture { flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--encre); display: grid; place-items: center; box-shadow: 0 0 0 4px var(--papier-clair), 0 0 0 5.5px var(--encre); transition: transform .45s var(--boing); }
 .vocal:hover .lecture { transform: scale(1.08) rotate(-6deg); }
@@ -337,11 +332,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .chat-tete { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
 .chat-tete .mono { color: rgba(255,255,255,.55); }
 .chat-tete h3 { margin-top: 0; max-width: 560px; font: 600 clamp(30px, 3.4vw, 44px)/1.05 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; }
-.inclus { position: relative; max-width: 380px; border-radius: 16px; padding: 20px 22px; border: var(--trait) solid rgba(255,255,255,.85); }
-.inclus::after { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(255,255,255,.3); border-radius: 11px; pointer-events: none; }
-.inclus .mono { color: rgba(255,255,255,.6); font-size: 10px; }
-.inclus p { margin: 8px 0 0; color: rgba(255,255,255,.82); font-size: 14.5px; }
-.inclus p b { color: var(--craie); }
 .mur { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .mur-col { display: grid; gap: 18px; }
 .capture { margin: 0; cursor: zoom-in; position: relative; padding: 8px; border-radius: 16px; border: var(--trait) solid rgba(255,255,255,.8); background: #111;
@@ -433,6 +423,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .offre .gauche .coin { left: -4px; }
 }
 @media (max-width: 900px) {
+  .virements { margin-top: 30px; }
   .bonus-grille { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
   .etape.large, .etape.large.inverse { grid-template-columns: 1fr; gap: 34px; }
   .stats-bloc { width: min(640px, 100%); justify-self: center; }
@@ -440,7 +431,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .etape, .offre { grid-template-columns: 1fr; gap: 34px; }
   .etape.inverse .visuel { order: 0; }
   .etape { padding: 48px 0; }
-  .avis { grid-template-columns: 1fr 1fr; }
   .chat-tete { flex-direction: column; align-items: start; gap: 18px; }
   .mur { grid-template-columns: 1fr; }
   .offre .gauche { padding: 44px 28px 14px; } .offre .droite { border-left: 0; border-top: var(--trait) dashed rgba(11,11,11,.35); padding: 22px 16px 18px; }
@@ -449,6 +439,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .visuel .coin, .visuel .coin.bas, .ticket .coin { right: 0; }
 }
 @media (max-width: 560px) {
+  .virements { gap: 12px; padding: 12px 12px 22px; } .vir .tampon { font-size: 11px; padding: 7px 10px 6px; bottom: 10px; }
   .lecteur .play { width: 76px; height: 76px; margin: -38px 0 0 -38px; box-shadow: 0 0 0 4px var(--encre), 0 0 0 6px var(--o); } .lecteur .play svg { width: 32px; height: 32px; } .lecteur .duree { display: none; }
   .profil { gap: 11px; padding: 10px 16px 10px 10px; margin-bottom: 26px; } .profil img { width: 48px; height: 48px; } .profil b { font-size: 16px; } .profil small { font-size: 12.5px; }
   .faq details { padding: 16px 16px; } .faq summary { font-size: 17px; }
@@ -472,7 +463,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .rassure span { display: block; } .rassure span + span::before { display: none; }
   .ecran { margin-top: 50px; padding: 8px; }
   .rond-n { width: 104px; } .rond-n b { font-size: 66px; }
-  .avis { grid-template-columns: 1fr; }
   .produits { padding: 26px 18px 112px; } .fiche { width: 92%; } .fiche.petite { width: 74%; right: 12px; bottom: 18px; }
   .nuit { padding: 100px 0 110px; }
   .prix b { font-size: 68px; }
@@ -497,11 +487,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 <div class="grain" aria-hidden="true"></div>
 <div class="scintille" aria-hidden="true"></div>
 
-<!-- L'AMORCE&nbsp;: 3, 2, 1, puis l'iris s'ouvre -->
-<div class="amorce" id="amorce" aria-hidden="true">
-  <div class="cadran"><div class="balaye" id="balaye"></div><div class="croix"></div><span class="chiffre" id="chiffre">3</span></div>
-  <div class="passer">clique pour passer</div>
-</div>
 
 <div class="hero-nuit">
 <div class="tissu" aria-hidden="true"></div>
@@ -539,7 +524,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   <div class="etape large monte">
     <div>
       <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>1</b></div>
-      <h3>Crée du contenu IA avec MOS<span class="ai">AI</span>C Studio.</h3>
+      <h3>Crée du contenu IA <em>automatiquement</em> avec MOS<span class="ai">AI</span>C Studio.</h3>
       <p>Sans aucune compétence technique, en 15 minutes par jour. <mark class="fort">Le studio fait tout à ta place.</mark> Il écrit tes scripts, génère tes vidéos et monte tout&nbsp;: Reels, carrousels, stories.</p>
     </div>
     <div class="visuel formats cousu">
@@ -556,7 +541,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   <div class="etape large inverse monte">
     <div>
       <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>2</b></div>
-      <h3>Poste ton contenu et fais <em>des milliers de vues.</em></h3>
+      <h3>Poste ton contenu et fais <em>des millions de vues.</em></h3>
       <p>Avec MOSAIC Studio, les possibilités sont infinies. Tu peux créer une dizaine de vidéos en un temps record. Et plus tu partages de vidéos, plus elles ont de chances d'attirer l'attention et de <mark class="fort">devenir virales</mark>.</p>
     </div>
     <div class="visuel stats-bloc cousu">
@@ -599,7 +584,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
     <div>
       <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>3</b></div>
       <h3>Revends <em>le produit que je te fournis.</em></h3>
-      <p>Pas la peine de construire ta propre offre. Je te confie un produit à vendre <mark class="fort">en affiliation</mark>&nbsp;: tu diriges ton audience vers lui, et chaque vente te rapporte de l'argent.</p>
+      <p>Pas la peine de construire ta propre offre. Je te confie un produit à vendre <mark class="fort">en affiliation</mark>&nbsp;: tu diriges ton audience vers lui, et chaque vente te rapporte <mark class="fort">58,80&nbsp;€</mark> (40&nbsp;% du prix).</p>
       <ol class="mini">
         <li><b>1</b>Publie une vidéo</li>
         <li><b>2</b>Envoie ton audience vers le produit</li>
@@ -614,6 +599,25 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
         <div class="w-ligne w-entete"><span>Montant</span><span>Statut</span><span>Produit</span><span class="w-plan">Plan</span></div>
         <div class="w-liste" id="w-liste"></div>
       </div>
+    </div>
+  </div>
+  <div class="fil" aria-hidden="true"></div>
+
+  <div class="etape large inverse monte">
+    <div>
+      <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>4</b></div>
+      <h3>Crée pour des clients&nbsp;: <em>ça rapporte gros.</em></h3>
+      <p>Avec MOSAIC, tu ne crées pas que pour toi. Des Reels, des pubs, des visuels pour des marques et des entreprises&nbsp;: une prestation IA se facture <mark class="fort">des centaines, voire des milliers d'euros</mark>. À côté, deux virements reçus d'un de mes clients pour ses contenus IA.</p>
+      <ol class="mini">
+        <li><b>1</b>Tu crées avec MOSAIC</li>
+        <li><b>2</b>Tu livres ton client</li>
+        <li class="cash"><b>3</b>Il te paie</li>
+      </ol>
+    </div>
+    <div class="visuel virements cousu">
+      <div class="coin gauche"><img class="saute" src="assets/rubberhose/patchs/la-fete-bouteille-de-champagne.png" alt="" style="--d:-.9s"></div>
+      <figure class="vir"><img src="assets/presta-virement-7.jpg" alt="Relevé bancaire : virement reçu de 1 600 € d'un client, le reste flouté" loading="lazy" width="720" height="1561"><span class="tampon plein">+ 1 600 €</span></figure>
+      <figure class="vir"><img src="assets/presta-virement-8.jpg" alt="Relevé bancaire : virement reçu de 1 500 € d'un client, le reste flouté" loading="lazy" width="720" height="1561"><span class="tampon plein">+ 1 500 €</span></figure>
     </div>
   </div>
 </section>
@@ -647,22 +651,11 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   </div>
 </section>
 
-<section class="preuves cadre" id="preuves">
-  <h2 class="monte">Les avis <em>élèves et clients.</em></h2>
-  <div class="avis">
-    <div class="a cousu monte"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4" aria-label="Écouter l'avis vocal de Bernie"><span class="lecture"></span><span class="onde"></span></button><div class="qui"><img src="assets/rubberhose/patchs/heureux-tortue.png" alt=""><div><b>Bernie</b>Élève · avis vocal</div></div></div>
-    <div class="a cousu monte"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3" aria-label="Écouter l'avis vocal de Laura"><span class="lecture"></span><span class="onde"></span></button><div class="qui"><img src="assets/rubberhose/patchs/reveur-nuage.png" alt=""><div><b>Laura</b>Cliente · avis vocal</div></div></div>
-    <div class="a cousu monte"><p>« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère&nbsp;! 🫶 »</p><div class="qui"><img src="assets/rubberhose/patchs/sur-de-lui-eclair.png" alt=""><div><b>Majoric</b>Élève</div></div></div>
-    <div class="a cousu monte"><p>« Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! Je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><img src="assets/rubberhose/patchs/super-content-pizza.png" alt=""><div><b>Kevin</b>Élève</div></div></div>
-  </div>
-</section>
-
 <section class="nuit">
   <div class="tissu" aria-hidden="true"></div>
   <div class="cadre">
     <div class="chat-tete">
-      <div><h3>Et dans le chat de la formation, <em>ça donne&nbsp;ça.</em></h3></div>
-      <div class="inclus"><span class="mono">Inclus avec le studio</span><p><b>Le chat de la communauté.</b> Tu postes ta création, ta question ou ton bug&nbsp;: c'est moi qui te réponds, et chaque retour devient une mise à jour.</p></div>
+      <div><h3>Les avis <em>dans le chat de la formation.</em></h3></div>
     </div>
     <div class="mur">
       <div class="mur-col">
@@ -671,6 +664,10 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
         <figure class="capture monte"><img src="assets/chat-yanimehami.jpg" alt="« Je viens aussi d'installer, franchement beau travail de fou, bravo à toi »" loading="lazy" width="1121" height="269"></figure>
       </div>
       <div class="mur-col">
+        <figure class="capture vocal-carte monte">
+          <div class="vc-tete"><img src="assets/rubberhose/patchs/heureux-tortue.png" alt=""><div><b>Bernie</b><span>Élève · avis vocal</span></div></div>
+          <button class="vocal" type="button" data-audio="assets/avis-bernie.mp4" aria-label="Écouter l'avis vocal de Bernie"><span class="lecture"></span><span class="onde"></span><span class="vc-duree mono">Écouter</span></button>
+        </figure>
         <figure class="capture monte"><img src="assets/chat-p2lv.jpg" alt="Un élève partage sa première vidéo IA&nbsp;: un saut en parachute avec une canette" loading="lazy" width="993" height="1189"></figure>
         <figure class="capture monte"><img src="assets/chat-js.jpg" alt="« Avoir accès à Mosaic Studio en étant membre historique de la formation, c'est la folie ! »" loading="lazy" width="1121" height="313"></figure>
       </div>
@@ -737,20 +734,6 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 <script>
 (() => {
   const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- L'AMORCE : 3, 2, 1 — chaque chiffre fait un tour de cadran — puis l'iris ---------- */
-  const amorce = document.getElementById('amorce'), chiffre = document.getElementById('chiffre'), balaye = document.getElementById('balaye');
-  let fini = false;
-  const ouvrir = () => { if (fini) return; fini = true; amorce.classList.add('ouvre'); setTimeout(() => amorce.remove(), 1150); };
-  amorce.addEventListener('click', ouvrir);
-  if (calme) { amorce.remove(); fini = true; }
-  else {
-    const DUREE = 520, debut = performance.now();
-    [2, 1].forEach((n, i) => setTimeout(() => { if (!fini) chiffre.textContent = n; }, DUREE * (i + 1)));
-    setTimeout(ouvrir, DUREE * 3);
-    const tour = t => { if (fini) return; balaye.style.setProperty('--a', (((t - debut) % DUREE) / DUREE * 360).toFixed(1) + 'deg'); requestAnimationFrame(tour); };
-    requestAnimationFrame(tour);
-  }
 
   /* ---------- LE FOND : un champ de points de broderie qui ondule, et que la souris tire comme un fil ---------- */
   const cv = document.getElementById('points'), cx = cv.getContext('2d');
@@ -858,7 +841,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   });
 
   /* ---------- la loupe sur les captures du chat ---------- */
-  document.querySelectorAll('.capture img').forEach(img => img.addEventListener('click', () => {
+  document.querySelectorAll('.capture > img').forEach(img => img.addEventListener('click', () => {
     const l = document.createElement('div'); l.className = 'loupe'; l.innerHTML = '<img alt="">'; l.firstChild.src = img.src; l.firstChild.alt = img.alt;
     const fermer = () => { l.classList.remove('ouverte'); setTimeout(() => l.remove(), 250); removeEventListener('keydown', echap); };
     const echap = e => { if (e.key === 'Escape') fermer(); };
