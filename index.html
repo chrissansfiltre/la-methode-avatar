@@ -105,6 +105,18 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .appel { margin-top: 46px; }
 .ecran { width: min(940px, 100%); margin: 58px auto 0; padding: 12px; border-radius: 22px; }
 .ecran img { width: 100%; height: auto; border-radius: 12px; }
+/* la VSL : la capture du studio sert de miniature, un bouton play au centre ; au clic, la vidéo prend sa place */
+.lecteur { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; }
+.lecteur img { width: 100%; height: 100%; object-fit: cover; transition: filter .4s ease, transform .6s var(--boing); }
+.lecteur::before { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(60% 70% at 50% 50%, rgba(11,11,11,.15), rgba(11,11,11,.55)); transition: opacity .3s; }
+.lecteur .play { position: absolute; z-index: 2; left: 50%; top: 50%; width: 112px; height: 112px; margin: -56px 0 0 -56px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--o); color: var(--craie); box-shadow: 0 0 0 6px var(--encre), 0 0 0 9px var(--o), 0 18px 40px -10px rgba(0,0,0,.6); transition: transform .45s var(--boing); animation: pouls-play 2.4s ease-in-out infinite; }
+.lecteur .play svg { width: 46px; height: 46px; margin-left: 6px; }
+.lecteur .duree { position: absolute; z-index: 2; left: 50%; bottom: 22px; translate: -50% 0; padding: 9px 14px 8px; border-radius: 999px; background: var(--encre); color: var(--craie); border: 1.5px solid rgba(255,255,255,.8); font-size: 11px; white-space: nowrap; }
+.lecteur:hover .play { transform: scale(1.1) rotate(-4deg); }
+.lecteur:hover img { filter: brightness(1.08); transform: scale(1.015); }
+@keyframes pouls-play { 0%, 100% { scale: 1; } 50% { scale: 1.06; } }
+.ecran video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; background: #000; }
 .ecran .tampon { position: absolute; top: -12px; left: 50%; translate: -50% 0; background: var(--papier); z-index: 2; }
 
 /* le haut de page en sombre : le tissu noir, une vague en bas */
@@ -437,6 +449,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .visuel .coin, .visuel .coin.bas, .ticket .coin { right: 0; }
 }
 @media (max-width: 560px) {
+  .lecteur .play { width: 76px; height: 76px; margin: -38px 0 0 -38px; box-shadow: 0 0 0 4px var(--encre), 0 0 0 6px var(--o); } .lecteur .play svg { width: 32px; height: 32px; } .lecteur .duree { display: none; }
   .profil { gap: 11px; padding: 10px 16px 10px 10px; margin-bottom: 26px; } .profil img { width: 48px; height: 48px; } .profil b { font-size: 16px; } .profil small { font-size: 12.5px; }
   .faq details { padding: 16px 16px; } .faq summary { font-size: 17px; }
   .cadeau { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; } .cadeau img { width: 52px; height: 38px; } .cadeau b { font-size: 18px; }
@@ -509,7 +522,12 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   </a>
   <h1>Crée du contenu IA en&nbsp;<span class="pastille">15&nbsp;min</span> par&nbsp;jour, et fais ta première vente en&nbsp;<span class="pastille">7&nbsp;jours</span>.</h1>
   <p class="chapo"><b>SANS</b> montrer ton visage, <b>SANS</b> compétences techniques, <b>EN</b> partant de zéro&nbsp;:</p>
-  <div class="ecran cousu monte"><span class="tampon">Le studio</span><img src="assets/studio-accueil-oct.jpg" alt="L'accueil de MOSAIC Studio" width="2160" height="1200"></div>
+  <div class="ecran cousu monte"><span class="tampon">Le studio</span>
+    <button class="lecteur" type="button" id="vsl" aria-label="Lire la vidéo de présentation de MOSAIC Studio (1 min 11)">
+      <img src="assets/studio-accueil-oct.jpg" alt="L'accueil de MOSAIC Studio" width="2160" height="1200">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+      <span class="duree mono" aria-hidden="true">Regarder · 1 min</span>
+    </button></div>
   <div class="appel"><a class="bouton" href="#offre">Je me lance <span aria-hidden="true">→</span></a>
   <p class="rassure mono"><span>Paiement unique</span><span>Accès à vie</span><span>Windows et Mac</span></p></div>
 </section>
@@ -775,6 +793,15 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   document.querySelectorAll('.monte').forEach(el => {
     const freres = [...el.parentElement.children].filter(x => x.classList.contains('monte'));
     el.style.transitionDelay = (Math.max(0, freres.indexOf(el)) % 4 * 80) + 'ms'; vu.observe(el);
+  });
+
+  /* ---------- la VSL : au clic sur la miniature, la vidéo prend sa place et se lance avec le son ---------- */
+  const vsl = document.getElementById('vsl');
+  if (vsl) vsl.addEventListener('click', () => {
+    const v = document.createElement('video');
+    v.src = 'assets/vsl-mosaic.mp4'; v.poster = 'assets/studio-accueil-oct.jpg'; v.controls = true; v.playsInline = true; v.preload = 'auto';
+    vsl.replaceWith(v); v.play().catch(() => {});
+    if (window.clarity) window.clarity('event', 'vsl_lecture');
   });
 
   /* ---------- l'étape 2 : une seule horloge, la vidéo — les vues sous l'œil et toutes les statistiques montent ensemble ---------- */
