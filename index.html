@@ -104,6 +104,12 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
 .lecteur:hover .play { transform: scale(1.1) rotate(-4deg); }
 .lecteur:hover img { filter: brightness(1.08); transform: scale(1.015); }
 @keyframes pouls-play { 0%, 100% { scale: 1; } 50% { scale: 1.06; } }
+.vsl-auto { position: relative; border-radius: 12px; overflow: hidden; }
+.vsl-auto video { cursor: pointer; }
+.vsl-auto .son { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; z-index: 2; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px 14px 18px; border-radius: 999px;
+  border: 2px solid var(--encre); background: var(--o); color: var(--craie); font: 600 16px/1 var(--corps); box-shadow: 4px 4px 0 var(--encre); cursor: pointer; animation: pouls-play 2.4s ease-in-out infinite; transition: transform .45s var(--boing); }
+.vsl-auto .son:hover { transform: translate(-2px, -2px); }
+.vsl-auto .son svg { width: 24px; height: 24px; }
 .ecran video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; background: #000; }
 .ecran .tampon { position: absolute; top: -12px; left: 50%; translate: -50% 0; background: var(--papier); z-index: 2; }
 
@@ -439,6 +445,7 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
   .visuel .coin, .visuel .coin.bas, .ticket .coin { right: 0; }
 }
 @media (max-width: 560px) {
+  .vsl-auto .son { bottom: 12px; padding: 10px 15px 10px 12px; font-size: 13px; } .vsl-auto .son svg { width: 18px; height: 18px; }
   .virements { gap: 12px; padding: 12px 12px 22px; } .vir .tampon { font-size: 11px; padding: 7px 10px 6px; bottom: 10px; }
   .lecteur .play { width: 76px; height: 76px; margin: -38px 0 0 -38px; box-shadow: 0 0 0 4px var(--encre), 0 0 0 6px var(--o); } .lecteur .play svg { width: 32px; height: 32px; } .lecteur .duree { display: none; }
   .profil { gap: 11px; padding: 10px 16px 10px 10px; margin-bottom: 26px; } .profil img { width: 48px; height: 48px; } .profil b { font-size: 16px; } .profil small { font-size: 12.5px; }
@@ -778,14 +785,30 @@ h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
     el.style.transitionDelay = (Math.max(0, freres.indexOf(el)) % 4 * 80) + 'ms'; vu.observe(el);
   });
 
-  /* ---------- la VSL : au clic sur la miniature, la vidéo prend sa place et se lance avec le son ---------- */
+  /* ---------- la VSL : elle se lance toute seule à l'arrivée, sans le son (les navigateurs interdisent le son
+     automatique). Un gros bouton « Activer le son » la relance depuis le début, avec le son et les contrôles.
+     Si le navigateur refuse même la lecture muette (mode économie d'énergie…), la miniature et son play restent. ---------- */
   const vsl = document.getElementById('vsl');
-  if (vsl) vsl.addEventListener('click', () => {
+  if (vsl) {
+    const lancerAvecSon = v => {
+      v.muted = false; v.currentTime = 0; v.controls = true; v.play().catch(() => {});
+      const b = v.parentElement.querySelector('.son'); if (b) b.remove();
+      if (window.clarity) window.clarity('event', 'vsl_lecture');
+    };
     const v = document.createElement('video');
-    v.src = 'assets/vsl-mosaic.mp4'; v.poster = 'assets/studio-accueil-oct.jpg'; v.controls = true; v.playsInline = true; v.preload = 'auto';
-    vsl.replaceWith(v); v.play().catch(() => {});
-    if (window.clarity) window.clarity('event', 'vsl_lecture');
-  });
+    v.src = 'assets/vsl-mosaic.mp4'; v.poster = 'assets/studio-accueil-oct.jpg'; v.muted = true; v.playsInline = true; v.autoplay = true; v.preload = 'auto';
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    const boite = document.createElement('div'); boite.className = 'vsl-auto';
+    const son = document.createElement('button'); son.type = 'button'; son.className = 'son';
+    son.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Activer le son</span>';
+    son.addEventListener('click', () => lancerAvecSon(v));
+    v.addEventListener('click', () => { if (v.muted) lancerAvecSon(v); });
+    boite.append(v, son);
+    v.play().then(() => vsl.replaceWith(boite)).catch(() => {
+      // lecture automatique refusée : on garde la miniature, le clic lance la vidéo avec le son
+      vsl.addEventListener('click', () => { vsl.replaceWith(boite); lancerAvecSon(v); });
+    });
+  }
 
   /* ---------- l'étape 2 : une seule horloge, la vidéo — les vues sous l'œil et toutes les statistiques montent ensemble ---------- */
   const enK = n => n < 1000 ? String(Math.round(n)) : (Math.floor(n / 100) / 10).toFixed(1).replace('.', ',') + ' k';
