@@ -3,986 +3,860 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MOSAIC Studio — Décuple ta créativité, pas ton temps de travail</title>
-<meta name="description" content="Tu tapes ton idée, MOSAIC Studio écrit, génère et monte ton Reel avec ton avatar IA, directement dans l'appli. Par Chris Sans Filtre.">
-<link rel="icon" type="image/png" href="assets/chris.png">
+<title>MOSAIC Studio — Crée du contenu IA en 15 min par jour, et fais ta première vente en 7 jours</title>
+<meta name="description" content="Crée du contenu avec MOSAIC Studio sans aucune compétence technique, en 15 minutes par jour. Par Chris Sans Filtre.">
+<link rel="icon" type="image/png" href="assets/rubberhose/logo-cfsf.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap">
-<script>document.documentElement.classList.add("js");</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
 <script src="https://cdn.whop.com/elements/amber/elements.js" data-whop-elements></script>
 <style>
+/* PAGE DE VENTE MOSAIC, version rubber hose (en ligne depuis le 14 oct. 2026) : la page épurée habillée avec le design system
+   de LABO/design-rubberhose — encre, papier, fil ; Fraunces doux, Instrument Serif, Inter, DM Mono ; le boing, l'iris, le point. */
+@property --iris { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 :root {
-  --nuit: #111113; --nuit-2: #18181B; --nuit-3: #222226; --gris: #3D3D40;
-  --papier: #E1DCD2; --blanc: #FFFFFF; --encre: #111113; --encre-2: #5B5B63; --encre-3: #8D8D96; --trait: #D3CDC2;
-  --o: #F96C22; --o2: #FF8A4C; --o3: #FFB98F; --o-voile: rgba(249,108,34,.1);
-  --vert: #2FB36B; --rouge: #E5484D;
-  --titre: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif: "Playfair Display", Georgia, serif;
-  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  color-scheme: light;
+  --encre: #0B0B0B; --encre-2: #2F2F2D; --papier: #F3F2EE; --papier-clair: #FBFAF7; --fil: #8C8A84; --craie: #FFFFFF;
+  --o: #F96C22; --trait: 1.5px; --boing: cubic-bezier(.34, 1.56, .64, 1);
+  --titre: "Fraunces", Georgia, serif; --etiquette: "Instrument Serif", Georgia, serif; --corps: "Inter", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
+  --doux: "SOFT" 100, "WONK" 1, "opsz" 144;
+  --gant: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M11 31c-4 0-7-3-7-7v-6c0-1.4 1.1-2.5 2.5-2.5S9 16.6 9 18v-2V5.5C9 4.1 10.1 3 11.5 3S14 4.1 14 5.5V14l.2-1.8c0-1.4 1.1-2.4 2.4-2.4s2.4 1 2.4 2.4V15l.2-1.4c0-1.3 1.1-2.3 2.4-2.3s2.3 1 2.3 2.3v1.8c.2-1.2 1.1-2 2.3-2 1.3 0 2.3 1 2.3 2.3V23c0 4.4-3.6 8-8 8z' fill='%23fff' stroke='%230B0B0B' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M14 14v5M19 15v4M24 16v3' stroke='%230B0B0B' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") 11 2, pointer;
+  --noir-haut: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M1200 26c-60 22-120 22-180 4s-120-26-200-4-140 26-220 6-130-22-200 0-130 22-200 2-90-14-200 0L0 60H1200z'/%3E%3C/svg%3E");
+  --noir-bas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cg transform='matrix(1 0 0 -1 0 60)'%3E%3Cpath d='M1200 26c-60 22-120 22-180 4s-120-26-200-4-140 26-220 6-130-22-200 0-130 22-200 2-90-14-200 0L0 60H1200z'/%3E%3C/g%3E%3C/svg%3E");
+  --noir-bas-m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cg transform='matrix(-1 0 0 -1 1200 60)'%3E%3Cpath d='M1200 26c-60 22-120 22-180 4s-120-26-200-4-140 26-220 6-130-22-200 0-130 22-200 2-90-14-200 0L0 60H1200z'/%3E%3C/g%3E%3C/svg%3E");
+  --vague: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1200v26c-60 22-120 22-180 4s-120-26-200-4-140 26-220 6-130-22-200 0-130 22-200 2-90-14-200 0z'/%3E%3C/svg%3E");
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--papier); color: var(--encre); font: 400 16.5px/1.6 var(--titre); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { margin: 0; overflow-x: hidden; background: var(--papier); color: var(--encre); font: 400 16px/1.6 var(--corps); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--encre); color: var(--craie); }
 img, video { display: block; max-width: 100%; }
 a { color: inherit; }
-b, strong { font-weight: 600; }
-::selection { background: rgba(249,108,34,.25); }
-em.s { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--o); letter-spacing: -.01em; }
-.sombre em.s, .hero em.s { color: var(--o2); }
-.mono { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
-.cadre { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 22px; }
-section { padding: 96px 0; position: relative; }
-h1, h2, h3 { margin: 0; font-family: var(--titre); font-weight: 500; letter-spacing: -.025em; }
-h2 { font-size: clamp(30px, 4.2vw, 46px); line-height: 1.08; }
-.chapo { color: var(--encre-2); font-size: 17px; max-width: 520px; margin: 18px 0 0; }
-.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; border: 0; cursor: pointer; font: 600 15px/1 var(--titre);
-  padding: 16px 24px; border-radius: 999px; transition: transform .2s, box-shadow .2s, background .2s; white-space: nowrap; }
-.btn .fl { transition: transform .2s; } .btn:hover .fl { transform: translateX(3px); }
-.btn.clair { background: #fff; color: var(--encre); box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
-.btn.noir { background: var(--nuit); color: #fff; box-shadow: 0 12px 30px -14px rgba(17,17,19,.7); }
-.btn.orange { background: var(--o); color: #fff; box-shadow: 0 14px 34px -14px rgba(249,108,34,.9); }
-.btn:hover { transform: translateY(-1px); }
-.lien { display: inline-flex; gap: 8px; align-items: center; color: inherit; text-decoration: none; font-weight: 500; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+a, button, summary { cursor: var(--gant); }
+h1, h2, h3 { margin: 0; }
+.doux { font-family: var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; }
+.doux em, h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+h1 em, h2 em, h3 em, .fiche-image b em, .ai { color: var(--o); }
+.mono { font: 500 11px/1.4 var(--mono); letter-spacing: .22em; text-transform: uppercase; }
+.cadre { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
 
-/* ---------- le grillage du fond (repris de la page en ligne) : carrés de 46 px, fixé à l'écran, qui s'estompe en descendant ---------- */
-body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image: linear-gradient(to right, rgba(17,17,19,.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,19,.12) 1px, transparent 1px);
-  background-size: 46px 46px;
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); }
+/* le fond : la toile, les points de broderie, le grain de la pellicule */
+.toile { position: fixed; inset: 0; z-index: -3; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(11,11,11,.022) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(11,11,11,.022) 0 1px, transparent 1px 4px),
+    radial-gradient(120% 90% at 50% 35%, transparent 55%, rgba(11,11,11,.13) 100%); }
+#points { position: fixed; inset: 0; z-index: -2; width: 100vw; height: 100vh; pointer-events: none; }
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .085; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(6) infinite; }
+@keyframes grain { 0% { transform: translate(0, 0); } 17% { transform: translate(-3%, 2%); } 33% { transform: translate(2%, -4%); } 50% { transform: translate(-4%, -1%); } 67% { transform: translate(3%, 3%); } 83% { transform: translate(-1%, 4%); } 100% { transform: translate(0, 0); } }
+.scintille { position: fixed; inset: 0; z-index: 89; pointer-events: none; background: var(--encre); opacity: 0; animation: scintille 7s infinite; }
+@keyframes scintille { 0%, 91%, 100% { opacity: 0; } 92% { opacity: .025; } 93% { opacity: 0; } 95% { opacity: .018; } 96% { opacity: 0; } }
 
-/* ---------- la barre du haut ---------- */
-.nav { position: sticky; top: 0; z-index: 30; background: rgba(225,220,210,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.nav .cadre { display: flex; align-items: center; justify-content: space-between; height: 66px; max-width: 1280px; }
-.marque { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; text-decoration: none; font: 700 19px/1 var(--titre); letter-spacing: -.03em; }
-.marque svg { width: 22px; height: 22px; }
-.marque .ai { color: var(--o); }
-.nav-liens { display: flex; gap: 30px; font-size: 14.5px; color: var(--encre-2); }
-.nav-liens a { text-decoration: none; } .nav-liens a:hover { color: var(--encre); }
-.nav .btn { padding: 12px 18px; font-size: 14px; }
+/* l'ouverture : l'amorce du film (3, 2, 1) puis l'iris */
+.amorce { position: fixed; inset: 0; z-index: 100; background: var(--encre); display: grid; place-items: center; cursor: var(--gant);
+  -webkit-mask: radial-gradient(circle at 50% 38%, transparent var(--iris), #000 calc(var(--iris) + 1px)); mask: radial-gradient(circle at 50% 38%, transparent var(--iris), #000 calc(var(--iris) + 1px));
+  transition: --iris 1.05s cubic-bezier(.7, 0, .2, 1); }
+.amorce.ouvre { --iris: 150vmax; }
+.amorce .cadran { position: relative; width: min(56vmin, 420px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: var(--craie); }
+.amorce .cadran::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); box-shadow: 0 0 0 14px var(--encre), 0 0 0 16px rgba(255,255,255,.35); }
+.amorce .balaye { position: absolute; inset: 2px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255,255,255,.16) var(--a, 0deg), transparent 0); }
+.amorce .croix { position: absolute; inset: -18%; pointer-events: none; background: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)) center / 1px 100% no-repeat, linear-gradient(90deg, rgba(255,255,255,.35), rgba(255,255,255,.35)) center / 100% 1px no-repeat; }
+.amorce .chiffre { position: relative; font: italic 800 clamp(120px, 28vmin, 240px)/1 var(--titre); font-variation-settings: var(--doux); }
+.amorce .passer { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font: 400 11px/1 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.45); }
 
-/* ---------- le hero : une carte arrondie, verre cannelé, aux couleurs de la DA ---------- */
-.hero-zone { padding: 6px 12px 0; max-width: 1400px; margin: 0 auto; }
-.hero { position: relative; overflow: hidden; border-radius: 28px; min-height: min(760px, 92vh); color: #fff; display: flex; align-items: flex-end;
-  background: radial-gradient(70% 70% at var(--l1x) var(--l1y), rgba(255,138,76,.75), transparent 60%), radial-gradient(60% 60% at var(--l2x) var(--l2y), rgba(249,108,34,.55), transparent 65%),
-    radial-gradient(90% 80% at 50% 110%, #0B0B0C, transparent 70%), linear-gradient(180deg, #2A160C 0%, #141012 55%, var(--nuit) 100%);
-  animation: lueurs 14s ease-in-out infinite alternate; }
-/* les lueurs se déplacent derrière les cannelures (les centres des dégradés sont animés) */
-@property --l1x { syntax: "<percentage>"; inherits: false; initial-value: 18%; }
-@property --l1y { syntax: "<percentage>"; inherits: false; initial-value: 8%; }
-@property --l2x { syntax: "<percentage>"; inherits: false; initial-value: 85%; }
-@property --l2y { syntax: "<percentage>"; inherits: false; initial-value: 20%; }
-@keyframes lueurs {
-  0%   { --l1x: 12%; --l1y: 6%;  --l2x: 88%; --l2y: 22%; }
-  33%  { --l1x: 38%; --l1y: 16%; --l2x: 66%; --l2y: 4%; }
-  66%  { --l1x: 62%; --l1y: 2%;  --l2x: 34%; --l2y: 18%; }
-  100% { --l1x: 82%; --l1y: 12%; --l2x: 14%; --l2y: 8%; }
-}
-.hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,.13) 10px, rgba(255,255,255,0) 22px, rgba(0,0,0,.18) 34px, rgba(255,255,255,0) 44px);
-  filter: blur(2.5px); -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.75) 45%, transparent 85%); mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.75) 45%, transparent 85%); }
-.hero::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; opacity: .9; }
-.hero-in { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: end; padding: 0 64px 70px; }
-.hero .mono { color: rgba(255,255,255,.78); margin: 0 0 18px; }
-.hero h1 { font-size: clamp(42px, 6.2vw, 84px); line-height: 1.0; font-weight: 500; letter-spacing: -.035em; }
-.hero h1 em.s { font-weight: 400; }
-.hero-droite p { margin: 0 0 24px; font-size: 16.5px; color: rgba(255,255,255,.86); max-width: 430px; }
-.hero-droite .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-.hero-droite .lien { color: rgba(255,255,255,.9); font-size: 15px; }
+/* le bouton et le tampon */
+.bouton { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; font: 600 15px/1 var(--corps); border-radius: 999px; padding: 17px 26px;
+  border: var(--trait) solid var(--encre); background: var(--encre); color: var(--craie); transition: transform .45s var(--boing), box-shadow .3s; box-shadow: 0 0 0 var(--encre); }
+.bouton:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--encre); }
+.bouton:active { transform: scale(.94, .9); box-shadow: 0 0 0 var(--encre); }
+.bouton.creux { background: transparent; color: var(--encre); }
+.tampon { display: inline-block; font: 500 9.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; padding: 6px 9px 5px; border: 1.2px solid var(--encre); border-radius: 999px; white-space: nowrap; }
+.tampon.plein { background: var(--encre); color: var(--craie); }
 
-/* le bandeau sous le hero */
-.bandeau-n { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 22px 0 0; font-size: 14px; color: var(--encre-2); }
-.bandeau-n .pastille { font: 500 10.5px/1 var(--mono); letter-spacing: .08em; padding: 5px 9px; border: 1px solid var(--trait); border-radius: 999px; background: #fff; color: var(--encre-3); }
-.bandeau-n a { color: var(--encre); text-decoration: none; font-weight: 500; }
-.outils { margin: 26px auto 0; max-width: 1180px; padding: 16px 22px; display: flex; align-items: center; gap: 26px; overflow: hidden; border-radius: 18px; background: #fff;
-  box-shadow: 0 14px 40px -26px rgba(17,17,19,.35); }
-.outils .mono { color: var(--encre-3); white-space: nowrap; font-size: 10.5px; }
-.outils .piste { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-.outils ul { list-style: none; margin: 0; padding: 0; display: flex; width: max-content; white-space: nowrap; color: var(--encre-2); font: 500 15px/1 var(--titre); animation: defile 32s linear infinite; }
-.outils li { display: flex; align-items: center; padding: 4px 0; }
-.outils li::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--o); opacity: .55; margin: 0 22px; }
-.outils:hover ul { animation-play-state: paused; }
+/* le fil brodé : un séparateur en points avant */
+.fil { display: flex; align-items: center; gap: 16px; font: 500 11px/1 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: #3B3B39; }
+.fil::before, .fil::after { content: ""; flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--encre) 0 7px, transparent 7px 12px); opacity: .55; border-radius: 2px; }
+.fil:empty { gap: 0; } .fil:empty::after { display: none; }
 
-/* ---------- le recadrage : la soirée découpée ---------- */
-.recadre { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: center; }
-.chrono { --n: 54px; display: flex; align-items: flex-start; gap: 18px; margin-top: 38px; }
-.chrono .avant { font: 400 var(--n)/1 var(--mono); color: var(--encre-3); }
-.chrono .avant .n { text-decoration: line-through; text-decoration-thickness: 2px; }
-.chrono .apres { font: 500 var(--n)/1 var(--mono); color: var(--o); }
-/* la flèche est centrée en hauteur sur les chiffres, pas sur les légendes */
-.chrono .fl { font-size: 22px; line-height: 1; color: var(--o); margin-top: calc(var(--n) / 2 - 11px); }
-.chrono small { display: block; margin-top: 8px; font: 400 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--encre-3); }
-.chrono .apres small { color: var(--o); }
-.soiree { border-radius: 22px; background: #fff; padding: 28px; box-shadow: 0 30px 70px -36px rgba(17,17,19,.45); border: 1px solid var(--trait); }
-.soiree-tete { display: flex; justify-content: space-between; align-items: baseline; }
-.soiree-tete b { font: 500 34px/1 var(--mono); }
-.soiree-tete .mono { color: var(--encre-3); }
-.barre-jour { display: flex; height: 12px; border-radius: 99px; overflow: hidden; background: #EFEBE4; margin: 20px 0 6px; }
-.barre-jour i { display: block; height: 100%; transition: width 1.2s cubic-bezier(.2,.8,.2,1); width: 0; }
-.legende-jour { display: flex; justify-content: space-between; font: 400 10.5px/1 var(--mono); color: var(--encre-3); }
-.taches { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--trait); }
-.taches li { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--trait); font-size: 15px; }
-.taches li i { width: 10px; height: 10px; border-radius: 3px; }
-.taches li s { color: var(--encre-3); font-family: var(--mono); font-size: 13px; }
-.taches li b { font: 500 13px/1 var(--mono); color: var(--o); }
-/* la dernière ligne suit les colonnes de la liste : le texte sous les tâches, le temps sous les zéros */
-.soiree-pied { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-top: 16px; }
-.soiree-pied span:first-child { grid-column: 2; font-weight: 600; font-size: 15px; line-height: 1.35; }
-.soiree-pied span:last-child { color: var(--o); font: 600 15px/1 var(--mono); white-space: nowrap; text-align: right; }
-.paires { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 72px; }
-.paire { border-radius: 18px; background: #fff; padding: 20px; box-shadow: 0 18px 46px -30px rgba(17,17,19,.4); border: 1px solid var(--trait); }
-.paire .mono { color: var(--encre-3); }
-.paire h3 { font-size: 17px; font-weight: 600; margin: 12px 0 6px; letter-spacing: -.01em; }
-.paire p { margin: 0; color: var(--encre-2); font-size: 14.5px; }
-.paire .alors { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--trait); color: var(--encre); font-weight: 500; font-size: 14.5px; }
-.paire .alors::before { content: "→"; color: var(--o); margin-right: .4em; }
+/* le cadre cousu : un bord d'encre, une couture en pointillés à l'intérieur */
+.cousu { position: relative; background: var(--papier-clair); border: var(--trait) solid var(--encre); border-radius: 18px; }
+.cousu::after { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(11,11,11,.24); border-radius: 13px; pointer-events: none; }
 
-/* ---------- les sections sombres, granuleuses ---------- */
-.sombre { background: radial-gradient(60% 50% at 10% 60%, rgba(249,108,34,.16), transparent 70%), radial-gradient(50% 40% at 95% 5%, rgba(255,138,76,.14), transparent 70%), var(--nuit); color: #fff; }
-.sombre::before { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
-.sombre .chapo { color: rgba(255,255,255,.72); }
-.systeme { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 280px minmax(0, 1.15fr); gap: 16px; align-items: stretch; }
-.sys-titre { display: flex; flex-direction: column; justify-content: center; padding: 10px 14px 6px 0; }
-.sys-titre .mono { color: var(--o2); margin-bottom: 16px; }
-.sys-titre h2 { font-size: clamp(30px, 3.2vw, 40px); }
-.tel { position: relative; margin: 0; border-radius: 26px; overflow: hidden; aspect-ratio: 9/16; align-self: center; background: #000;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 40px 80px -40px #000; }
-.tel video, .tel img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
-.tel figcaption { position: absolute; left: 12px; top: 12px; font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: var(--o); color: #fff; }
-.carte-photo { position: relative; border-radius: 22px; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; padding: 34px; isolation: isolate; }
-.carte-photo img, .carte-photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.carte-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(17,17,19,.05) 20%, rgba(17,17,19,.88) 100%); }
-.carte-photo.ecran { background: #1A1A1D; flex-direction: column; justify-content: space-between; align-items: stretch; }
-.carte-photo.ecran img { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 1440/760; flex: none; margin-bottom: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12); object-position: left top; z-index: 0; box-shadow: 0 24px 60px -30px #000; }
-.carte-photo.ecran::after { display: none; }
-.carte-photo h2 { font-size: clamp(28px, 3.2vw, 38px); }
-.carte-photo .texte p { margin: 0 0 18px; color: rgba(255,255,255,.86); }
-.coches { list-style: none; margin: 0; padding: 0; }
-.coches li { display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.16); font-size: 14.5px; }
-.coches li::before { content: "✓"; color: var(--o2); }
-.stats { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); }
-.stats b { display: block; font: 400 clamp(28px, 2.8vw, 36px)/1 var(--titre); letter-spacing: -.03em; }
-.stats .mono { display: block; margin-top: 10px; color: rgba(255,255,255,.6); font-size: 10px; line-height: 1.45; }
+/* le boing */
+@keyframes boing { 0%, 100% { transform: translateY(0) scale(1, 1); } 18% { transform: translateY(0) scale(1.07, .92); } 40% { transform: translateY(-16px) scale(.95, 1.06); } 62% { transform: translateY(0) scale(1.05, .95); } 76% { transform: translateY(-4px) scale(.99, 1.01); } 88% { transform: translateY(0) scale(1.01, .99); } }
+.saute { transform-origin: 50% 92%; animation: boing 2.6s var(--boing) infinite; animation-delay: var(--d, 0s); filter: drop-shadow(0 8px 10px rgba(0,0,0,.22)); }
+/* ce qui arrive en rebondissant quand on fait défiler */
+.monte { opacity: 0; transform: translateY(26px) scale(.98); }
+.monte.vue { opacity: 1; transform: none; transition: transform .8s var(--boing), opacity .5s ease; }
 
-/* ---------- le calcul ---------- */
-.calcul { position: relative; overflow: hidden; border-radius: 28px; color: #fff; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 30px; padding: 46px;
-  background: radial-gradient(60% 80% at var(--l1x) var(--l1y), rgba(255,138,76,.55), transparent 60%), radial-gradient(60% 60% at var(--l2x) var(--l2y), rgba(249,108,34,.4), transparent 70%), linear-gradient(160deg, #24140C, var(--nuit));
-  --l1x: 15%; --l1y: 0%; --l2x: 90%; --l2y: 100%; animation: lueurs-calcul 12s ease-in-out infinite alternate; }
-@keyframes lueurs-calcul {
-  0%   { --l1x: 10%; --l1y: 0%;   --l2x: 92%; --l2y: 100%; }
-  50%  { --l1x: 50%; --l1y: 20%;  --l2x: 55%; --l2y: 80%; }
-  100% { --l1x: 88%; --l1y: 4%;   --l2x: 12%; --l2y: 96%; }
-}
-.calcul::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,.08) 10px, rgba(255,255,255,0) 22px); filter: blur(2px); }
-.calcul > * { position: relative; }
-.calcul h2 { font-size: clamp(30px, 3.6vw, 42px); }
-.reglette { margin-top: 34px; }
-.reglette label { display: flex; justify-content: space-between; font: 500 15px/1.3 var(--titre); color: rgba(255,255,255,.85); }
-.reglette label { gap: 14px; align-items: center; }
-.reglette label b { font: 500 22px/1 var(--mono); color: #fff; white-space: nowrap; }
-.reglette label b small { font-size: 13px; color: rgba(255,255,255,.7); margin-left: 4px; }
-input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; background: transparent; cursor: pointer; margin: 8px 0 22px; }
-input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, #fff var(--p, 30%), rgba(255,255,255,.25) var(--p, 30%)); }
-input[type=range]::-moz-range-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, #fff var(--p, 30%), rgba(255,255,255,.25) var(--p, 30%)); }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; margin-top: -9px; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 0; }
-.resultat { border-radius: 22px; background: #fff; color: var(--encre); padding: 28px; display: flex; flex-direction: column; }
-.resultat .mono { color: var(--encre-3); font-size: 10.5px; }
-.resultat .gros { font: 400 64px/1 var(--titre); letter-spacing: -.04em; margin-top: 10px; }
-.resultat .gros small { font-size: 16px; color: var(--encre-2); letter-spacing: 0; margin-left: 6px; }
-.resultat .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; padding-top: 18px; border-top: 1px solid var(--trait); }
-.resultat .deux b { display: block; font: 400 26px/1 var(--titre); }
-.resultat .deux span { font-size: 12.5px; color: var(--encre-3); }
-.resultat .btn { justify-content: center; margin-top: auto; }
-.resultat .note { margin: 12px 0 0; font-size: 12px; color: var(--encre-3); }
 
-/* ---------- ce que le studio fait : les cartes en verre ---------- */
-.intro-fait { display: grid; grid-template-columns: 250px 1fr; gap: 56px; align-items: center; }
-.intro-fait .carte-photo { min-height: 0; aspect-ratio: 9/16; padding: 22px; }
-.intro-fait .carte-photo b { font-size: 18px; font-weight: 500; line-height: 1.25; }
-.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; margin-top: 46px; }
-.verre { position: relative; overflow: hidden; border-radius: 22px; padding: 26px; color: #fff; display: flex; flex-direction: column; isolation: isolate; min-height: 270px;
-  background: radial-gradient(70% 60% at 20% 10%, rgba(255,138,76,.55), transparent 60%), radial-gradient(60% 70% at 100% 100%, rgba(249,108,34,.35), transparent 65%), linear-gradient(160deg, #26160E, #121214 70%); }
-.verre::before { content: ""; position: absolute; inset: 0; background: var(--grain); z-index: -1; }
-.verre:nth-child(2n) { background: radial-gradient(60% 60% at 85% 10%, rgba(255,138,76,.45), transparent 60%), radial-gradient(70% 70% at 0% 100%, rgba(120,60,30,.55), transparent 65%), linear-gradient(200deg, #1F1410, #111113 70%); }
-.verre h3 { font-size: 22px; font-weight: 500; line-height: 1.2; }
-.verre p { margin: 8px 0 0; color: rgba(255,255,255,.76); font-size: 14.5px; max-width: 460px; }
-.verre .tag { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.16); font-family: var(--serif); font-style: italic; font-size: 17px; color: #fff; }
-.verre .tag::after { content: ""; }
-.verre .vis { margin: 20px 0; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 24px 60px -30px #000; }
-.v-grand { grid-column: span 7; grid-row: span 2; }
-.v-moyen { grid-column: span 5; }
-.v-tiers { grid-column: span 4; }
-.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.duo figure { margin: 0; position: relative; }
-.duo video { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); }
-.duo figcaption { position: absolute; left: 8px; top: 8px; font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-radius: 6px; background: rgba(17,17,19,.75); }
-.duo .apres figcaption { background: var(--o); }
-.son { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); cursor: pointer; white-space: nowrap; font: 600 11.5px/1 var(--titre); color: #fff; background: rgba(17,17,19,.8); border: 1px solid rgba(255,255,255,.25); padding: 7px 10px; border-radius: 999px; }
-.son.actif { background: var(--o); border-color: transparent; }
-/* carrousel (4:5) et story (9:16) côte à côte, à la même hauteur, sans rien couper */
-.vis-mini { display: grid; grid-template-columns: 4fr 2.8125fr; gap: 8px; margin: 18px 0; align-items: start; }
-.vis-mini img { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); }
-.vis-mini img:first-child { aspect-ratio: 4/5; } .vis-mini img:last-child { aspect-ratio: 9/16; }
-.chaine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; counter-reset: c; }
-.chaine li { counter-increment: c; border-radius: 12px; padding: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); font-size: 12.5px; line-height: 1.35; color: rgba(255,255,255,.7);
-  transition: background .4s, border-color .4s, translate .4s cubic-bezier(.2,.8,.2,1); }
-.chaine li::before { content: "0" counter(c); display: block; font: 500 10px/1 var(--mono); color: var(--o2); margin-bottom: 8px; }
-.chaine li b { display: block; color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
-.chaine li:hover { background: rgba(255,255,255,.12); border-color: rgba(255,138,76,.5); translate: 0 -2px; }
-.v-grand .duo { margin-bottom: 10px; }
-.sous-cta { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
-.sous-cta .mono { color: var(--encre-3); font-size: 10.5px; }
-.puces { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; text-align: center; }
-.puces span { white-space: nowrap; }
-.puces span::before { content: "✓ "; color: var(--o); }
+/* le haut de page */
+.hero { position: relative; text-align: center; padding: 64px 0 0; }
+.volants { position: absolute; inset: 0 -60px auto; height: 520px; pointer-events: none; }
+.volant { position: absolute; width: 104px; height: 120px; display: grid; place-items: center; transform: translate(var(--px, 0), var(--py, 0)) rotate(var(--r, 0deg)); transition: transform .9s cubic-bezier(.2, .8, .2, 1); }
+.volant img { max-width: 100%; max-height: 100%; }
+.hero h1 { font: 600 clamp(42px, 6.6vw, 84px)/.98 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.04em; max-width: 900px; margin: 0 auto; }
+.hero h1 em { white-space: nowrap; }
+.pastille { display: inline-block; background: var(--encre); color: var(--o); font-style: italic; font-weight: 400; padding: .02em .28em .1em .2em; margin: 0 .04em; border-radius: .16em; line-height: 1; rotate: -1.5deg; white-space: nowrap; }
+.pastille + .pastille, h1 .pastille:last-child { rotate: 1.5deg; }
+.chapo { margin: 26px auto 0; max-width: 540px; font-size: 18px; color: var(--encre-2); }
+.rassure { margin: 18px 0 0; color: #3B3B39; }
+.rassure span + span::before { content: "✦"; margin: 0 12px; font-size: 9px; color: var(--fil); vertical-align: 1px; }
+.appel { margin-top: 46px; }
+.ecran { width: min(940px, 100%); margin: 58px auto 0; padding: 12px; border-radius: 22px; }
+.ecran img { width: 100%; height: auto; border-radius: 12px; }
+.ecran .tampon { position: absolute; top: -12px; left: 50%; translate: -50% 0; background: var(--papier); z-index: 2; }
 
-/* ---------- les étapes ---------- */
-.etapes-zone { padding: 0 12px; max-width: 1400px; margin: 0 auto; }
-.etapes-bloc { border-radius: 28px; padding: 70px 0; }
-.etapes-tete { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
-.etapes-tete .compteur { text-align: right; font: 500 14px/1 var(--mono); color: rgba(255,255,255,.6); }
-.etapes-tete p { color: rgba(255,255,255,.75); margin: 0; max-width: 460px; }
-.etape { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 30px; align-items: center; border-radius: 22px; background: #fff; color: var(--encre); padding: 30px; margin-top: 18px; position: relative; }
-.etape .num { display: flex; gap: 10px; align-items: center; }
-.etape .num .mono { color: var(--encre-3); }
-.etape .num span:last-child { font: 500 12px/1 var(--titre); padding: 6px 10px; border-radius: 999px; background: var(--papier); color: var(--encre-2); }
-.etape h3 { font-size: 30px; margin: 18px 0 8px; }
-.etape p { margin: 0; color: var(--encre-2); }
-.etape .infos { display: grid; grid-template-columns: 1fr 1fr; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--trait); }
-.etape .infos .mono { display: block; color: var(--encre-3); font-size: 10px; margin-bottom: 6px; }
-.etape .infos div + div { padding-left: 18px; border-left: 1px solid var(--trait); }
-.etape .ecran { border-radius: 16px; background: #F1EEE8; padding: 16px; }
-.etape .ecran img { border-radius: 10px; box-shadow: 0 20px 44px -26px rgba(17,17,19,.6); }
-.etape .tl { overflow-x: auto; }
+/* le haut de page en sombre : le tissu noir, une vague en bas */
+.hero-nuit { position: relative; background: var(--encre); color: var(--craie); padding-bottom: 150px; isolation: isolate; }
+.hero-nuit .tissu { position: absolute; inset: 0; background: url(assets/rubberhose/tissu-noir-raccord.jpg) 0 0 / 455px; opacity: .5; mix-blend-mode: screen; pointer-events: none; z-index: -1; }
+.hero-nuit { -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 59px) no-repeat, var(--noir-bas) bottom / 100% 60px no-repeat; mask: linear-gradient(#000 0 0) top / 100% calc(100% - 59px) no-repeat, var(--noir-bas) bottom / 100% 60px no-repeat; }
+.hero-nuit .chapo { color: rgba(255,255,255,.8); }
+.hero-nuit .chapo b { color: var(--craie); font-weight: 600; }
+.hero-nuit .rassure { color: rgba(255,255,255,.62); }
+.hero-nuit .bouton { background: var(--craie); color: var(--encre); border-color: var(--craie); }
+.hero-nuit .bouton:hover { box-shadow: 4px 4px 0 var(--o); }
+.hero-nuit .pastille { box-shadow: 0 0 0 2px rgba(255,255,255,.9); }
+.hero-nuit .ecran { border-color: rgba(255,255,255,.85); background: #141414; }
+.hero-nuit .ecran::after { border-color: rgba(255,255,255,.25); }
+.hero-nuit .ecran .tampon { background: var(--encre); color: var(--craie); border-color: rgba(255,255,255,.85); }
 
-/* ---------- les preuves ---------- */
-.preuves { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 46px; }
-.cas { border-radius: 22px; background: #fff; border: 1px solid var(--trait); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 22px 50px -34px rgba(17,17,19,.4); }
-.cas .img { aspect-ratio: 2/3; overflow: hidden; background: #EEE; }
-.cas .img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.cas .txt { padding: 22px; }
-.cas .mono { color: var(--encre-3); }
-.cas h3 { font-size: 20px; margin: 10px 0 12px; line-height: 1.25; }
-.cas .res { font-size: 14px; color: var(--encre-2); padding-top: 12px; border-top: 1px solid var(--trait); }
-.cas .res b { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; color: var(--o); margin-right: 6px; }
-.honnete { margin: 20px 0 0; font-size: 13px; color: var(--encre-3); }
+/* le badge Instagram, en haut du hero */
+.profil { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 14px; margin: 0 auto 34px; padding: 12px 22px 12px 12px; text-align: left; text-decoration: none; color: var(--craie);
+  background: rgba(255,255,255,.05); border: var(--trait) solid rgba(255,255,255,.8); border-radius: 18px; transition: transform .45s var(--boing), box-shadow .3s; }
+.profil::after { content: ""; position: absolute; inset: 5px; border: 1.5px dashed rgba(255,255,255,.22); border-radius: 13px; pointer-events: none; }
+.profil:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--o); }
+.profil img { width: 58px; height: 58px; border-radius: 50%; flex: none; box-shadow: 0 0 0 2.5px var(--encre), 0 0 0 4.5px var(--o); }
+.profil b { display: flex; align-items: center; gap: 7px; font: 700 19px/1.2 var(--corps); letter-spacing: -.01em; }
+.profil b svg { width: 19px; height: 19px; flex: none; }
+.profil small { display: block; margin-top: 3px; font-size: 14.5px; color: rgba(255,255,255,.62); }
+.profil small i { font-style: normal; font-weight: 700; color: var(--o); white-space: nowrap; }
 
-/* ---------- les avis ---------- */
-.avis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
-.a { border-radius: 20px; background: #fff; border: 1px solid var(--trait); padding: 22px; display: flex; flex-direction: column; }
-.a p { margin: 0 0 18px; font-size: 15px; }
-.a .qui { margin-top: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--encre-3); }
-.a .qui i { width: 34px; height: 34px; border-radius: 50%; background: var(--nuit); color: #fff; display: grid; place-items: center; font: 600 14px/1 var(--titre); font-style: normal; }
-.a .qui b { display: block; color: var(--encre); font-size: 14px; }
-.vocal { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; cursor: pointer; text-align: left; padding: 0; background: none; color: inherit; font: inherit; margin-bottom: 18px; }
-.vocal .bouton { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--o); display: grid; place-items: center; }
-.vocal .bouton::after { content: ""; border-left: 13px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
-.vocal.joue .bouton::after { border: 0; width: 12px; height: 14px; margin: 0; background: linear-gradient(90deg, #fff 0 4px, transparent 4px 8px, #fff 8px); }
-.vocal .onde { flex: 1; height: 28px; background: repeating-linear-gradient(90deg, rgba(249,108,34,.6) 0 2px, transparent 2px 6px); -webkit-mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); }
-.vocal.joue .onde { animation: onde .9s linear infinite; }
+/* les trois étapes */
+.etapes { padding: 120px 0 40px; }
+.etapes h2 { font: 600 clamp(36px, 4.8vw, 58px)/1.02 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; text-align: center; margin-bottom: 30px; }
+.etape { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; padding: 64px 0; }
+.etape + .fil { margin: 0; }
+.etape.inverse .visuel { order: -1; }
+.rond-n { position: relative; width: 128px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; margin-bottom: 26px;
+  border: 2px solid var(--encre); box-shadow: 0 0 0 9px var(--papier), 0 0 0 10.5px var(--encre); background: var(--papier-clair); overflow: hidden; }
+.rond-n .balaye { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(249,108,34,.14) var(--a), transparent 0); }
+.vue .rond-n .balaye, .rond-n.vue .balaye { animation: tour 1.2s cubic-bezier(.6, 0, .3, 1) .2s both; }
+@keyframes tour { from { --a: 0deg; } to { --a: 360deg; } }
+.rond-n .croix { position: absolute; inset: 0; background: linear-gradient(rgba(11,11,11,.2), rgba(11,11,11,.2)) center / 1px 100% no-repeat, linear-gradient(90deg, rgba(11,11,11,.2), rgba(11,11,11,.2)) center / 100% 1px no-repeat; }
+.rond-n b { color: var(--o); position: relative; font: italic 800 84px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.04em; margin-top: -4px; }
+.etape h3 { font: 600 clamp(30px, 3.4vw, 44px)/1.04 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; margin: 0 0 16px; }
+.fort { background: rgba(249,108,34,.42); color: var(--encre); font-weight: 600; padding: .05em .25em; border-radius: .25em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.etape > * { min-width: 0; }
+.etape p { margin: 0; color: var(--encre-2); font-size: 17px; max-width: 460px; }
+.visuel { position: relative; padding: 12px; }
+.visuel > img { width: 100%; height: auto; max-height: 460px; object-fit: cover; object-position: top; border-radius: 10px; }
+.visuel.vertical { max-width: 310px; justify-self: center; }
+.visuel.vertical > img { max-height: 540px; }
+.visuel > video { display: block; width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 10px; background: #111; }
+.visuel .coin { position: absolute; width: 104px; top: -46px; right: -34px; z-index: 3; rotate: 8deg; }
+.visuel .coin.gauche { right: auto; left: -38px; rotate: -9deg; }
+.visuel .coin img { width: 100%; }
+
+/* l'étape 1 : un Reel, deux slides de carrousel, deux stories — un seul bloc */
+.etape.large { grid-template-columns: minmax(0, .8fr) minmax(0, 1.3fr); gap: 56px; }
+.formats { display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 10px; padding: 14px; align-content: start; }
+.formats figure { position: relative; margin: 0; border-radius: 9px; overflow: hidden; background: #111; }
+.formats img, .formats video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.formats .f-reel { grid-row: 1 / 3; }
+.formats .f-reel video { position: absolute; inset: 0; }
+.formats .f-car { aspect-ratio: 4 / 5; }
+.formats .f-sto { aspect-ratio: 9 / 16; }
+.formats .tampon { position: absolute; left: 8px; bottom: 8px; border-color: var(--encre); font-size: 8.5px; padding: 5px 8px 4px; }
+
+/* l'étape 3 : le chemin en trois cases, et les ventes qui tombent une à une */
+.mini { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.mini li { position: relative; padding: 22px 10px 14px; border: var(--trait) solid var(--encre); border-radius: 14px; background: var(--papier-clair); text-align: center; font: 600 13.5px/1.3 var(--corps); }
+.mini li b { position: absolute; top: -13px; left: 50%; translate: -50% 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--encre); color: var(--craie); font: italic 700 15px/1 var(--titre); font-variation-settings: var(--doux); }
+.mini li:not(:last-child)::after { content: "→"; position: absolute; right: -18px; top: 50%; translate: 0 -50%; font: 500 15px/1 var(--mono); color: var(--encre); }
+.mini li.cash { background: var(--o); color: var(--craie); box-shadow: 3px 3px 0 var(--encre); }
+.mini li.cash b { background: var(--craie); color: var(--o); box-shadow: 0 0 0 1.5px var(--encre); }
+.tombe { display: flex; align-items: center; gap: 10px; margin-top: 22px !important; font-weight: 600; color: var(--encre) !important; }
+.tombe i { width: 10px; height: 10px; border-radius: 50%; background: #2FCB73; box-shadow: 0 0 0 0 rgba(47,203,115,.6); animation: pouls 1.6s infinite; }
+@keyframes pouls { 70% { box-shadow: 0 0 0 9px rgba(47,203,115,0); } 100% { box-shadow: 0 0 0 0 rgba(47,203,115,0); } }
+.ventes-bloc { padding: 14px; }
+.visuel .coin.bas { top: auto; bottom: -40px; right: -34px; rotate: 10deg; }
+.whop { background: #121212; color: #fff; border-radius: 9px; overflow: hidden; font-family: -apple-system, "SF Pro Display", var(--corps); }
+.w-tete { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; padding: 18px 20px 14px; }
+.w-tete b { font-size: 17px; font-weight: 700; }
+.w-tete span { font-size: 12.5px; color: #9B9B9B; white-space: nowrap; }
+.w-tete strong { color: #3DDC84; font-size: 15px; margin-left: 6px; font-variant-numeric: tabular-nums; display: inline-block; }
+.w-tete strong.pop { animation: pop .5s var(--boing); }
+@keyframes pop { 40% { transform: scale(1.18); } }
+.w-ligne { display: grid; grid-template-columns: 96px 150px minmax(0, 1fr) 76px; align-items: center; gap: 12px; padding: 0 20px; height: 54px; border-top: 1px solid #232323; font-size: 14.5px; }
+.w-entete { height: 40px; font-size: 13px; color: #9B9B9B; border-top: 0; background: #121212; }
+.w-ligne > b { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.w-entete > span:first-child { text-align: right; }
+.w-ligne .w-plan { color: #A3A3A3; }
+.w-ligne > span:nth-child(3) { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.w-liste { height: 432px; overflow: hidden; -webkit-mask: linear-gradient(#000 75%, transparent); mask: linear-gradient(#000 75%, transparent); }
+.w-liste .w-ligne { overflow: hidden; }
+.w-liste .w-ligne.nouvelle { animation: arrive .7s var(--boing); }
+@keyframes arrive { from { height: 0; opacity: 0; transform: translateY(-16px); } to { height: 54px; opacity: 1; transform: none; } }
+.w-liste .w-ligne.flash { background: linear-gradient(90deg, rgba(61,220,132,.13), rgba(61,220,132,0) 70%); transition: background 1.6s ease; }
+.w-liste .w-ligne.flash.fini { background: transparent; }
+.w-statut { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; background: #173A27; color: #3DDC84; }
+.w-statut svg { width: 15px; height: 15px; }
+.w-statut svg path { stroke-dasharray: 20; stroke-dashoffset: 0; }
+.w-statut .attente { display: none; }
+.attente-la .w-statut { background: #2A2A2A; color: #BDBDBD; }
+.attente-la .w-statut .attente { display: inline; }
+.attente-la .w-statut .ok, .attente-la .w-statut svg { display: none; }
+.w-statut .roue { display: none; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #5A5A5A; border-top-color: #DADADA; animation: roue .7s linear infinite; }
+.attente-la .w-statut .roue { display: inline-block; }
+@keyframes roue { to { transform: rotate(1turn); } }
+.valide .w-statut { animation: pop .5s var(--boing); }
+.valide .w-statut svg path { animation: coche .45s ease-out .1s both; }
+@keyframes coche { from { stroke-dashoffset: 20; } }
+
+/* l'étape 2 : le Reel qui tourne, et ses statistiques qui montent */
+.etape.large.inverse { grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr); }
+.stats-bloc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px; }
+.s-reel { position: relative; margin: 0; border-radius: 9px; overflow: hidden; background: #111; aspect-ratio: 9 / 16; }
+.s-reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.oeil { position: absolute; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 5px; color: #fff; font: 700 15px/1 var(--corps); text-shadow: 0 1px 6px rgba(0,0,0,.55); font-variant-numeric: tabular-nums; }
+.oeil svg { width: 19px; height: 19px; filter: drop-shadow(0 1px 4px rgba(0,0,0,.5)); }
+.ig { container-type: inline-size; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 9px; background: #0C1014; color: #fff; font-family: -apple-system, "SF Pro Display", var(--corps); }
+.ig-in { padding: 4.5cqw 3.8cqw 0; }
+.ig svg { display: block; }
+.ig-tete { display: flex; align-items: center; gap: 3.2cqw; }
+.ig-rond { width: 10cqw; height: 10cqw; border-radius: 50%; border: .25cqw solid #2C3138; display: grid; place-items: center; flex: none; }
+.ig-rond svg { width: 5cqw; }
+.ig-tete b { font-size: 4.4cqw; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+.ig-pilule { margin-left: auto; display: flex; align-items: center; gap: 4cqw; padding: 0 3.4cqw; height: 10cqw; border-radius: 6cqw; border: .25cqw solid #2C3138; }
+.ig-pilule svg { width: 5.4cqw; } .ig-pilule i { font-style: normal; font-size: 3cqw; letter-spacing: .1em; }
+.ig-icones { display: flex; justify-content: space-between; padding: 5.5cqw 4cqw 0; }
+.ig-icones span { display: grid; justify-items: center; gap: 2.4cqw; min-width: 11cqw; }
+.ig-icones svg { width: 5.2cqw; }
+.ig-icones b { font-size: 3.7cqw; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ig-onglets { display: flex; justify-content: space-between; margin: 4.5cqw -3.8cqw 0; padding: 0 2cqw; border-bottom: .2cqw solid #262B31; font-size: 3.7cqw; font-weight: 700; color: #8A9099; }
+.ig-onglets > * { padding-bottom: 3cqw; }
+.ig-onglets b { color: #fff; box-shadow: inset 0 -.5cqw #fff; }
+.ig-titre { margin: 3.8cqw 0 2.8cqw; font-size: 4.2cqw; font-weight: 800; display: flex; align-items: center; gap: 2cqw; }
+.ig-titre i { font-style: normal; font-size: 2.4cqw; width: 3.8cqw; height: 3.8cqw; border-radius: 50%; border: .3cqw solid #fff; display: grid; place-items: center; font-weight: 700; }
+.ig-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 2.8cqw; }
+.ig-cartes div { background: #22272E; border-radius: 2.4cqw; padding: 3.2cqw 3.6cqw 3cqw; min-width: 0; }
+.ig-cartes span { display: block; font-size: 3.2cqw; font-weight: 700; color: #A9AFB7; white-space: nowrap; overflow: hidden; }
+.ig-cartes b { display: block; margin-top: 2.2cqw; font-size: 5.4cqw; font-weight: 800; font-variant-numeric: tabular-nums; }
+.ig-puces { display: flex; gap: 1.8cqw; font-size: 3.4cqw; font-weight: 700; }
+.ig-puces > * { padding: 1.8cqw 3.4cqw; border-radius: 6cqw; border: .25cqw solid #3A3F47; }
+.ig-puces b { background: #22272E; border-color: #22272E; }
+.ig-courbe { width: 100%; margin-top: 2cqw; overflow: visible; }
+.ig-axe text { fill: #A9AFB7; font: 600 30px/1 -apple-system, "SF Pro Display", Inter, sans-serif; }
+.ig-trait { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ig-legende { display: flex; gap: 6cqw; margin-top: 1.6cqw; font-size: 3.6cqw; color: #D6D9DD; }
+.ig-legende span { display: flex; align-items: center; gap: 2cqw; }
+.ig-legende i { width: 2.2cqw; height: 2.2cqw; border-radius: 50%; }
+
+/* l'ancienne étape 2 : deux étiquettes produit (ta formation, MOSAIC à revendre) */
+.produits { padding: 40px 36px 120px; background: var(--papier); }
+.fiche { position: relative; width: 80%; background: var(--papier-clair); border: var(--trait) solid var(--encre); border-radius: 16px; overflow: hidden; box-shadow: 6px 6px 0 var(--encre); }
+.fiche-image { position: relative; height: 158px; padding: 18px 20px; color: var(--craie); display: flex; flex-direction: column; justify-content: space-between; background: var(--encre); overflow: hidden; }
+.fiche-image::before { content: ""; position: absolute; inset: 0; background: url(assets/rubberhose/tissu-noir-raccord.jpg) 0 0 / 320px; opacity: .6; mix-blend-mode: screen; }
+.fiche-image > * { position: relative; }
+.fiche-image .mono { color: rgba(255,255,255,.65); font-size: 10px; }
+.fiche-image b { font: 600 27px/1.02 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; }
+.fiche-image img { position: absolute; right: 12px; bottom: -14px; width: 92px; }
+.fiche-corps { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px 6px; }
+.fiche-corps b { display: block; font: 400 24px/1 var(--etiquette); text-transform: uppercase; }
+.fiche-corps small { color: var(--fil); font-size: 12.5px; }
+.fiche-prix { font: 600 26px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; white-space: nowrap; }
+.fiche-bouton { margin: 12px 18px 18px; background: var(--encre); color: var(--craie); text-align: center; border-radius: 999px; padding: 12px; font-weight: 600; font-size: 14px; }
+.fiche.petite { position: absolute; right: 24px; bottom: 24px; width: 58%; rotate: 3deg; padding-bottom: 8px; }
+.fiche-tete { display: flex; align-items: center; gap: 8px; padding: 14px 16px 0; }
+.fiche-tete b { font: 600 16px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.02em; }
+.fiche-tete .tampon { margin-left: auto; }
+.fiche.petite .fiche-corps { padding-top: 12px; }
+
+/* les bonus : deux formations offertes, en tickets cousus */
+.bonus-zone { padding: 70px 0 30px; }
+.bonus-zone h2 { font: 600 clamp(36px, 4.8vw, 58px)/1.02 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; text-align: center; margin: 0; }
+.bonus-intro { text-align: center; max-width: 520px; margin: 16px auto 0; color: var(--encre-2); font-size: 17px; }
+.bonus-grille { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px; margin-top: 50px; }
+.ticket { display: flex; flex-direction: column; padding: 12px; border-radius: 20px; transition: transform .45s var(--boing), box-shadow .3s; box-shadow: 0 0 0 var(--encre); }
+.ticket:hover { transform: translate(-3px, -3px) rotate(-.4deg); box-shadow: 6px 6px 0 var(--encre); }
+.ticket .coin { position: absolute; width: 96px; top: -40px; right: -26px; z-index: 3; rotate: 9deg; }
+.ticket .coin img { width: 100%; }
+.ticket-image { position: relative; border-radius: 11px; overflow: hidden; aspect-ratio: 590 / 396; background: #111; }
+.ticket-image img { width: 100%; height: 100%; object-fit: cover; }
+.offert { position: absolute; left: 14px; bottom: 14px; width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; rotate: -12deg;
+  background: var(--o); color: var(--craie); font: italic 700 19px/1 var(--titre); font-variation-settings: var(--doux); box-shadow: 0 0 0 2px var(--encre), 0 0 0 5px var(--o), 0 0 0 6.5px var(--encre); }
+.offert::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; border: 1.5px dashed rgba(255,255,255,.7); }
+.ticket-corps { flex: 1; display: flex; flex-direction: column; position: relative; padding: 26px 14px 10px; margin-top: 12px; border-top: 2px dashed rgba(11,11,11,.35); }
+.ticket-corps .tampon { position: absolute; top: -12px; left: 14px; }
+.ticket-corps h3 { margin: 6px 0 8px; font: 400 36px/1 var(--etiquette); text-transform: uppercase; letter-spacing: -.005em; }
+.ticket-corps p { margin: 0; color: var(--encre-2); font-size: 15.5px; }
+.puces { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.puces span { font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 8px 10px; border: 1.2px solid var(--encre); border-radius: 999px; }
+.valeur { display: flex; align-items: baseline; gap: 12px; margin-top: auto; padding-top: 18px; }
+.valeur s { font: 400 20px/1 var(--mono); color: var(--fil); }
+.valeur b { font: italic 800 38px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; color: var(--o); }
+
+/* les preuves */
+.preuves { padding: 70px 0 10px; }
+.preuves h2 { font: 600 clamp(36px, 4.8vw, 58px)/1.02 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; text-align: center; margin: 0; }
+.avis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+.a { padding: 24px 22px 22px; display: flex; flex-direction: column; transition: transform .45s var(--boing); }
+.a:hover { transform: translateY(-3px) rotate(-.4deg); }
+.a.vue:hover { transform: translateY(-3px) rotate(-.4deg); }
+.a p { margin: 0 0 18px; font: 400 21px/1.22 var(--etiquette); font-style: italic; }
+.a .qui { margin-top: auto; display: flex; align-items: center; gap: 10px; font: 500 10px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fil); }
+.a .qui img { width: 44px; flex: none; }
+.a .qui b { display: block; color: var(--encre); font: 400 21px/1 var(--etiquette); letter-spacing: 0; text-transform: uppercase; margin-bottom: 3px; }
+.vocal { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; text-align: left; padding: 0; background: none; color: inherit; font: inherit; margin-bottom: 20px; }
+.vocal .lecture { flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--encre); display: grid; place-items: center; box-shadow: 0 0 0 4px var(--papier-clair), 0 0 0 5.5px var(--encre); transition: transform .45s var(--boing); }
+.vocal:hover .lecture { transform: scale(1.08) rotate(-6deg); }
+.vocal .lecture::after { content: ""; border-left: 13px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
+.vocal.joue .lecture::after { border: 0; width: 12px; height: 14px; margin: 0; background: linear-gradient(90deg, #fff 0 4px, transparent 4px 8px, #fff 8px); }
+.vocal .onde { flex: 1; height: 30px; background: repeating-linear-gradient(90deg, var(--encre) 0 2px, transparent 2px 6px); opacity: .55; -webkit-mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); mask: radial-gradient(70% 90% at 50% 50%, #000 40%, transparent 80%); }
+.vocal.joue .onde { animation: onde .9s linear infinite; opacity: .9; }
 @keyframes onde { to { background-position: 12px 0; } }
 
-/* ---------- le chat de la formation : les captures brutes ---------- */
-.chat { position: relative; overflow: hidden; margin-top: 18px; border-radius: 28px; padding: 46px; color: #fff; isolation: isolate;
-  background: radial-gradient(60% 50% at 0% 0%, rgba(249,108,34,.22), transparent 70%), radial-gradient(50% 50% at 100% 100%, rgba(255,138,76,.14), transparent 70%), var(--nuit); }
-.chat::before { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; z-index: -1; }
-.chat-tete { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 30px; }
-.chat-tete h3 { font-size: clamp(24px, 2.6vw, 32px); max-width: 560px; line-height: 1.15; }
-.chat-tete .mono { color: rgba(255,255,255,.55); font-size: 10.5px; white-space: nowrap; }
-.mur { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
-.mur-col { display: grid; gap: 16px; }
-.capture { margin: 0; cursor: zoom-in; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); background: #121212;
-  box-shadow: 0 30px 60px -36px #000; transition: translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, border-color .4s; }
-.capture img { width: 100%; height: auto; }
-.capture:hover { translate: 0 -4px; border-color: rgba(255,138,76,.45); box-shadow: 0 44px 80px -40px #000; }
-.inclus { max-width: 380px; border-radius: 16px; padding: 18px 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
-.inclus .mono { color: var(--o2); font-size: 10.5px; }
-.inclus p { margin: 8px 0 0; color: rgba(255,255,255,.8); font-size: 14.5px; }
-.loupe { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(10,10,11,.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: zoom-out; opacity: 0; transition: opacity .25s; }
+/* le chat de la formation : la bande noire en tissu */
+.nuit { position: relative; margin-top: 110px; background: var(--encre); color: var(--craie); padding: 130px 0 140px; isolation: isolate; }
+.nuit { -webkit-mask: var(--noir-haut) top / 100% 60px no-repeat, linear-gradient(#000 0 0) center / 100% calc(100% - 118px) no-repeat, var(--noir-bas-m) bottom / 100% 60px no-repeat;
+  mask: var(--noir-haut) top / 100% 60px no-repeat, linear-gradient(#000 0 0) center / 100% calc(100% - 118px) no-repeat, var(--noir-bas-m) bottom / 100% 60px no-repeat; }
+.nuit .tissu { position: absolute; inset: 0; background: url(assets/rubberhose/tissu-noir-raccord.jpg) 0 0 / 455px; opacity: .5; mix-blend-mode: screen; pointer-events: none; z-index: -1; }
+.chat-tete { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
+.chat-tete .mono { color: rgba(255,255,255,.55); }
+.chat-tete h3 { margin-top: 0; max-width: 560px; font: 600 clamp(30px, 3.4vw, 44px)/1.05 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.03em; }
+.inclus { position: relative; max-width: 380px; border-radius: 16px; padding: 20px 22px; border: var(--trait) solid rgba(255,255,255,.85); }
+.inclus::after { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(255,255,255,.3); border-radius: 11px; pointer-events: none; }
+.inclus .mono { color: rgba(255,255,255,.6); font-size: 10px; }
+.inclus p { margin: 8px 0 0; color: rgba(255,255,255,.82); font-size: 14.5px; }
+.inclus p b { color: var(--craie); }
+.mur { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.mur-col { display: grid; gap: 18px; }
+.capture { margin: 0; cursor: zoom-in; position: relative; padding: 8px; border-radius: 16px; border: var(--trait) solid rgba(255,255,255,.8); background: #111;
+  transition: transform .45s var(--boing), box-shadow .3s; box-shadow: 0 0 0 rgba(255,255,255,.85); }
+.capture::after { content: ""; position: absolute; inset: 4px; border: 1px dashed rgba(255,255,255,.25); border-radius: 12px; pointer-events: none; }
+.capture img { width: 100%; height: auto; border-radius: 9px; }
+.capture:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(255,255,255,.85); }
+.honnete { text-align: center; margin: 30px 0 0; color: rgba(255,255,255,.5); }
+.loupe { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(11,11,11,.9); cursor: zoom-out; opacity: 0; transition: opacity .25s; }
 .loupe.ouverte { opacity: 1; }
-.loupe img { max-width: min(1100px, 100%); max-height: 100%; border-radius: 14px; box-shadow: 0 40px 100px -30px #000; }
-.inclus p b { color: #fff; }
+.loupe img { max-width: min(1100px, 100%); max-height: 100%; border-radius: 14px; border: 2px solid var(--craie); }
 
-/* ---------- Chris ---------- */
-.chris { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: center; }
-.chris-photo { border-radius: 50%; overflow: hidden; aspect-ratio: 1; background: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 0 0 10px rgba(255,255,255,.04), 0 40px 80px -40px #000; }
-.chris-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
-.chris .mono { color: var(--o2); }
-.chris h3 { font-size: 34px; margin: 12px 0 10px; }
-.chris p { color: rgba(255,255,255,.78); margin: 0 0 18px; max-width: 560px; }
-.defile { position: relative; overflow: hidden; margin-top: 56px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.defile-in { display: flex; gap: 10px; width: max-content; animation: defile 40s linear infinite; }
-.defile span { white-space: nowrap; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.8); font-size: 14px; }
-@keyframes defile { to { transform: translateX(-50%); } }
-
-/* ---------- l'offre ---------- */
-.offre { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 50px; align-items: start; }
-.offre-carte { border-radius: 26px; background: #fff; border: 1px solid var(--trait); padding: 34px; box-shadow: 0 40px 90px -50px rgba(17,17,19,.55); }
-.urgence { display: inline-flex; align-items: center; gap: 8px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--o); }
-.urgence::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--o); animation: clign 1.4s infinite; }
-@keyframes clign { 50% { opacity: .3; } }
-.prix { display: flex; align-items: baseline; gap: 14px; margin: 18px 0 4px; }
-.prix s { font: 400 26px/1 var(--mono); color: var(--encre-3); }
-.prix b { font: 500 76px/1 var(--titre); letter-spacing: -.045em; }
-.prix b small { font-size: 30px; color: var(--o); }
-.modalite { color: var(--encre-2); margin: 0; font-size: 14.5px; }
-.liste { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--trait); }
-.liste li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--trait); font-size: 15px; }
-.liste li::before { content: "✓"; color: var(--o); font-weight: 700; }
-.liste li small { display: block; color: var(--encre-3); font-size: 13px; }
-.liste li.offert::before { content: "+"; }
-.liste li.offert b { color: var(--o); }
-.whop-mount { margin-top: 24px; border-radius: 16px; overflow: hidden; background: #fff; min-height: 480px; }
-.whop-mount > div, .whop-mount [data-whop-plan] { width: 100%; }
+/* l'offre */
+.offre-zone { padding: 120px 0 90px; }
+.offre { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-radius: 26px; box-shadow: 8px 8px 0 var(--encre); }
+.offre::after { inset: 8px; border-radius: 19px; }
+.offre .gauche { padding: 56px 48px; position: relative; }
+.offre .gauche > .tampon { margin-bottom: 18px; }
+.offre h2 { font: 600 clamp(38px, 4.4vw, 56px)/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; }
+.prix { display: flex; align-items: baseline; gap: 16px; margin: 26px 0 6px; }
+.prix s { font: 400 22px/1 var(--mono); color: var(--fil); }
+.prix b { color: var(--o); font: italic 800 84px/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.05em; }
+.offre .sous { color: #3B3B39; margin: 0 0 28px; }
+.offre ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.offre li { display: flex; gap: 12px; font-size: 15.5px; }
+.offre li::before { content: "✦"; flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--encre); color: var(--craie); display: grid; place-items: center; font-size: 10px; }
+.offre .gauche .coin { position: absolute; z-index: 3; width: 120px; left: -46px; bottom: -40px; rotate: -10deg; }
+.offre .droite { padding: 28px; position: relative; border-left: var(--trait) dashed rgba(11,11,11,.35); z-index: 1; }
+.whop-mount { border-radius: 14px; overflow: hidden; background: #fff; min-height: 480px; border: var(--trait) solid var(--encre); }
 .whop-mount iframe { width: 100% !important; border: 0; display: block; min-height: 480px; }
-.petit { margin: 12px 0 0; font-size: 13px; color: var(--encre-3); }
-.bonus { display: grid; gap: 12px; margin-top: 30px; }
-.offre-gauche { position: sticky; top: 96px; }
-.apres-achat { margin-top: 14px; border-radius: 18px; background: var(--nuit); color: #fff; padding: 24px; position: relative; overflow: hidden; isolation: isolate; }
-.apres-achat::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 90% at 100% 0%, rgba(249,108,34,.3), transparent 70%), var(--grain); }
-.apres-achat .mono { color: var(--o2); font-size: 10.5px; }
-.apres-achat ol { list-style: none; margin: 16px 0 0; padding: 0; counter-reset: e; }
-.apres-achat li { counter-increment: e; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 14.5px; color: rgba(255,255,255,.8); }
-.apres-achat li:first-child { border-top: 0; padding-top: 0; }
-.apres-achat li::before { content: "0" counter(e); font: 500 11px/1 var(--mono); color: #fff; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
-.apres-achat li b { display: block; color: #fff; font-weight: 600; }
-.surete { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.surete span { font: 500 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--encre-2); padding: 9px 12px; border-radius: 999px; background: #fff; border: 1px solid var(--trait); }
-.surete span::before { content: "✓ "; color: var(--o); }
-.bn { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; border-radius: 18px; background: #fff; border: 1px solid var(--trait); padding: 12px; }
-.bn img { border-radius: 12px; aspect-ratio: 590/396; object-fit: cover; }
-.bn .mono { color: var(--o); font-size: 10px; }
-.bn b { display: block; font-size: 16px; font-weight: 600; margin: 4px 0 2px; }
-.bn span { font-size: 13.5px; color: var(--encre-2); }
-.bn .duree { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; font-style: normal; }
-.bn .duree i { font: 500 10px/1 var(--mono); font-style: normal; letter-spacing: .03em; color: var(--encre); padding: 5px 7px; border-radius: 6px; background: var(--papier); border: 1px solid var(--trait); white-space: nowrap; }
+.offre .garantie { margin: 16px 4px 0; font-size: 12.5px; color: #3B3B39; line-height: 1.55; }
 
-/* ---------- FAQ ---------- */
-.faq { display: grid; grid-template-columns: 360px 1fr; gap: 50px; }
-.faq-gauche { position: sticky; top: 96px; align-self: start; }
-.question-plus { margin-top: 34px; border-radius: 20px; background: #fff; border: 1px solid var(--trait); padding: 22px; box-shadow: 0 22px 50px -34px rgba(17,17,19,.4); }
-.question-plus .qui { display: flex; align-items: center; gap: 12px; }
-.question-plus img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: #fff; border: 1px solid var(--trait); }
-.question-plus .qui b { display: block; font-size: 15px; } .question-plus .qui span { font-size: 13px; color: var(--encre-3); }
-.question-plus p { margin: 16px 0 18px; color: var(--encre-2); font-size: 15px; }
-.question-plus .btn { width: 100%; justify-content: center; }
-.faq details { border-bottom: 1px solid var(--trait); }
-.faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 52px 1fr 24px; gap: 12px; padding: 20px 0; font-size: 18px; font-weight: 500; align-items: center; }
+/* l'offre : Windows et Mac, les deux formations offertes, la valeur totale */
+.os-duo { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; white-space: nowrap; }
+.os { width: 15px; height: 15px; flex: none; position: relative; top: -1px; }
+.cadeaux { position: relative; margin-top: 28px; padding: 24px 14px 14px; border: 2px dashed var(--o); border-radius: 16px; background: rgba(249,108,34,.07); display: grid; gap: 10px; }
+.cadeaux-titre { position: absolute; top: -13px; left: 16px; background: var(--o); color: var(--craie); font: 500 10.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; padding: 7px 11px 6px; border-radius: 999px; box-shadow: 0 0 0 1.5px var(--encre); }
+.cadeau { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; background: var(--papier-clair); border: var(--trait) solid var(--encre); border-radius: 12px; padding: 8px 12px 8px 8px; }
+.cadeau img { width: 64px; height: 44px; object-fit: cover; border-radius: 7px; }
+.cadeau b { display: block; font: 400 21px/1 var(--etiquette); text-transform: uppercase; }
+.cadeau small { display: block; margin-top: 4px; font: 500 10px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--fil); }
+.prix-c { display: grid; justify-items: end; font: italic 800 20px/1 var(--titre); font-variation-settings: var(--doux); color: var(--o); }
+.prix-c s { font: 400 12px/1 var(--mono); color: var(--fil); margin-bottom: 3px; font-style: normal; }
+.recap { margin-top: 24px; border-top: 2px dashed rgba(11,11,11,.3); padding-top: 14px; display: grid; gap: 7px; font-size: 14.5px; }
+.recap div { display: flex; justify-content: space-between; gap: 12px; color: #3B3B39; }
+.recap-total { padding-top: 8px; margin-top: 4px; border-top: 1px solid rgba(11,11,11,.15); font-weight: 600; color: var(--encre) !important; }
+.recap-total s { color: var(--fil); }
+.recap-auj { align-items: baseline; font-weight: 600; color: var(--encre) !important; }
+.recap-auj b { font: italic 800 30px/1 var(--titre); font-variation-settings: var(--doux); color: var(--o); }
+
+/* les questions */
+.faq { width: min(780px, calc(100% - 40px)); margin: 0 auto; padding: 20px 0 120px; }
+.faq h2 { font: 600 clamp(32px, 3.8vw, 46px)/1.04 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; text-align: center; margin: 0 0 34px; }
+.faq details { position: relative; background: var(--papier-clair); border: var(--trait) solid var(--encre); border-radius: 16px; padding: 20px 22px; margin-bottom: 12px; transition: box-shadow .3s, transform .45s var(--boing); }
+.faq details[open] { box-shadow: 5px 5px 0 var(--encre); }
+.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; font: 600 19px/1.3 var(--corps); letter-spacing: -.01em; color: var(--encre); }
 .faq summary::-webkit-details-marker { display: none; }
-/* le numéro de la question, dans un petit rond cerclé d'orange */
-.faq summary .n { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--o); display: grid; place-items: center; font: 500 13px/1 var(--mono); color: var(--o); transition: background .3s, color .3s; }
-.faq details[open] summary .n, .faq summary:hover .n { background: var(--o); color: #fff; }
-.faq summary::after { content: "+"; color: var(--o); font-size: 22px; line-height: 1; transition: transform .2s; }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { margin: -6px 0 22px 64px; color: var(--encre-2); font-size: 15.5px; }
+.faq summary::after { content: "+"; flex: none; width: 36px; height: 36px; border-radius: 50%; border: var(--trait) solid var(--encre); display: grid; place-items: center; font: 400 21px/1 var(--mono); transition: transform .45s var(--boing), background .3s, color .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); background: var(--o); border-color: var(--o); color: var(--craie); }
+.faq details p { margin: 14px 0 2px; padding-top: 14px; border-top: 1.5px dashed rgba(11,11,11,.22); color: var(--encre-2); font-size: 16px; line-height: 1.65; max-width: 680px; }
+.faq details p b { color: var(--encre); }
 
-/* ---------- la fin ---------- */
-.fin-zone { padding: 0 12px 12px; max-width: 1400px; margin: 0 auto; }
-.fin { border-radius: 28px; padding: 90px 64px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; overflow: hidden; }
-.fin h2 { font-size: clamp(34px, 4.6vw, 58px); position: relative; }
-.fin p { color: rgba(255,255,255,.75); margin: 16px 0 0; position: relative; }
-.fin ul { list-style: none; margin: 22px 0 0; padding: 0; position: relative; }
-.fin li { display: flex; gap: 10px; padding: 7px 0; font-size: 14.5px; color: rgba(255,255,255,.85); }
-.fin li::before { content: "→"; color: var(--o2); }
-.fin .btn { position: relative; }
-footer { padding: 36px 0 30px; color: var(--encre-3); font-size: 13px; }
-footer .cadre { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
-footer a { color: var(--encre-2); text-decoration: none; }
-.avert { max-width: 640px; margin: 18px auto 0; text-align: center; font-size: 12px; color: var(--encre-3); }
+/* la parade, puis la fin */
+.parade { position: relative; background: var(--encre); color: var(--craie); padding: 110px 0 0; }
+.parade { -webkit-mask: var(--noir-haut) top / 100% 60px no-repeat, linear-gradient(#000 0 0) bottom / 100% calc(100% - 59px) no-repeat;
+  mask: var(--noir-haut) top / 100% 60px no-repeat, linear-gradient(#000 0 0) bottom / 100% calc(100% - 59px) no-repeat; }
+.parade .tissu { position: absolute; inset: 0; background: url(assets/rubberhose/tissu-noir-raccord.jpg) 0 0 / 455px; opacity: .55; mix-blend-mode: screen; pointer-events: none; }
+.piste { position: relative; overflow: hidden; padding: 30px 0 10px; }
+.cortege { display: flex; gap: 46px; width: max-content; animation: defile 60s linear infinite; }
+.piste:hover .cortege { animation-play-state: paused; }
+@keyframes defile { to { transform: translateX(-50%); } }
+.marcheur { width: 120px; flex: none; }
+.marcheur img { width: 100%; transform-origin: 50% 95%; animation: dandine .62s ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
+@keyframes dandine { from { transform: translateY(0) rotate(-5deg) scale(1.03, .97); } to { transform: translateY(-12px) rotate(5deg) scale(.98, 1.03); } }
+.sol { height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.6) 0 7px, transparent 7px 12px); }
+.fin { position: relative; text-align: center; padding: 64px 16px 40px; }
+.fin .bouton { background: var(--craie); color: var(--encre); border-color: var(--craie); }
+.fin .bouton:hover { box-shadow: 4px 4px 0 rgba(255,255,255,.5); }
+.fin nav { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-top: 40px; font: 500 10.5px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; }
+.fin nav a { text-decoration: none; color: #D9D8D3; border-bottom: 1px dashed rgba(255,255,255,.35); padding-bottom: 5px; }
+.fin nav a:hover { color: var(--craie); border-bottom-style: solid; }
+.fin small { display: block; max-width: 620px; margin: 40px auto 0; font: 400 10.5px/1.7 var(--mono); letter-spacing: .1em; color: var(--fil); text-transform: uppercase; }
 
-/* ---------- au survol (repris de serensee.com, aux couleurs de la DA) ---------- */
-/* les boutons changent de teinte, la flèche glisse */
-.btn.noir:hover { background: #2B2B30; } .btn.orange:hover { background: #FF7A35; } .btn.clair:hover { background: #F3EFE8; }
-.lien span { display: inline-block; transition: transform .3s; } .lien:hover span { transform: translateX(3px); }
-.nav-liens a { transition: color .3s; }
-.outils li { transition: color .3s; } .outils li:hover { color: var(--encre); }
-/* les quatre problèmes : la carte s'incline vers la souris, un halo la suit, le problème se barre */
-.paire { position: relative; overflow: hidden; --gx: 50%; --gy: 50%; transition: box-shadow 1.2s cubic-bezier(.2,.8,.2,1), border-color 1.2s, background-color 1.2s; will-change: transform; }
-.paire::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s cubic-bezier(.2,.8,.2,1);
-  background: radial-gradient(260px 260px at var(--gx) var(--gy), rgba(249,108,34,.16), rgba(255,138,76,.06) 45%, transparent 72%); }
-.paire > * { position: relative; }
-.paire .mono { transition: color 1.2s; }
-.paire h3 { text-decoration: line-through 1.5px transparent; transition: color .9s, text-decoration-color .9s; }
-.paire .alors::before { display: inline-block; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
-.paire:hover { border-color: #fff; box-shadow: 0 1px 0 #fff inset, 0 34px 70px -34px rgba(249,108,34,.5); }
-.paire:hover::before { opacity: 1; }
-.paire:hover .mono { color: var(--o); }
-.paire:hover h3 { color: var(--encre-3); text-decoration-color: var(--encre-3); }
-.paire:hover .alors::before { transform: translateX(3px); }
-/* la soirée : la tâche survolée s'allume dans la barre */
-.taches li { cursor: default; transition: color .3s; }
-.barre-jour i { transition: width 1.2s cubic-bezier(.2,.8,.2,1), opacity .3s; }
-.soiree.sonde .barre-jour i { opacity: .25; } .soiree.sonde .barre-jour i.chaud { opacity: 1; }
-.taches li.chaud { color: var(--o); }
-.soiree-tete b { transition: color .3s; } .soiree.sonde .soiree-tete b { color: var(--o); }
-/* les cartes qui se soulèvent (translate, pour ne pas gêner l'apparition) */
-.verre, .cas, .bn, .a, .resultat, .etape { transition: translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s cubic-bezier(.2,.8,.2,1), background-position 1.2s cubic-bezier(.2,.8,.2,1); }
-.js .rv.verre, .js .rv.cas, .js .rv.a, .js .rv.etape { transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1), translate .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s cubic-bezier(.2,.8,.2,1), background-position 1.2s cubic-bezier(.2,.8,.2,1); }
-.verre, .verre:nth-child(2n) { background-size: 130% 130%; background-position: 30% 40%; box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 20px 50px -30px rgba(17,17,19,.7); }
-.verre:hover, .verre:nth-child(2n):hover { translate: 0 -4px; background-position: 70% 60%; box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 44px 90px -40px rgba(17,17,19,.85); }
-.cas:hover { translate: 0 -3px; box-shadow: 0 40px 80px -40px rgba(17,17,19,.55); }
-.cas .img img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .cas:hover .img img { transform: scale(1.05); }
-.bn { overflow: hidden; } .bn img { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
-.bn:hover { translate: 0 -3px; box-shadow: 0 30px 60px -36px rgba(17,17,19,.5); border-color: #D9D3C9; }
-.bn:hover img { transform: scale(1.06) rotate(-3deg); }
-.a:hover { translate: 0 -3px; box-shadow: 0 30px 60px -36px rgba(17,17,19,.45); }
-.etape .ecran img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .etape:hover .ecran img { transform: scale(1.015); }
-.tel:hover video { transform: scale(1.03); }
-.chris-photo:hover img { transform: scale(1.06); }
-.carte-photo.ecran img { transition: transform .9s cubic-bezier(.2,.8,.2,1); } .carte-photo.ecran:hover img { transform: translateY(-3px); }
-/* le défilé s'arrête sous la souris, la poignée des réglettes grossit */
-.defile:hover .defile-in { animation-play-state: paused; }
-.defile span { transition: background .3s, border-color .3s, color .3s; } .defile span:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); color: #fff; }
-input[type=range]::-webkit-slider-thumb { transition: transform .2s, box-shadow .2s; }
-input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(255,255,255,.14), 0 8px 20px rgba(0,0,0,.45); }
-.faq summary { transition: color .3s; }
-/* le hero : en descendant, la carte bascule et recule, le fond glisse */
-.hero { --p: 0; transform-origin: 50% 100%; }
-.hero::before { transform: translateY(calc(var(--p) * 5%)) scale(calc(1 + var(--p) * .08)); }
-.hero-in { transform: translateY(calc(var(--p) * -70px)); opacity: calc(1 - var(--p) * .45); }
-
-/* ---------- apparitions ---------- */
-.js .rv { opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
-.js .rv.vu { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .rv { opacity: 1; transform: none; } }
-
-/* ---------- téléphone ---------- */
-@media (max-width: 960px) {
-  section { padding: 70px 0; }
-  .nav-liens { display: none; }
-  .hero { min-height: 640px; border-radius: 22px; }
-  .hero-in { grid-template-columns: 1fr; padding: 0 24px 34px; gap: 22px; }
-  .outils { margin: 20px 12px 0; }
-  .recadre, .systeme, .calcul, .intro-fait, .etapes-tete, .etape, .chris, .offre, .faq, .fin { grid-template-columns: 1fr; }
-  .tel { width: min(280px, 100%); justify-self: center; }
-  /* téléphone : les images seules sur leur ligne et le texte autour sont dans l'axe */
-  .intro-fait .carte-photo, .chris-photo { justify-self: center; }
-  .sys-titre, .intro-fait > div:last-child, .chris > div:last-child { text-align: center; }
-  .intro-fait .chapo, .chris p { margin-left: auto; margin-right: auto; }
-  .intro-fait { gap: 30px; } .intro-fait > div:last-child { order: -1; } /* le titre et le texte avant la vidéo */
-  .sys-titre .stats { text-align: center; }
-  .intro-fait .carte-photo { width: min(250px, 100%); }
-  .chris-photo { width: min(260px, 100%); }
-  .chaine { grid-template-columns: 1fr 1fr; }
-  .sys-titre { padding: 0; }
-  .chat { padding: 26px 16px; border-radius: 22px; }
-  .chat-tete { flex-direction: column; align-items: start; gap: 10px; }
-  .mur { grid-template-columns: 1fr; }
-  .paires, .preuves { grid-template-columns: 1fr 1fr; }
+@media (max-width: 1180px) {
+  .volants { display: none; }
+  /* les patchs posés sur les coins restent dans l'écran : ils débordent de 10 px au plus */
+  .visuel .coin, .visuel .coin.bas, .ticket .coin { right: -10px; }
+  .visuel .coin.gauche { left: -10px; right: auto; }
+  .offre .gauche .coin { left: -4px; }
+}
+@media (max-width: 900px) {
+  .bonus-grille { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .etape.large, .etape.large.inverse { grid-template-columns: 1fr; gap: 34px; }
+  .stats-bloc { width: min(640px, 100%); justify-self: center; }
+  .formats { width: min(640px, 100%); justify-self: center; }
+  .etape, .offre { grid-template-columns: 1fr; gap: 34px; }
+  .etape.inverse .visuel { order: 0; }
+  .etape { padding: 48px 0; }
   .avis { grid-template-columns: 1fr 1fr; }
-  .bento { grid-template-columns: 1fr; }
-  .v-grand, .v-moyen, .v-tiers { grid-column: auto; grid-row: auto; }
-  .calcul { padding: 26px; }
-  .etapes-bloc { padding: 50px 0; }
-  .etapes-tete .compteur { text-align: left; }
-  .faq-gauche, .offre-gauche { position: static; }
-  .surete { justify-content: center; }
-  .question-plus { margin-top: 24px; }
-  .faq details p { margin-left: 0; }
-  .fin { padding: 50px 26px; }
+  .chat-tete { flex-direction: column; align-items: start; gap: 18px; }
+  .mur { grid-template-columns: 1fr; }
+  .offre .gauche { padding: 44px 28px 14px; } .offre .droite { border-left: 0; border-top: var(--trait) dashed rgba(11,11,11,.35); padding: 22px 16px 18px; }
+  .offre .gauche .coin { display: none; }
+  .visuel .coin { width: 82px; top: -34px; } .visuel .coin.gauche { left: 0; }
+  .visuel .coin, .visuel .coin.bas, .ticket .coin { right: 0; }
 }
 @media (max-width: 560px) {
-  .stats { gap: 10px; } .stats b { font-size: 26px; } .stats .mono { font-size: 9.5px; letter-spacing: .05em; }
-  .apres-achat { padding: 20px; }
-  .bandeau-n { flex-wrap: wrap; padding: 0 20px; text-align: center; font-size: 13.5px; gap: 8px; line-height: 1.4; }
-  .outils { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px 0 14px; margin: 18px 16px 0; border-radius: 16px; }
-  .outils > .mono { text-align: center; }
-  .outils ul { font-size: 14px; animation-duration: 26s; }
-  .outils li::after { margin: 0 16px; }
-  .marque { font-size: 17px; } .nav .btn { padding: 11px 14px; font-size: 13px; }
-  .cadre { padding: 0 16px; }
-  .paires, .preuves, .avis { grid-template-columns: 1fr; }
-  /* téléphone : trois colonnes, la flèche au centre de l'écran, les chiffres collés contre elle */
-  /* téléphone : « 5 h », la flèche vers le bas, « 15 min », tout empilé et centré (symétrique quelle que soit la largeur) */
-  .chrono { --n: 44px; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-  .chrono .fl { margin: 0; transform: rotate(90deg); }
-  .soiree { padding: 22px 20px; }
-  .soiree-pied span:first-child { font-size: 14.5px; }
-  .soiree-pied span:last-child { font-size: 13.5px; }
-  .faq summary { grid-template-columns: 40px 1fr 20px; font-size: 16.5px; }
-  .faq summary .n { width: 30px; height: 30px; font-size: 12px; }
-  .bn { grid-template-columns: 100px 1fr; }
-  .prix b { font-size: 60px; }
-  .carte-photo { min-height: 380px; padding: 22px; }
-  .etape { padding: 20px; }
-  .etape h3 { font-size: 24px; }
+  .profil { gap: 11px; padding: 10px 16px 10px 10px; margin-bottom: 26px; } .profil img { width: 48px; height: 48px; } .profil b { font-size: 16px; } .profil small { font-size: 12.5px; }
+  .faq details { padding: 16px 16px; } .faq summary { font-size: 17px; }
+  .cadeau { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; } .cadeau img { width: 52px; height: 38px; } .cadeau b { font-size: 18px; }
+  .ticket .coin { width: 76px; top: -30px; right: -8px; }
+  .ticket-corps h3 { font-size: 30px; }
+  .offert { width: 62px; height: 62px; font-size: 16px; }
+  .mini { gap: 16px; } .mini li { font-size: 12px; padding: 20px 6px 12px; } .mini li:not(:last-child)::after { right: -14px; }
+  .ventes-bloc { padding: 10px; }
+  .w-ligne { grid-template-columns: 74px 118px minmax(0, 1fr); gap: 8px; padding: 0 12px; font-size: 12.5px; }
+  .w-ligne .w-plan { display: none; }
+  .w-statut { font-size: 11.5px; padding: 4px 8px; }
+  .w-tete { padding: 14px 12px 10px; } .w-tete span { font-size: 11px; }
+  .stats-bloc { padding: 10px; gap: 8px; }
+  .oeil { font-size: 12px; left: 7px; bottom: 7px; } .oeil svg { width: 15px; height: 15px; }
+  .formats { grid-template-columns: 1fr 1fr; padding: 10px; gap: 8px; }
+  .formats .f-reel { grid-row: auto; grid-column: 1 / 3; width: 72%; justify-self: center; aspect-ratio: 9 / 16; }
+  .cadre { width: calc(100% - 32px); }
+  .hero { padding-top: 40px; }
+  .hero h1 em { white-space: normal; }
+  .rassure span { display: block; } .rassure span + span::before { display: none; }
+  .ecran { margin-top: 50px; padding: 8px; }
+  .rond-n { width: 104px; } .rond-n b { font-size: 66px; }
+  .avis { grid-template-columns: 1fr; }
+  .produits { padding: 26px 18px 112px; } .fiche { width: 92%; } .fiche.petite { width: 74%; right: 12px; bottom: 18px; }
+  .nuit { padding: 100px 0 110px; }
+  .prix b { font-size: 68px; }
+  .faq summary { font-size: 21px; }
+ 
 }
-@media (max-width: 370px) {
-  .m-studio { display: none; }
-  .nav .btn { padding: 10px 12px; font-size: 12.5px; gap: 6px; }
-  .question-plus .btn { white-space: normal; text-align: center; }
+@media (max-width: 400px) {
+  .mini { gap: 12px; } .mini li { font-size: 11px; padding: 18px 4px 10px; } .mini li:not(:last-child)::after { right: -11px; font-size: 12px; }
+  .w-ligne { grid-template-columns: 66px 104px minmax(0, 1fr); gap: 6px; padding: 0 10px; font-size: 11.5px; }
+  .w-statut { font-size: 10.5px; padding: 4px 7px; gap: 4px; } .w-statut svg { width: 12px; height: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .monte { opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="sg" viewBox="0 0 120 120"><g fill="currentColor"><rect x="9" y="9" width="18" height="18" rx="2.5" opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" opacity=".73"/><rect x="9" y="30" width="18" height="18" rx="2.5" opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" opacity=".73"/><rect x="93" y="30" width="18" height="18" rx="2.5" opacity=".58"/><rect x="9" y="51" width="18" height="18" rx="2.5" opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" opacity=".73"/><rect x="72" y="51" width="18" height="18" rx="2.5" opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" opacity=".5"/><rect x="9" y="72" width="18" height="18" rx="2.5" opacity=".73"/><rect x="51" y="72" width="18" height="18" rx="2.5" opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" opacity=".43"/><rect x="30" y="93" width="18" height="18" rx="2.5" opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" opacity=".36"/></g><g fill="#F96C22"><rect x="93" y="9" width="18" height="18" rx="2.5"/><rect x="72" y="30" width="18" height="18" rx="2.5"/><rect x="51" y="51" width="18" height="18" rx="2.5"/><rect x="30" y="72" width="18" height="18" rx="2.5"/><rect x="9" y="93" width="18" height="18" rx="2.5"/></g></symbol>
-</svg>
+<div class="toile" aria-hidden="true"></div>
+<canvas id="points" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="scintille" aria-hidden="true"></div>
 
-<header class="nav">
-  <div class="cadre">
-    <a class="marque" href="#"><svg aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C <span class="m-studio" style="font-weight:500;color:var(--encre-3)">Studio</span></span></a>
-    <nav class="nav-liens"><a href="#comment">Comment ça marche</a><a href="#exemples">Ce qu'il fait</a><a href="#resultats">Résultats</a><a href="#faq">Questions</a></nav>
-    <a class="btn noir" href="#offre">Je veux mon studio <span class="fl">→</span></a>
-  </div>
-</header>
-
-<main>
-
-<!-- ================= HERO ================= -->
-<div class="hero-zone">
-  <div class="hero">
-    <div class="hero-in">
-      <div>
-        <p class="mono">Le studio IA des créateurs · par Chris Sans Filtre</p>
-        <h1>Décuple ta <em class="s">créativité</em>, pas ton temps de travail.</h1>
-      </div>
-      <div class="hero-droite">
-        <p>MOSAIC Studio écrit, génère et monte tes Reels, tes carrousels et tes stories avec ton avatar IA. Une appli sur ton ordi : tu tapes ton idée, tu valides, c'est prêt.</p>
-        <div class="actions">
-          <a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a>
-          <a class="lien" href="#exemples">Voir un Reel monté par le studio <span>→</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p class="bandeau-n"><span class="pastille">CALCUL</span><a href="#calcul">Combien de Reels tu pourrais sortir en 1 heure →</a></p>
-  <div class="outils"><span class="mono">Le studio pilote pour toi</span>
-    <div class="piste"><ul><li>Claude</li><li>Seedance 2.5</li><li>Kling</li><li>Nano Banana</li><li>Higgsfield</li><li>Magnific</li><li>ElevenLabs</li><li>Whisper</li><li aria-hidden="true">Claude</li><li aria-hidden="true">Seedance 2.5</li><li aria-hidden="true">Kling</li><li aria-hidden="true">Nano Banana</li><li aria-hidden="true">Higgsfield</li><li aria-hidden="true">Magnific</li><li aria-hidden="true">ElevenLabs</li><li aria-hidden="true">Whisper</li></ul></div></div>
+<!-- L'AMORCE&nbsp;: 3, 2, 1, puis l'iris s'ouvre -->
+<div class="amorce" id="amorce" aria-hidden="true">
+  <div class="cadran"><div class="balaye" id="balaye"></div><div class="croix"></div><span class="chiffre" id="chiffre">3</span></div>
+  <div class="passer">clique pour passer</div>
 </div>
 
-<!-- ================= LE RECADRAGE ================= -->
-<section>
-  <div class="cadre">
-    <div class="recadre">
-      <div class="rv">
-        <h2>T'as pas besoin de plus de temps. T'as besoin d'un <em class="s">studio</em>.</h2>
-        <p class="chapo">Tu bosses toute la journée. Le soir, il te reste une heure, et tout passe encore par toi : le script, les prompts, l'avatar qui change de tête, le montage.</p>
-        <div class="chrono">
-          <div class="avant"><span class="n">5 h</span><small>Un Reel, à la main</small></div>
-          <span class="fl">→</span>
-          <div class="apres">15 min<small>Avec MOSAIC Studio</small></div>
-        </div>
-      </div>
-      <div class="soiree rv" id="soiree">
-        <div class="soiree-tete"><span class="mono">Un Reel · aujourd'hui</span><b id="soiree-total">5 h</b></div>
-        <div class="barre-jour"><i data-l="13" style="background:#F96C22"></i><i data-l="12" style="background:#FF8A4C"></i><i data-l="15" style="background:#FFB98F"></i><i data-l="40" style="background:#3D3D40"></i><i data-l="20" style="background:#8D8D96"></i></div>
-        <div class="legende-jour"><span>21 h</span><span>2 h du matin</span></div>
-        <ul class="taches">
-          <li><i style="background:#F96C22"></i>Écrire le script <s>40 min</s><b>0</b></li>
-          <li><i style="background:#FF8A4C"></i>Les prompts, en anglais <s>35 min</s><b>0</b></li>
-          <li><i style="background:#FFB98F"></i>Régénérer l'avatar qui a changé de tête <s>45 min</s><b>0</b></li>
-          <li><i style="background:#3D3D40"></i>Le montage : coupes, sous-titres, sons <s>2 h</s><b>0</b></li>
-          <li><i style="background:#8D8D96"></i>Les allers-retours <s>1 h</s><b>0</b></li>
-        </ul>
-        <div class="soiree-pied"><span>Ce que tu fais encore</span><span>Valider · 15 min</span></div>
-      </div>
-    </div>
-
-    <div class="paires">
-      <div class="paire rv"><span class="mono">01</span><h3>Ton avatar change de tête</h3><p>D'une vidéo à l'autre, ce n'est jamais le même.</p><p class="alors">Une planche, le même visage partout.</p></div>
-      <div class="paire rv"><span class="mono">02</span><h3>Des prompts à rallonge</h3><p>En anglais, réécrits dix fois.</p><p class="alors">Zéro prompt à écrire.</p></div>
-      <div class="paire rv"><span class="mono">03</span><h3>Deux heures de montage</h3><p>Coupes, sous-titres, bruitages, à la main.</p><p class="alors">Monté dans l'appli.</p></div>
-      <div class="paire rv"><span class="mono">04</span><h3>Quinze idées, zéro posté</h3><p>Les idées sont là, le temps non.</p><p class="alors">Une idée tapée, un Reel prêt.</p></div>
-    </div>
+<div class="hero-nuit">
+<div class="tissu" aria-hidden="true"></div>
+<section class="hero cadre">
+  <div class="volants" aria-hidden="true">
+    <div class="volant" style="left:0px;top:10px;--r:-8deg" data-prof="22"><img class="saute" src="assets/rubberhose/patchs/super-content-pizza.png" alt="" style="--d:-0.4s"></div>
+    <div class="volant" style="right:0px;top:10px;--r:8deg" data-prof="28"><img class="saute" src="assets/rubberhose/patchs/sur-de-lui-eclair.png" alt="" style="--d:-0.9s"></div>
+    <div class="volant" style="left:70px;top:200px;--r:6deg" data-prof="34"><img class="saute" src="assets/rubberhose/patchs/idee-ampoule.png" alt="" style="--d:-1.3s"></div>
+    <div class="volant" style="right:70px;top:200px;--r:-6deg" data-prof="18"><img class="saute" src="assets/rubberhose/patchs/intelligence-cerveau.png" alt="" style="--d:-1.7s"></div>
+    <div class="volant" style="left:0px;top:390px;--r:-6deg" data-prof="14"><img class="saute" src="assets/rubberhose/patchs/reveur-nuage.png" alt="" style="--d:-2s"></div>
+    <div class="volant" style="right:0px;top:390px;--r:6deg" data-prof="38"><img class="saute" src="assets/rubberhose/patchs/la-fete-bouteille-de-champagne.png" alt="" style="--d:-0.2s"></div>
   </div>
+
+  <a class="profil monte" href="https://www.instagram.com/chris.sans.filtre/" target="_blank" rel="noopener">
+    <img src="assets/chris.png" alt="Chris Sans Filtre" width="400" height="400">
+    <span><b>@chris.sans.filtre <svg viewBox="0 0 40 40" aria-label="Compte vérifié"><path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fill="#0095F6" fill-rule="evenodd"/></svg></b>
+    <small>Chris Sans Filtre · Business &amp; IA <i>(+11,5K abonnés)</i></small></span>
+  </a>
+  <h1>Crée du contenu IA en&nbsp;<span class="pastille">15&nbsp;min</span> par&nbsp;jour, et fais ta première vente en&nbsp;<span class="pastille">7&nbsp;jours</span>.</h1>
+  <p class="chapo"><b>SANS</b> montrer ton visage, <b>SANS</b> compétences techniques, <b>EN</b> partant de zéro&nbsp;:</p>
+  <div class="ecran cousu monte"><span class="tampon">Le studio</span><img src="assets/studio-accueil-oct.jpg" alt="L'accueil de MOSAIC Studio" width="2160" height="1200"></div>
+  <div class="appel"><a class="bouton" href="#offre">Je me lance <span aria-hidden="true">→</span></a>
+  <p class="rassure mono"><span>Paiement unique</span><span>Accès à vie</span><span>Windows et Mac</span></p></div>
 </section>
-
-<!-- ================= LE SYSTÈME ================= -->
-<section class="sombre">
-  <div class="cadre">
-    <div class="systeme">
-      <div class="sys-titre rv"><span class="mono">Le studio autour de l'IA</span>
-        <h2>L'IA n'est qu'un outil. Ce qui change tout, c'est le <em class="s">système</em> qui le pilote.</h2>
-        <div class="stats">
-          <div><b>+170k</b><span class="mono">abonnés sur mes comptes IA</span></div>
-          <div><b>+10M</b><span class="mono">de vues générées</span></div>
-          <div><b>0</b><span class="mono">fois à la caméra</span></div>
-        </div></div>
-      <figure class="tel rv"><video data-auto src="assets/reel-quinze-minutes.mp4" poster="assets/reel-quinze-minutes.jpg" muted loop playsinline preload="none"></video><figcaption>Monté par le studio</figcaption></figure>
-      <div class="carte-photo ecran rv"><img src="assets/studio-accueil.jpg" alt="" loading="lazy">
-        <div class="texte"><p>Les outils sont les mêmes pour tout le monde. MOSAIC les pilote à ta place, dans le bon ordre, avec ton avatar, ta DA et ta façon de parler. Chaque création suit le même chemin.</p>
-          <ul class="coches"><li>Ton avatar, ta DA, ta voix : réglés une fois</li><li>Le prix affiché avant chaque génération</li><li>Monté et exporté dans l'appli, sans logiciel en plus</li></ul></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= LE CALCUL ================= -->
-<section id="calcul">
-  <div class="cadre">
-    <div class="calcul rv">
-      <div>
-        <h2>Combien de <em class="s">Reels</em> tu pourrais sortir&nbsp;?</h2>
-        <div class="reglette">
-          <label for="heures">Le temps que tu as par semaine <b id="h-val">5 h</b></label>
-          <input type="range" id="heures" min="1" max="15" step="1" value="5">
-          <label for="prix-v">Prestation IA vendue <b id="p-val">50 €<small>/ vidéo</small></b></label>
-          <input type="range" id="prix-v" min="0" max="300" step="10" value="50">
-        </div>
-      </div>
-      <div class="resultat">
-        <span class="mono">Tu pourrais sortir</span>
-        <div class="gros"><span id="r-avec">80</span><small>Reels par mois</small></div>
-        <div class="deux"><div><b id="r-sans">4 Reels</b><span>sans le studio</span></div><div><b id="r-euros">400 €</b><span id="r-vendus">si tu en vends 8/80</span></div></div>
-        <a class="btn orange" href="#offre">Je veux mon studio <span class="fl">→</span></a>
-        <p class="note">Calcul : 5 h par Reel à la main, 15 min avec le studio. L'attente des générations n'est pas comptée : elles tournent pendant que tu fais autre chose. Ce n'est pas une promesse de gains.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CE QUE LE STUDIO FAIT ================= -->
-<section id="exemples" style="padding-top:20px">
-  <div class="cadre">
-    <div class="intro-fait">
-      <div class="carte-photo rv" style="color:#fff"><video src="assets/cree-broll.mp4" poster="assets/cree-broll.jpg" muted loop playsinline autoplay preload="metadata"></video><b>Fait avec le studio,<br>tel quel.</b></div>
-      <div class="rv"><h2>Ce que le studio fait à ta place, <em class="s">concrètement</em>.</h2>
-        <p class="chapo">Tu gardes la main sur ce qui compte : l'idée, le ton, la validation. Le reste ne passe plus par toi.</p></div>
-    </div>
-
-    <div class="bento">
-      <div class="verre v-grand rv">
-        <h3>Le Reel monté de A à Z</h3>
-        <p>Script, voix, vidéos, sous-titres mot à mot, bruitages, montage. Un détail à changer ? Tu le demandes, le studio le corrige.</p>
-        <div class="duo">
-          <figure class="avant"><figcaption>Les clips bruts</figcaption><video src="assets/avant-brut.mp4" poster="assets/avant-brut.jpg" muted loop playsinline autoplay preload="metadata"></video></figure>
-          <figure class="apres"><figcaption>Monté par le studio</figcaption><video src="assets/apres-monte.mp4" poster="assets/apres-monte.jpg" muted loop playsinline autoplay preload="metadata"></video><button class="son" type="button">🔇 Le son</button></figure>
-        </div>
-        <ol class="chaine"><li><b>Script</b>ton accroche, mot pour mot</li><li><b>Voix</b>la tienne ou une voix IA</li><li><b>Vidéos</b>ton avatar dans chaque plan</li><li><b>Montage</b>sous-titres, sons, export</li></ol>
-        <span class="tag">monté dans l'appli, sans logiciel</span>
-      </div>
-      <div class="verre v-moyen rv">
-        <h3>Ton avatar, verrouillé</h3>
-        <p>Sa planche une fois. Ensuite, le même visage dans chaque image et chaque vidéo. Ou toi, en clone IA.</p>
-        <div class="vis"><img src="assets/cree-avatar-chris.jpg" alt="La planche du clone IA de Chris" loading="lazy"></div>
-        <span class="tag">le même visage partout</span>
-      </div>
-      <div class="verre v-moyen rv">
-        <h3>Les carrousels et les stories</h3>
-        <p>Écrits et mis en page à ta DA, retouchables à la main, prêts à poster.</p>
-        <div class="vis-mini"><img src="assets/slide-pmub9nw45-1.jpg" alt="Un carrousel fait avec le studio" loading="lazy"><img src="assets/slide-pmubmynmi-1.jpg" alt="Des stories faites avec le studio" loading="lazy"></div>
-        <span class="tag">sans un seul crédit pour la mise en page</span>
-      </div>
-      <div class="verre v-tiers rv"><h3>Le reproducteur</h3><p>Tu déposes un Reel qui cartonne : son rythme et ses coupes deviennent ton format.</p><span class="tag">un viral devient ton format</span></div>
-      <div class="verre v-tiers rv"><h3>Ta voix, tes sons</h3><p>Ta voix ou une voix IA, et 34 bruitages libres de droits, posés au bon mot.</p><span class="tag">34 bruitages offerts</span></div>
-      <div class="verre v-tiers rv"><h3>Le prix avant tout</h3><p>Chaque génération affiche son coût avant de partir. Le montage, lui, ne coûte rien.</p><span class="tag">jamais de surprise</span></div>
-    </div>
-    <div class="sous-cta rv"><a class="btn noir" href="#offre">Je veux mon studio <span class="fl">→</span></a><span class="mono puces"><span>Paiement unique</span><span>Accès immédiat</span><span>Mises à jour incluses</span></span></div>
-  </div>
-</section>
-
-<!-- ================= LES ÉTAPES ================= -->
-<div class="etapes-zone" id="comment">
-  <div class="etapes-bloc sombre">
-    <div class="cadre" style="position:relative">
-      <div class="etapes-tete rv"><h2>Trois étapes, de l'idée au Reel <em class="s">posté</em>.</h2>
-        <div><div class="compteur">01 — 03</div><p style="margin-top:14px">Le studio te guide écran par écran. Chaque étape a sa durée et ce que tu as à la fin.</p></div></div>
-      <div class="etape rv">
-        <div><div class="num"><span class="mono">01</span><span>Tu choisis</span></div>
-          <h3>Ce que tu veux créer</h3><p>Un Reel, un carrousel, des stories. Tu tapes ton idée en une phrase, avec ton avatar et ta DA.</p>
-          <div class="infos"><div><span class="mono">Durée</span>1 minute</div><div><span class="mono">Ce que tu as</span>Ton idée, cadrée</div></div></div>
-        <div class="ecran"><picture><source media="(max-width: 700px)" srcset="assets/studio-accueil-m.jpg"><img src="assets/studio-accueil.jpg" alt="L'accueil de MOSAIC Studio" loading="lazy"></picture></div>
-      </div>
-      <div class="etape rv">
-        <div><div class="num"><span class="mono">02</span><span>Le studio écrit</span></div>
-          <h3>Le script, la voix, le découpage</h3><p>Plan par plan, avec le prix de chaque vidéo avant de générer. Ton accroche reste mot pour mot.</p>
-          <div class="infos"><div><span class="mono">Durée</span>5 minutes</div><div><span class="mono">Ce que tu as</span>Ton Reel, plan par plan</div></div></div>
-        <div class="ecran"><picture><source media="(max-width: 700px)" srcset="assets/studio-reel-decoupage-m.jpg"><img src="assets/studio-reel-decoupage.jpg" alt="Le découpage d'un Reel" loading="lazy"></picture></div>
-      </div>
-      <div class="etape rv">
-        <div><div class="num"><span class="mono">03</span><span>Le studio monte</span></div>
-          <h3>Ton Reel sort monté</h3><p>Plans, sous-titres, voix, bruitages : posés en automatique, exporté en vidéo prête à poster.</p>
-          <div class="infos"><div><span class="mono">Durée</span>Pendant que tu fais autre chose</div><div><span class="mono">Ce que tu as</span>La vidéo finie</div></div></div>
-        <div class="ecran tl"><img src="assets/timeline-capcut.jpg" alt="Le montage posé par le studio" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- ================= RÉSULTATS ================= -->
-<section id="resultats">
+<section class="etapes cadre" id="comment">
+  <h2 class="monte">De zéro compétence<br>à ton <em>premier euro</em>.</h2>
+
+  <div class="etape large monte">
+    <div>
+      <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>1</b></div>
+      <h3>Crée du contenu IA avec MOS<span class="ai">AI</span>C Studio.</h3>
+      <p>Sans aucune compétence technique, en 15 minutes par jour. <mark class="fort">Le studio fait tout à ta place.</mark> Il écrit tes scripts, génère tes vidéos et monte tout&nbsp;: Reels, carrousels, stories.</p>
+    </div>
+    <div class="visuel formats cousu">
+      <div class="coin"><img class="saute" src="assets/rubberhose/patchs/camescope.png" alt="" style="--d:-.6s"></div>
+      <figure class="f-reel"><video src="assets/reel-quinze-minutes.mp4" poster="assets/reel-quinze-minutes.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Un Reel monté par le studio"></video><span class="tampon plein">Reel</span></figure>
+      <figure class="f-car"><img src="assets/etape1-carrousel-1.jpg" alt="Une slide de carrousel faite par le studio" loading="lazy"><span class="tampon plein">Carrousel</span></figure>
+      <figure class="f-car"><img src="assets/etape1-carrousel-2.jpg" alt="Une autre slide du même carrousel" loading="lazy"></figure>
+      <figure class="f-sto"><video src="assets/etape1-story-1.mp4" poster="assets/etape1-story-1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Une story faite par le studio"></video><span class="tampon plein">Story</span></figure>
+      <figure class="f-sto"><video src="assets/etape1-story-2.mp4" poster="assets/etape1-story-2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Une autre story"></video></figure>
+    </div>
+  </div>
+  <div class="fil" aria-hidden="true"></div>
+
+  <div class="etape large inverse monte">
+    <div>
+      <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>2</b></div>
+      <h3>Poste ton contenu et fais <em>des milliers de vues.</em></h3>
+      <p>Avec MOSAIC Studio, les possibilités sont infinies. Tu peux créer une dizaine de vidéos en un temps record. Et plus tu partages de vidéos, plus elles ont de chances d'attirer l'attention et de <mark class="fort">devenir virales</mark>.</p>
+    </div>
+    <div class="visuel stats-bloc cousu">
+      <div class="coin gauche"><img class="saute" src="assets/rubberhose/patchs/idee-ampoule.png" alt="" style="--d:-1.4s"></div>
+      <figure class="s-reel"><video src="assets/etape2-reel.mp4" poster="assets/etape2-reel.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Un Reel fait avec MOSAIC Studio"></video>
+        <span class="oeil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 12S5.5 4.5 12 4.5 22.5 12 22.5 12 18.5 19.5 12 19.5 1.5 12 1.5 12z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="#fff" stroke-width="2"/></svg><b id="oeil-vues">0</b></span></figure>
+      <div class="ig" role="img" aria-label="Les statistiques du Reel : 78 936 vues, 2,7 K j'aime, 4,2 K commentaires, 693 followers en plus"><div class="ig-in">
+        <div class="ig-tete"><span class="ig-rond"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Statistiques du reel</b><span class="ig-pilule"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><i>•••</i></span></div>
+        <div class="ig-icones">
+          <span><svg viewBox="0 0 24 24"><path d="M12 20.5s-8.5-5.1-8.5-11A4.8 4.8 0 0 1 12 6.6a4.8 4.8 0 0 1 8.5 2.9c0 5.9-8.5 11-8.5 11z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><b data-n="2700" data-f="K">0</b></span>
+          <span><svg viewBox="0 0 24 24"><path d="M20.7 18.5 21.5 21l-3.2-.9A9.3 9.3 0 1 1 21.3 12a9.2 9.2 0 0 1-.6 6.5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><b data-n="4200" data-f="K">0</b></span>
+          <span><svg viewBox="0 0 24 24"><path d="M17 3l3 3-3 3M20 6H9a5 5 0 0 0-5 5v1M7 21l-3-3 3-3M4 18h11a5 5 0 0 0 5-5v-1" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><b data-n="182">0</b></span>
+          <span><svg viewBox="0 0 24 24"><path d="M21.5 3 3 9.6l7.2 3.2L21.5 3zM10.2 12.8l3.2 7.7L21.5 3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><b>--</b></span>
+          <span><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5.5L6 21z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><b data-n="3800" data-f="K">0</b></span>
+        </div>
+        <div class="ig-onglets"><b>Vue d’ensemble</b><span>Interactions</span><span>Audience</span></div>
+        <div class="ig-titre">Résumé <i>i</i></div>
+        <div class="ig-cartes">
+          <div><span>Vues</span><b data-n="78936" data-f="en">0</b></div>
+          <div><span>Spectateur(ice)s</span><b data-n="57973" data-f="en">0</b></div>
+          <div><span>Durée de vue moyenne</span><b data-n="21" data-f="s">0</b></div>
+          <div><span>Followers en plus</span><b data-n="693">0</b></div>
+        </div>
+        <div class="ig-titre">Vues au fil du temps <i>i</i></div>
+        <div class="ig-puces"><b>Tout</b><span>Followers</span><span>Non-followers</span></div>
+        <svg class="ig-courbe" viewBox="0 0 820 310">
+          <g class="ig-axe"><text x="0" y="31">100 k</text><text x="16" y="156">50 k</text><text x="40" y="281">0</text></g>
+          <path d="M70 20H810M70 145H810M70 270H810" stroke="#3A3F47" stroke-width="2"/>
+          <path d="M70.0 267.0 L810 255.2" stroke="#7D838C" stroke-width="5" stroke-dasharray="20 12"/>
+          <path class="ig-trait" d="M70.0 267.0 L122.2 244.3 L172.4 178.1 L227.6 125.7 L282.9 108.9 L333.1 99.1 L443.5 83.2 L523.8 76.3 L601.2 73.4" fill="none" stroke="#EE2BD0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+          <g class="ig-axe"><text x="80.2" y="308">oct. 9</text><text x="399.5" y="308">oct. 12</text><text x="689.8" y="308">oct. 16</text></g>
+        </svg>
+        <div class="ig-legende"><span><i style="background:#EE2BD0"></i>Ce reel</span><span><i style="background:#7D838C"></i>Votre reel type</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fil" aria-hidden="true"></div>
+
+  <div class="etape large monte">
+    <div>
+      <div class="rond-n"><div class="balaye"></div><div class="croix"></div><b>3</b></div>
+      <h3>Revends <em>le produit que je te fournis.</em></h3>
+      <p>Pas la peine de construire ta propre offre. Je te confie un produit à vendre <mark class="fort">en affiliation</mark>&nbsp;: tu diriges ton audience vers lui, et chaque vente te rapporte de l'argent.</p>
+      <ol class="mini">
+        <li><b>1</b>Publie une vidéo</li>
+        <li><b>2</b>Envoie ton audience vers le produit</li>
+        <li class="cash"><b>3</b>Encaisse l'argent</li>
+      </ol>
+      <p class="tombe"><i></i>Et les ventes arrivent toutes seules.</p>
+    </div>
+    <div class="visuel ventes-bloc cousu">
+      <div class="coin bas"><img class="saute" src="assets/rubberhose/patchs/charmeur-diamant.png" alt="" style="--d:-.3s"></div>
+      <div class="whop" role="img" aria-label="Des ventes de MOSAIC Studio à 147 euros qui arrivent une à une, avec 58,80 euros de commission chacune">
+        <div class="w-tete"><b>Tes commissions</b><span>Total aujourd'hui <strong id="w-total">0,00 €</strong></span></div>
+        <div class="w-ligne w-entete"><span>Montant</span><span>Statut</span><span>Produit</span><span class="w-plan">Plan</span></div>
+        <div class="w-liste" id="w-liste"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bonus-zone cadre" id="bonus">
+  <h2 class="monte">Et en plus, <em>deux formations offertes.</em></h2>
+  <p class="bonus-intro monte">Avec le studio, tu repars aussi avec mes deux autres formations. Elles sont incluses, tu n'as rien à payer en plus.</p>
+  <div class="bonus-grille">
+    <article class="ticket cousu monte">
+      <div class="coin"><img class="saute" src="assets/rubberhose/patchs/tamagotchi.png" alt="" style="--d:-.8s"></div>
+      <div class="ticket-image"><img src="assets/bonus-ai-avatar-system.jpg" alt="AI AVATAR System" loading="lazy"><span class="offert">Offert</span></div>
+      <div class="ticket-corps">
+        <span class="tampon plein">Bonus n°1</span>
+        <h3>AI Avatar System</h3>
+        <p>Crée des vidéos virales avec ton avatar IA, de zéro jusqu'à la monétisation.</p>
+        <div class="puces"><span>13 chapitres</span><span>18 leçons</span><span>1 h 18</span></div>
+        <div class="valeur"><s>47 €</s><b>Offert</b></div>
+      </div>
+    </article>
+    <article class="ticket cousu monte">
+      <div class="coin" style="width:130px;top:-34px"><img class="saute" src="assets/rubberhose/patchs/cassette.png" alt="" style="--d:-1.9s"></div>
+      <div class="ticket-image"><img src="assets/bonus-ai-cinema-studio.jpg" alt="AI Cinema Studio" loading="lazy"><span class="offert">Offert</span></div>
+      <div class="ticket-corps">
+        <span class="tampon plein">Bonus n°2</span>
+        <h3>AI Cinema Studio</h3>
+        <p>Des vidéos IA dignes du cinéma, sans tourner une seule scène.</p>
+        <div class="puces"><span>8 chapitres</span><span>15 leçons</span><span>1 h 56</span></div>
+        <div class="valeur"><s>67 €</s><b>Offert</b></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="preuves cadre" id="preuves">
+  <h2 class="monte">Les avis <em>élèves et clients.</em></h2>
+  <div class="avis">
+    <div class="a cousu monte"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4" aria-label="Écouter l'avis vocal de Bernie"><span class="lecture"></span><span class="onde"></span></button><div class="qui"><img src="assets/rubberhose/patchs/heureux-tortue.png" alt=""><div><b>Bernie</b>Élève · avis vocal</div></div></div>
+    <div class="a cousu monte"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3" aria-label="Écouter l'avis vocal de Laura"><span class="lecture"></span><span class="onde"></span></button><div class="qui"><img src="assets/rubberhose/patchs/reveur-nuage.png" alt=""><div><b>Laura</b>Cliente · avis vocal</div></div></div>
+    <div class="a cousu monte"><p>« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère&nbsp;! 🫶 »</p><div class="qui"><img src="assets/rubberhose/patchs/sur-de-lui-eclair.png" alt=""><div><b>Majoric</b>Élève</div></div></div>
+    <div class="a cousu monte"><p>« Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! Je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><img src="assets/rubberhose/patchs/super-content-pizza.png" alt=""><div><b>Kevin</b>Élève</div></div></div>
+  </div>
+</section>
+
+<section class="nuit">
+  <div class="tissu" aria-hidden="true"></div>
   <div class="cadre">
-    <h2 class="rv">Ce que ça donne, <em class="s">en vrai</em>.</h2>
-    <p class="chapo rv">Mes comptes, mes captures. Trois étapes que l'IA m'a fait franchir.</p>
-    <div class="preuves">
-      <div class="cas rv"><div class="img"><img src="assets/preuve-vues.jpg" alt="Statistiques Instagram : 223 254 vues" loading="lazy"></div>
-        <div class="txt"><span class="mono">Les vues</span><h3>Un compte IA, sans jamais me montrer.</h3><p class="res"><b>RÉSULTAT</b>223 254 vues et 2 075 abonnés en 3 semaines.</p></div></div>
-      <div class="cas rv"><div class="img"><img src="assets/preuve-dm.jpg" alt="Des marques écrivent en message privé" loading="lazy"></div>
-        <div class="txt"><span class="mono">Les clients</span><h3>Les vues amènent les marques.</h3><p class="res"><b>RÉSULTAT</b>Des marques qui écrivent en DM pour bosser avec moi.</p></div></div>
-      <div class="cas rv"><div class="img"><img src="assets/preuve-ventes2.png" alt="Virements reçus en juillet" loading="lazy"></div>
-        <div class="txt"><span class="mono">Les ventes</span><h3>Et les clients, ça rapporte.</h3><p class="res"><b>RÉSULTAT</b>De vrais virements, tombés en juillet.</p></div></div>
+    <div class="chat-tete">
+      <div><h3>Et dans le chat de la formation, <em>ça donne&nbsp;ça.</em></h3></div>
+      <div class="inclus"><span class="mono">Inclus avec le studio</span><p><b>Le chat de la communauté.</b> Tu postes ta création, ta question ou ton bug&nbsp;: c'est moi qui te réponds, et chaque retour devient une mise à jour.</p></div>
     </div>
-    <p class="honnete rv">Ce sont mes résultats, pas des projections. Créer du contenu demande du travail et de la régularité.</p>
-
-    <h2 class="rv" style="margin-top:96px">Ils sont <em class="s">déjà</em> dedans.</h2>
-    <div class="avis">
-      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-bernie.mp4"><span class="bouton"></span><span class="onde"></span></button><div class="qui"><i>B</i><div><b>Bernie</b>Élève · avis vocal</div></div></div>
-      <div class="a rv"><button class="vocal" type="button" data-audio="assets/avis-laura.mp3"><span class="bouton"></span><span class="onde"></span></button><div class="qui"><i>L</i><div><b>Laura</b>Cliente · avis vocal</div></div></div>
-      <div class="a rv"><p>« Tu es un génie frère ✌️ Merci pour ton guide, j'ai tout compris comment bien gérer dès le départ avec mon character sheet, donc merci beaucoup frère&nbsp;! 🫶 »</p><div class="qui"><i>M</i><div><b>Majoric</b>Élève</div></div></div>
-      <div class="a rv"><p>« Merci infiniment pour les vidéos tuto, c'est méga carré 👊 Tout est tellement bien expliqué c'est une folie&nbsp;! Je vais suivre ta formation à la lettre 🤩 »</p><div class="qui"><i>K</i><div><b>Kevin</b>Élève</div></div></div>
-    </div>
-
-    <div class="chat rv">
-      <div class="chat-tete"><div><span class="mono">Captures brutes · non retouchées</span><h3 style="margin-top:12px">Et dans le chat de la formation, <em class="s">ça donne&nbsp;ça</em>.</h3></div>
-        <div class="inclus"><span class="mono">Inclus avec le studio</span><p><b>Le chat de la communauté.</b> Tu postes ta création, ta question ou ton bug : c'est moi qui te réponds, et chaque retour devient une mise à jour.</p></div></div>
-      <div class="mur">
-        <div class="mur-col">
-          <figure class="capture"><img src="assets/chat-suavewretch.jpg" alt="Un élève partage les créations de son avatar IA et remercie Chris" loading="lazy" width="1091" height="939"></figure>
-          <figure class="capture"><img src="assets/chat-stephen.jpg" alt="« Salut l'équipe, ravi de faire partie de cette formation ! »" loading="lazy" width="837" height="237"></figure>
-          <figure class="capture"><img src="assets/chat-yanimehami.jpg" alt="« Je viens aussi d'installer, franchement beau travail de fou, bravo à toi »" loading="lazy" width="1121" height="269"></figure>
-        </div>
-        <div class="mur-col">
-          <figure class="capture"><img src="assets/chat-p2lv.jpg" alt="Un élève partage sa première vidéo IA : un saut en parachute avec une canette" loading="lazy" width="993" height="1189"></figure>
-          <figure class="capture"><img src="assets/chat-js.jpg" alt="« Avoir accès à Mosaic Studio en étant membre historique de la formation, c'est la folie ! »" loading="lazy" width="1121" height="313"></figure>
-        </div>
+    <div class="mur">
+      <div class="mur-col">
+        <figure class="capture monte"><img src="assets/chat-suavewretch.jpg" alt="Un élève partage les créations de son avatar IA et remercie Chris" loading="lazy" width="1091" height="939"></figure>
+        <figure class="capture monte"><img src="assets/chat-stephen.jpg" alt="« Salut l'équipe, ravi de faire partie de cette formation ! »" loading="lazy" width="837" height="237"></figure>
+        <figure class="capture monte"><img src="assets/chat-yanimehami.jpg" alt="« Je viens aussi d'installer, franchement beau travail de fou, bravo à toi »" loading="lazy" width="1121" height="269"></figure>
+      </div>
+      <div class="mur-col">
+        <figure class="capture monte"><img src="assets/chat-p2lv.jpg" alt="Un élève partage sa première vidéo IA&nbsp;: un saut en parachute avec une canette" loading="lazy" width="993" height="1189"></figure>
+        <figure class="capture monte"><img src="assets/chat-js.jpg" alt="« Avoir accès à Mosaic Studio en étant membre historique de la formation, c'est la folie ! »" loading="lazy" width="1121" height="313"></figure>
       </div>
     </div>
+    <p class="honnete mono">Les résultats viennent de l'expérience de chacun et ne garantissent aucun gain.</p>
   </div>
 </section>
 
-<!-- ================= CHRIS ================= -->
-<section class="sombre">
-  <div class="cadre" style="position:relative">
-    <div class="chris">
-      <div class="chris-photo rv"><img src="assets/chris.png" alt="Chris Sans Filtre" loading="lazy"></div>
-      <div class="rv"><span class="mono">Un créateur, pas une agence</span>
-        <h3>Chris Sans <em class="s">Filtre</em></h3>
-        <p>J'ai construit MOSAIC pour moi d'abord : pour sortir mes Reels IA sans y passer mes soirées. +170k abonnés sur mes comptes IA, +10M de vues, et jamais une seule fois devant la caméra.</p>
-        <p>Celui qui a construit le studio est celui qui te répond dans la communauté. Chaque retour d'élève devient une mise à jour.</p>
-        <a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a></div>
+<div class="offre-zone cadre" id="offre">
+  <div class="offre cousu monte">
+    <div class="gauche">
+      <span class="tampon plein">Un seul paiement</span>
+      <h2>Tout est <em>dedans.</em></h2>
+      <div class="prix"><s>397 €</s><b>147 €</b></div>
+      <p class="sous mono">Prix de lancement · accès à vie · aucun abonnement</p>
+      <ul>
+        <li class="li-os"><span>Le studio complet, compatible <span class="os-duo"><svg class="os" viewBox="0 0 24 24" aria-label="Windows"><path d="M2 4.3 10 3.2v7.6H2zM11 3.1 22 1.5v9.3H11zM2 12h8v7.7l-8-1.1zM11 12h11v9.4l-11-1.5z" fill="currentColor"/></svg> Windows</span> et <span class="os-duo"><svg class="os" viewBox="0 0 24 24" aria-label="Mac"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9C5.8 6.8 4.1 7.8 3.2 9.4c-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.3 2.7 1.3-.1 1.8-.9 3.4-.9s2 .9 3.4.8c1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.8-1.1-2.8-4.4zM13.8 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z" fill="currentColor"/></svg> Mac</span></span></li>
+        <li>Les modules vidéo, de l'installation à ton premier Reel</li>
+        <li>Toutes les mises à jour, d'un clic</li>
+        <li>Le chat de la communauté&nbsp;: c'est moi qui réponds</li>
+      </ul>
+      <div class="cadeaux">
+        <span class="cadeaux-titre">+ 2 formations offertes</span>
+        <div class="cadeau"><img src="assets/bonus-ai-avatar-system.jpg" alt=""><div><b>AI Avatar System</b><small>13&nbsp;chapitres · 1&nbsp;h&nbsp;18</small></div><span class="prix-c"><s>47 €</s>Offert</span></div>
+        <div class="cadeau"><img src="assets/bonus-ai-cinema-studio.jpg" alt=""><div><b>AI Cinema Studio</b><small>8&nbsp;chapitres · 1&nbsp;h&nbsp;56</small></div><span class="prix-c"><s>67 €</s>Offert</span></div>
+      </div>
+      <div class="recap">
+        <div><span>MOSAIC Studio</span><span>397 €</span></div>
+        <div><span>AI Avatar System</span><span>47 €</span></div>
+        <div><span>AI Cinema Studio</span><span>67 €</span></div>
+        <div class="recap-total"><span>Valeur totale</span><s>511 €</s></div>
+        <div class="recap-auj"><span>Aujourd'hui</span><b>147 €</b></div>
+      </div>
+      <div class="coin" aria-hidden="true"><img class="saute" src="assets/rubberhose/patchs/like-chat.png" alt="" style="--d:-1s"></div>
     </div>
-    <div class="defile" aria-hidden="true"><div class="defile-in">
-      <span>Reels montés</span><span>Carrousels</span><span>Stories</span><span>B-roll</span><span>Avatar verrouillé</span><span>Clone IA</span><span>Reproducteur</span><span>Voix IA</span><span>Bruitages</span><span>Sous-titres mot à mot</span><span>Packshots</span><span>Environnements</span><span>DA</span><span>Mises à jour</span>
-      <span>Reels montés</span><span>Carrousels</span><span>Stories</span><span>B-roll</span><span>Avatar verrouillé</span><span>Clone IA</span><span>Reproducteur</span><span>Voix IA</span><span>Bruitages</span><span>Sous-titres mot à mot</span><span>Packshots</span><span>Environnements</span><span>DA</span><span>Mises à jour</span>
-    </div></div>
-  </div>
-</section>
-
-<!-- ================= L'OFFRE ================= -->
-<section id="offre">
-  <div class="cadre">
-    <div class="offre">
-      <div class="offre-gauche rv">
-        <h2>Un accès à vie, un seul <em class="s">paiement</em>.</h2>
-        <p class="chapo">Le studio complet, les modules vidéo pas à pas, toutes les mises à jour. Et mes deux autres formations, offertes.</p>
-        <div class="bonus">
-          <div class="bn"><img src="assets/bonus-ai-avatar-system.jpg" alt="AI AVATAR System" loading="lazy"><div><span class="mono">Bonus offert · valeur 47 €</span><b>AI AVATAR System</b><span>Crée des vidéos virales avec ton avatar IA, de zéro à la monétisation.</span><em class="duree"><i>13&nbsp;chapitres</i><i>18&nbsp;leçons</i><i>1&nbsp;h&nbsp;18</i></em></div></div>
-          <div class="bn"><img src="assets/bonus-ai-cinema-studio.jpg" alt="AI Cinema Studio" loading="lazy"><div><span class="mono">Bonus offert · valeur 67 €</span><b>AI Cinema Studio</b><span>Des vidéos IA cinématiques, sans tourner une seule scène.</span><em class="duree"><i>8&nbsp;chapitres</i><i>15&nbsp;leçons</i><i>1&nbsp;h&nbsp;56</i></em></div></div>
-        </div>
-        <div class="apres-achat">
-          <span class="mono">Ce qui se passe juste après</span>
-          <ol>
-            <li><span><b>Tu paies ici, une seule fois</b>Paiement unique, sans abonnement.</span></li>
-            <li><span><b>Ta clé t'attend sur Whop</b>Avec le studio à télécharger, Windows ou Mac.</span></li>
-            <li><span><b>Double-clic, le studio s'installe</b>Le premier module vidéo te guide jusqu'à ton premier Reel.</span></li>
-          </ol>
-        </div>
-        <div class="surete"><span>Paiement sécurisé</span><span>Accès immédiat</span><span>Mises à jour incluses</span></div>
-      </div>
-      <div class="offre-carte rv">
-        <span class="urgence">Prix de lancement · il monte à chaque grosse mise à jour</span>
-        <div class="prix"><s>397 €</s><b>147<small>€</small></b></div>
-        <p class="modalite">Paiement unique · accès à vie · aucun abonnement</p>
-        <ul class="liste">
-          <li><span><b>Le studio complet</b>, Windows et Mac<small>Reels, carrousels, stories, B-roll, reproducteur</small></span></li>
-          <li><span><b>Les modules vidéo pas à pas</b>, sur Whop<small>de l'installation à ton premier Reel monté</small></span></li>
-          <li><span><b>34 bruitages libres de droits</b>, livrés avec</span></li>
-          <li><span><b>Toutes les mises à jour</b>, installées d'un clic</span></li>
-          <li><span><b>Le chat de la communauté</b>, pour ne jamais rester bloqué</span></li>
-          <li><span><b>Ta clé de licence</b>, reçue tout de suite<small>un ordinateur à la fois, transférable</small></span></li>
-          <li class="offert"><span><b>AI AVATAR System</b> + <b>AI Cinema Studio</b>, offertes<small>114&nbsp;€ de formations · 3&nbsp;h&nbsp;14 de vidéo</small></span></li>
-        </ul>
-        <div class="whop-mount" id="paiement"><div data-whop-plan="plan_F2UvpPNi9F4at" data-whop-palette="orange" data-whop-accent="#F96C22"></div></div>
-        <p class="petit"><b>Le prix que tu paies aujourd'hui est définitif</b>, même quand il augmentera. Garantie légale de conformité : si le studio ne fonctionne pas chez toi, il est réparé, ou remboursé.</p>
-      </div>
+    <div class="droite">
+      <div class="whop-mount" id="paiement"><div data-whop-plan="plan_F2UvpPNi9F4at" data-whop-palette="gray" data-whop-accent="#0B0B0B"></div></div>
+      <p class="garantie">À prévoir en plus&nbsp;: ton abonnement Claude (Pro ou Max) et les crédits de ta plateforme (Higgsfield ou Magnific), affichés avant chaque génération. Si le studio ne fonctionne pas chez toi, je le répare, ou je te rembourse.</p>
     </div>
-  </div>
-</section>
-
-<!-- ================= FAQ ================= -->
-<section id="faq" style="padding-top:20px">
-  <div class="cadre">
-    <div class="faq">
-      <div class="faq-gauche rv">
-        <h2>Ce qu'on me demande avant de <em class="s">commencer</em>.</h2>
-        <div class="question-plus">
-          <div class="qui"><img src="assets/chris.png" alt="" loading="lazy"><div><b>Chris Sans Filtre</b><span>Je réponds moi-même</span></div></div>
-          <p>Ta question n'est pas dans la liste ? Une fois dedans, tu la poses dans le chat de la formation, et c'est moi qui te réponds.</p>
-          <a class="btn noir" href="#offre">Je veux mon studio · 147 € <span class="fl">→</span></a>
-        </div>
-      </div>
-      <div class="rv">
-        <details><summary><span class="n">1</span>Je peux le faire sans aucune compétence ?</summary><p>Oui, zéro. Un double-clic et le studio s'installe tout seul. Pas de terminal, pas de code. Les modules vidéo te montrent chaque écran.</p></details>
-        <details><summary><span class="n">2</span>Est-ce que je dois me montrer ?</summary><p>Non. Ton avatar IA joue à ta place. Et si tu veux, tu crées ton propre clone d'après une photo de toi.</p></details>
-        <details><summary><span class="n">3</span>Je reçois le studio quand ?</summary><p>Tout de suite après le paiement. Tu télécharges le studio et ta clé t'attend dans ton espace Whop.</p></details>
-        <details><summary><span class="n">4</span>J'ai qu'une heure le soir. Ça suffit ?</summary><p>Oui, c'est fait pour ça. Tu lances, tu valides. Les vidéos se génèrent pendant que tu fais autre chose.</p></details>
-        <details><summary><span class="n">5</span>Est-ce qu'il y a des frais en plus ?</summary><p>Oui, et je te le dis cash : ton abonnement Claude (Pro ou Max) et les crédits de ta plateforme, Higgsfield ou Magnific. Le studio affiche le prix avant chaque génération. Pour te donner une idée, le Reel de cette page a coûté 76 crédits. Le montage, lui, ne coûte rien : il se fait dans l'appli.</p></details>
-        <details><summary><span class="n">6</span>Ça marche sur Mac ? Sur téléphone ?</summary><p>Sur Windows et Mac, oui. Sur téléphone, non : le studio tourne sur ton ordinateur.</p></details>
-        <details><summary><span class="n">7</span>Je peux l'utiliser sur plusieurs ordis ?</summary><p>Un à la fois. Tu changes de PC ? Tu réinitialises ta clé depuis Whop et tu l'actives sur le nouveau.</p></details>
-        <details><summary><span class="n">8</span>Le prix va rester à 147 € ?</summary><p>Non. C'est le prix de lancement : il monte à chaque grosse mise à jour. Ce que tu prends aujourd'hui, tu le gardes, mises à jour comprises.</p></details>
-        <details><summary><span class="n">9</span>Et si ça me plaît pas ?</summary><p>Le studio est un contenu numérique livré tout de suite : en l'achetant, tu demandes l'accès immédiat et tu renonces à ton droit de rétractation de 14 jours. Pas de « satisfait ou remboursé ». Par contre, si le studio ne fonctionne pas chez toi, je le répare, et si je n'y arrive pas, je te rembourse. Tout est écrit dans les <a href="mosaic/cgv.html">conditions de vente</a>.</p></details>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= LA FIN ================= -->
-<div class="fin-zone">
-  <div class="fin sombre">
-    <div><h2>Décuple ta créativité. Pas ton temps de <em class="s">travail</em>.</h2>
-      <p>Ce soir, ton heure peut partir dans CapCut. Ou ton premier Reel peut être monté à 21 h 15.</p></div>
-    <div style="position:relative"><a class="btn clair" href="#offre">Je veux mon studio <span class="fl">→</span></a>
-      <ul><li>Le studio et ta clé, tout de suite</li><li>Les modules vidéo, de l'installation au premier Reel</li><li>Le chat de la communauté, pour ne jamais rester bloqué</li></ul></div>
   </div>
 </div>
 
-</main>
+<section class="faq" id="faq">
+  <h2>Les questions <em>qu'on me pose.</em></h2>
+  <details open><summary>Je reçois le studio quand&nbsp;?</summary><p>Tout de suite après le paiement. Tu reçois ton accès par email&nbsp;: le studio à télécharger, ta clé d'activation et les modules vidéo. Aucune attente.</p></details>
+  <details><summary>Je peux l'utiliser sans aucune compétence&nbsp;?</summary><p>Oui. Un double-clic et le studio s'installe tout seul&nbsp;: pas de terminal, pas de code. Ensuite, tu tapes ton idée et le studio fait le reste. Les modules vidéo te montrent chaque écran, même si tu n'as jamais touché à l'IA.</p></details>
+  <details><summary>Je dois montrer mon visage&nbsp;?</summary><p>Non. Ton avatar IA joue à ta place. Et si tu veux, tu crées ton clone à partir d'une photo de toi.</p></details>
+  <details><summary>Il y a des frais après l'achat&nbsp;?</summary><p>Oui, et je te le dis cash&nbsp;: il te faut un abonnement Claude (Pro ou Max), c'est lui qui écrit et pilote tout. Pour générer les images et les vidéos, tu utilises les crédits de ta plateforme, Higgsfield ou Magnific. Le studio t'affiche le prix avant chaque génération, et le montage, lui, ne coûte rien.</p></details>
+  <details><summary>Et les mises à jour, le remboursement&nbsp;?</summary><p><b>Toutes les mises à jour sont incluses, à vie, et s'installent d'un clic.</b> Et si le studio ne fonctionne pas sur ton ordinateur, je le répare, ou je te rembourse.</p></details>
+  <details><summary>J'aurai les mêmes rendus que toi&nbsp;?</summary><p>Oui. C'est le studio que j'utilise moi-même pour tous mes contenus, avec les mêmes outils. Tu suis les mêmes étapes, tu obtiens le même niveau de rendu.</p></details>
+</section>
 
-<footer>
-  <div class="cadre">
-    <span>MOSAIC Studio · par Chris Sans Filtre · © 2026</span>
-    <nav><a href="mosaic/cgv.html">Conditions de vente</a><a href="mosaic/mentions-legales.html">Mentions légales</a><a href="mosaic/confidentialite.html">Confidentialité</a><a href="mosaic/cookies.html">Cookies</a></nav>
+<footer class="parade">
+  <div class="tissu" aria-hidden="true"></div>
+  <div class="piste" aria-hidden="true"><div class="cortege" id="cortege"></div></div>
+  <div class="sol" aria-hidden="true"></div>
+  <div class="fin">
+    <a class="bouton" href="#offre">Je veux mon studio · 147 € <span aria-hidden="true">→</span></a>
+    <nav><a href="mosaic/cgv.html">Conditions de vente</a><a href="mosaic/mentions-legales.html">Mentions légales</a><a href="mosaic/confidentialite.html">Confidentialité</a><a href="mosaic/cookies.html">Cookies</a><a href="#" onclick="openCookiePrefs();return false;">Gérer les cookies</a></nav>
+    <small>MOSAIC Studio · Chris Sans Filtre · © 2026<br>Les résultats présentés viennent de mon expérience personnelle et ne garantissent aucun gain. Créer du contenu demande du travail et de la régularité.</small>
   </div>
-  <p class="avert">Les résultats présentés viennent de mon expérience personnelle et ne garantissent aucun gain. Créer du contenu demande de la régularité.</p>
 </footer>
 
 <script>
-(function () {
-  // la soirée découpée : les barres se remplissent quand la carte apparaît
-  const soiree = document.getElementById("soiree");
-  const remplir = () => soiree.querySelectorAll(".barre-jour i").forEach(i => { i.style.width = i.dataset.l + "%"; });
+(() => {
+  const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // le son du Reel monté
-  const apres = document.querySelector(".apres video"), bSon = document.querySelector(".apres .son");
-  if (apres && bSon) {
-    const basculer = () => { apres.muted = !apres.muted; if (!apres.muted) { apres.currentTime = 0; document.querySelector(".avant video").currentTime = 0; apres.play(); }
-      bSon.textContent = apres.muted ? "🔇 Le son" : "🔊 Son activé"; bSon.classList.toggle("actif", !apres.muted); };
-    bSon.addEventListener("click", basculer);
+  /* ---------- L'AMORCE : 3, 2, 1 — chaque chiffre fait un tour de cadran — puis l'iris ---------- */
+  const amorce = document.getElementById('amorce'), chiffre = document.getElementById('chiffre'), balaye = document.getElementById('balaye');
+  let fini = false;
+  const ouvrir = () => { if (fini) return; fini = true; amorce.classList.add('ouvre'); setTimeout(() => amorce.remove(), 1150); };
+  amorce.addEventListener('click', ouvrir);
+  if (calme) { amorce.remove(); fini = true; }
+  else {
+    const DUREE = 520, debut = performance.now();
+    [2, 1].forEach((n, i) => setTimeout(() => { if (!fini) chiffre.textContent = n; }, DUREE * (i + 1)));
+    setTimeout(ouvrir, DUREE * 3);
+    const tour = t => { if (fini) return; balaye.style.setProperty('--a', (((t - debut) % DUREE) / DUREE * 360).toFixed(1) + 'deg'); requestAnimationFrame(tour); };
+    requestAnimationFrame(tour);
   }
 
-  // les avis vocaux : un seul à la fois
+  /* ---------- LE FOND : un champ de points de broderie qui ondule, et que la souris tire comme un fil ---------- */
+  const cv = document.getElementById('points'), cx = cv.getContext('2d');
+  const PAS = 19, LONG = 7.5;
+  let L = 0, H = 0, dpr = 1, sx = -9999, sy = -9999, mx = -9999, my = -9999;
+  const taille = () => { dpr = Math.min(2, devicePixelRatio || 1); L = innerWidth; H = innerHeight; cv.width = L * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  taille(); addEventListener('resize', taille);
+  addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; });
+  addEventListener('pointerleave', () => { mx = my = -9999; });
+  const dessiner = t => {
+    t *= .001;
+    sx += (mx - sx) * .08; sy += (my - sy) * .08;
+    cx.clearRect(0, 0, L, H);
+    cx.lineCap = 'round'; cx.lineWidth = 1.35;
+    const decal = (scrollY * .15) % PAS;
+    for (let y = -PAS + PAS / 2 - decal; y < H + PAS; y += PAS) {
+      for (let x = PAS / 2; x < L + PAS; x += PAS) {
+        let a = Math.sin(x * .0105 + t * .32) * Math.cos(y * .0125 - t * .24) * 1.6 + Math.sin((x - y) * .0042 + t * .18) * .9;
+        let alpha = .045 + .07 * (.5 + .5 * Math.sin(x * .006 + y * .008 - t * .4));
+        const dx = x - sx, dy = y - sy, d2 = dx * dx + dy * dy;
+        if (d2 < 40000) { const f = 1 - Math.sqrt(d2) / 200; a = a * (1 - f) + (Math.atan2(dy, dx) + Math.PI / 2) * f; alpha += .16 * f * f; }
+        const c = Math.cos(a) * LONG / 2, s = Math.sin(a) * LONG / 2;
+        cx.strokeStyle = 'rgba(11,11,11,' + alpha.toFixed(3) + ')';
+        cx.beginPath(); cx.moveTo(x - c, y - s); cx.lineTo(x + c, y + s); cx.stroke();
+      }
+    }
+    if (!calme) requestAnimationFrame(dessiner);
+  };
+  requestAnimationFrame(dessiner);
+
+  /* ---------- les patchs autour du titre suivent la souris, chacun à sa profondeur ---------- */
+  const volants = [...document.querySelectorAll('.volant')];
+  addEventListener('pointermove', e => {
+    const kx = e.clientX / innerWidth - .5, ky = e.clientY / innerHeight - .5;
+    volants.forEach(v => { const p = +v.dataset.prof; v.style.setProperty('--px', (-kx * p).toFixed(1) + 'px'); v.style.setProperty('--py', (-ky * p).toFixed(1) + 'px'); });
+  });
+
+  /* ---------- ce qui arrive en rebondissant ---------- */
+  const vu = new IntersectionObserver(l => l.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('vue'); vu.unobserve(e.target); }), { threshold: .15 });
+  document.querySelectorAll('.monte').forEach(el => {
+    const freres = [...el.parentElement.children].filter(x => x.classList.contains('monte'));
+    el.style.transitionDelay = (Math.max(0, freres.indexOf(el)) % 4 * 80) + 'ms'; vu.observe(el);
+  });
+
+  /* ---------- l'étape 2 : une seule horloge, la vidéo — les vues sous l'œil et toutes les statistiques montent ensemble ---------- */
+  const enK = n => n < 1000 ? String(Math.round(n)) : (Math.floor(n / 100) / 10).toFixed(1).replace('.', ',') + ' k';
+  const oeilV = document.querySelector('.s-reel video'), oeilB = document.getElementById('oeil-vues');
+  const ig = document.querySelector('.ig');
+  if (oeilV && ig) {
+    const champs = [...ig.querySelectorAll('[data-n]')], trait = ig.querySelector('.ig-trait');
+    const ecrire = (b, n) => { const f = b.dataset.f;
+      b.textContent = f === 'K' ? (n < 1000 ? String(Math.round(n)) : (Math.floor(n / 100) / 10).toFixed(1).replace('.', ',') + ' K')
+        : f === 'en' ? Math.round(n).toLocaleString('en-US') : f === 's' ? Math.round(n) + ' s' : String(Math.round(n)); };
+    const maj = () => {
+      const d = oeilV.duration || 44, f = calme ? 1 : Math.min(1, oeilV.currentTime / (d * .85)), e = 1 - Math.pow(1 - f, 2.4);
+      oeilB.textContent = enK(78936 * e);
+      champs.forEach(b => ecrire(b, +b.dataset.n * e));
+      trait.style.strokeDashoffset = (1 - e).toFixed(4);
+      requestAnimationFrame(maj);
+    };
+    requestAnimationFrame(maj);
+  }
+
+  /* ---------- l'étape 3 : les ventes de MOSAIC tombent une à une, en attente puis validées ; 40 % de 147 € = 58,80 € de commission ---------- */
+  const wListe = document.getElementById('w-liste'), wTotal = document.getElementById('w-total');
+  if (wListe) {
+    let total = 0;
+    const euros = n => n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+    const compter = () => { total += 58.8; wTotal.textContent = euros(total); wTotal.classList.remove('pop'); void wTotal.offsetWidth; wTotal.classList.add('pop'); };
+    const ligne = () => { const l = document.createElement('div'); l.className = 'w-ligne';
+      l.innerHTML = '<b>58,80 €</b><span class="w-statut"><span class="roue"></span><span class="attente">Pending</span><span class="ok">Succeeded</span><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>MOSAIC STUDIO</span><span class="w-plan">€147.00</span>';
+      return l; };
+    for (let n = 0; n < 6; n++) { wListe.appendChild(ligne()); total += 58.8; }
+    wTotal.textContent = euros(total);
+    const tomber = () => {
+      const l = ligne(); l.classList.add('nouvelle', 'attente-la', 'flash'); wListe.prepend(l);
+      setTimeout(() => { l.classList.remove('attente-la'); l.classList.add('valide'); compter(); setTimeout(() => l.classList.add('fini'), 300); }, 1100);
+      while (wListe.children.length > 9) wListe.lastChild.remove();
+    };
+    let minuterie = null;
+    if (!calme) new IntersectionObserver(l => l.forEach(e => {
+      if (e.isIntersecting && !minuterie) { tomber(); minuterie = setInterval(tomber, 2400); }
+      else if (!e.isIntersecting && minuterie) { clearInterval(minuterie); minuterie = null; }
+    }), { threshold: .3 }).observe(wListe);
+  }
+
+  /* ---------- les avis vocaux ---------- */
   let enCours = null;
-  document.querySelectorAll(".vocal").forEach(b => {
-    const son = new Audio(); son.preload = "none"; son.src = b.dataset.audio;
-    son.addEventListener("ended", () => b.classList.remove("joue"));
-    b.addEventListener("click", () => {
-      if (enCours && enCours.son !== son) { enCours.son.pause(); enCours.b.classList.remove("joue"); }
-      if (son.paused) { son.play(); b.classList.add("joue"); enCours = { son, b }; } else { son.pause(); b.classList.remove("joue"); }
+  document.querySelectorAll('.vocal').forEach(b => {
+    const son = new Audio(); son.preload = 'none'; son.src = b.dataset.audio;
+    son.addEventListener('ended', () => b.classList.remove('joue'));
+    b.addEventListener('click', () => {
+      if (enCours && enCours.son !== son) { enCours.son.pause(); enCours.b.classList.remove('joue'); }
+      if (son.paused) { son.play(); b.classList.add('joue'); enCours = { son, b }; } else { son.pause(); b.classList.remove('joue'); }
     });
   });
 
-  // les apparitions
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("vu"); if (e.target === soiree) remplir(); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -30px 0px" });
-    document.querySelectorAll(".rv").forEach(el => io.observe(el));
-  } else { document.querySelectorAll(".rv").forEach(el => el.classList.add("vu")); remplir(); }
-
-  const fin = matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // les quatre problèmes : la carte s'incline de 2° vers la souris (avec un ressort), le halo la suit
-  if (fin) document.querySelectorAll(".paire").forEach(c => {
-    let cx = .5, cy = .5, x = .5, y = .5, anim = null, dedans = false;
-    const pas = () => {
-      x += (cx - x) * .08; y += (cy - y) * .08;
-      c.style.transform = "perspective(900px) rotateX(" + ((.5 - y) * 4).toFixed(2) + "deg) rotateY(" + ((x - .5) * 4).toFixed(2) + "deg)";
-      c.style.setProperty("--gx", (x * 100).toFixed(1) + "%"); c.style.setProperty("--gy", (y * 100).toFixed(1) + "%");
-      if (dedans || Math.abs(cx - x) + Math.abs(cy - y) > .002) anim = requestAnimationFrame(pas); else { anim = null; c.style.transform = ""; }
-    };
-    c.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); cx = (e.clientX - r.left) / r.width; cy = (e.clientY - r.top) / r.height; if (!anim) anim = requestAnimationFrame(pas); });
-    c.addEventListener("pointerenter", () => { dedans = true; c.style.transition = "opacity .8s, box-shadow 1.2s cubic-bezier(.2,.8,.2,1), border-color 1.2s, background-color 1.2s"; brouiller(c.querySelector(".alors")); });
-    c.addEventListener("pointerleave", () => { dedans = false; cx = .5; cy = .5; if (!anim) anim = requestAnimationFrame(pas); });
-  });
-
-  // le texte-solution se brouille puis se recompose, lettre par lettre
-  const SIGNES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  function brouiller(el) {
-    if (!el || el.dataset.brouille === "1" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const vrai = el.dataset.vrai || (el.dataset.vrai = el.textContent);
-    el.dataset.brouille = "1";
-    const t0 = performance.now(), duree = 700;
-    const tour = now => {
-      const k = Math.min(1, (now - t0) / duree), n = Math.floor(vrai.length * k);
-      el.textContent = vrai.slice(0, n) + [...vrai.slice(n)].map(ch => ch === " " ? " " : SIGNES[Math.floor(Math.random() * SIGNES.length)]).join("");
-      if (k < 1) requestAnimationFrame(tour); else { el.textContent = vrai; el.dataset.brouille = ""; }
-    };
-    requestAnimationFrame(tour);
-  }
-  if ("IntersectionObserver" in window) {
-    const ioB = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const i = [...document.querySelectorAll(".paire")].indexOf(e.target.closest(".paire")); setTimeout(() => brouiller(e.target), 500 + 160 * i); ioB.unobserve(e.target); } }), { threshold: .6 });
-    document.querySelectorAll(".paire .alors").forEach(el => ioB.observe(el));
-  }
-
-  // la soirée : survoler une tâche allume sa part de la barre et affiche son temps
-  const segs = [...soiree.querySelectorAll(".barre-jour i")], lignes = [...soiree.querySelectorAll(".taches li")], total = document.getElementById("soiree-total");
-  lignes.forEach((li, i) => {
-    li.addEventListener("pointerenter", e => { if (e.pointerType !== "mouse") return; /* au doigt, le défilement passait pour un survol */ soiree.classList.add("sonde"); li.classList.add("chaud"); segs[i] && segs[i].classList.add("chaud"); total.textContent = li.querySelector("s").textContent; });
-    li.addEventListener("pointerleave", () => { soiree.classList.remove("sonde"); li.classList.remove("chaud"); segs[i] && segs[i].classList.remove("chaud"); total.textContent = "5 h"; });
-  });
-
-  // le hero : en descendant, il bascule légèrement en arrière et recule
-  const hero = document.querySelector(".hero");
-  if (hero && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    let tic = false;
-    const maj = () => { tic = false; const p = Math.min(1, Math.max(0, scrollY / hero.offsetHeight));
-      hero.style.setProperty("--p", p.toFixed(3));
-      hero.style.transform = p ? "perspective(1400px) rotateX(" + p.toFixed(3) + "deg) scale(" + (1 - p * .05).toFixed(4) + ")" : "";
-      hero.style.borderRadius = (28 + p * 16).toFixed(1) + "px"; };
-    addEventListener("scroll", () => { if (!tic) { tic = true; requestAnimationFrame(maj); } }, { passive: true }); maj();
-  }
-
-  // la vidéo du Reel ne se charge et ne tourne que quand elle est à l'écran
-  if ("IntersectionObserver" in window) {
-    const ioV = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); } else v.pause(); }), { threshold: .25 });
-    document.querySelectorAll("video[data-auto]").forEach(v => ioV.observe(v));
-  }
-
-  // les captures du chat s'ouvrent en grand au clic
-  document.querySelectorAll(".capture img").forEach(img => img.addEventListener("click", () => {
-    const l = document.createElement("div"); l.className = "loupe"; l.innerHTML = '<img alt="">'; l.firstChild.src = img.src; l.firstChild.alt = img.alt;
-    const fermer = () => { l.classList.remove("ouverte"); setTimeout(() => l.remove(), 250); removeEventListener("keydown", echap); };
-    const echap = e => { if (e.key === "Escape") fermer(); };
-    l.addEventListener("click", fermer); addEventListener("keydown", echap);
-    document.body.appendChild(l); void l.offsetWidth; l.classList.add("ouverte");
+  /* ---------- la loupe sur les captures du chat ---------- */
+  document.querySelectorAll('.capture img').forEach(img => img.addEventListener('click', () => {
+    const l = document.createElement('div'); l.className = 'loupe'; l.innerHTML = '<img alt="">'; l.firstChild.src = img.src; l.firstChild.alt = img.alt;
+    const fermer = () => { l.classList.remove('ouverte'); setTimeout(() => l.remove(), 250); removeEventListener('keydown', echap); };
+    const echap = e => { if (e.key === 'Escape') fermer(); };
+    l.addEventListener('click', fermer); addEventListener('keydown', echap);
+    document.body.appendChild(l); void l.offsetWidth; l.classList.add('ouverte');
   }));
 
-  // le calcul : un Reel ≈ 5 h à la main, ≈ 15 min avec le studio
-  const h = document.getElementById("heures"), p = document.getElementById("prix-v");
-  const reels = n => n + (n > 1 ? " Reels" : " Reel");
-  function calculer() {
-    const heures = +h.value, prix = +p.value;
-    const sans = Math.floor(heures * 60 / 300) * 4, avec = Math.floor(heures * 60 / 15) * 4;
-    document.getElementById("h-val").textContent = heures + " h";
-    document.getElementById("p-val").innerHTML = prix ? prix + " €<small>/ vidéo</small>" : "je n'en vends pas";
-    document.getElementById("r-avec").textContent = avec;
-    document.getElementById("r-sans").textContent = reels(sans);
-    const vendus = Math.round(avec / 10);
-    document.getElementById("r-euros").textContent = prix ? vendus * prix + " €" : "—";
-    document.getElementById("r-vendus").textContent = prix ? "si tu en vends " + vendus + "/" + avec : "tu n'en vends pas";
-    h.style.setProperty("--p", ((heures - 1) / 14 * 100) + "%");
-    p.style.setProperty("--p", (prix / 300 * 100) + "%");
-  }
-  h.addEventListener("input", calculer); p.addEventListener("input", calculer); calculer();
+  /* ---------- la parade : tous les patchs, deux fois de suite pour tourner sans fin ---------- */
+  const PATCHS = ['super-content-pizza', 'sur-de-lui-eclair', 'heureux-tortue', 'idee-ampoule', 'en-retard-sablier', 'triste-bougie', 'rire-squelette',
+    'la-fete-bouteille-de-champagne', 'malicieux-bombe', 'reveur-nuage', 'tout-gene-cactus', 'ennuye-couronne', 'empathique-vinyle', 'intelligence-cerveau',
+    'charmeur-diamant', 'panique-reveil', 'etourdi-globe-terrestre', 'colere-champignon', 'pensif-livre', 'angoisse-dent', 'like-chat', 'colere-2-cle-a-molette', 'meprisant-il'];
+  document.getElementById('cortege').innerHTML = PATCHS.concat(PATCHS).map((p, i) => '<div class="marcheur"><img src="assets/rubberhose/patchs/' + p + '.png" alt="" loading="lazy" style="--d:' + (-(i % 5) * .13).toFixed(2) + 's"></div>').join('');
 })();
 </script>
-
-<!-- WHOP ELEMENTS — le paiement intégré (le même que sur la page en ligne) -->
 <script type="module">
   (function monterWhop(essai) {
     if (typeof window.WhopElements !== 'function') { if (essai < 50) setTimeout(function () { monterWhop(essai + 1); }, 200); return; }
     document.querySelectorAll('[data-whop-plan]').forEach(function (zone) {
-      var accent = zone.dataset.whopAccent || '#F96C22';
-      var whop = window.WhopElements({ locale: 'fr', appearance: {
-        theme: { appearance: 'light', accentColor: zone.dataset.whopPalette || 'orange' },
+      var accent = zone.dataset.whopAccent || '#0B0B0B';
+      var whop = window.WhopElements({ locale: 'fr', appearance: { theme: { appearance: 'light', accentColor: zone.dataset.whopPalette || 'gray' },
         classes: { 'whop-CheckoutPayButton': { backgroundColor: accent, color: '#ffffff', fontWeight: '600' } } } });
-      whop.checkout.create({ plan: zone.dataset.whopPlan, returnUrl: location.origin + location.pathname })
-        .create('checkout').mount(zone);
+      whop.checkout.create({ plan: zone.dataset.whopPlan, returnUrl: location.origin + location.pathname }).create('checkout').mount(zone);
     });
   })(0);
 </script>
+<script src="assets/rubberhose/consentement.js" data-cookies="mosaic/cookies.html"></script>
 </body>
 </html>

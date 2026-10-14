@@ -2,85 +2,102 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cookies — MOSAIC Studio</title>
 <meta name="description" content="Les cookies utilisés par la page de MOSAIC Studio.">
-<link rel="icon" type="image/png" href="../assets/chris.png">
+<link rel="icon" type="image/png" href="../assets/rubberhose/logo-cfsf.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
 <style>
-/* le branding de la nouvelle page de vente : fond crème grillagé, Archivo + Playfair italique + JetBrains Mono, orange #F96C22 */
-:root { --papier: #E1DCD2; --encre: #111113; --encre-2: #4E4E56; --encre-3: #8D8D96; --trait: #D3CDC2; --o: #F96C22; --o2: #FF8A4C; --nuit: #111113;
-  --titre: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif; --serif: "Playfair Display", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace; color-scheme: light; }
+/* Pages légales de MOSAIC, au design rubber hose de la page de vente (version-rubberhose.html) :
+   encre, papier, fil, orange MOSAIC ; Fraunces doux, Instrument Serif, Inter, DM Mono ; le cadre cousu et le tissu noir. */
+:root {
+  --encre: #0B0B0B; --encre-2: #2F2F2D; --papier: #F3F2EE; --papier-clair: #FBFAF7; --fil: #8C8A84; --craie: #FFFFFF; --o: #F96C22;
+  --trait: 1.5px; --boing: cubic-bezier(.34, 1.56, .64, 1); --doux: "SOFT" 100, "WONK" 1, "opsz" 144;
+  --titre: "Fraunces", Georgia, serif; --etiquette: "Instrument Serif", Georgia, serif; --corps: "Inter", system-ui, sans-serif; --mono: "DM Mono", ui-monospace, monospace;
+  --gant: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M11 31c-4 0-7-3-7-7v-6c0-1.4 1.1-2.5 2.5-2.5S9 16.6 9 18v-2V5.5C9 4.1 10.1 3 11.5 3S14 4.1 14 5.5V14l.2-1.8c0-1.4 1.1-2.4 2.4-2.4s2.4 1 2.4 2.4V15l.2-1.4c0-1.3 1.1-2.3 2.4-2.3s2.3 1 2.3 2.3v1.8c.2-1.2 1.1-2 2.3-2 1.3 0 2.3 1 2.3 2.3V23c0 4.4-3.6 8-8 8z' fill='%23fff' stroke='%230B0B0B' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M14 14v5M19 15v4M24 16v3' stroke='%230B0B0B' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") 11 2, pointer;
+  color-scheme: light;
+}
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--papier); color: var(--encre-2); font: 400 16px/1.7 var(--titre); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image: linear-gradient(to right, rgba(17,17,19,.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,19,.12) 1px, transparent 1px); background-size: 46px 46px;
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); mask-image: radial-gradient(130% 85% at 50% 0%, #000 20%, transparent 92%); }
-::selection { background: rgba(249,108,34,.25); }
-.nav { position: sticky; top: 0; z-index: 30; background: rgba(225,220,210,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.nav-in { max-width: 1180px; margin: 0 auto; padding: 0 22px; height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.marque { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; text-decoration: none; color: var(--encre); font: 700 19px/1 var(--titre); letter-spacing: -.03em; }
-.marque svg { width: 22px; height: 22px; } .marque .ai { color: var(--o); } .marque .m-studio { font-weight: 500; color: var(--encre-3); }
-.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; font: 600 14px/1 var(--titre); padding: 12px 18px; border-radius: 999px;
-  background: var(--nuit); color: #fff; box-shadow: 0 12px 30px -14px rgba(17,17,19,.7); transition: background .2s, transform .2s; }
-.btn:hover { background: #2B2B30; transform: translateY(-1px); } .btn span { display: inline-block; transition: transform .3s; } .btn:hover span { transform: translateX(3px); }
-.col { max-width: 820px; margin: 22px auto 40px; padding: 44px 48px 30px; background: #fff; border-radius: 28px; border: 1px solid var(--trait); box-shadow: 0 40px 90px -50px rgba(17,17,19,.5); }
-.retour { display: inline-flex; align-items: center; gap: 8px; color: var(--encre-2); text-decoration: none; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
-  padding: 8px 12px; border-radius: 999px; border: 1px solid var(--trait); background: var(--papier); margin-bottom: 26px; transition: color .2s, border-color .2s; }
-.retour:hover { color: var(--o); border-color: var(--o); }
-h1 { font: 500 clamp(32px, 5.4vw, 48px)/1.05 var(--titre); letter-spacing: -.035em; color: var(--encre); margin: 0 0 12px; }
-h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--o); letter-spacing: -.01em; }
-.maj { font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--encre-3); margin: 0 0 30px; }
-.resume { position: relative; overflow: hidden; background: var(--nuit); color: rgba(255,255,255,.82); border-radius: 20px; padding: 24px 26px; margin: 0 0 34px; isolation: isolate; }
-.resume::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 90% at 100% 0%, rgba(249,108,34,.32), transparent 70%); }
-.resume h2 { margin: 0 0 12px; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--o2); }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--papier); color: var(--encre-2); font: 400 16px/1.7 var(--corps); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: var(--encre); color: var(--craie); }
+a, button { cursor: var(--gant); }
+.toile { position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(11,11,11,.022) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(11,11,11,.022) 0 1px, transparent 1px 4px),
+    radial-gradient(120% 90% at 50% 35%, transparent 55%, rgba(11,11,11,.1) 100%); }
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .07; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* la feuille cousue */
+.feuille { position: relative; width: min(860px, calc(100% - 32px)); margin: 64px auto 70px; padding: 48px 52px 34px; background: var(--papier-clair); border: var(--trait) solid var(--encre); border-radius: 26px; box-shadow: 8px 8px 0 var(--encre); }
+.feuille::after { content: ""; position: absolute; inset: 8px; border: 1.5px dashed rgba(11,11,11,.22); border-radius: 19px; pointer-events: none; }
+.patch { position: absolute; width: 110px; top: -46px; right: -34px; rotate: 9deg; z-index: 3; filter: drop-shadow(0 8px 10px rgba(0,0,0,.22)); transform-origin: 50% 92%; animation: boing 2.6s var(--boing) infinite; }
+@keyframes boing { 0%, 100% { transform: translateY(0) scale(1, 1); } 18% { transform: translateY(0) scale(1.07, .92); } 40% { transform: translateY(-14px) scale(.95, 1.06); } 62% { transform: translateY(0) scale(1.05, .95); } 76% { transform: translateY(-4px) scale(.99, 1.01); } 88% { transform: translateY(0) scale(1.01, .99); } }
+.retour { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; color: var(--encre); text-decoration: none; font: 500 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+  padding: 9px 13px 8px; border-radius: 999px; border: 1.2px solid var(--encre); margin-bottom: 28px; transition: background .2s, color .2s; }
+.retour:hover { background: var(--encre); color: var(--craie); }
+h1 { position: relative; z-index: 1; font: 600 clamp(36px, 6vw, 56px)/1 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.035em; color: var(--encre); margin: 0 0 14px; }
+h1 em { font-style: italic; font-weight: 400; color: var(--o); }
+.maj { font: 500 10.5px/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fil); margin: 0 0 30px; }
+
+/* « En bref » : le bloc de tissu noir */
+.resume { position: relative; overflow: hidden; background: var(--encre); color: rgba(255,255,255,.84); border-radius: 18px; padding: 24px 26px; margin: 0 0 34px; isolation: isolate; z-index: 1; }
+.resume::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url(../assets/rubberhose/tissu-noir-raccord.jpg) 0 0 / 455px; opacity: .5; mix-blend-mode: screen; }
+.resume h2 { display: inline-block; margin: 0 0 14px; padding: 7px 11px 6px; border-radius: 999px; background: var(--o); color: var(--craie); font: 500 10.5px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
 .resume ul { margin: 0; padding: 0; list-style: none; }
-.resume li { margin: 0; padding: 10px 0 10px 26px; position: relative; color: #fff; border-top: 1px solid rgba(255,255,255,.12); }
+.resume li { margin: 0; padding: 11px 0 11px 28px; position: relative; color: #fff; border-top: 1.5px dashed rgba(255,255,255,.18); }
 .resume li:first-child { border-top: 0; padding-top: 2px; }
-.resume li::before { content: "✓"; position: absolute; left: 0; top: 10px; color: var(--o2); }
-.resume li:first-child::before { top: 2px; }
-.resume b, .resume strong { color: #fff; } .resume a { color: var(--o2); }
-section { border-top: 1px solid var(--trait); padding: 26px 0 8px; }
-h2 { font: 600 20px/1.3 var(--titre); letter-spacing: -.02em; color: var(--encre); margin: 0 0 12px; display: flex; align-items: baseline; gap: 10px; }
-h2 span { flex: none; display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 999px; border: 1.5px solid var(--o); color: var(--o); font: 500 12px/1 var(--mono); align-self: center; }
-p { margin: 0 0 14px; } ul { margin: 0 0 14px; padding-left: 20px; } li { margin: 6px 0; } li::marker { color: var(--o); }
+.resume li::before { content: "✦"; position: absolute; left: 0; top: 12px; color: var(--o); font-size: 12px; }
+.resume li:first-child::before { top: 3px; }
+.resume b, .resume strong { color: #fff; } .resume a { color: var(--o); }
+
+/* les articles */
+section { position: relative; z-index: 1; border-top: 2px dashed rgba(11,11,11,.22); padding: 28px 0 10px; }
+section h2 { font: 600 23px/1.25 var(--titre); font-variation-settings: var(--doux); letter-spacing: -.02em; color: var(--encre); margin: 0 0 14px; display: flex; align-items: center; gap: 12px; }
+section h2 span { flex: none; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--encre); color: var(--craie); font: italic 700 15px/1 var(--titre); font-variation-settings: var(--doux); }
+h3 { font: 600 17px/1.3 var(--corps); color: var(--encre); margin: 18px 0 8px; }
+p { margin: 0 0 14px; } ul, ol { margin: 0 0 14px; padding-left: 22px; } li { margin: 6px 0; } li::marker { color: var(--o); }
 b, strong { color: var(--encre); font-weight: 600; }
 a { color: var(--o); text-underline-offset: 3px; overflow-wrap: anywhere; }
-.a-remplir { outline: 1.5px dashed rgba(249,108,34,.9); outline-offset: 3px; border-radius: 6px; padding: 2px 6px; color: var(--o); }
-footer { border-top: 1px solid var(--trait); margin-top: 30px; padding-top: 20px; font: 500 11px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--encre-3); }
-footer nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-footer nav a { text-decoration: none; color: var(--encre-2); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--trait); transition: color .2s, border-color .2s, background .2s; overflow-wrap: normal; }
-footer nav a:hover { color: var(--o); border-color: var(--o); }
-footer nav a[aria-current="page"] { background: var(--nuit); border-color: var(--nuit); color: #fff; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 14.5px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1.5px dashed rgba(11,11,11,.2); vertical-align: top; }
+th { font: 500 10.5px/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--fil); }
+.a-remplir { outline: 1.5px dashed var(--o); outline-offset: 3px; border-radius: 6px; padding: 2px 6px; color: var(--o); }
+
+/* le pied : les quatre pages en tampons */
+.pied { position: relative; z-index: 1; border-top: 2px dashed rgba(11,11,11,.22); margin-top: 24px; padding-top: 22px; font: 500 10.5px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--fil); }
+.pied nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.pied nav a { text-decoration: none; color: var(--encre); padding: 9px 13px 8px; border-radius: 999px; border: 1.2px solid var(--encre); transition: background .2s, color .2s; overflow-wrap: normal; }
+.pied nav a:hover { background: var(--encre); color: var(--craie); }
+.pied nav a[aria-current="page"] { background: var(--o); border-color: var(--encre); color: var(--craie); box-shadow: 2px 2px 0 var(--encre); }
+.pied .gerer { color: var(--encre); }
+
+@media (max-width: 960px) { .patch { right: 0; } }
 @media (max-width: 700px) {
-  .nav-in { padding: 0 16px; }
-  .col { margin: 12px 12px 28px; padding: 28px 20px 22px; border-radius: 22px; }
+  .feuille { margin: 34px auto 50px; padding: 30px 22px 24px; border-radius: 22px; box-shadow: 5px 5px 0 var(--encre); }
+  .patch { width: 80px; top: -34px; right: 0; }
   .resume { padding: 20px; }
-  h2 { font-size: 18px; }
+  section h2 { font-size: 20px; }
 }
-@media (max-width: 370px) { .marque .m-studio { display: none; } .btn { padding: 10px 12px; font-size: 12.5px; gap: 6px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="sg" viewBox="0 0 120 120"><g fill="currentColor"><rect x="9" y="9" width="18" height="18" rx="2.5" opacity=".95"/><rect x="30" y="9" width="18" height="18" rx="2.5" opacity=".88"/><rect x="51" y="9" width="18" height="18" rx="2.5" opacity=".8"/><rect x="72" y="9" width="18" height="18" rx="2.5" opacity=".73"/><rect x="9" y="30" width="18" height="18" rx="2.5" opacity=".88"/><rect x="30" y="30" width="18" height="18" rx="2.5" opacity=".8"/><rect x="51" y="30" width="18" height="18" rx="2.5" opacity=".73"/><rect x="93" y="30" width="18" height="18" rx="2.5" opacity=".58"/><rect x="9" y="51" width="18" height="18" rx="2.5" opacity=".8"/><rect x="30" y="51" width="18" height="18" rx="2.5" opacity=".73"/><rect x="72" y="51" width="18" height="18" rx="2.5" opacity=".58"/><rect x="93" y="51" width="18" height="18" rx="2.5" opacity=".5"/><rect x="9" y="72" width="18" height="18" rx="2.5" opacity=".73"/><rect x="51" y="72" width="18" height="18" rx="2.5" opacity=".58"/><rect x="72" y="72" width="18" height="18" rx="2.5" opacity=".5"/><rect x="93" y="72" width="18" height="18" rx="2.5" opacity=".43"/><rect x="30" y="93" width="18" height="18" rx="2.5" opacity=".58"/><rect x="51" y="93" width="18" height="18" rx="2.5" opacity=".5"/><rect x="72" y="93" width="18" height="18" rx="2.5" opacity=".43"/><rect x="93" y="93" width="18" height="18" rx="2.5" opacity=".36"/></g><g fill="#F96C22"><rect x="93" y="9" width="18" height="18" rx="2.5"/><rect x="72" y="30" width="18" height="18" rx="2.5"/><rect x="51" y="51" width="18" height="18" rx="2.5"/><rect x="30" y="72" width="18" height="18" rx="2.5"/><rect x="9" y="93" width="18" height="18" rx="2.5"/></g></symbol>
-</svg>
-<header class="nav"><div class="nav-in">
-  <a class="marque" href="../"><svg aria-hidden="true"><use href="#sg"/></svg><span>MOS<span class="ai">AI</span>C <span class="m-studio">Studio</span></span></a>
-  <a class="btn" href="../#offre">Je veux mon studio <span>→</span></a>
-</div></header>
-<div class="col">
-  <a class="retour" href="../">← Retour à MOSAIC Studio</a>
+<div class="toile" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="feuille">
+  <img class="patch" src="../assets/rubberhose/patchs/super-content-pizza.png" alt="" aria-hidden="true">
+<a class="retour" href="../">← Retour à MOSAIC Studio</a>
   <h1><em>Cookies</em></h1>
-  <p class="maj">MOSAIC Studio · Dernière mise à jour : 28 septembre 2026</p>
+  <p class="maj">MOSAIC Studio · Dernière mise à jour : 14 octobre 2026</p>
 
   <div class="resume">
     <h2>En bref</h2>
     <ul>
-      <li>Cette page ne dépose <b>aucun cookie</b> de mesure d'audience ni de publicité. C'est pourquoi aucun bandeau ne vous est présenté.</li>
+      <li>Aucun cookie de publicité. Un seul outil de mesure d'audience, <b>Microsoft Clarity</b>, et seulement si vous cliquez sur « Accepter » dans le bandeau.</li>
       <li>Seul le formulaire de paiement de Whop peut déposer des cookies nécessaires au paiement.</li>
     </ul>
   </div>
@@ -93,7 +110,13 @@ footer nav a[aria-current="page"] { background: var(--nuit); border-color: var(-
   <section>
     <h2><span>2.</span>Les cookies de cette page</h2>
     <p><b>Cookies strictement nécessaires : le paiement Whop.</b> Le formulaire de paiement intégré à la page vient de Whop (whop.com). Il peut déposer des cookies indispensables à la session de paiement et à la lutte contre la fraude. La loi ne les soumet pas à votre consentement. Ils sont régis par la <a href="https://whop.com/privacy/">politique de confidentialité de Whop</a>.</p>
-    <p><b>Mesure d'audience, publicité, réseaux sociaux : aucun.</b></p>
+    <p><b>Mesure d'audience : Microsoft Clarity, seulement avec votre accord.</b> La page utilise Microsoft Clarity (Microsoft Corporation) pour mesurer l'audience et comprendre la navigation (clics, défilement, enregistrement de session), afin d'améliorer la page. Ces cookies ne sont déposés qu'après votre clic sur « Accepter » dans le bandeau. Les données peuvent être transférées aux États-Unis, dans le cadre des clauses contractuelles types de la Commission européenne.</p>
+<ul>
+<li><b>_clck</b> : identifiant visiteur Microsoft Clarity (1 an).</li>
+<li><b>_clsk</b> : regroupe les pages d'une même visite (1 jour).</li>
+</ul>
+<p><b>Votre choix.</b> Il est gardé dans votre navigateur (stockage local), pour ne pas vous redemander à chaque visite.</p>
+<p><b>Publicité, réseaux sociaux : aucun.</b></p>
     <p><b>Polices de caractères.</b> Les polices sont chargées depuis Google Fonts. Ce service ne dépose pas de cookie, mais reçoit votre adresse IP (voir la <a href="confidentialite.html">politique de confidentialité</a>).</p>
   </section>
 
@@ -105,14 +128,16 @@ footer nav a[aria-current="page"] { background: var(--nuit); border-color: var(-
   <section>
     <h2><span>4.</span>Gérer les cookies</h2>
     <p>Vous pouvez bloquer ou supprimer les cookies dans les réglages de votre navigateur (Chrome, Firefox, Safari, Edge). Bloquer ceux de Whop peut empêcher le paiement de fonctionner.</p>
+<p>Vous pouvez aussi changer d'avis à tout moment sur la mesure d'audience&nbsp;: <a href="#" onclick="openCookiePrefs();return false;">gérer les cookies</a>.</p>
   </section>
 
   <section>
     <h2><span>5.</span>Contact</h2>
     <p><a href="mailto:christophervaslopes@gmail.com">christophervaslopes@gmail.com</a></p>
   </section>
+  <footer class="pied"><nav><a href="cgv.html">Conditions de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cookies.html" aria-current="page">Cookies</a></nav>MOSAIC Studio · Chris Sans Filtre · © 2026 · <a class="gerer" href="#" onclick="openCookiePrefs();return false;">Gérer les cookies</a></footer>
+</main>
 
-  <footer><nav><a href="cgv.html">Conditions de vente</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cookies.html" aria-current="page">Cookies</a></nav>MOSAIC Studio · Chris Sans Filtre · © 2026</footer>
-</div>
+<script src="../assets/rubberhose/consentement.js" data-cookies="cookies.html"></script>
 </body>
 </html>
